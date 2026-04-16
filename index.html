@@ -1,788 +1,997 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HyperFrames — 编写 HTML，渲染视频，为 AI 智能体而生</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        surface: '#0a0a0f',
-        panel: '#12121a',
-        elevated: '#1a1a28',
-        border: '#2a2a3a',
-        accent: '#00d4ff',
-        'accent-dim': '#0099bb',
-        'accent-glow': 'rgba(0,212,255,0.15)',
-        warm: '#ff6b4a',
-        muted: '#7a7a8e',
-      },
-      fontFamily: {
-        display: ['"Space Grotesk"', '"Noto Sans SC"', 'sans-serif'],
-        body: ['"Noto Sans SC"', '"Space Grotesk"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HyperFrames — 编写 HTML，渲染视频，为 AI 智能体而生</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Space Grotesk', 'Noto Sans SC', 'sans-serif'],
+            body: ['Noto Sans SC', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              dark: '#0c0c0c',
+              mid: '#1a1a1a',
+              surface: '#222222',
+              subtle: '#333333',
+              accent: '#e8553d',
+              accentLight: '#ff7a5c',
+              warm: '#f5f0e8',
+              muted: '#8a8a8a',
+            }
+          }
+        }
       }
     }
-  }
-}
-</script>
-<style>
-  :root {
-    --accent: #00d4ff;
-    --accent-rgb: 0, 212, 255;
-    --warm: #ff6b4a;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { background: #0a0a0f; color: #e0e0ea; }
-
-  /* Scanline overlay */
-  .scanlines::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 2px,
-      rgba(0,0,0,0.03) 2px,
-      rgba(0,0,0,0.03) 4px
-    );
-    pointer-events: none;
-    z-index: 9999;
-  }
-
-  /* Grid background */
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
-
-  /* Glow effects */
-  .glow-text {
-    text-shadow: 0 0 40px rgba(var(--accent-rgb), 0.3), 0 0 80px rgba(var(--accent-rgb), 0.1);
-  }
-
-  .glow-border {
-    box-shadow: 0 0 0 1px rgba(var(--accent-rgb), 0.2), 0 0 30px rgba(var(--accent-rgb), 0.05);
-  }
-
-  /* Floating animation */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-  }
-
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  @keyframes slide-up {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-slide-up { animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-  .animate-fade-in { animation: fade-in 1s ease forwards; }
-
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
-  .stagger-6 { animation-delay: 0.6s; }
-
-  /* Code block styling */
-  .code-block {
-    background: linear-gradient(135deg, #12121a 0%, #0d0d15 100%);
-    border: 1px solid #2a2a3a;
-    position: relative;
-    overflow: hidden;
-  }
-  .code-block::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(var(--accent-rgb), 0.5), transparent);
-  }
-
-  /* Timeline decoration */
-  .timeline-line {
-    background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
-  }
-
-  /* Ticker */
-  .ticker-track {
-    animation: ticker 30s linear infinite;
-  }
-
-  /* Smooth hover transitions */
-  .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-  }
-  .hover-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(var(--accent-rgb), 0.1);
-  }
-
-  /* Corner decorations */
-  .corner-frame {
-    position: relative;
-  }
-  .corner-frame::before,
-  .corner-frame::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: rgba(var(--accent-rgb), 0.3);
-  }
-  .corner-frame::before {
-    top: -1px; left: -1px;
-    border-top: 2px solid;
-    border-left: 2px solid;
-  }
-  .corner-frame::after {
-    bottom: -1px; right: -1px;
-    border-bottom: 2px solid;
-    border-right: 2px solid;
-  }
-
-  /* Selection */
-  ::selection {
-    background: rgba(var(--accent-rgb), 0.3);
-    color: #fff;
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: #0a0a0f; }
-  ::-webkit-scrollbar-thumb { background: #2a2a3a; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #3a3a4a; }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      transition-duration: 0.01ms !important;
+  </script>
+  <style>
+    :root {
+      --accent: #e8553d;
+      --accent-light: #ff7a5c;
+      --bg: #0c0c0c;
+      --surface: #1a1a1a;
+      --text: #f5f0e8;
+      --muted: #8a8a8a;
     }
-  }
-</style>
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Noto Sans SC', sans-serif; overflow-x: hidden; }
+
+    /* Noise texture overlay */
+    .noise-overlay::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Gradient mesh background */
+    .hero-mesh {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .hero-mesh::before {
+      content: '';
+      position: absolute;
+      width: 800px;
+      height: 800px;
+      top: -200px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(232,85,61,0.15) 0%, transparent 70%);
+      animation: float-slow 20s ease-in-out infinite;
+    }
+    .hero-mesh::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      bottom: -100px;
+      left: -100px;
+      background: radial-gradient(circle, rgba(255,122,92,0.08) 0%, transparent 70%);
+      animation: float-slow 25s ease-in-out infinite reverse;
+    }
+
+    @keyframes float-slow {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(30px, -40px) scale(1.05); }
+      66% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slide-in-right {
+      from { opacity: 0; transform: translateX(40px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes pulse-border {
+      0%, 100% { border-color: rgba(232,85,61,0.3); }
+      50% { border-color: rgba(232,85,61,0.7); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .animate-fade-up {
+      opacity: 0;
+      animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-fade-in {
+      opacity: 0;
+      animation: fade-in 0.6s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }
+    .delay-7 { animation-delay: 0.7s; }
+
+    /* Code block styling */
+    .code-block {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .code-block-header {
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .code-dot-red { background: #ff5f57; }
+    .code-dot-yellow { background: #ffbd2e; }
+    .code-dot-green { background: #28ca41; }
+
+    .code-content {
+      padding: 20px;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .token-tag { color: #e8553d; }
+    .token-attr { color: #c9a86c; }
+    .token-string { color: #8fbc6f; }
+    .token-comment { color: #555; }
+    .token-keyword { color: #cc7832; }
+    .token-text { color: #d4d4d4; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Feature card */
+    .feature-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(232,85,61,0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .feature-card:hover {
+      border-color: rgba(232,85,61,0.3);
+      transform: translateY(-4px);
+    }
+    .feature-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Package card */
+    .pkg-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 24px 28px;
+      transition: all 0.3s ease;
+    }
+    .pkg-card:hover {
+      border-color: rgba(232,85,61,0.25);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      transition: all 0.3s;
+    }
+    .badge:hover {
+      border-color: rgba(232,85,61,0.3);
+      color: var(--text);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    /* CTA button shimmer */
+    .btn-shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-shimmer::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+
+    /* Marquee */
+    .marquee-track {
+      display: flex;
+      animation: marquee 30s linear infinite;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Section divider */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    }
+
+    /* Nav blur */
+    .nav-blur {
+      backdrop-filter: blur(20px) saturate(1.5);
+      -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    }
+
+    /* Prompt card */
+    .prompt-card {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .prompt-card:hover {
+      border-color: rgba(232,85,61,0.3);
+      background: rgba(232,85,61,0.03);
+    }
+    .prompt-card .prompt-prefix {
+      color: var(--accent);
+      font-family: 'Space Grotesk', monospace;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .prompt-card .prompt-text {
+      color: rgba(245,240,232,0.7);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* Step number */
+    .step-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 72px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(232,85,61,0.08);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
-<body class="scanlines grid-bg font-body antialiased">
+<body class="noise-overlay">
 
-<!-- ═══════════════ NAV ═══════════════ -->
-<nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-surface/80 border-b border-border/50">
-  <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded bg-accent/10 border border-accent/30 flex items-center justify-center">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 nav-blur bg-brand-dark/70 border-b border-white/[0.04]">
+    <div class="max-w-[1400px] mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-brand-accent flex items-center justify-center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+        </div>
+        <span class="font-display font-bold text-lg tracking-tight text-brand-warm">HyperFrames</span>
       </div>
-      <span class="font-display font-bold text-lg tracking-tight text-white">HyperFrames</span>
+      <div class="hidden md:flex items-center gap-8 text-sm text-brand-muted">
+        <a href="#features" class="hover:text-brand-warm transition-colors">特性</a>
+        <a href="#how-it-works" class="hover:text-brand-warm transition-colors">工作原理</a>
+        <a href="#quickstart" class="hover:text-brand-warm transition-colors">快速开始</a>
+        <a href="#packages" class="hover:text-brand-warm transition-colors">包</a>
+        <a href="https://hyperframes.heygen.com/introduction" target="_blank" class="hover:text-brand-warm transition-colors flex items-center gap-1">
+          文档
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/heygen-com/hyperframes" target="_blank" class="text-brand-muted hover:text-brand-warm transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+        <a href="#quickstart" class="btn-shimmer hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-brand-accent text-white text-sm font-medium hover:bg-brand-accentLight transition-colors">
+          开始使用
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
-    <div class="hidden md:flex items-center gap-8 text-sm text-muted">
-      <a href="#features" class="hover:text-accent transition-colors duration-300">特性</a>
-      <a href="#how-it-works" class="hover:text-accent transition-colors duration-300">工作原理</a>
-      <a href="#components" class="hover:text-accent transition-colors duration-300">组件库</a>
-      <a href="#packages" class="hover:text-accent transition-colors duration-300">架构</a>
-      <a href="#skills" class="hover:text-accent transition-colors duration-300">AI 技能</a>
-    </div>
-    <a href="https://github.com/heygen-com/hyperframes" target="_blank" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-elevated border border-border hover:border-accent/50 text-sm text-white transition-all duration-300">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-      GitHub
-    </a>
-  </div>
-</nav>
+  </nav>
 
-<!-- ═══════════════ HERO ═══════════════ -->
-<section class="relative min-h-[100dvh] flex items-center overflow-hidden pt-16">
-  <!-- Background elements -->
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/4 -left-32 w-96 h-96 bg-accent/5 rounded-full blur-[128px]"></div>
-    <div class="absolute bottom-1/4 -right-32 w-80 h-80 bg-warm/5 rounded-full blur-[128px]"></div>
-    <!-- Frame corners - cinematic viewfinder -->
-    <div class="absolute top-24 left-8 md:left-16 w-16 h-16 border-t-2 border-l-2 border-accent/20"></div>
-    <div class="absolute top-24 right-8 md:right-16 w-16 h-16 border-t-2 border-r-2 border-accent/20"></div>
-    <div class="absolute bottom-8 left-8 md:left-16 w-16 h-16 border-b-2 border-l-2 border-accent/20"></div>
-    <div class="absolute bottom-8 right-8 md:right-16 w-16 h-16 border-b-2 border-r-2 border-accent/20"></div>
-    <!-- Recording indicator -->
-    <div class="absolute top-28 right-12 md:right-20 flex items-center gap-2 text-xs font-mono text-warm/70">
-      <span class="w-2 h-2 rounded-full bg-warm" style="animation: pulse-glow 2s ease infinite;"></span>
-      REC
-    </div>
-  </div>
-
-  <div class="relative max-w-[1400px] mx-auto px-6 w-full">
-    <div class="grid lg:grid-cols-[1.2fr_1fr] gap-16 items-center">
-      <!-- Left: Text -->
-      <div>
-        <div class="opacity-0 animate-slide-up stagger-1">
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/5 border border-accent/20 text-xs font-mono text-accent mb-8">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
-            开源视频渲染框架 v0.x
-          </div>
+  <!-- Hero -->
+  <section class="relative min-h-[100dvh] flex items-center pt-16">
+    <div class="hero-mesh"></div>
+    <div class="max-w-[1400px] mx-auto px-6 py-24 relative z-10 flex flex-col lg:flex-row items-center lg:items-center gap-12 lg:gap-16">
+      <div class="flex-1 min-w-0">
+        <!-- Badges -->
+        <div class="flex flex-wrap items-center gap-3 mb-8 animate-fade-up delay-1">
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            开源
+          </span>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            Apache 2.0
+          </span>
+          <span class="badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            Node >= 22
+          </span>
         </div>
 
-        <h1 class="opacity-0 animate-slide-up stagger-2 font-display font-bold text-5xl md:text-6xl lg:text-7xl tracking-tighter leading-[0.95] text-white mb-6">
-          编写 <span class="text-accent glow-text">HTML</span><br>
-          渲染 <span class="text-warm">视频</span><br>
-          <span class="text-muted text-4xl md:text-5xl lg:text-6xl">为 AI 智能体而生</span>
+        <!-- Headline -->
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] mb-6 animate-fade-up delay-2">
+          编写 HTML<br>
+          <span class="text-brand-accent">渲染视频</span><br>
+          为 AI 智能体而生
         </h1>
 
-        <p class="opacity-0 animate-slide-up stagger-3 text-lg text-muted leading-relaxed max-w-[50ch] mb-10">
-          HyperFrames 是一个让你用 HTML 创建、预览和渲染视频的开源框架。无需 React，无需专有 DSL——AI 智能体天生就懂 HTML。
+        <!-- Subtitle -->
+        <p class="text-lg sm:text-xl text-brand-muted leading-relaxed max-w-[55ch] mb-10 animate-fade-up delay-3">
+          HyperFrames 是一个开源视频渲染框架，让你能够创建、预览和渲染基于 HTML 的视频合成作品——并为 AI 智能体提供原生支持。
         </p>
 
-        <div class="opacity-0 animate-slide-up stagger-4 flex flex-wrap gap-4">
-          <div class="code-block rounded-xl px-5 py-3 font-mono text-sm flex items-center gap-3">
-            <span class="text-muted select-none">$</span>
-            <span class="text-accent">npx hyperframes init my-video</span>
-            <button onclick="navigator.clipboard.writeText('npx hyperframes init my-video')" class="ml-2 text-muted hover:text-accent transition-colors" title="复制">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            </button>
-          </div>
-          <a href="#how-it-works" class="px-5 py-3 rounded-xl bg-accent/10 border border-accent/30 text-accent text-sm font-medium hover:bg-accent/20 transition-all duration-300">
-            了解更多 →
+        <!-- CTAs -->
+        <div class="flex flex-wrap items-center gap-4 animate-fade-up delay-4">
+          <a href="#quickstart" class="btn-shimmer inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-brand-accent text-white font-medium hover:bg-brand-accentLight transition-all hover:scale-[1.02] active:scale-[0.98]">
+            快速开始
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#how-it-works" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-white/10 text-brand-warm font-medium hover:border-white/20 hover:bg-white/[0.03] transition-all">
+            了解原理
           </a>
         </div>
-
-        <!-- Stats row -->
-        <div class="opacity-0 animate-slide-up stagger-5 mt-12 flex gap-10 text-sm">
-          <div>
-            <div class="font-display font-bold text-2xl text-white">50+</div>
-            <div class="text-muted">即用组件</div>
-          </div>
-          <div>
-            <div class="font-display font-bold text-2xl text-white">7</div>
-            <div class="text-muted">核心包</div>
-          </div>
-          <div>
-            <div class="font-display font-bold text-2xl text-white">4</div>
-            <div class="text-muted">AI 技能</div>
-          </div>
-        </div>
       </div>
 
-      <!-- Right: Code preview -->
-      <div class="opacity-0 animate-slide-up stagger-5 hidden lg:block">
-        <div class="corner-frame code-block rounded-2xl p-6 animate-float">
-          <!-- Window chrome -->
-          <div class="flex items-center gap-2 mb-4 pb-4 border-b border-border/50">
-            <div class="flex gap-1.5">
-              <div class="w-3 h-3 rounded-full bg-warm/60"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500/60"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500/60"></div>
+      <!-- Terminal preview -->
+      <div class="w-full lg:w-[480px] lg:flex-shrink-0 animate-fade-up delay-5">
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-dot code-dot-red"></span>
+            <span class="code-dot code-dot-yellow"></span>
+            <span class="code-dot code-dot-green"></span>
+            <span class="text-xs text-brand-muted ml-2">终端</span>
+          </div>
+          <div class="code-content">
+            <div><span class="token-comment"># 安装 HyperFrames 技能</span></div>
+            <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">skills add heygen-com/hyperframes</span></div>
+            <div class="mt-3"><span class="token-comment"># 初始化项目</span></div>
+            <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes init my-video</span></div>
+            <div><span class="token-text">$</span> <span class="token-keyword">cd</span> <span class="token-string">my-video</span></div>
+            <div class="mt-3"><span class="token-comment"># 浏览器预览</span></div>
+            <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes preview</span></div>
+            <div class="mt-3"><span class="token-comment"># 渲染为 MP4</span></div>
+            <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes render</span></div>
+            <div class="mt-3 flex items-center gap-1">
+              <span class="token-text">✓</span>
+              <span class="token-string">视频已生成 → output.mp4</span>
+              <span class="inline-block w-2 h-4 bg-brand-accent/70 animate-pulse ml-1"></span>
             </div>
-            <span class="text-xs font-mono text-muted ml-2">composition.html</span>
           </div>
-          <pre class="text-sm font-mono leading-relaxed overflow-x-auto"><code><span class="text-muted">&lt;</span><span class="text-warm">div</span> <span class="text-accent">data-composition-id</span>=<span class="text-green-400">"demo"</span>
-     <span class="text-accent">data-width</span>=<span class="text-green-400">"1920"</span>
-     <span class="text-accent">data-height</span>=<span class="text-green-400">"1080"</span><span class="text-muted">&gt;</span>
-
-  <span class="text-muted">&lt;</span><span class="text-warm">video</span>
-    <span class="text-accent">data-start</span>=<span class="text-green-400">"0"</span>
-    <span class="text-accent">data-duration</span>=<span class="text-green-400">"5"</span>
-    <span class="text-accent">data-track-index</span>=<span class="text-green-400">"0"</span>
-    <span class="text-accent">src</span>=<span class="text-green-400">"intro.mp4"</span> <span class="text-muted">/&gt;</span>
-
-  <span class="text-muted">&lt;</span><span class="text-warm">img</span>
-    <span class="text-accent">data-start</span>=<span class="text-green-400">"2"</span>
-    <span class="text-accent">data-duration</span>=<span class="text-green-400">"3"</span>
-    <span class="text-accent">data-track-index</span>=<span class="text-green-400">"1"</span>
-    <span class="text-accent">src</span>=<span class="text-green-400">"logo.png"</span> <span class="text-muted">/&gt;</span>
-
-  <span class="text-muted">&lt;</span><span class="text-warm">audio</span>
-    <span class="text-accent">data-volume</span>=<span class="text-green-400">"0.5"</span>
-    <span class="text-accent">src</span>=<span class="text-green-400">"music.wav"</span> <span class="text-muted">/&gt;</span>
-
-<span class="text-muted">&lt;/</span><span class="text-warm">div</span><span class="text-muted">&gt;</span></code></pre>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ═══════════════ TICKER ═══════════════ -->
-<div class="border-y border-border/50 bg-panel/50 py-3 overflow-hidden">
-  <div class="flex whitespace-nowrap ticker-track">
-    <span class="flex items-center gap-12 px-6 text-sm font-mono text-muted/60">
-      <span>◆ HTML 原生</span>
-      <span>◆ AI 优先</span>
-      <span>◆ 确定性渲染</span>
-      <span>◆ GSAP 动画</span>
-      <span>◆ Lottie 支持</span>
-      <span>◆ Three.js 集成</span>
-      <span>◆ CSS 动画</span>
-      <span>◆ WebGL 着色器</span>
-      <span>◆ 50+ 组件</span>
-      <span>◆ Docker 就绪</span>
-      <span>◆ Apache 2.0</span>
-      <span>◆ Node.js ≥22</span>
-    </span>
-    <span class="flex items-center gap-12 px-6 text-sm font-mono text-muted/60">
-      <span>◆ HTML 原生</span>
-      <span>◆ AI 优先</span>
-      <span>◆ 确定性渲染</span>
-      <span>◆ GSAP 动画</span>
-      <span>◆ Lottie 支持</span>
-      <span>◆ Three.js 集成</span>
-      <span>◆ CSS 动画</span>
-      <span>◆ WebGL 着色器</span>
-      <span>◆ 50+ 组件</span>
-      <span>◆ Docker 就绪</span>
-      <span>◆ Apache 2.0</span>
-      <span>◆ Node.js ≥22</span>
-    </span>
-  </div>
-</div>
-
-<!-- ═══════════════ FEATURES ═══════════════ -->
-<section id="features" class="py-32 relative">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-accent tracking-widest uppercase">核心优势</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">为什么选择 HyperFrames</h2>
+  <!-- Marquee -->
+  <div class="relative overflow-hidden py-6 border-y border-white/[0.04] bg-brand-mid/30">
+    <div class="marquee-track">
+      <div class="flex items-center gap-12 px-6 whitespace-nowrap text-sm text-brand-muted/40 font-display font-medium tracking-wider uppercase">
+        <span>HTML 原生</span><span class="text-brand-accent/30">◆</span>
+        <span>AI 优先</span><span class="text-brand-accent/30">◆</span>
+        <span>确定性渲染</span><span class="text-brand-accent/30">◆</span>
+        <span>GSAP 动画</span><span class="text-brand-accent/30">◆</span>
+        <span>Lottie 支持</span><span class="text-brand-accent/30">◆</span>
+        <span>Three.js</span><span class="text-brand-accent/30">◆</span>
+        <span>50+ 组件</span><span class="text-brand-accent/30">◆</span>
+        <span>着色器过渡</span><span class="text-brand-accent/30">◆</span>
+        <span>Docker 渲染</span><span class="text-brand-accent/30">◆</span>
+        <span>TTS 旁白</span><span class="text-brand-accent/30">◆</span>
+        <span>FFmpeg</span><span class="text-brand-accent/30">◆</span>
+        <span>Puppeteer</span><span class="text-brand-accent/30">◆</span>
+      </div>
+      <div class="flex items-center gap-12 px-6 whitespace-nowrap text-sm text-brand-muted/40 font-display font-medium tracking-wider uppercase">
+        <span>HTML 原生</span><span class="text-brand-accent/30">◆</span>
+        <span>AI 优先</span><span class="text-brand-accent/30">◆</span>
+        <span>确定性渲染</span><span class="text-brand-accent/30">◆</span>
+        <span>GSAP 动画</span><span class="text-brand-accent/30">◆</span>
+        <span>Lottie 支持</span><span class="text-brand-accent/30">◆</span>
+        <span>Three.js</span><span class="text-brand-accent/30">◆</span>
+        <span>50+ 组件</span><span class="text-brand-accent/30">◆</span>
+        <span>着色器过渡</span><span class="text-brand-accent/30">◆</span>
+        <span>Docker 渲染</span><span class="text-brand-accent/30">◆</span>
+        <span>TTS 旁白</span><span class="text-brand-accent/30">◆</span>
+        <span>FFmpeg</span><span class="text-brand-accent/30">◆</span>
+        <span>Puppeteer</span><span class="text-brand-accent/30">◆</span>
+      </div>
     </div>
+  </div>
 
-    <div class="grid md:grid-cols-2 gap-4">
-      <!-- Feature 1 — Large -->
-      <div class="hover-lift glow-border rounded-2xl bg-panel/80 border border-border p-8 md:p-10 md:row-span-2">
-        <div class="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mb-6">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-accent">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-          </svg>
-        </div>
-        <h3 class="font-display font-bold text-2xl text-white mb-3 tracking-tight">HTML 原生</h3>
-        <p class="text-muted leading-relaxed mb-6">
-          合成作品就是带有数据属性的 HTML 文件。无需学习 React，无需专有 DSL，无需复杂的构建流程。你已经会写 HTML，你已经准备好了。
-        </p>
-        <div class="code-block rounded-xl p-4 font-mono text-xs text-muted">
-          <span class="text-accent">data-composition-id</span> · <span class="text-accent">data-start</span> · <span class="text-accent">data-duration</span> · <span class="text-accent">data-track-index</span>
-        </div>
+  <!-- Features -->
+  <section id="features" class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">为什么选择 HyperFrames</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">重新定义<br>视频创作方式</h2>
+        <p class="text-brand-muted text-lg leading-relaxed">用你熟悉的 HTML 技术，借助 AI 的力量，让视频创作像写网页一样简单。</p>
       </div>
 
-      <!-- Feature 2 -->
-      <div class="hover-lift glow-border rounded-2xl bg-panel/80 border border-border p-8">
-        <div class="w-12 h-12 rounded-xl bg-warm/10 border border-warm/20 flex items-center justify-center mb-6">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-warm">
-            <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.58-3.25 3.93L12 22"/>
-            <path d="M8 6a4 4 0 0 1 8 0"/>
-            <path d="M17 12.5c1.77.77 3 2.53 3 4.5a5 5 0 0 1-10 0"/>
-            <path d="M4.5 17a5 5 0 0 1 6-4.9"/>
-          </svg>
+      <div class="grid sm:grid-cols-2 gap-5 reveal">
+        <div class="feature-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8553d" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">HTML 原生</h3>
+          <p class="text-brand-muted leading-relaxed">合成作品是带有数据属性的 HTML 文件。无需 React，无需专有 DSL。你所掌握的 HTML 技能直接复用。</p>
         </div>
-        <h3 class="font-display font-bold text-xl text-white mb-3 tracking-tight">AI 优先设计</h3>
-        <p class="text-muted leading-relaxed text-sm">
-          智能体天生就懂 HTML。CLI 默认非交互式，专为 AI 驱动的工作流设计。用自然语言描述你要的视频，智能体帮你搞定一切。
-        </p>
+
+        <div class="feature-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8553d" stroke-width="2"><path d="M12 2a8 8 0 018 8c0 3-1.5 5-3 6.5V20a2 2 0 01-2 2h-6a2 2 0 01-2-2v-3.5C5.5 15 4 13 4 10a8 8 0 018-8z"/><path d="M9 21h6M10 17v4M14 17v4"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">AI 优先</h3>
+          <p class="text-brand-muted leading-relaxed">智能体已经懂 HTML。CLI 默认非交互式，专为智能体驱动的工作流设计。描述你想要什么，AI 帮你实现。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8553d" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">确定性渲染</h3>
+          <p class="text-brand-muted leading-relaxed">相同输入 = 相同输出。专为自动化流水线打造，每次渲染结果一致可复现。</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="w-12 h-12 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-5">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e8553d" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18"/><path d="M7 2v20M17 2v20M2 12h20M2 7h5M2 17h5M17 7h5M17 17h5"/></svg>
+          </div>
+          <h3 class="font-display text-xl font-semibold mb-3">帧适配器模式</h3>
+          <p class="text-brand-muted leading-relaxed">自带动画运行时——GSAP、Lottie、CSS、Three.js。选择最适合你的方式，一切无缝集成。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- How it Works -->
+  <section id="how-it-works" class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">工作原理</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">用数据属性<br>定义视频</h2>
+        <p class="text-brand-muted text-lg leading-relaxed">在 HTML 中通过 <code class="text-brand-accentLight bg-brand-accent/10 px-2 py-0.5 rounded text-sm">data-*</code> 属性声明时间轴，框架自动编排和渲染。</p>
       </div>
 
-      <!-- Feature 3 -->
-      <div class="hover-lift glow-border rounded-2xl bg-panel/80 border border-border p-8">
-        <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-6">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-green-400">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
+      <div class="grid lg:grid-cols-5 gap-8 items-start reveal">
+        <!-- Code -->
+        <div class="lg:col-span-3">
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-dot code-dot-red"></span>
+              <span class="code-dot code-dot-yellow"></span>
+              <span class="code-dot code-dot-green"></span>
+              <span class="text-xs text-brand-muted ml-2">composition.html</span>
+            </div>
+            <div class="code-content text-[13px]">
+              <div><span class="token-tag">&lt;div</span> <span class="token-attr">id</span>=<span class="token-string">"stage"</span></div>
+              <div class="pl-4"><span class="token-attr">data-composition-id</span>=<span class="token-string">"my-video"</span></div>
+              <div class="pl-4"><span class="token-attr">data-start</span>=<span class="token-string">"0"</span></div>
+              <div class="pl-4"><span class="token-attr">data-width</span>=<span class="token-string">"1920"</span> <span class="token-attr">data-height</span>=<span class="token-string">"1080"</span><span class="token-tag">&gt;</span></div>
+              <div class="pl-2"><span class="token-tag">&lt;video</span></div>
+              <div class="pl-6"><span class="token-attr">id</span>=<span class="token-string">"clip-1"</span></div>
+              <div class="pl-6"><span class="token-attr">data-start</span>=<span class="token-string">"0"</span> <span class="token-attr">data-duration</span>=<span class="token-string">"5"</span></div>
+              <div class="pl-6"><span class="token-attr">data-track-index</span>=<span class="token-string">"0"</span></div>
+              <div class="pl-6"><span class="token-attr">src</span>=<span class="token-string">"intro.mp4"</span></div>
+              <div class="pl-6"><span class="token-attr">muted</span> <span class="token-attr">playsinline</span></div>
+              <div class="pl-2"><span class="token-tag">/&gt;&lt;/video&gt;</span></div>
+              <div class="pl-2"><span class="token-tag">&lt;img</span></div>
+              <div class="pl-6"><span class="token-attr">id</span>=<span class="token-string">"overlay"</span></div>
+              <div class="pl-6"><span class="token-attr">data-start</span>=<span class="token-string">"2"</span> <span class="token-attr">data-duration</span>=<span class="token-string">"3"</span></div>
+              <div class="pl-6"><span class="token-attr">data-track-index</span>=<span class="token-string">"1"</span></div>
+              <div class="pl-6"><span class="token-attr">src</span>=<span class="token-string">"logo.png"</span></div>
+              <div class="pl-2"><span class="token-tag">/&gt;</span></div>
+              <div class="pl-2"><span class="token-tag">&lt;audio</span></div>
+              <div class="pl-6"><span class="token-attr">id</span>=<span class="token-string">"bg-music"</span></div>
+              <div class="pl-6"><span class="token-attr">data-start</span>=<span class="token-string">"0"</span> <span class="token-attr">data-duration</span>=<span class="token-string">"9"</span></div>
+              <div class="pl-6"><span class="token-attr">data-track-index</span>=<span class="token-string">"2"</span></div>
+              <div class="pl-6"><span class="token-attr">data-volume</span>=<span class="token-string">"0.5"</span></div>
+              <div class="pl-6"><span class="token-attr">src</span>=<span class="token-string">"music.wav"</span></div>
+              <div class="pl-2"><span class="token-tag">&gt;&lt;/audio&gt;</span></div>
+              <div><span class="token-tag">&lt;/div&gt;</span></div>
+            </div>
+          </div>
         </div>
-        <h3 class="font-display font-bold text-xl text-white mb-3 tracking-tight">确定性渲染</h3>
-        <p class="text-muted leading-relaxed text-sm">
-          相同输入 = 相同输出。每一帧都精确可控，专为自动化流水线和 CI/CD 打造。告别随机性，拥抱确定性。
-        </p>
+
+        <!-- Timeline visualization -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+            <h4 class="font-display font-semibold text-sm mb-5 text-brand-warm/80">时间轴视图</h4>
+            <!-- Track 0 -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs text-brand-muted w-16">Track 0</span>
+                <span class="text-xs text-brand-accent font-medium">intro.mp4</span>
+              </div>
+              <div class="h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] relative overflow-hidden">
+                <div class="absolute left-0 top-0 h-full w-[55%] bg-brand-accent/20 border border-brand-accent/30 rounded-lg flex items-center px-3">
+                  <span class="text-[11px] text-brand-accentLight">0s — 5s</span>
+                </div>
+              </div>
+            </div>
+            <!-- Track 1 -->
+            <div class="mb-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs text-brand-muted w-16">Track 1</span>
+                <span class="text-xs text-brand-accent font-medium">logo.png</span>
+              </div>
+              <div class="h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] relative overflow-hidden">
+                <div class="absolute left-[22%] top-0 h-full w-[33%] bg-orange-500/20 border border-orange-500/30 rounded-lg flex items-center px-3">
+                  <span class="text-[11px] text-orange-300">2s — 5s</span>
+                </div>
+              </div>
+            </div>
+            <!-- Track 2 -->
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs text-brand-muted w-16">Track 2</span>
+                <span class="text-xs text-brand-accent font-medium">music.wav</span>
+              </div>
+              <div class="h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] relative overflow-hidden">
+                <div class="absolute left-0 top-0 h-full w-full bg-emerald-500/15 border border-emerald-500/25 rounded-lg flex items-center px-3">
+                  <span class="text-[11px] text-emerald-400">0s — 9s</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+            <h4 class="font-display font-semibold text-sm mb-4 text-brand-warm/80">核心属性</h4>
+            <div class="space-y-3 text-sm">
+              <div class="flex items-start gap-3">
+                <code class="text-brand-accentLight bg-brand-accent/10 px-2 py-0.5 rounded text-xs whitespace-nowrap">data-start</code>
+                <span class="text-brand-muted">元素开始时间（秒）</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <code class="text-brand-accentLight bg-brand-accent/10 px-2 py-0.5 rounded text-xs whitespace-nowrap">data-duration</code>
+                <span class="text-brand-muted">元素持续时间</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <code class="text-brand-accentLight bg-brand-accent/10 px-2 py-0.5 rounded text-xs whitespace-nowrap">data-track-index</code>
+                <span class="text-brand-muted">轨道索引，控制层叠</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <code class="text-brand-accentLight bg-brand-accent/10 px-2 py-0.5 rounded text-xs whitespace-nowrap">data-volume</code>
+                <span class="text-brand-muted">音频音量控制</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- Quick Start -->
+  <section id="quickstart" class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">快速开始</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">两种方式<br>即刻启程</h2>
       </div>
 
-      <!-- Feature 4 -->
-      <div class="hover-lift glow-border rounded-2xl bg-panel/80 border border-border p-8 md:col-span-2">
-        <div class="flex flex-col md:flex-row md:items-center gap-6">
-          <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center shrink-0">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-purple-400">
-              <rect x="2" y="3" width="20" height="14" rx="2"/>
-              <path d="M8 21h8"/><path d="M12 17v4"/>
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Method 1 -->
+        <div class="reveal">
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 sm:p-10 h-full">
+            <div class="flex items-start justify-between mb-8">
+              <div>
+                <div class="step-number">01</div>
+              </div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-accent/10 text-brand-accent text-xs font-medium">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                推荐
+              </span>
+            </div>
+            <h3 class="font-display text-2xl font-bold mb-3">使用 AI 编程智能体</h3>
+            <p class="text-brand-muted mb-8 leading-relaxed">安装 HyperFrames 技能，然后用自然语言描述你想要的视频，AI 帮你完成一切。</p>
+
+            <div class="code-block mb-8">
+              <div class="code-content text-sm">
+                <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">skills add heygen-com/hyperframes</span></div>
+              </div>
+            </div>
+
+            <p class="text-sm text-brand-muted mb-5">示例提示词：</p>
+            <div class="space-y-3">
+              <div class="prompt-card">
+                <span class="prompt-prefix">/hyperframes</span>
+                <p class="prompt-text mt-1">创建一个 10 秒的产品介绍视频，包含淡入标题、背景视频和背景音乐。</p>
+              </div>
+              <div class="prompt-card">
+                <span class="prompt-prefix">/hyperframes</span>
+                <p class="prompt-text mt-1">制作一个 9:16 TikTok 风格钩子视频，配合 TTS 旁白同步的弹跳字幕。</p>
+              </div>
+              <div class="prompt-card">
+                <span class="prompt-prefix">/hyperframes</span>
+                <p class="prompt-text mt-1">将这个 CSV 文件转换为动画柱状图竞赛。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Method 2 -->
+        <div class="reveal">
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-8 sm:p-10 h-full">
+            <div class="mb-8">
+              <div class="step-number">02</div>
+            </div>
+            <h3 class="font-display text-2xl font-bold mb-3">手动启动项目</h3>
+            <p class="text-brand-muted mb-8 leading-relaxed">适合喜欢手动控制的开发者，几行命令即可创建和预览视频项目。</p>
+
+            <div class="code-block mb-8">
+              <div class="code-content text-sm space-y-2">
+                <div><span class="token-comment"># 初始化项目</span></div>
+                <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes init my-video</span></div>
+                <div><span class="token-text">$</span> <span class="token-keyword">cd</span> <span class="token-string">my-video</span></div>
+                <div class="mt-2"><span class="token-comment"># 浏览器中预览（实时重载）</span></div>
+                <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes preview</span></div>
+                <div class="mt-2"><span class="token-comment"># 渲染为 MP4</span></div>
+                <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">hyperframes render</span></div>
+              </div>
+            </div>
+
+            <p class="text-sm text-brand-muted mb-4">`hyperframes init` 会自动安装技能，因此你可以随时交给 AI 智能体处理。</p>
+
+            <div class="bg-white/[0.02] border border-white/[0.06] rounded-xl p-5">
+              <h4 class="font-display font-semibold text-sm mb-3 text-brand-warm/80">系统要求</h4>
+              <div class="flex flex-wrap gap-3">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#788c5d" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                  Node.js >= 22
+                </span>
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.06] text-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6a9bcc" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  FFmpeg
+                </span>
+              </div>
+            </div>
+
+            <!-- Supported agents -->
+            <div class="mt-8">
+              <h4 class="font-display font-semibold text-sm mb-4 text-brand-warm/80">支持的 AI 智能体</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="badge">Claude Code</span>
+                <span class="badge">Cursor</span>
+                <span class="badge">Gemini CLI</span>
+                <span class="badge">Codex</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- Component Library -->
+  <section class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-center reveal">
+        <div>
+          <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">组件库</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">50+ 即用型<br>区块和组件</h2>
+          <p class="text-brand-muted text-lg leading-relaxed mb-8">社交叠加层、着色器过渡、数据可视化、电影级特效——一行命令即可添加到你的项目中。</p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <code class="text-brand-accentLight text-sm bg-brand-accent/10 px-3 py-1 rounded">npx hyperframes add flash-through-white</code>
+              <span class="text-brand-muted text-sm">着色器过渡</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <code class="text-brand-accentLight text-sm bg-brand-accent/10 px-3 py-1 rounded">npx hyperframes add instagram-follow</code>
+              <span class="text-brand-muted text-sm">社交叠加层</span>
+            </div>
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06]">
+              <code class="text-brand-accentLight text-sm bg-brand-accent/10 px-3 py-1 rounded">npx hyperframes add data-chart</code>
+              <span class="text-brand-muted text-sm">动画图表</span>
+            </div>
+          </div>
+          <a href="https://hyperframes.heygen.com/catalog/blocks/data-chart" target="_blank" class="inline-flex items-center gap-2 mt-8 text-brand-accent font-medium hover:underline">
+            浏览完整组件库
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <!-- Visual grid of component categories -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-brand-accent/30 transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-brand-accent/10 flex items-center justify-center mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e8553d" stroke-width="1.5"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+            </div>
+            <span class="text-sm font-medium">着色器过渡</span>
+            <span class="text-xs text-brand-muted mt-1">Shader Transitions</span>
+          </div>
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-brand-accent/30 transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-orange-500/10 flex items-center justify-center mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <span class="text-sm font-medium">社交叠加</span>
+            <span class="text-xs text-brand-muted mt-1">Social Overlays</span>
+          </div>
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-brand-accent/30 transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+            </div>
+            <span class="text-sm font-medium">数据可视化</span>
+            <span class="text-xs text-brand-muted mt-1">Data Visualization</span>
+          </div>
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:border-brand-accent/30 transition-colors">
+            <div class="w-14 h-14 rounded-xl bg-violet-500/10 flex items-center justify-center mb-3">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="1.5"><path d="M15.6 11.6L22 7v10l-6.4-4.6v-1zM4 5h9a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7c0-1.1.9-2 2-2z"/></svg>
+            </div>
+            <span class="text-sm font-medium">电影级特效</span>
+            <span class="text-xs text-brand-muted mt-1">Cinematic Effects</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- Packages -->
+  <section id="packages" class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">包</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">模块化架构<br>按需选用</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">hyperframes</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">CLI 工具——创建、预览、检查 lint 和渲染合成作品。</p>
+        </div>
+
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/core</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">类型、解析器、生成器、linter、运行时、帧适配器。</p>
+        </div>
+
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/engine</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">可寻址页面到视频捕获引擎（Puppeteer + FFmpeg）。</p>
+        </div>
+
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/producer</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">完整渲染流水线（捕获 + 编码 + 音频混合）。</p>
+        </div>
+
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/studio</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">基于浏览器的合成作品编辑器 UI。</p>
+        </div>
+
+        <div class="pkg-card">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/player</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">可嵌入的 <code class="text-xs">&lt;hyperframes-player&gt;</code> Web 组件。</p>
+        </div>
+
+        <div class="pkg-card sm:col-span-2 lg:col-span-1">
+          <div class="flex items-center gap-3 mb-3">
+            <code class="text-brand-accentLight font-display text-sm font-semibold">@hyperframes/shader-transitions</code>
+          </div>
+          <p class="text-brand-muted text-sm leading-relaxed">用于合成作品的 WebGL 着色器过渡。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- Skills -->
+  <section class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="grid lg:grid-cols-2 gap-16 items-start reveal">
+        <div>
+          <p class="text-brand-accent font-display font-semibold text-sm tracking-wider uppercase mb-4">技能</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">教会 AI<br>更懂你</h2>
+          <p class="text-brand-muted text-lg leading-relaxed mb-8">HyperFrames 提供专用技能，用于教授 AI 智能体通用文档未涵盖的框架特定模式。</p>
+
+          <div class="code-block">
+            <div class="code-content text-sm">
+              <div><span class="token-text">$</span> <span class="token-keyword">npx</span> <span class="token-string">skills add heygen-com/hyperframes</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-xl p-6 hover:border-brand-accent/20 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <code class="text-brand-accentLight font-display font-semibold">hyperframes</code>
+            </div>
+            <p class="text-brand-muted text-sm leading-relaxed">HTML 合成作品创作、字幕、TTS、音频响应动画、过渡。</p>
+          </div>
+
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-xl p-6 hover:border-brand-accent/20 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <code class="text-brand-accentLight font-display font-semibold">hyperframes-cli</code>
+            </div>
+            <p class="text-brand-muted text-sm leading-relaxed">CLI 命令：init、lint、preview、render、transcribe、tts、doctor。</p>
+          </div>
+
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-xl p-6 hover:border-brand-accent/20 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <code class="text-brand-accentLight font-display font-semibold">hyperframes-registry</code>
+            </div>
+            <p class="text-brand-muted text-sm leading-relaxed">通过 <code class="text-xs">hyperframes add</code> 安装区块和组件。</p>
+          </div>
+
+          <div class="bg-white/[0.02] border border-white/[0.06] rounded-xl p-6 hover:border-brand-accent/20 transition-colors">
+            <div class="flex items-center gap-3 mb-2">
+              <code class="text-brand-accentLight font-display font-semibold">gsap</code>
+            </div>
+            <p class="text-brand-muted text-sm leading-relaxed">GSAP 动画 API、时间线、缓动、ScrollTrigger、插件、React/Vue/Svelte、性能。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider max-w-[1400px] mx-auto"></div>
+
+  <!-- CTA -->
+  <section class="py-28 sm:py-36">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="relative rounded-3xl overflow-hidden reveal">
+        <div class="absolute inset-0 bg-gradient-to-br from-brand-accent/20 via-brand-surface to-brand-mid"></div>
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);"></div>
+        <div class="relative z-10 px-8 sm:px-16 py-16 sm:py-20 text-center">
+          <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-tighter mb-6">准备好开始了吗？</h2>
+          <p class="text-brand-muted text-lg max-w-xl mx-auto mb-10 leading-relaxed">用 HTML 和 AI 的力量，让视频创作变得前所未有地简单。</p>
+          <div class="flex flex-wrap items-center justify-center gap-4">
+            <a href="https://hyperframes.heygen.com/quickstart" target="_blank" class="btn-shimmer inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-brand-accent text-white font-medium hover:bg-brand-accentLight transition-all hover:scale-[1.02] active:scale-[0.98]">
+              查看快速开始指南
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="https://github.com/heygen-com/hyperframes" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-white/10 text-brand-warm font-medium hover:border-white/20 hover:bg-white/[0.03] transition-all">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/[0.04] py-12">
+    <div class="max-w-[1400px] mx-auto px-6">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3">
+          <div class="w-7 h-7 rounded-lg bg-brand-accent flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3"/>
             </svg>
           </div>
-          <div>
-            <h3 class="font-display font-bold text-xl text-white mb-2 tracking-tight">帧适配器模式</h3>
-            <p class="text-muted leading-relaxed text-sm">
-              自带动画运行时集成——GSAP、Lottie、CSS 动画、Three.js，开箱即用。统一的帧适配器接口，让你在不同的动画引擎之间无缝切换。
-            </p>
-          </div>
+          <span class="font-display font-bold text-sm text-brand-warm">HyperFrames</span>
+        </div>
+        <div class="flex items-center gap-6 text-sm text-brand-muted">
+          <a href="https://hyperframes.heygen.com/introduction" target="_blank" class="hover:text-brand-warm transition-colors">文档</a>
+          <a href="https://hyperframes.heygen.com/catalog/blocks/data-chart" target="_blank" class="hover:text-brand-warm transition-colors">组件库</a>
+          <a href="https://github.com/heygen-com/hyperframes/blob/main/CONTRIBUTING.md" target="_blank" class="hover:text-brand-warm transition-colors">贡献指南</a>
+          <a href="https://github.com/heygen-com/hyperframes/blob/main/LICENSE" target="_blank" class="hover:text-brand-warm transition-colors">Apache 2.0</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </footer>
 
-<!-- ═══════════════ HOW IT WORKS ═══════════════ -->
-<section id="how-it-works" class="py-32 relative border-t border-border/30">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-accent tracking-widest uppercase">快速开始</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">三步创作视频</h2>
-    </div>
+  <script>
+    // Scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    revealElements.forEach(el => revealObserver.observe(el));
 
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Step 1 -->
-      <div class="relative group">
-        <div class="absolute -top-4 -left-2 font-display font-bold text-8xl text-accent/5 select-none">01</div>
-        <div class="relative hover-lift rounded-2xl bg-panel/80 border border-border p-8 h-full">
-          <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center font-display font-bold text-accent text-sm mb-6">01</div>
-          <h3 class="font-display font-bold text-lg text-white mb-3 tracking-tight">初始化项目</h3>
-          <div class="code-block rounded-lg p-3 font-mono text-xs mb-4">
-            <span class="text-muted">$</span> <span class="text-accent">npx hyperframes init</span> my-video
-          </div>
-          <p class="text-muted text-sm leading-relaxed">一行命令创建项目脚手架，自动安装依赖和 AI 技能。</p>
-        </div>
-      </div>
-
-      <!-- Step 2 -->
-      <div class="relative group">
-        <div class="absolute -top-4 -left-2 font-display font-bold text-8xl text-accent/5 select-none">02</div>
-        <div class="relative hover-lift rounded-2xl bg-panel/80 border border-border p-8 h-full">
-          <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center font-display font-bold text-accent text-sm mb-6">02</div>
-          <h3 class="font-display font-bold text-lg text-white mb-3 tracking-tight">实时预览</h3>
-          <div class="code-block rounded-lg p-3 font-mono text-xs mb-4">
-            <span class="text-muted">$</span> <span class="text-accent">npx hyperframes preview</span>
-          </div>
-          <p class="text-muted text-sm leading-relaxed">在浏览器中即时预览你的合成作品，支持实时重载。</p>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="relative group">
-        <div class="absolute -top-4 -left-2 font-display font-bold text-8xl text-accent/5 select-none">03</div>
-        <div class="relative hover-lift rounded-2xl bg-panel/80 border border-border p-8 h-full">
-          <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center font-display font-bold text-accent text-sm mb-6">03</div>
-          <h3 class="font-display font-bold text-lg text-white mb-3 tracking-tight">渲染输出</h3>
-          <div class="code-block rounded-lg p-3 font-mono text-xs mb-4">
-            <span class="text-muted">$</span> <span class="text-accent">npx hyperframes render</span>
-          </div>
-          <p class="text-muted text-sm leading-relaxed">一键渲染为高质量 MP4，支持本地和 Docker 环境。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ AI AGENT WORKFLOW ═══════════════ -->
-<section class="py-32 relative border-t border-border/30">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-warm tracking-widest uppercase">AI 驱动</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">用自然语言创作视频</h2>
-      <p class="text-muted mt-4 max-w-[60ch] leading-relaxed">安装 HyperFrames 技能后，直接用自然语言告诉智能体你想要什么——它会帮你搞定脚手架、动画和渲染。</p>
-    </div>
-
-    <div class="grid lg:grid-cols-2 gap-6">
-      <!-- Install skill -->
-      <div class="rounded-2xl bg-panel/80 border border-border p-8">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </div>
-          <span class="font-display font-semibold text-white">安装技能</span>
-        </div>
-        <div class="code-block rounded-xl p-4 font-mono text-sm">
-          <span class="text-muted">$</span> <span class="text-accent">npx skills add</span> heygen-com/hyperframes
-        </div>
-        <p class="text-muted text-sm mt-4">支持 Claude Code、Cursor、Gemini CLI、Codex 等主流 AI 智能体。</p>
-      </div>
-
-      <!-- Prompt examples -->
-      <div class="rounded-2xl bg-panel/80 border border-border p-8">
-        <div class="flex items-center gap-3 mb-6">
-          <div class="w-8 h-8 rounded-lg bg-warm/10 flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-warm"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <span class="font-display font-semibold text-white">示例提示词</span>
-        </div>
-        <div class="space-y-3">
-          <div class="rounded-xl bg-elevated/50 border border-border/50 px-4 py-3 text-sm text-muted">
-            <span class="text-accent/60 font-mono text-xs">冷启动</span>
-            <p class="mt-1">创建一个 10 秒的产品介绍视频，包含淡入标题和背景音乐。</p>
-          </div>
-          <div class="rounded-xl bg-elevated/50 border border-border/50 px-4 py-3 text-sm text-muted">
-            <span class="text-warm/60 font-mono text-xs">内容转换</span>
-            <p class="mt-1">将附件中的 PDF 总结为一个 45 秒的宣传视频。</p>
-          </div>
-          <div class="rounded-xl bg-elevated/50 border border-border/50 px-4 py-3 text-sm text-muted">
-            <span class="text-purple-400/60 font-mono text-xs">特定格式</span>
-            <p class="mt-1">制作一个 9:16 TikTok 风格的短视频，配合弹跳字幕。</p>
-          </div>
-          <div class="rounded-xl bg-elevated/50 border border-border/50 px-4 py-3 text-sm text-muted">
-            <span class="text-green-400/60 font-mono text-xs">迭代优化</span>
-            <p class="mt-1">将标题放大 2 倍，切换到深色模式，结尾添加淡出效果。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ COMPONENTS ═══════════════ -->
-<section id="components" class="py-32 relative border-t border-border/30">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-accent tracking-widest uppercase">组件库</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">50+ 即用型组件</h2>
-      <p class="text-muted mt-4 max-w-[60ch] leading-relaxed">社交叠加层、着色器过渡、数据可视化和电影级特效——一行命令安装。</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="hover-lift rounded-2xl bg-panel/80 border border-border p-6 group">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 rounded bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent text-sm">✦</div>
-          <span class="font-display font-semibold text-white text-sm">着色器过渡</span>
-        </div>
-        <div class="code-block rounded-lg p-3 font-mono text-xs">
-          <span class="text-muted">$</span> npx hyperframes add <span class="text-accent">flash-through-white</span>
-        </div>
-        <p class="text-muted text-xs mt-3">WebGL 着色器驱动的专业级视频过渡效果</p>
-      </div>
-
-      <div class="hover-lift rounded-2xl bg-panel/80 border border-border p-6 group">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 rounded bg-gradient-to-br from-warm/20 to-warm/5 flex items-center justify-center text-warm text-sm">♥</div>
-          <span class="font-display font-semibold text-white text-sm">社交叠加层</span>
-        </div>
-        <div class="code-block rounded-lg p-3 font-mono text-xs">
-          <span class="text-muted">$</span> npx hyperframes add <span class="text-accent">instagram-follow</span>
-        </div>
-        <p class="text-muted text-xs mt-3">Instagram 关注、点赞等社交平台 UI 组件</p>
-      </div>
-
-      <div class="hover-lift rounded-2xl bg-panel/80 border border-border p-6 group">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-8 h-8 rounded bg-gradient-to-br from-green-500/20 to-green-500/5 flex items-center justify-center text-green-400 text-sm">◉</div>
-          <span class="font-display font-semibold text-white text-sm">数据可视化</span>
-        </div>
-        <div class="code-block rounded-lg p-3 font-mono text-xs">
-          <span class="text-muted">$</span> npx hyperframes add <span class="text-accent">data-chart</span>
-        </div>
-        <p class="text-muted text-xs mt-3">动画图表、数据驱动的可视化组件</p>
-      </div>
-    </div>
-
-    <div class="mt-8 text-center">
-      <a href="https://hyperframes.heygen.com/catalog/blocks/data-chart" target="_blank" class="inline-flex items-center gap-2 text-sm text-accent hover:text-white transition-colors duration-300">
-        浏览完整组件库
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ PACKAGES ═══════════════ -->
-<section id="packages" class="py-32 relative border-t border-border/30">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-accent tracking-widest uppercase">架构</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">模块化包架构</h2>
-      <p class="text-muted mt-4 max-w-[60ch] leading-relaxed">7 个独立包，各司其职，从核心类型到完整的浏览器编辑器。</p>
-    </div>
-
-    <div class="space-y-3">
-      <!-- Package rows -->
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/cli" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center font-mono text-accent text-xs shrink-0">CLI</div>
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-3">
-            <span class="font-mono text-sm text-white font-medium">hyperframes</span>
-            <span class="hidden sm:inline text-xs px-2 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/20">主包</span>
-          </div>
-          <p class="text-muted text-sm mt-1 truncate">创建、预览、检查 lint 和渲染合成作品</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/core" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-warm/10 flex items-center justify-center font-mono text-warm text-xs shrink-0">核心</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/core</span>
-          <p class="text-muted text-sm mt-1 truncate">类型、解析器、生成器、linter、运行时、帧适配器</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/engine" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center font-mono text-purple-400 text-xs shrink-0">引擎</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/engine</span>
-          <p class="text-muted text-sm mt-1 truncate">可寻址页面到视频捕获引擎（Puppeteer + FFmpeg）</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/producer" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-green-500/10 flex items-center justify-center font-mono text-green-400 text-xs shrink-0">制作</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/producer</span>
-          <p class="text-muted text-sm mt-1 truncate">完整渲染流水线（捕获 + 编码 + 音频混合）</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/studio" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-yellow-500/10 flex items-center justify-center font-mono text-yellow-400 text-xs shrink-0">工作室</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/studio</span>
-          <p class="text-muted text-sm mt-1 truncate">基于浏览器的合成作品编辑器 UI</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/player" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center font-mono text-blue-400 text-xs shrink-0">播放</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/player</span>
-          <p class="text-muted text-sm mt-1 truncate">可嵌入的 &lt;hyperframes-player&gt; Web 组件</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-
-      <a href="https://github.com/heygen-com/hyperframes/tree/main/packages/shader-transitions" target="_blank" class="hover-lift flex items-center gap-6 rounded-xl bg-panel/60 border border-border p-5 group transition-all">
-        <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center font-mono text-pink-400 text-xs shrink-0">着色</div>
-        <div class="flex-1 min-w-0">
-          <span class="font-mono text-sm text-white font-medium">@hyperframes/shader-transitions</span>
-          <p class="text-muted text-sm mt-1 truncate">用于合成作品的 WebGL 着色器过渡</p>
-        </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted group-hover:text-accent transition-colors shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ SKILLS ═══════════════ -->
-<section id="skills" class="py-32 relative border-t border-border/30">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="mb-20">
-      <span class="text-xs font-mono text-warm tracking-widest uppercase">AI 技能</span>
-      <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mt-3">教会你的智能体</h2>
-      <p class="text-muted mt-4 max-w-[60ch] leading-relaxed">HyperFrames 提供专用技能，教授 AI 智能体通用文档未涵盖的框架特定模式。</p>
-    </div>
-
-    <div class="grid sm:grid-cols-2 gap-4">
-      <div class="rounded-2xl bg-panel/80 border border-border p-8 hover-lift">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-sm px-2 py-1 rounded bg-accent/10 text-accent border border-accent/20">hyperframes</span>
-        </div>
-        <p class="text-muted text-sm leading-relaxed">HTML 合成作品创作、字幕、TTS、音频响应动画、过渡</p>
-      </div>
-
-      <div class="rounded-2xl bg-panel/80 border border-border p-8 hover-lift">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-sm px-2 py-1 rounded bg-warm/10 text-warm border border-warm/20">hyperframes-cli</span>
-        </div>
-        <p class="text-muted text-sm leading-relaxed">CLI 命令：init、lint、preview、render、transcribe、tts、doctor</p>
-      </div>
-
-      <div class="rounded-2xl bg-panel/80 border border-border p-8 hover-lift">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-sm px-2 py-1 rounded bg-green-500/10 text-green-400 border border-green-500/20">hyperframes-registry</span>
-        </div>
-        <p class="text-muted text-sm leading-relaxed">通过 hyperframes add 安装区块和组件</p>
-      </div>
-
-      <div class="rounded-2xl bg-panel/80 border border-border p-8 hover-lift">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="font-mono text-sm px-2 py-1 rounded bg-purple-500/10 text-purple-400 border border-purple-500/20">gsap</span>
-        </div>
-        <p class="text-muted text-sm leading-relaxed">GSAP 动画 API、时间线、缓动、ScrollTrigger、插件、性能优化</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ CTA ═══════════════ -->
-<section class="py-32 relative border-t border-border/30">
-  <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/3 rounded-full blur-[200px]"></div>
-  </div>
-  <div class="relative max-w-[800px] mx-auto px-6 text-center">
-    <h2 class="font-display font-bold text-4xl md:text-5xl tracking-tighter text-white mb-6">开始用 HTML 渲染视频</h2>
-    <p class="text-muted text-lg mb-10 leading-relaxed">
-      无论你是手动编码还是让 AI 智能体代劳，HyperFrames 都让视频创作变得前所未有的简单。
-    </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <div class="code-block rounded-xl px-6 py-4 font-mono text-sm flex items-center gap-3">
-        <span class="text-muted select-none">$</span>
-        <span class="text-accent">npx hyperframes init my-video</span>
-        <button onclick="navigator.clipboard.writeText('npx hyperframes init my-video')" class="ml-2 text-muted hover:text-accent transition-colors" title="复制">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        </button>
-      </div>
-      <a href="https://hyperframes.heygen.com/introduction" target="_blank" class="px-6 py-4 rounded-xl bg-accent text-surface font-display font-semibold text-sm hover:bg-accent/90 transition-all duration-300">
-        阅读完整文档 →
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<footer class="border-t border-border/30 py-12">
-  <div class="max-w-[1400px] mx-auto px-6">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-      <div class="flex items-center gap-3">
-        <div class="w-6 h-6 rounded bg-accent/10 border border-accent/30 flex items-center justify-center">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-accent"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <span class="font-display font-semibold text-sm text-white">HyperFrames</span>
-        <span class="text-muted text-xs">by HeyGen</span>
-      </div>
-      <div class="flex items-center gap-6 text-sm text-muted">
-        <a href="https://hyperframes.heygen.com/introduction" target="_blank" class="hover:text-accent transition-colors">文档</a>
-        <a href="https://github.com/heygen-com/hyperframes" target="_blank" class="hover:text-accent transition-colors">GitHub</a>
-        <a href="https://github.com/heygen-com/hyperframes/blob/main/CONTRIBUTING.md" target="_blank" class="hover:text-accent transition-colors">贡献指南</a>
-        <span>Apache 2.0 许可证</span>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- Intersection Observer for scroll animations -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
-        observer.unobserve(entry.target);
-      }
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-  document.querySelectorAll('#features .hover-lift, #packages a, #skills .hover-lift, #how-it-works .group').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    observer.observe(el);
-  });
-});
-</script>
+    // Nav background on scroll
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.06)';
+      } else {
+        nav.style.borderBottomColor = 'rgba(255,255,255,0.04)';
+      }
+    }, { passive: true });
+  </script>
 
 </body>
 </html>
