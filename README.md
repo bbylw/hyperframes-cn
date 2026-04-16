@@ -6,8 +6,6 @@
   </picture>
 </p>
 
-> **📌 本项目汉化自 [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)**
-
 <p align="center">
   <a href="https://www.npmjs.com/package/hyperframes"><img src="https://img.shields.io/npm/v/hyperframes.svg?style=flat" alt="npm 版本"></a>
   <a href="https://www.npmjs.com/package/hyperframes"><img src="https://img.shields.io/npm/dm/hyperframes.svg?style=flat" alt="npm 下载量"></a>
@@ -169,3 +167,7 @@ npx skills add heygen-com/hyperframes
 ## 许可证
 
 [Apache 2.0](https://github.com/heygen-com/hyperframes/blob/main/LICENSE)
+
+---
+
+> **📌 本项目汉化自 [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)**
