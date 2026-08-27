@@ -257,7 +257,7 @@ npx hyperframes render --fps=30`;
                 <span className="wz-out-title mono">
                   <i className="rec-dot" />配套 CLI 执行脚本
                 </span>
-                <button type="button" className="btn btn-ghost btn-sm" onClick={copyCli}>
+                <button type="button" className="btn btn-primary btn-sm" onClick={copyCli}>
                   复制 CLI ⎘
                 </button>
               </div>
