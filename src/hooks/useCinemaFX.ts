@@ -1,19 +1,24 @@
 import { useEffect } from "react";
 
-const SPOT_SELECTOR = ".chan,.clapper,.vs-frame,.term,.wizard-form-card,.wizard-output-card,.pg-viewport-panel,.pg-code-panel,.skill-card,.frame-card";
+const SPOT_SELECTOR =
+  ".chan,.vs-frame,.term,.wizard-form-card,.wizard-output-card,.pg-viewport-panel,.pg-code-panel,.skill-card,.frame-card";
 const SCRAMBLE_CHARS = "01<>/#▮▯";
 
-export function useCinemaFX() {
+export function useCinemaFX(routeKey: string) {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // 字符乱码破译动效
     const seg = new Intl.Segmenter("zh-CN", { granularity: "grapheme" });
+    const activeTimers = new Map<number, { el: HTMLElement; finalText: string }>();
 
     const scramble = (el: HTMLElement) => {
       const finalText = el.textContent ?? "";
       if (!finalText.trim()) return;
+      if (!el.getAttribute("aria-label")) {
+        el.setAttribute("aria-label", finalText);
+      }
       let step = 0;
       const graphemes = Array.from(seg.segment(finalText), (s) => s.segment);
       const total = Math.max(10, graphemes.length);
@@ -27,9 +32,19 @@ export function useCinemaFX() {
           .join("");
         if (step >= total) {
           window.clearInterval(iv);
+          activeTimers.delete(iv);
           el.textContent = finalText;
         }
       }, 26);
+      activeTimers.set(iv, { el, finalText });
+    };
+
+    const cleanupScrambleTimers = () => {
+      for (const [iv, info] of activeTimers) {
+        window.clearInterval(iv);
+        info.el.textContent = info.finalText;
+      }
+      activeTimers.clear();
     };
 
     // 优化视口观察器，使用宽容的阈值与 rootMargin
@@ -52,7 +67,10 @@ export function useCinemaFX() {
 
     // 仅在精细指针（鼠标）设备上启用 spotlight / 磁吸效果
     if (!window.matchMedia("(pointer: fine)").matches) {
-      return () => io.disconnect();
+      return () => {
+        io.disconnect();
+        cleanupScrambleTimers();
+      };
     }
 
     let curMagnet: HTMLElement | null = null;
@@ -108,10 +126,11 @@ export function useCinemaFX() {
 
     return () => {
       io.disconnect();
+      cleanupScrambleTimers();
       document.removeEventListener("pointermove", onPointerMove);
       document.documentElement.removeEventListener("mouseleave", onLeaveWindow);
       if (pendingFrame) window.cancelAnimationFrame(pendingFrame);
       if (curMagnet) resetMagnet(curMagnet);
     };
-  }, []);
+  }, [routeKey]);
 }

@@ -5,6 +5,7 @@ import { VolumeUpIcon, VolumeMuteIcon } from "./Icons";
 
 interface CinemaHUDProps {
   onShowToast: (msg: string) => void;
+  docSlug: string | null;
 }
 
 const SCENES = [
@@ -24,25 +25,28 @@ const SCENES = [
   { id: "community", name: "SC.10 / 社区" },
 ];
 
-export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
+export default function CinemaHUD({ onShowToast, docSlug }: CinemaHUDProps) {
   const [activeScene, setActiveScene] = useState<string>("SC.HERO");
   const [sfxActive, setSfxActive] = useState<boolean>(soundFX.isEnabled());
   const [showBackTop, setShowBackTop] = useState<boolean>(false);
   const barRef = useRef<HTMLDivElement>(null);
 
-  // 阅读进度：支持 scroll timeline 时由 CSS 驱动，否则用滚动监听兜底
+  // 阅读进度：仅在支持 scroll timeline 且未开启减弱动态效果时交由 CSS 驱动，否则用滚动监听兜底
   useEffect(() => {
     const bar = barRef.current;
-    const nativeTimeline = CSS.supports("animation-timeline", "scroll()");
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
 
     const update = () => {
       raf = 0;
       const scrolled = window.scrollY;
       setShowBackTop(scrolled > 500);
+      const nativeTimeline = CSS.supports("animation-timeline", "scroll()") && !motionQuery.matches;
       if (!nativeTimeline && bar) {
         const total = document.documentElement.scrollHeight - window.innerHeight;
         bar.style.transform = `scaleX(${total > 0 ? Math.min(scrolled / total, 1) : 0})`;
+      } else if (bar) {
+        bar.style.transform = "";
       }
     };
 
@@ -53,15 +57,18 @@ export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    motionQuery.addEventListener("change", update);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      motionQuery.removeEventListener("change", update);
       if (raf) window.cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [docSlug]);
 
   // 当前幕：IntersectionObserver 取代每次滚动遍历 getBoundingClientRect
   useEffect(() => {
+    if (docSlug !== null) return;
     const visible = new Set<string>();
     const io = new IntersectionObserver(
       (entries) => {
@@ -92,7 +99,9 @@ export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
       observed.forEach((el) => io.unobserve(el));
       io.disconnect();
     };
-  }, []);
+  }, [docSlug]);
+
+  const displayScene = docSlug !== null ? `DOCS / ${docSlug.toUpperCase()}` : activeScene;
 
   const toggleSound = () => {
     const next = soundFX.toggle();
@@ -115,7 +124,7 @@ export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
       <div className="hud-content">
         <div className="hud-meta mono">
           <i className="rec-dot is-blinking" aria-hidden="true" />
-          <span className="hud-scene-name">{activeScene}</span>
+          <span className="hud-scene-name">{displayScene}</span>
         </div>
 
         <div className="hud-divider" />

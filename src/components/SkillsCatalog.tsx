@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useId, useMemo, useState, type KeyboardEvent } from "react";
 import { coreSkills, onDemandSkills, type SkillRow } from "../data/content";
 import { soundFX } from "../utils/audioFX";
 import { copyToClipboard } from "../utils/clipboard";
@@ -12,6 +12,9 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [expandedSkill, setExpandedSkill] = useState<string | null>(null);
+  const baseId = useId();
+  const searchInputId = `${baseId}-search`;
+  const panelId = `${baseId}-tabpanel`;
 
   // 合并全部 9 个已发布技能：路由器 + 核心集合 + 按需安装
   const allSkills: SkillRow[] = useMemo(() => {
@@ -76,6 +79,22 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
     }
   };
 
+  const handleTabKeyDown = (e: KeyboardEvent<HTMLButtonElement>, currentIndex: number) => {
+    let nextIdx = -1;
+    if (e.key === "ArrowRight") nextIdx = (currentIndex + 1) % categories.length;
+    else if (e.key === "ArrowLeft")
+      nextIdx = (currentIndex - 1 + categories.length) % categories.length;
+    else if (e.key === "Home") nextIdx = 0;
+    else if (e.key === "End") nextIdx = categories.length - 1;
+    if (nextIdx < 0) return;
+
+    e.preventDefault();
+    soundFX.playClick();
+    setActiveCategory(categories[nextIdx].id);
+    const tabs = e.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    tabs?.[nextIdx]?.focus();
+  };
+
   return (
     <section className="section alt skills-catalog-section" id="skills">
       <div className="container">
@@ -88,28 +107,32 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
           </div>
           <h2 className="scene-title">内置 9 个智能体 Skills 矩阵</h2>
           <p className="scene-lede">
-            先读 <strong>/hyperframes</strong> —— 它承载合成契约与全部参考文档；
-            默认安装 <strong>核心集合</strong>（六个），其余三个技能按需安装，
+            先读 <strong>/hyperframes</strong> —— 它承载合成契约与全部参考文档； 默认安装{" "}
+            <strong>核心集合</strong>（六个），其余三个技能按需安装，
             <strong>没有任何操作会在你背后偷偷拉取整套集合</strong>。
           </p>
         </div>
 
         {/* 搜索与分类过滤器 */}
         <div className="skills-filter-bar">
-          <div className="skills-tabs" role="tablist">
-            {categories.map((c) => {
+          <div className="skills-tabs" role="tablist" aria-label="技能分类筛选">
+            {categories.map((c, index) => {
               const isSelected = activeCategory === c.id;
               return (
                 <button
                   key={c.id}
+                  id={`${baseId}-tab-${c.id}`}
                   type="button"
                   role="tab"
                   aria-selected={isSelected}
+                  aria-controls={panelId}
+                  tabIndex={isSelected ? 0 : -1}
                   className={`skills-tab-btn ${isSelected ? "is-active" : ""}`}
                   onClick={() => {
                     soundFX.playClick();
                     setActiveCategory(c.id);
                   }}
+                  onKeyDown={(e) => handleTabKeyDown(e, index)}
                 >
                   <span>{c.label}</span>
                   <span className="skills-count mono">{c.count}</span>
@@ -119,10 +142,14 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
           </div>
 
           <div className="skills-search-box">
+            <label htmlFor={searchInputId} className="sr-only">
+              搜索技能名称、输入格式或关键字
+            </label>
             <span className="search-icon" aria-hidden="true">
               <SearchIcon size={15} />
             </span>
             <input
+              id={searchInputId}
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -143,95 +170,98 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
         </div>
 
         {/* 技能卡片网格 */}
-        <div className="skills-grid">
-          {filteredSkills.map((skill) => {
-            const isExpanded = expandedSkill === skill.name;
-            return (
-              <article key={skill.name} className="skill-card">
-                <div className="skill-card-head">
-                  <div className="skill-title-row">
-                    <h3 className="skill-name mono">{skill.name}</h3>
-                    {skill.badge && <span className="skill-badge mono">{skill.badge}</span>}
+        <div id={panelId} role="tabpanel" aria-labelledby={`${baseId}-tab-${activeCategory}`}>
+          <div className="skills-grid">
+            {filteredSkills.map((skill) => {
+              const isExpanded = expandedSkill === skill.name;
+              return (
+                <article key={skill.name} className="skill-card">
+                  <div className="skill-card-head">
+                    <div className="skill-title-row">
+                      <h3 className="skill-name mono">{skill.name}</h3>
+                      {skill.badge && <span className="skill-badge mono">{skill.badge}</span>}
+                    </div>
+                    {skill.tag && <span className="skill-tag mono">{skill.tag}</span>}
                   </div>
-                  {skill.tag && <span className="skill-tag mono">{skill.tag}</span>}
-                </div>
 
-                <p className="skill-usage">{skill.usage}</p>
+                  <p className="skill-usage">{skill.usage}</p>
 
-                {skill.inputFormat && (
-                  <div className="skill-input-meta mono">
-                    <span className="meta-k">INPUT:</span>
-                    <span className="meta-v">{skill.inputFormat}</span>
-                  </div>
-                )}
+                  {skill.inputFormat && (
+                    <div className="skill-input-meta mono">
+                      <span className="meta-k">INPUT:</span>
+                      <span className="meta-v">{skill.inputFormat}</span>
+                    </div>
+                  )}
 
-                {skill.cliCommand && (
-                  <div className="skill-cli-row">
-                    <code className="skill-cli-code mono">{skill.cliCommand}</code>
-                    <button
-                      type="button"
-                      className="skill-copy-btn"
-                      onClick={() => copyCommand(skill.cliCommand!)}
-                      title="复制安装与更新指令"
-                      aria-label={`复制 ${skill.name} 的安装与更新指令`}
-                    >
-                      复制 ⎘
-                    </button>
-                  </div>
-                )}
+                  {skill.cliCommand && (
+                    <div className="skill-cli-row">
+                      <code className="skill-cli-code mono">{skill.cliCommand}</code>
+                      <button
+                        type="button"
+                        className="skill-copy-btn"
+                        onClick={() => copyCommand(skill.cliCommand!)}
+                        title="复制安装与更新指令"
+                        aria-label={`复制 ${skill.name} 的安装与更新指令`}
+                      >
+                        复制 ⎘
+                      </button>
+                    </div>
+                  )}
 
-                {skill.examplePrompt && (
-                  <div className="skill-prompt-toggle">
-                    <button
-                      type="button"
-                      className="prompt-toggle-btn mono"
-                      onClick={() => {
-                        soundFX.playClick();
-                        setExpandedSkill(isExpanded ? null : skill.name);
-                      }}
-                    >
-                      {isExpanded ? "收起示例 Prompt ▲" : "查看提问示例 Prompt ▼"}
-                    </button>
-                    {isExpanded && (
-                      <div className="skill-prompt-box mono">
-                        <p>{skill.examplePrompt}</p>
-                        <button
-                          type="button"
-                          className="btn btn-ghost btn-xs"
-                          style={{ marginTop: "8px" }}
-                          aria-label={`复制 ${skill.name} 的示例 Prompt`}
-                          onClick={async () => {
-                            soundFX.playSnap();
-                            const ok = await copyToClipboard(skill.examplePrompt!);
-                            if (ok) onShowToast("示例 Prompt 已复制");
-                          }}
-                        >
-                          复制此 Prompt ⎘
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-              </article>
-            );
-          })}
-        </div>
-
-        {filteredSkills.length === 0 && (
-          <div className="skills-empty mono">
-            <p>未找到匹配「{searchQuery}」的技能。</p>
-            <button
-              type="button"
-              className="btn btn-ghost btn-sm"
-              onClick={() => {
-                setSearchQuery("");
-                setActiveCategory("all");
-              }}
-            >
-              重置过滤条件
-            </button>
+                  {skill.examplePrompt && (
+                    <div className="skill-prompt-toggle">
+                      <button
+                        type="button"
+                        className="prompt-toggle-btn mono"
+                        aria-expanded={isExpanded}
+                        onClick={() => {
+                          soundFX.playClick();
+                          setExpandedSkill(isExpanded ? null : skill.name);
+                        }}
+                      >
+                        {isExpanded ? "收起示例 Prompt ▲" : "查看提问示例 Prompt ▼"}
+                      </button>
+                      {isExpanded && (
+                        <div className="skill-prompt-box mono">
+                          <p>{skill.examplePrompt}</p>
+                          <button
+                            type="button"
+                            className="btn btn-ghost btn-xs"
+                            style={{ marginTop: "8px" }}
+                            aria-label={`复制 ${skill.name} 的示例 Prompt`}
+                            onClick={async () => {
+                              soundFX.playSnap();
+                              const ok = await copyToClipboard(skill.examplePrompt!);
+                              if (ok) onShowToast("示例 Prompt 已复制");
+                            }}
+                          >
+                            复制此 Prompt ⎘
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
           </div>
-        )}
+
+          {filteredSkills.length === 0 && (
+            <div className="skills-empty mono">
+              <p>未找到匹配「{searchQuery}」的技能。</p>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() => {
+                  setSearchQuery("");
+                  setActiveCategory("all");
+                }}
+              >
+                重置过滤条件
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

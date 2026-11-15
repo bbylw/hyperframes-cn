@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { copyToClipboard } from "../utils/clipboard";
 import { soundFX } from "../utils/audioFX";
 
@@ -10,13 +10,28 @@ interface CodeBlockProps {
 
 export default function CodeBlock({ code, filename, comment }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) {
+        window.clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
 
   async function copy() {
     soundFX.playSnap();
     const ok = await copyToClipboard(code);
     if (ok) {
+      if (timerRef.current !== null) {
+        window.clearTimeout(timerRef.current);
+      }
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1800);
+      timerRef.current = window.setTimeout(() => {
+        timerRef.current = null;
+        setCopied(false);
+      }, 1800);
     }
   }
 

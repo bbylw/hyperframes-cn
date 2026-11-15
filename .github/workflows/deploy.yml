@@ -25,13 +25,19 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: "1.4.4"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies with Bun
         run: bun install --frozen-lockfile
+
+      - name: Check formatting
+        run: bun run fmt:check
+
+      - name: Run linter
+        run: bun run lint
 
       - name: Build site with Bun
         run: bun run build

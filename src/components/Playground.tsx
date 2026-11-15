@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useId, useRef, useState, useTransition, type KeyboardEvent } from "react";
 import { playgroundPresets, type PlaygroundPreset } from "../data/playgroundData";
 import { soundFX } from "../utils/audioFX";
 import { copyToClipboard } from "../utils/clipboard";
@@ -8,6 +8,18 @@ interface PlaygroundProps {
   onShowToast: (msg: string) => void;
 }
 
+const CODE_TABS: Array<{ id: "html" | "gsap" | "cli"; label: string }> = [
+  { id: "html", label: "INDEX.HTML" },
+  { id: "gsap", label: "ANIMATION.JS" },
+  { id: "cli", label: "CLI 渲染命令" },
+];
+
+function formatAspectResolution(ratio: PlaygroundPreset["aspectRatio"]): string {
+  if (ratio === "9:16") return "1080×1920";
+  if (ratio === "1:1") return "1080×1080";
+  return "1920×1080";
+}
+
 export default function Playground({ onShowToast }: PlaygroundProps) {
   const [selectedId, setSelectedId] = useState<string>("product-launch");
   const [currentTime, setCurrentTime] = useState<number>(1.8);
@@ -15,9 +27,12 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
   const [fps, setFps] = useState<number>(24);
   const [activeTab, setActiveTab] = useState<"html" | "gsap" | "cli">("html");
   const [, startTransition] = useTransition();
+  const baseId = useId();
 
   const preset = playgroundPresets.find((p) => p.id === selectedId) ?? playgroundPresets[0];
   const maxDuration = preset.duration;
+
+  const cliCode = `# 1. 建立该合成脚手架\nnpx hyperframes init ${preset.id}-demo\n\n# 2. 浏览器热重载实时调试\ncd ${preset.id}-demo\nnpx hyperframes preview\n\n# 3. 逐帧导出确定性 MP4 视频\nnpx hyperframes render --composition=${preset.compositionId} --fps=${fps}`;
 
   // 动画走带循环
   const rafRef = useRef<number>(0);
@@ -63,11 +78,39 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
   };
 
   const handlePresetChange = (id: string) => {
+    const nextPreset = playgroundPresets.find((p) => p.id === id) ?? playgroundPresets[0];
     soundFX.playClick();
     startTransition(() => {
       setSelectedId(id);
-      setCurrentTime(1.8);
+      setCurrentTime(Math.min(1.8, nextPreset.duration));
     });
+  };
+
+  const handleTabListKeyDown = (
+    e: KeyboardEvent<HTMLButtonElement>,
+    ids: string[],
+    currentIndex: number,
+    onSelect: (id: string) => void,
+  ) => {
+    let nextIdx = -1;
+    if (e.key === "ArrowRight") nextIdx = (currentIndex + 1) % ids.length;
+    else if (e.key === "ArrowLeft") nextIdx = (currentIndex - 1 + ids.length) % ids.length;
+    else if (e.key === "Home") nextIdx = 0;
+    else if (e.key === "End") nextIdx = ids.length - 1;
+    if (nextIdx < 0) return;
+
+    e.preventDefault();
+    onSelect(ids[nextIdx]);
+    const tabs = e.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    tabs?.[nextIdx]?.focus();
+  };
+
+  const handleViewportKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.code !== "Space") return;
+    const tag = e.target instanceof HTMLElement ? e.target.tagName : "";
+    if (tag === "BUTTON" || tag === "INPUT" || tag === "SELECT" || tag === "A") return;
+    e.preventDefault();
+    togglePlay();
   };
 
   const togglePlay = () => {
@@ -88,11 +131,7 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
   const copyCode = async () => {
     soundFX.playSnap();
     const content =
-      activeTab === "html"
-        ? preset.htmlCode
-        : activeTab === "gsap"
-          ? preset.gsapCode
-          : `npx hyperframes init ${preset.id}-video\ncd ${preset.id}-video\nnpx hyperframes render`;
+      activeTab === "html" ? preset.htmlCode : activeTab === "gsap" ? preset.gsapCode : cliCode;
     const ok = await copyToClipboard(content);
     if (ok) {
       onShowToast("代码与命令已复制到剪贴板");
@@ -110,13 +149,13 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
       const cardY = t < 0.5 ? 60 : Math.max(0, 60 - (t - 0.5) * 50);
       const cardOpacity = t < 0.5 ? 0 : Math.min(1, (t - 0.5) / 0.8);
       const cardScale = t < 0.5 ? 0.9 : Math.min(1, 0.9 + (t - 0.5) * 0.1);
-      
+
       const cursorX = t < 1.2 ? 50 : Math.min(220, 50 + (t - 1.2) * 120);
       const cursorY = t < 1.2 ? 180 : Math.max(120, 180 - (t - 1.2) * 40);
       const isClicked = t >= 2.0 && t <= 2.4;
 
-      const currentFPS = t < 1.8 ? 0 : Math.min(60, Math.floor((t - 1.8) * 35));
-      const currentStars = t < 2.0 ? 0 : Math.min(12.8, Number(((t - 2.0) * 6.4).toFixed(1)));
+      const currentFPS = t < 1.0 ? 0 : Math.min(60, Math.floor(((t - 1.0) / 1.8) * 60));
+      const currentStars = t < 1.2 ? 0 : Math.min(12, Number((((t - 1.2) / 2.2) * 12).toFixed(1)));
 
       return (
         <div className="pg-screen pg-launch-screen">
@@ -134,8 +173,8 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
             }}
           >
             <div className="pg-badge">HYPERFRAMES 2.0</div>
-            <h4 className="pg-title">用 HTML 写视频，由 AI 驱动</h4>
-            <p className="pg-desc">确定性无头 Chrome 逐帧抽取 · FFmpeg 工业级压制</p>
+            <h3 className="pg-title">Turn HTML Into Cinematic Video</h3>
+            <p className="pg-desc">Deterministic rendering powered by Headless Chrome & FFmpeg.</p>
             <div className="pg-metrics">
               <div className="pg-m-item">
                 <span className="pg-m-num">{currentFPS}</span>
@@ -181,7 +220,7 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
         <div className="pg-screen pg-pr-screen">
           <div className="pg-pr-header" style={{ opacity: headerOpacity }}>
             <span className="pg-pr-chip">PR #1024</span>
-            <span className="pg-pr-h-text">feat: GPU Frame Transition Engine</span>
+            <span className="pg-pr-h-text">feat: add WebGL shader transitions</span>
           </div>
 
           <div
@@ -193,15 +232,15 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
           >
             <div className="pg-diff-row is-del" style={{ opacity: delOpacity }}>
               <span className="pg-diff-sign">-</span>
-              <code>const renderer = new LegacyCanvasRenderer();</code>
+              <code>const renderer = new LegacyRenderer();</code>
             </div>
             <div className="pg-diff-row is-add" style={{ opacity: add1Opacity }}>
               <span className="pg-diff-sign">+</span>
-              <code>const renderer = new GPUFrameEngine(&#123; mode: "deterministic" &#125;);</code>
+              <code>const renderer = new GPUFrameEngine(&#123; shader: "wipe" &#125;);</code>
             </div>
             <div className="pg-diff-row is-add" style={{ opacity: add2Opacity }}>
               <span className="pg-diff-sign">+</span>
-              <code>await renderer.renderVideo(&#123; format: "mp4", fps: 60 &#125;);</code>
+              <code>await renderer.renderDeterministic();</code>
             </div>
           </div>
 
@@ -215,7 +254,7 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
             <span className="pg-stamp-icon" aria-hidden="true">
               <BotAgentIcon size={14} />
             </span>
-            <span>AI Agent Automated Check: PASSED</span>
+            <span>Merged by AI Agent via /hyperframes</span>
           </div>
         </div>
       );
@@ -223,14 +262,14 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
 
     if (p.id === "data-chart") {
       const b1 = Math.min(15, (t / 1.5) * 15);
-      const b2 = Math.min(42, (t / 1.8) * 42);
-      const b3 = Math.min(96, (t / 2.2) * 96);
-      const highlight = t >= 3.0;
+      const b2 = Math.min(38, (t / 1.8) * 38);
+      const b3 = Math.min(95, (t / 2.2) * 95);
+      const highlight = t >= 3.2;
 
       return (
         <div className="pg-screen pg-chart-screen">
           <div className="pg-chart-head">
-            <h4>Rendering Performance Benchmark</h4>
+            <h3>Video Generation Speedup (x Times)</h3>
             <span className="pg-chart-tag">Multi-Threaded / Cloud</span>
           </div>
           <div className="pg-chart-bars">
@@ -242,20 +281,18 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
               <span className="pg-bar-score">1.0x</span>
             </div>
             <div className="pg-bar-item">
-              <span className="pg-bar-name">React Bundler</span>
+              <span className="pg-bar-name">Remotion Node</span>
               <div className="pg-bar-bg">
                 <div className="pg-bar-val b-muted" style={{ width: `${b2}%` }} />
               </div>
-              <span className="pg-bar-score">2.8x</span>
+              <span className="pg-bar-score">2.5x</span>
             </div>
             <div className="pg-bar-item">
               <span className="pg-bar-name">HyperFrames Lambda</span>
               <div className="pg-bar-bg">
                 <div className="pg-bar-val b-gold" style={{ width: `${b3}%` }} />
               </div>
-              <span className={`pg-bar-score b-gold-txt ${highlight ? "is-pulse" : ""}`}>
-                8.4x
-              </span>
+              <span className={`pg-bar-score b-gold-txt ${highlight ? "is-pulse" : ""}`}>8.4x</span>
             </div>
           </div>
         </div>
@@ -320,7 +357,7 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
           <span className="pg-kt-txt t-main">PURE CINEMA</span>
         </div>
         <div className="pg-kt-row">
-          <span className="pg-kt-txt t-desc">WEB STANDARDS REINVENTED</span>
+          <span className="pg-kt-txt t-desc">BUILT WITH WEB STANDARDS</span>
         </div>
       </div>
     );
@@ -345,16 +382,27 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
 
         {/* 预设场景切换栏 */}
         <div className="pg-presets-nav" role="tablist" aria-label="场景预设">
-          {playgroundPresets.map((p) => {
+          {playgroundPresets.map((p, index) => {
             const isSelected = p.id === selectedId;
             return (
               <button
                 key={p.id}
+                id={`${baseId}-preset-tab-${p.id}`}
                 type="button"
                 role="tab"
                 aria-selected={isSelected}
+                aria-controls={`${baseId}-workbench`}
+                tabIndex={isSelected ? 0 : -1}
                 className={`pg-preset-btn ${isSelected ? "is-selected" : ""}`}
                 onClick={() => handlePresetChange(p.id)}
+                onKeyDown={(e) =>
+                  handleTabListKeyDown(
+                    e,
+                    playgroundPresets.map((item) => item.id),
+                    index,
+                    handlePresetChange,
+                  )
+                }
               >
                 <span className="pg-btn-icon" aria-hidden="true">
                   <SemanticIcon name={p.icon} size={18} />
@@ -369,9 +417,19 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
         </div>
 
         {/* 主工作台 */}
-        <div className="pg-workbench">
+        <div
+          id={`${baseId}-workbench`}
+          role="tabpanel"
+          aria-labelledby={`${baseId}-preset-tab-${selectedId}`}
+          className="pg-workbench"
+        >
           {/* 左侧：实时视口与控制器 */}
-          <div className="pg-viewport-panel">
+          <div
+            className="pg-viewport-panel"
+            tabIndex={0}
+            aria-label="实时视频预览面板，聚焦后可按空格键播放或暂停"
+            onKeyDown={handleViewportKeyDown}
+          >
             <div className="pg-viewport-header">
               <div className="pg-live-indicator mono">
                 <i className={`rec-dot ${isPlaying ? "is-blinking" : ""}`} />
@@ -379,7 +437,7 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
               </div>
               <div className="pg-view-meta mono">
                 <span className="pg-meta-pill">{preset.aspectRatio}</span>
-                <span className="pg-meta-pill">CANVAS 1080P</span>
+                <span className="pg-meta-pill">{formatAspectResolution(preset.aspectRatio)}</span>
               </div>
             </div>
 
@@ -471,56 +529,56 @@ export default function Playground({ onShowToast }: PlaygroundProps) {
 
           {/* 右侧：代码与命令检视器 */}
           <div className="pg-code-panel">
-            <div className="pg-code-tabs" role="tablist">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === "html"}
-                className={`pg-tab ${activeTab === "html" ? "is-active" : ""}`}
-                onClick={() => {
-                  soundFX.playClick();
-                  setActiveTab("html");
-                }}
-              >
-                INDEX.HTML
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === "gsap"}
-                className={`pg-tab ${activeTab === "gsap" ? "is-active" : ""}`}
-                onClick={() => {
-                  soundFX.playClick();
-                  setActiveTab("gsap");
-                }}
-              >
-                ANIMATION.JS
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={activeTab === "cli"}
-                className={`pg-tab ${activeTab === "cli" ? "is-active" : ""}`}
-                onClick={() => {
-                  soundFX.playClick();
-                  setActiveTab("cli");
-                }}
-              >
-                CLI 渲染命令
-              </button>
+            <div className="pg-code-tabs" role="tablist" aria-label="源码与渲染命令视图">
+              {CODE_TABS.map((tab, index) => {
+                const isSelected = activeTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    id={`${baseId}-code-tab-${tab.id}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    aria-controls={`${baseId}-code-panel`}
+                    tabIndex={isSelected ? 0 : -1}
+                    className={`pg-tab ${isSelected ? "is-active" : ""}`}
+                    onClick={() => {
+                      soundFX.playClick();
+                      setActiveTab(tab.id);
+                    }}
+                    onKeyDown={(e) =>
+                      handleTabListKeyDown(
+                        e,
+                        CODE_TABS.map((t) => t.id),
+                        index,
+                        (id) => {
+                          soundFX.playClick();
+                          setActiveTab(id as "html" | "gsap" | "cli");
+                        },
+                      )
+                    }
+                  >
+                    {tab.label}
+                  </button>
+                );
+              })}
 
               <button type="button" className="pg-copy-btn" onClick={copyCode}>
                 <span>复制代码 ⎘</span>
               </button>
             </div>
 
-            <div className="pg-code-body mono">
+            <div
+              id={`${baseId}-code-panel`}
+              role="tabpanel"
+              aria-labelledby={`${baseId}-code-tab-${activeTab}`}
+              className="pg-code-body mono"
+            >
               <pre>
                 <code>
                   {activeTab === "html" && preset.htmlCode}
                   {activeTab === "gsap" && preset.gsapCode}
-                  {activeTab === "cli" &&
-                    `# 1. 建立该合成脚手架\nnpx hyperframes init ${preset.id}-demo\n\n# 2. 浏览器热重载实时调试\ncd ${preset.id}-demo\nnpx hyperframes preview\n\n# 3. 逐帧导出确定性 MP4 视频\nnpx hyperframes render --composition=${preset.id} --fps=${fps}`}
+                  {activeTab === "cli" && cliCode}
                 </code>
               </pre>
             </div>

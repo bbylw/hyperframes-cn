@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useState, type ReactNode } from "react";
 import { CountdownLeader, ProjectorBeam } from "./components/Cinema";
 import CodeBlock from "./components/CodeBlock";
 import { useCinemaFX } from "./hooks/useCinemaFX";
@@ -10,9 +10,21 @@ import FrameGallery from "./components/FrameGallery";
 import MobileNav from "./components/MobileNav";
 import CinemaHUD from "./components/CinemaHUD";
 import Toast from "./components/Toast";
-import DocsPage from "./components/DocsPage";
 import BrandLogo from "./components/BrandLogo";
 import { SemanticIcon, ZapBoltIcon, BotAgentIcon } from "./components/Icons";
+
+const DocsPage = lazy(() => import("./components/DocsPage"));
+
+function DocsLoadingFallback() {
+  useEffect(() => {
+    document.title = "中文文档 · HyperFrames";
+  }, []);
+  return (
+    <div className="container docs-loading mono" role="status">
+      正在加载中文文档…
+    </div>
+  );
+}
 import {
   addSamples,
   agentSample,
@@ -81,7 +93,13 @@ function Nav() {
             rel="noreferrer"
             aria-label="GitHub 仓库"
           >
-            <svg className="nav-btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+            <svg
+              className="nav-btn-icon"
+              viewBox="0 0 24 24"
+              width="15"
+              height="15"
+              fill="currentColor"
+            >
               <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
             </svg>
             <span>GitHub</span>
@@ -93,7 +111,13 @@ function Nav() {
             target="_blank"
             rel="noreferrer"
           >
-            <svg className="nav-btn-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
+            <svg
+              className="nav-btn-icon"
+              viewBox="0 0 24 24"
+              width="15"
+              height="15"
+              fill="currentColor"
+            >
               <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
             </svg>
             <span>加入 Discord</span>
@@ -160,7 +184,7 @@ function Hero() {
               target="_blank"
               rel="noreferrer"
             >
-              <span>打开在线演练场 ↗</span>
+              <span>打开在线演练场</span>
             </a>
           </div>
 
@@ -226,7 +250,6 @@ function QuickStart() {
         <div style={{ marginTop: "28px" }}>
           <a className="btn btn-ghost" href="#docs/quickstart">
             <span>查看完整中文文档页 · Quickstart</span>
-            <span className="arrow">→</span>
           </a>
           <p className="figure-cap mono">
             <b>▸</b> 中文版 · 对应官网 hyperframes.heygen.com/quickstart（三条路径）
@@ -292,12 +315,18 @@ function HowItWorks() {
           <div className="hw-step-box">
             <span className="hw-step-num mono">01</span>
             <h4>HTML 声明式轨道</h4>
-            <p>使用 <code>data-start</code> 与 <code>data-duration</code> 锁定每个元素的出入场精确时间戳。</p>
+            <p>
+              使用 <code>data-start</code> 与 <code>data-duration</code>{" "}
+              锁定每个元素的出入场精确时间戳。
+            </p>
           </div>
           <div className="hw-step-box">
             <span className="hw-step-num mono">02</span>
             <h4>逐帧精确定位适配器</h4>
-            <p>将 GSAP 等动画引擎设为 <code>paused: true</code>，挂载至 <code>window.__timelines</code>。</p>
+            <p>
+              将 GSAP 等动画引擎设为 <code>paused: true</code>，挂载至{" "}
+              <code>window.__timelines</code>。
+            </p>
           </div>
           <div className="hw-step-box">
             <span className="hw-step-num mono">03</span>
@@ -351,7 +380,7 @@ function Stack() {
                   <td className="code-cell">
                     {r.link ? (
                       <a className="link-accent" href={r.link} target="_blank" rel="noreferrer">
-                        {r.component} ↗
+                        {r.component}
                       </a>
                     ) : (
                       r.component
@@ -470,7 +499,7 @@ function WhyAndCompare() {
               target="_blank"
               rel="noreferrer"
             >
-              ▸ 阅读完整对比指南 ↗
+              阅读完整对比指南
             </a>
           </p>
         </div>
@@ -500,8 +529,12 @@ function DocsAndPackages() {
           }
         />
         <div className="docs-grid" data-reveal>
-          <a className="doc-chip mono" href="#docs/quickstart" style={{ borderColor: "var(--accent)", color: "var(--accent)" }}>
-            中文文档 · 快速开始 →
+          <a
+            className="doc-chip mono"
+            href="#docs/quickstart"
+            style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+          >
+            中文文档 · 快速开始
           </a>
           {docsLinks.map((d) => (
             <a
@@ -511,7 +544,7 @@ function DocsAndPackages() {
               target="_blank"
               rel="noreferrer"
             >
-              {d.label} ↗
+              {d.label}
             </a>
           ))}
         </div>
@@ -555,7 +588,19 @@ function Community() {
         <SceneHead
           no="SC.10"
           title="社区"
-          lede="已在 HeyGen 投入生产使用，并有来自 tldraw、TanStack 等团队的社区示例（ADOPTERS.md）。你的团队正在使用？欢迎提交 PR 加入名单。"
+          lede={
+            <>
+              已在 HeyGen 投入生产使用，并有来自 tldraw、TanStack 等团队的社区示例（
+              <a
+                href="https://github.com/heygen-com/hyperframes/blob/main/ADOPTERS.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                ADOPTERS.md
+              </a>
+              ）。你的团队正在使用？欢迎提交 PR 加入名单。
+            </>
+          }
         />
         <div className="comm-grid" data-reveal>
           <article className="comm-card">
@@ -580,14 +625,31 @@ function Community() {
                 rel="noreferrer"
               >
                 GitHub Issues
-              </a>{" "}
-              ；安全报告请参阅 SECURITY.md。
+              </a>
+              ；安全报告请参阅{" "}
+              <a
+                href="https://github.com/heygen-com/hyperframes/blob/main/SECURITY.md"
+                target="_blank"
+                rel="noreferrer"
+              >
+                SECURITY.md
+              </a>
+              。
             </p>
           </article>
           <article className="comm-card">
             <span className="comm-idx mono">CH.03 / RESEARCH</span>
             <h3>用户调研</h3>
-            <p>预约一次轻松的 30 分钟交流 —— 无需准备，也无销售推销。</p>
+            <p>
+              <a
+                href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cSpKoDgmcmRrgekrnrgqmvPT8W6F2Zg6e7MY7IJqaZKwpn_I0NdTHkN390iguMepE_NVg8ezb?gv=true"
+                target="_blank"
+                rel="noreferrer"
+              >
+                预约一次轻松的 30 分钟交流
+              </a>{" "}
+              —— 无需准备，也无销售推销。
+            </p>
           </article>
         </div>
       </div>
@@ -682,7 +744,6 @@ function Footer() {
 }
 
 export default function App() {
-  useCinemaFX();
   const [toastMsg, setToastMsg] = useState<string>("");
   const [toastVisible, setToastVisible] = useState<boolean>(false);
   const [docSlug, setDocSlug] = useState<string | null>(() => {
@@ -692,6 +753,8 @@ export default function App() {
     if (h === "#docs") return "introduction";
     return null;
   });
+
+  useCinemaFX(docSlug ?? "home");
 
   const showToast = (msg: string) => {
     setToastMsg(msg);
@@ -714,10 +777,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title =
-      docSlug !== null
-        ? "中文文档 · HyperFrames"
-        : "HyperFrames · 用 HTML 写视频，由 AI 智能体驱动";
+    if (docSlug === null) {
+      document.title = "HyperFrames · 用 HTML 写视频，由 AI 智能体驱动";
+    }
   }, [docSlug]);
 
   const goHome = () => {
@@ -729,8 +791,16 @@ export default function App() {
   };
 
   useEffect(() => {
+    if (docSlug === null) {
+      const hash = window.location.hash;
+      if (hash && hash !== "#top" && !hash.startsWith("#docs")) {
+        const target = document.getElementById(hash.slice(1));
+        if (target) target.scrollIntoView();
+      }
+    }
+
     const els = Array.from(document.querySelectorAll("[data-reveal]"));
-    
+
     // 即时触发初始视口内的元素
     const checkImmediate = () => {
       els.forEach((el) => {
@@ -756,7 +826,7 @@ export default function App() {
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
-  }, []);
+  }, [docSlug]);
 
   return (
     <>
@@ -768,37 +838,35 @@ export default function App() {
       <i className="cine-bar cine-bar-bottom" aria-hidden="true" />
       <CountdownLeader />
       <ProjectorBeam />
-      <CinemaHUD onShowToast={showToast} />
-      <Toast
-        message={toastMsg}
-        visible={toastVisible}
-        onClose={() => setToastVisible(false)}
-      />
+      <CinemaHUD onShowToast={showToast} docSlug={docSlug} />
+      <Toast message={toastMsg} visible={toastVisible} onClose={() => setToastVisible(false)} />
       <Nav />
       <main id="main">
         {docSlug !== null ? (
-          <DocsPage slug={docSlug} onBack={goHome} />
+          <Suspense fallback={<DocsLoadingFallback />}>
+            <DocsPage slug={docSlug} onBack={goHome} />
+          </Suspense>
         ) : (
           <>
-        <Hero />
-        <div aria-hidden="true">
-          <Ticker items={tickerItems} />
-          <div style={{ borderTop: "1px solid var(--line)" }}>
-            <Ticker items={[...tickerItems].reverse()} reverse />
-          </div>
-        </div>
-        <QuickStart />
-        <Playground onShowToast={showToast} />
-        <PromptWizard onShowToast={showToast} />
-        <BuildList />
-        <HowItWorks />
-        <SkillsCatalog onShowToast={showToast} />
-        <Stack />
-        <FrameGallery onShowToast={showToast} />
-        <Catalog />
-        <WhyAndCompare />
-        <DocsAndPackages />
-        <Community />
+            <Hero />
+            <div aria-hidden="true">
+              <Ticker items={tickerItems} />
+              <div style={{ borderTop: "1px solid var(--line)" }}>
+                <Ticker items={[...tickerItems].reverse()} reverse />
+              </div>
+            </div>
+            <QuickStart />
+            <Playground onShowToast={showToast} />
+            <PromptWizard onShowToast={showToast} />
+            <BuildList />
+            <HowItWorks />
+            <SkillsCatalog onShowToast={showToast} />
+            <Stack />
+            <FrameGallery onShowToast={showToast} />
+            <Catalog />
+            <WhyAndCompare />
+            <DocsAndPackages />
+            <Community />
           </>
         )}
       </main>

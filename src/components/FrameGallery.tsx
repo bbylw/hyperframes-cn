@@ -30,7 +30,7 @@ rules:
     entrance: "power3.out"
     exit: "power2.in"
 ---
-/* AI Agents read this spec to orchestrate video elements deterministically */
+<!-- AI Agents read this spec to orchestrate video elements deterministically -->
 `;
     const ok = await copyToClipboard(spec);
     if (ok) {
@@ -63,12 +63,14 @@ rules:
         {/* 模板交互画廊 */}
         <div className="frame-workspace">
           {/* 左侧：模板选择器 */}
-          <div className="frame-cards-grid">
+          <div className="frame-cards-grid" role="group" aria-label="设计系统风格模板">
             {frameTemplates.map((t) => {
               const isSelected = t.id === selectedTemplate.id;
               return (
-                <div
+                <button
                   key={t.id}
+                  type="button"
+                  aria-pressed={isSelected}
                   className={`frame-card ${isSelected ? "is-selected" : ""}`}
                   onClick={() => {
                     soundFX.playClick();
@@ -85,14 +87,8 @@ rules:
                       color: t.accentColor,
                     }}
                   >
-                    <div
-                      className="frame-mock-bar"
-                      style={{ backgroundColor: t.primaryColor }}
-                    />
-                    <span
-                      className="frame-mock-title"
-                      style={{ color: t.primaryColor }}
-                    >
+                    <div className="frame-mock-bar" style={{ backgroundColor: t.primaryColor }} />
+                    <span className="frame-mock-title" style={{ color: t.primaryColor }}>
                       {t.name}
                     </span>
                     <span className="frame-mock-tag mono">{t.ratio}</span>
@@ -100,29 +96,23 @@ rules:
 
                   <div className="frame-card-info">
                     <div className="frame-card-title-row">
-                      <h4 className="frame-name mono">{t.name}</h4>
+                      <span className="frame-name mono">{t.name}</span>
                       <span className="frame-cat-tag mono">{t.category}</span>
                     </div>
 
-                    <div className="frame-swatches">
+                    <div className="frame-swatches" aria-hidden="true">
+                      <span className="swatch-dot" style={{ backgroundColor: t.primaryColor }} />
+                      <span className="swatch-dot" style={{ backgroundColor: t.accentColor }} />
                       <span
                         className="swatch-dot"
-                        style={{ backgroundColor: t.primaryColor }}
-                        title={`主色: ${t.primaryColor}`}
-                      />
-                      <span
-                        className="swatch-dot"
-                        style={{ backgroundColor: t.accentColor }}
-                        title={`高亮: ${t.accentColor}`}
-                      />
-                      <span
-                        className="swatch-dot"
-                        style={{ backgroundColor: t.bgColor, border: "1px solid rgba(255,255,255,0.2)" }}
-                        title={`背景: ${t.bgColor}`}
+                        style={{
+                          backgroundColor: t.bgColor,
+                          border: "1px solid rgba(255,255,255,0.2)",
+                        }}
                       />
                     </div>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
@@ -153,7 +143,7 @@ rules:
                 className="spec-title"
                 style={{
                   color: selectedTemplate.primaryColor,
-                  fontFamily: selectedTemplate.fontPair.split("+")[0].trim(),
+                  fontFamily: `"${selectedTemplate.fontPair.split("+")[0].trim()}", var(--font-display), var(--font-body)`,
                 }}
               >
                 {selectedTemplate.name}
@@ -190,7 +180,7 @@ rules:
                 rel="noreferrer"
                 className="btn btn-ghost"
               >
-                在官方演练场混编 ↗
+                在官方演练场混编
               </a>
             </div>
           </div>

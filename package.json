@@ -2,12 +2,14 @@
   "name": "hyperframes-cn",
   "version": "2.0.0",
   "private": true,
-  "type": "module",
   "homepage": "https://hyperframes.ndjp.net",
+  "type": "module",
   "scripts": {
     "dev": "vp dev",
     "build": "tsc -b && vp build",
     "lint": "vp lint",
+    "fmt": "vp fmt src scripts index.html package.json vite.config.ts tsconfig.json tsconfig.app.json tsconfig.node.json",
+    "fmt:check": "vp fmt --check src scripts index.html package.json vite.config.ts tsconfig.json tsconfig.app.json tsconfig.node.json",
     "preview": "vp preview",
     "serve": "bun run scripts/serve.ts"
   },

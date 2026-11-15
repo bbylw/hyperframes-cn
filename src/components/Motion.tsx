@@ -18,35 +18,51 @@ interface TimecodeProps {
 export const Timecode = memo(function Timecode({ interactive }: TimecodeProps) {
   const [running, setRunning] = useState(true);
   const textRef = useRef<HTMLElement | null>(null);
-  const runningRef = useRef(true);
+  const frameRef = useRef(0);
 
   useEffect(() => {
-    runningRef.current = running;
-  }, [running]);
-
-  useEffect(() => {
+    if (!running) return;
     // rAF 驱动 + 直接写 textContent，绕开 React 重渲染；
-    // 页面隐藏时暂停，避免后台空转
-    let frame = 0;
+    // 暂停或页面隐藏时彻底停止调度 rAF，避免后台空转
     let raf = 0;
     let last = 0;
+
     const step = (t: number) => {
       raf = 0;
-      if (!runningRef.current || document.hidden) {
-        last = t;
-        raf = window.requestAnimationFrame(step);
-        return;
-      }
+      if (document.hidden) return;
       if (t - last >= 1000 / 24) {
         last = t;
-        frame += 1;
-        if (textRef.current) textRef.current.textContent = formatFrames(frame);
+        frameRef.current += 1;
+        if (textRef.current) textRef.current.textContent = formatFrames(frameRef.current);
       }
       raf = window.requestAnimationFrame(step);
     };
-    raf = window.requestAnimationFrame(step);
-    return () => window.cancelAnimationFrame(raf);
-  }, []);
+
+    const start = () => {
+      if (!raf && !document.hidden) {
+        last = performance.now();
+        raf = window.requestAnimationFrame(step);
+      }
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        if (raf) {
+          window.cancelAnimationFrame(raf);
+          raf = 0;
+        }
+      } else {
+        start();
+      }
+    };
+
+    start();
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, [running]);
 
   const text = (
     <span className="timecode mono" ref={textRef}>

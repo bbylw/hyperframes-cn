@@ -9,10 +9,11 @@ export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
-  // 用原生模态 dialog 管理遮罩、焦点陷阱、Esc 与焦点归还
+  // 用原生模态 dialog 管理遮罩、焦点陷阱、Esc 与焦点归还，并启用 closedby="any" 轻触遮罩关闭
   useEffect(() => {
     const dialog = dialogRef.current;
     if (!dialog) return;
+    dialog.setAttribute("closedby", "any");
     if (isOpen && !dialog.open) {
       dialog.showModal();
     } else if (!isOpen && dialog.open) {
@@ -30,11 +31,17 @@ export default function MobileNav() {
     setIsOpen(false);
   };
 
-  // 只有点在 ::backdrop 上才关闭；点面板内边距不关闭
+  // 不支持 closedBy 的浏览器兜底：只有点击落在对话框矩形之外（即 ::backdrop 上）才关闭
   const handleBackdropClick = (event: MouseEvent<HTMLDialogElement>) => {
+    if ("closedBy" in HTMLDialogElement.prototype) return;
     if (event.target !== event.currentTarget) return;
     const rect = event.currentTarget.getBoundingClientRect();
-    if (event.clientX < rect.left) setIsOpen(false);
+    const clickedOutside =
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom;
+    if (clickedOutside) setIsOpen(false);
   };
 
   return (
@@ -80,14 +87,13 @@ export default function MobileNav() {
               </button>
             </div>
 
-            <nav className="drawer-nav">
+            <nav className="drawer-nav" aria-label="移动端主导航">
               <ul className="drawer-list">
                 {navLinks.map((l, index) => (
                   <li key={l.href}>
                     <a href={l.href} onClick={handleLinkClick} className="drawer-link">
-                      <span className="drawer-idx mono">{`0${index + 1}`}</span>
+                      <span className="drawer-idx mono">{String(index + 1).padStart(2, "0")}</span>
                       <span className="drawer-txt">{l.label}</span>
-                      <span className="drawer-arrow">→</span>
                     </a>
                   </li>
                 ))}
@@ -102,7 +108,7 @@ export default function MobileNav() {
                 rel="noreferrer"
                 onClick={handleLinkClick}
               >
-                GitHub 仓库 ↗
+                GitHub 仓库
               </a>
               <a
                 className="btn btn-primary btn-block"

@@ -9,7 +9,7 @@ interface ToastProps {
 
 export default function Toast({ message, type = "success", visible, onClose }: ToastProps) {
   const onCloseRef = useRef(onClose);
-  
+
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
@@ -20,16 +20,14 @@ export default function Toast({ message, type = "success", visible, onClose }: T
       onCloseRef.current();
     }, 3200);
     return () => window.clearTimeout(timer);
-  }, [visible]);
+  }, [visible, message, type]);
 
   if (!visible) return null;
 
   return (
     <div className={`cinema-toast toast-${type}`} role="status" aria-live="polite">
       <i className="rec-dot" aria-hidden="true" />
-      <span className="toast-label mono">
-        {type === "success" ? "SIGNAL_OK" : "SYSTEM"}
-      </span>
+      <span className="toast-label mono">{type === "success" ? "SIGNAL_OK" : "SYSTEM"}</span>
       <span className="toast-divider">/</span>
       <span className="toast-msg">{message}</span>
       <button

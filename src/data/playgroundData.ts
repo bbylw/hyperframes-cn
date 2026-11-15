@@ -1,5 +1,6 @@
 export interface PlaygroundPreset {
   id: string;
+  compositionId: string;
   name: string;
   badge: string;
   icon: string;
@@ -13,10 +14,12 @@ export interface PlaygroundPreset {
 export const playgroundPresets: PlaygroundPreset[] = [
   {
     id: "product-launch",
+    compositionId: "launch",
     name: "产品发布宣传片",
     badge: "PRODUCT LAUNCH",
     icon: "rocket",
-    description: "高对比度粒子背景、光标点击动效、卡片 3D 浮现与数据指标跳动，极佳的 SaaS 产品首发推广模板。",
+    description:
+      "高对比度粒子背景、光标点击动效、卡片 3D 浮现与数据指标跳动，极佳的 SaaS 产品首发推广模板。",
     duration: 6,
     aspectRatio: "16:9",
     htmlCode: `<div id="stage" data-composition-id="launch" data-start="0" data-width="1920" data-height="1080">
@@ -55,10 +58,10 @@ tl.from("#product-card", {
   ease: "power3.out",
 }, 0.5);
 
-// 光晕脉冲
-tl.fromTo(".glow-orb", 
-  { scale: 0.8, opacity: 0.3 }, 
-  { scale: 1.2, opacity: 0.8, duration: 2, repeat: -1, yoyo: true, ease: "sine.inOut" }, 
+// 光晕脉冲（使用有限 repeat 保证合成时长确定性）
+tl.fromTo(".glow-orb",
+  { scale: 0.8, opacity: 0.3 },
+  { scale: 1.2, opacity: 0.8, duration: 1.5, repeat: 3, yoyo: true, ease: "sine.inOut" },
   0
 );
 
@@ -91,10 +94,12 @@ window.__timelines.launch = tl;`,
   },
   {
     id: "pr-walkthrough",
+    compositionId: "pr-diff",
     name: "GitHub PR 代码讲解",
     badge: "PR TO VIDEO",
     icon: "git-pr",
-    description: "动态代码差异对比（Diff）、分支徽标、高亮行滑入与打字机效果，适合版本更新日志与技术解说。",
+    description:
+      "动态代码差异对比（Diff）、分支徽标、高亮行滑入与打字机效果，适合版本更新日志与技术解说。",
     duration: 6,
     aspectRatio: "16:9",
     htmlCode: `<div id="stage" data-composition-id="pr-diff" data-start="0" data-width="1920" data-height="1080">
@@ -127,6 +132,7 @@ window.__timelines["pr-diff"] = tl;`,
   },
   {
     id: "data-chart",
+    compositionId: "chart-race",
     name: "动态图表竞速",
     badge: "DATA VIZ",
     icon: "data-chart",
@@ -171,6 +177,7 @@ window.__timelines["chart-race"] = tl;`,
   },
   {
     id: "cinematic-captions",
+    compositionId: "captions",
     name: "电影感逐字字幕",
     badge: "SUBTITLES",
     icon: "captions",
@@ -204,13 +211,19 @@ words.forEach((w, i) => {
   }
 });
 
-tl.fromTo(".highlight-gold", { textShadow: "0 0 0px #e2a63d" }, { textShadow: "0 0 30px #e2a63d", duration: 0.8, repeat: -1, yoyo: true }, 2.8);
+tl.fromTo(
+  ".highlight-gold",
+  { textShadow: "0 0 0px #e2a63d" },
+  { textShadow: "0 0 30px #e2a63d", duration: 0.75, repeat: 3, yoyo: true },
+  2.8,
+);
 
 window.__timelines = window.__timelines || {};
 window.__timelines.captions = tl;`,
   },
   {
     id: "kinetic-typography",
+    compositionId: "kinetic",
     name: "动态排版与片头",
     badge: "TYPOGRAPHY",
     icon: "typography",

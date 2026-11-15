@@ -9,6 +9,15 @@ import {
 export function CountdownLeader() {
   const [phase, setPhase] = useState<number | null>(null);
   const [leaving, setLeaving] = useState(false);
+  const finishTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (finishTimerRef.current !== null) {
+        window.clearTimeout(finishTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (leaderSessionDone() || motionReduced()) return;
@@ -19,11 +28,17 @@ export function CountdownLeader() {
   function finish() {
     markLeaderSessionDone();
     setLeaving(true);
-    window.setTimeout(() => setPhase(null), 420);
+    if (finishTimerRef.current !== null) {
+      window.clearTimeout(finishTimerRef.current);
+    }
+    finishTimerRef.current = window.setTimeout(() => {
+      finishTimerRef.current = null;
+      setPhase(null);
+    }, 420);
   }
 
   useEffect(() => {
-    if (phase === null) return;
+    if (phase === null || leaving) return;
     const t = window.setTimeout(() => {
       if (phase > 1) {
         setPhase(phase - 1);
@@ -32,7 +47,7 @@ export function CountdownLeader() {
       }
     }, 820);
     return () => window.clearTimeout(t);
-  }, [phase]);
+  }, [phase, leaving]);
 
   if (phase === null) return null;
 

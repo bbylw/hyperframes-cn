@@ -171,7 +171,8 @@ export const coreSkills: SkillRow[] = [
     badge: "PRO",
     inputFormat: "任意已有的视频文件",
     cliCommand: "npx hyperframes skills update reverse-any-video",
-    examplePrompt: "使用 /reverse-any-video，把这段参考视频重建为可编辑的 HyperFrames 工程，并逐帧校验。",
+    examplePrompt:
+      "使用 /reverse-any-video，把这段参考视频重建为可编辑的 HyperFrames 工程，并逐帧校验。",
     usage:
       "把任意视频文件重建为可编辑的 HyperFrames 工程（动态图形、真人出镜、实拍、AI 生成素材），并与原片逐帧比对校验。HyperFrames Pro。",
   },
@@ -220,7 +221,8 @@ export const onDemandSkills: SkillRow[] = [
     badge: "MIGRATION",
     inputFormat: "Remotion 源码，或 Motion Canvas、Lottie、Three.js、canvas 工程",
     cliCommand: "npx hyperframes skills update remotion-to-hyperframes",
-    examplePrompt: "使用 /remotion-to-hyperframes，把这个 Remotion 组件迁移为 HyperFrames HTML + GSAP 合成，并逐帧校验。",
+    examplePrompt:
+      "使用 /remotion-to-hyperframes，把这个 Remotion 组件迁移为 HyperFrames HTML + GSAP 合成，并逐帧校验。",
     usage:
       "把已有的视频代码或素材迁入 HyperFrames（优先 Remotion；也支持 Motion Canvas、Lottie、Three.js、canvas 及其他工具的渲染结果），并逐帧校验。",
   },
@@ -297,12 +299,14 @@ export const manifesto: Manifesto[] = [
   {
     claim: "HTML 原生",
     icon: "html",
-    detail: "合成就是带 data 属性的标准 HTML 文件。无需 JSX，没有专有时间线格式，智能体天生就会写。",
+    detail:
+      "合成就是带 data 属性的标准 HTML 文件。无需 JSX，没有专有时间线格式，智能体天生就会写。",
   },
   {
     claim: "对智能体极度友好",
     icon: "bot",
-    detail: "LLM 拥有千亿级 HTML/CSS 训练语料；HyperFrames CLI 默认非交互模式，专为智能体执行而生。",
+    detail:
+      "LLM 拥有千亿级 HTML/CSS 训练语料；HyperFrames CLI 默认非交互模式，专为智能体执行而生。",
   },
   {
     claim: "逐帧确定性输出",
@@ -312,7 +316,8 @@ export const manifesto: Manifesto[] = [
   {
     claim: "零构建步骤",
     icon: "zap",
-    detail: "index.html 合成文件双击即可在浏览器中原样播放与实时热重载调试，告别庞大的 Node 打包链。",
+    detail:
+      "index.html 合成文件双击即可在浏览器中原样播放与实时热重载调试，告别庞大的 Node 打包链。",
   },
   {
     claim: "基于适配器的无界动画",
@@ -327,9 +332,21 @@ export const manifesto: Manifesto[] = [
 ];
 
 export const compareRows: CompareRow[] = [
-  { aspect: "创作方式", hyperframes: "HTML + CSS + 可定位动画", remotion: "React 组件 (JSX / TSX)" },
-  { aspect: "构建步骤", hyperframes: "无；index.html 原样即时播放", remotion: "需要 Webpack / Vite 打包器" },
-  { aspect: "智能体交付", hyperframes: "纯 HTML 文本文件，极其容易生成", remotion: "复杂 React 组件树与依赖管理" },
+  {
+    aspect: "创作方式",
+    hyperframes: "HTML + CSS + 可定位动画",
+    remotion: "React 组件 (JSX / TSX)",
+  },
+  {
+    aspect: "构建步骤",
+    hyperframes: "无；index.html 原样即时播放",
+    remotion: "需要 Webpack / Vite 打包器",
+  },
+  {
+    aspect: "智能体交付",
+    hyperframes: "纯 HTML 文本文件，极其容易生成",
+    remotion: "复杂 React 组件树与依赖管理",
+  },
   {
     aspect: "库时钟动画",
     hyperframes: "通过适配器支持 GSAP / Three.js 逐帧精确定位",
@@ -340,7 +357,11 @@ export const compareRows: CompareRow[] = [
     hyperframes: "本地 CLI + 无服务器 AWS Lambda 极速并发",
     remotion: "Remotion Lambda 方案",
   },
-  { aspect: "开源许可证", hyperframes: "Apache 2.0 (完全免费商用)", remotion: "Company License (商业收费规则)" },
+  {
+    aspect: "开源许可证",
+    hyperframes: "Apache 2.0 (完全免费商用)",
+    remotion: "Company License (商业收费规则)",
+  },
 ];
 
 export const packageRows: PkgRow[] = [
@@ -403,6 +424,6 @@ export const docsLinks = [
   { label: "GSAP 动画指南", href: "https://hyperframes.heygen.com/guides/gsap-animation" },
   { label: "API 核心参考", href: "https://hyperframes.heygen.com/packages/core" },
   { label: "组件库 Catalog", href: "https://hyperframes.heygen.com/catalog/blocks/data-chart" },
-  { label: "官方实例库", href: "https://hyperframes.heygen.com/examples" },
+  { label: "工作流指南", href: "https://hyperframes.heygen.com/workflows" },
   { label: "AWS Lambda 部署", href: "https://hyperframes.heygen.com/deploy/aws-lambda" },
 ];

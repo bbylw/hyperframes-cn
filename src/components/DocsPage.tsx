@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 import CodeBlock from "./CodeBlock";
 import QuickstartArticle from "./QuickstartArticle";
-import { DOCS_CONTENT, DOCS_FLAT, DOCS_GROUPS, findDoc, genericContent, groupOf } from "../data/docs";
+import {
+  DOCS_CONTENT,
+  DOCS_FLAT,
+  DOCS_GROUPS,
+  findDoc,
+  genericContent,
+  groupOf,
+} from "../data/docs";
 
 interface DocsPageProps {
   slug: string;
@@ -37,7 +44,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
       <div className="container">
         <div className="docs-crumb mono">
           <button type="button" className="docs-back" onClick={onBack}>
-            ← 返回首页
+            返回首页
           </button>
           <span className="docs-crumb-sep">/</span>
           <span>文档</span>
@@ -52,7 +59,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
             {item.zh} · {item.en}
           </span>
           <a className="docs-crumb-src" href={official} target="_blank" rel="noreferrer">
-            官网原文 ↗
+            官网原文
           </a>
         </div>
 
@@ -71,9 +78,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                         <button
                           type="button"
                           className={
-                            it.slug === item.slug
-                              ? "docs-nav-item is-active"
-                              : "docs-nav-item"
+                            it.slug === item.slug ? "docs-nav-item is-active" : "docs-nav-item"
                           }
                           onClick={() => go(it.slug)}
                           aria-current={it.slug === item.slug ? "page" : undefined}
@@ -137,11 +142,16 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                     </figure>
                   )}
                   <div className="docs-page-cta">
-                    <a className="btn btn-secondary" href={official} target="_blank" rel="noreferrer">
-                      <span>阅读官网全文 ↗</span>
+                    <a
+                      className="btn btn-secondary"
+                      href={official}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <span>阅读官网全文</span>
                     </a>
                     <a className="btn btn-ghost" href={item.url} target="_blank" rel="noreferrer">
-                      <span>Markdown 原文 .md ↗</span>
+                      <span>Markdown 原文 .md</span>
                     </a>
                   </div>
                 </div>
@@ -182,8 +192,13 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                       本页中文要点以上方为准，完整步骤、示例与截图请看官网原文：
                     </p>
                     <p className="docs-cta">
-                      <a className="btn btn-ghost btn-sm" href={official} target="_blank" rel="noreferrer">
-                        <span>{item.en} · 官网全文 ↗</span>
+                      <a
+                        className="btn btn-ghost btn-sm"
+                        href={official}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <span>{item.en} · 官网全文</span>
                       </a>
                     </p>
                   </section>
@@ -195,7 +210,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
               <div>
                 {prev && (
                   <button type="button" className="docs-pn" onClick={() => go(prev.slug)}>
-                    <span className="mono docs-pn-label">← 上一篇</span>
+                    <span className="mono docs-pn-label">上一篇</span>
                     <span className="docs-pn-title">{prev.zh}</span>
                     <span className="docs-pn-en">{prev.en}</span>
                   </button>
@@ -203,8 +218,12 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
               </div>
               <div className="docs-pn-right">
                 {next && (
-                  <button type="button" className="docs-pn docs-pn--next" onClick={() => go(next.slug)}>
-                    <span className="mono docs-pn-label">下一篇 →</span>
+                  <button
+                    type="button"
+                    className="docs-pn docs-pn--next"
+                    onClick={() => go(next.slug)}
+                  >
+                    <span className="mono docs-pn-label">下一篇</span>
                     <span className="docs-pn-title">{next.zh}</span>
                     <span className="docs-pn-en">{next.en}</span>
                   </button>
@@ -215,9 +234,9 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
             <div className="docs-foot mono">
               <span>HyperFrames 中文文档</span>
               <a href={official} target="_blank" rel="noreferrer">
-                {item.en} 官网原文 ↗
+                {item.en} 官网原文
               </a>
-              <span>本页为中文转述 · Built on Mintlify</span>
+              <span>中文导览与目录整理 · 完整内容请以官网原文为准</span>
             </div>
           </div>
         </div>

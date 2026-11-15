@@ -17,6 +17,8 @@ export default function PromptWizard({ onShowToast }: PromptWizardProps) {
   const [captions, setCaptions] = useState<boolean>(true);
 
   const urlInputId = useId();
+  const baseId = useId();
+  const topic = targetUrlOrTopic.trim() || "（未指定输入源）";
 
   // 所有创作请求都先经过 /hyperframes 路由器
   const videoTypeLabels: Record<string, string> = {
@@ -33,10 +35,11 @@ export default function PromptWizard({ onShowToast }: PromptWizardProps) {
     const skill = getSkillName();
     let prompt = `使用 ${skill} 技能，为我制作一支 ${duration} 的确定性视频。\n`;
     prompt += `• 视频场景: ${videoTypeLabels[videoType] ?? "自由创作"}\n`;
-    prompt += `• 输入源: ${targetUrlOrTopic}\n`;
+    prompt += `• 输入源: ${topic}\n`;
     prompt += `• 画幅比例: ${aspectRatio}（目标分辨率: ${aspectRatio === "16:9" ? "1920x1080" : aspectRatio === "9:16" ? "1080x1920" : "1080x1080"}）\n`;
     prompt += `• 动画引擎: ${engine}（严格使用 paused: true 可安全定位时间线）\n`;
-    if (audioBed) prompt += `• 音频要求: 接入符合节奏的背景音乐（通过 /media-use 获取素材并完成混音）\n`;
+    if (audioBed)
+      prompt += `• 音频要求: 接入符合节奏的背景音乐（通过 /media-use 获取素材并完成混音）\n`;
     if (captions) prompt += `• 字幕要求: 包含动态逐字高潮字幕，重点文字发光或高亮\n`;
     prompt += `• 输出标准: 产出符合 HyperFrames 合成契约的 index.html，并执行 npx hyperframes render 导出 MP4。`;
     return prompt;
@@ -89,16 +92,18 @@ npx hyperframes render --fps=30`;
           </div>
           <h2 className="scene-title">AI 智能体提示词 & CLI 生成器</h2>
           <p className="scene-lede">
-            无需手动拼装复杂的合成规约 —— <strong>点选你的视频需求</strong>，
-            一键生成可直接交付给 Claude Code、Cursor、Codex 等 AI 智能体的 Prompt 与初始化命令。
+            无需手动拼装复杂的合成规约 —— <strong>点选你的视频需求</strong>， 一键生成可直接交付给
+            Claude Code、Cursor、Codex 等 AI 智能体的 Prompt 与初始化命令。
           </p>
         </div>
 
         <div className="wizard-grid">
           {/* 左侧：参数配置器 */}
           <div className="wizard-form-card">
-            <div className="wz-group">
-              <label className="wz-label mono">01 / 视频场景类型</label>
+            <div className="wz-group" role="group" aria-labelledby={`${baseId}-type-lbl`}>
+              <span id={`${baseId}-type-lbl`} className="wz-label mono">
+                01 / 视频场景类型
+              </span>
               <div className="wz-chips">
                 {[
                   { id: "product-launch", label: "产品发布短片", iconKey: "rocket" },
@@ -110,6 +115,7 @@ npx hyperframes render --fps=30`;
                   <button
                     key={t.id}
                     type="button"
+                    aria-pressed={videoType === t.id}
                     className={`wz-chip ${videoType === t.id ? "is-active" : ""}`}
                     onClick={() => {
                       soundFX.playClick();
@@ -140,13 +146,16 @@ npx hyperframes render --fps=30`;
             </div>
 
             <div className="wz-row-group">
-              <div className="wz-group flex-1">
-                <label className="wz-label mono">03 / 画幅比例</label>
+              <div className="wz-group flex-1" role="group" aria-labelledby={`${baseId}-ratio-lbl`}>
+                <span id={`${baseId}-ratio-lbl`} className="wz-label mono">
+                  03 / 画幅比例
+                </span>
                 <div className="wz-chips">
                   {["16:9", "9:16", "1:1"].map((r) => (
                     <button
                       key={r}
                       type="button"
+                      aria-pressed={aspectRatio === r}
                       className={`wz-chip ${aspectRatio === r ? "is-active" : ""}`}
                       onClick={() => {
                         soundFX.playClick();
@@ -159,13 +168,16 @@ npx hyperframes render --fps=30`;
                 </div>
               </div>
 
-              <div className="wz-group flex-1">
-                <label className="wz-label mono">04 / 目标时长</label>
+              <div className="wz-group flex-1" role="group" aria-labelledby={`${baseId}-dur-lbl`}>
+                <span id={`${baseId}-dur-lbl`} className="wz-label mono">
+                  04 / 目标时长
+                </span>
                 <div className="wz-chips">
                   {["10s", "30s", "60s", "90s"].map((d) => (
                     <button
                       key={d}
                       type="button"
+                      aria-pressed={duration === d}
                       className={`wz-chip ${duration === d ? "is-active" : ""}`}
                       onClick={() => {
                         soundFX.playClick();
@@ -180,13 +192,16 @@ npx hyperframes render --fps=30`;
             </div>
 
             <div className="wz-row-group">
-              <div className="wz-group flex-1">
-                <label className="wz-label mono">05 / 动画适配器</label>
+              <div className="wz-group flex-1" role="group" aria-labelledby={`${baseId}-eng-lbl`}>
+                <span id={`${baseId}-eng-lbl`} className="wz-label mono">
+                  05 / 动画适配器
+                </span>
                 <div className="wz-chips">
                   {["GSAP", "Three.js", "Anime.js", "CSS Keyframes"].map((eng) => (
                     <button
                       key={eng}
                       type="button"
+                      aria-pressed={engine === eng}
                       className={`wz-chip ${engine === eng ? "is-active" : ""}`}
                       onClick={() => {
                         soundFX.playClick();
@@ -199,8 +214,10 @@ npx hyperframes render --fps=30`;
                 </div>
               </div>
 
-              <div className="wz-group flex-1">
-                <label className="wz-label mono">06 / 附加增强</label>
+              <div className="wz-group flex-1" role="group" aria-labelledby={`${baseId}-extra-lbl`}>
+                <span id={`${baseId}-extra-lbl`} className="wz-label mono">
+                  06 / 附加增强
+                </span>
                 <div className="wz-checks">
                   <label className="wz-check-label">
                     <input
@@ -248,7 +265,8 @@ npx hyperframes render --fps=30`;
             <div className="wz-output-box" style={{ marginTop: "16px" }}>
               <div className="wz-out-header">
                 <span className="wz-out-title mono">
-                  <i className="rec-dot" />配套 CLI 执行脚本
+                  <i className="rec-dot" />
+                  配套 CLI 执行脚本
                 </span>
                 <button type="button" className="btn btn-primary btn-sm" onClick={copyCli}>
                   复制 CLI ⎘
