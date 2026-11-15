@@ -5,31 +5,31 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "把 HeyGen 数字人放在镜头前朗读脚本，HyperFrames 包裹场景、图表、字幕与音乐，全部仍可编辑。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "在 Studio 应用程序中或与你自己的代理一起，说出演示者出现的位置以及他们所说的内容： 如果你有头像和声音（你自己的数字双胞胎，或 HeyGen 库中的一个），请命名，或者描述你想要的人并让代理进行选择。头像是由 HeyGen 制作的，因此需要你的 HeyGen 帐户：在 Studio 应用程序中添加 HeyGen API 密钥；使用你自己的代理，安装 [HeyGen CLI](https://developers.heygen.com/cli) 并使用 `heygen auth login --oauth` 登录。头像使用 HeyGen 积分：你的计划在登录时获得的积分，带有 API 密钥的 API 积分。",
-     "**已经自己录制了吗？** 跳过头像：添加你的剪辑并查看[字幕和剪辑](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。 **只想要演示者，不需要围绕他们设计任何内容？** 直接在 HeyGen 中制作；它不会是一个可编辑的 HyperFrames 项目。"
+     "在 Studio 应用里，或与你自己的智能体对话，说清数字人站在哪、说什么。若已有头像与声音（你自己的数字分身，或 HeyGen 库里的某个），报名字即可；只有描述，智能体也会替你选。头像由 HeyGen 制作，需要你的 HeyGen 账号：在 Studio 应用加 HeyGen API 密钥；用自家智能体则装 [HeyGen CLI](https://developers.heygen.com/cli) 并 `heygen auth login --oauth` 登录。头像消耗 HeyGen 积分，额度来自套餐赠送或带密钥的 API 积分。",
+     "**已自己录好？** 跳过头像，加剪辑即可，看[字幕与剪辑](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。**只想要数字人，不要成片设计？** 直接在 HeyGen 里做，那不是可编辑的 HyperFrames 工程。"
     ],
     "codeBlocks": [
      {
       "code": "A 30-second product update. A presenter opens with: \"This week we shipped three things.\"\nThen show each feature full screen with captions, and bring the presenter back to close.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "它可以围绕演示者做什么",
+    "h": "围绕数字人能做什么",
     "p": "",
     "paras": [
-     "（[如何](https://hyperframes.heygen.com/guides/remove-background.md)），标题可以从它们后面经过。"
+     "抠像（见[如何](https://hyperframes.heygen.com/guides/remove-background.md)）后，标题可从他身后穿过。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "将它们放在幕后、幕前或幕后。去除背景后",
-     "切换至全屏产品照片或图表并返回。",
-     "逐字逐句地说明他们实际上所说的内容。",
-     "将剪辑作为文件保留在项目中，因此渲染永远不会依赖于下载。"
+     "把数字人置于前景、背景或前景与背景之间切换。",
+     "切到全屏产品图或图表，再切回。",
+     "逐字逐句给台词打字幕。",
+     "剪辑存入工程做文件，渲染永远不依赖临时下载。"
     ]
    },
    {
@@ -51,32 +51,38 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "把真人出镜、访谈或播客剪辑交给它，拿到与词同步的字幕、设计过卡片（标题、引言、数字、下三分之一），或去掉长停顿的精简剪辑。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "将剪辑添加到**制作一些东西**并说出你想要的内容： **喜欢其他人视频中的字幕吗？** 也粘贴其链接并说“这样的字幕”。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
+     "在**做点什么**里把剪辑加好，说你要的效果。**爱别人视频里的字幕？** 把链接一道贴上，说“字幕仿这个”。用自家智能体而非应用时，以 `/hyperframes` 开头。"
     ],
     "codeBlocks": [
      {
       "code": "Add clear animated captions to this interview. Keep the footage and its spoken edit unchanged.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "要求三件事之一",
+    "h": "三选一",
     "p": "",
     "paras": [
-     "扬声器后面设置大字，营造电影般的外观。",
-     "卡片持有，一切都与所说内容同步。",
-     "字幕遵循最终时间： 要重新排序故事或从长录音中挑选最佳时刻，请将你想要的视频描述为[自定义视频](https://hyperframes.heygen.com/guides/general-video.md)。",
-     "告诉客服人员文字记录中可能遗漏的任何名称或术语，以及说话者的脸部和任何屏幕文本的位置，以便图形不会被遮挡。",
-     "[card] [练习：编辑自己的素材](https://hyperframes.heygen.com/lessons/edit-your-footage) 20 分钟的免费课程，包含短片、测验和尝试简介。片段简介是目标、播放位置、两到三个编辑以及确切的标题词。"
+     "选其一：",
+     "**字幕** —— 屏幕上的台词，与人声同步。多数视频是讲者下方一条干净字幕行；电影感则用大字压在讲者身后。",
+     "**设计卡** —— 标题、引言、数字标注、下三分之一，或讲者缩到角落而卡片独占画面，全部与台词同步。",
+     "**更紧的剪辑** —— 删掉点名的长停顿或冗长。先剪再加字幕，让字幕跟着最终时序。",
+     "要重排故事或从长录音挑最佳段落，把想要的成片描述为[自定义视频](https://hyperframes.heygen.com/guides/general-video.md)。",
+     "把转录可能漏掉的人名、术语，以及脸与屏字的所在位告诉智能体，图形才不挡脸。",
+     "[card] [练习：剪你自己的素材](https://hyperframes.heygen.com/lessons/edit-your-footage) 20 分钟免费小课，含短片、测验与试写题：一份素材简报 = 目标、播放位、两三个剪法与准确标题词。"
     ],
     "codeBlocks": [
      {
+      "code": "Add clear animated captions to this interview. Keep the footage and its spoken edit unchanged.",
+      "file": "text"
+     },
+     {
       "code": "cut the pauses longer than 0.8 s out of assets/interview.mp4, then add clean\ncaptions to the tighter cut.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ],
     "bullets": [
@@ -86,13 +92,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     ]
    },
    {
-    "h": "提示有效",
+    "h": "有效提示",
     "p": "",
     "paras": [
-     "有两个词可以帮助你：**轨道**是承载口语文字的字幕行； **嵌入**是在说话者后面设置的一个大词，表示最强烈的时刻。",
-     "将字幕添加到 ./interview\\.mp4。清晰的逐字栏载有口头文字，下三分之一可读。将最受关注的单个单词提升为嵌入到演讲者后面；突出显示每条铁路线中的一个关键词。保持源宽高比。镜头保持不变。",
+     "两个词最管用：**轨道**是承载台词的字幕行；**嵌入**是压在讲者身后的一词大字，留给最强的一刻。",
+     "给 `./interview.mp4` 加字幕。干净逐字轨道承载台词，下三分之一可读。把最有力的一词提为讲者身后嵌入，每行轨道高亮一关键词。保持原画幅，剪辑不动。",
      "<video aria-label=\"Captions anchor rail\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/captions-anchor-rail-v2.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面生成的演示者镜头的提示制作：一个嵌入扬声器后面，其他所有内容都在导轨上。* 导轨承载了大部分文本； **嵌入**是稀缺的、赢得的高峰——在高潮时主题后面出现一个大词，而不是每一行。嵌入整个成绩单是最常见的错误。"
+     "*上提示在生成数字人镜头上所做的效果：讲者身后一处嵌入，其余在轨道。* 轨道承载大段文字；**嵌入**是稀缺的、挣来的高潮——高潮处主题身后一词巨字，不是每行都有。把整稿嵌入是最常见错误。"
     ],
     "codeBlocks": []
    },
@@ -100,19 +106,19 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "设计卡片",
     "p": "",
     "paras": [
-     "包 ./Founder-clip.mp4 与设计的图形覆盖卡同步到成绩单。 9:16 肖像，暖纸风格。打开全屏踢球+标题挂钩，在她命名公司时放下下三分之一，计算“200+团队/ 120万美元ARR”统计数据的数据标注卡，以及最强行的引述卡。扬声器在卡片下方保持全屏显示；当数据卡还存在时，她将她缩小到角落画中画中。该剪辑在下面原封不动地播放。",
-     "你描述*卡片* — 它们的内容、时间安排以及演讲者如何与它们共享画布（全出血、分割、画中画或玻璃覆盖）。智能体设计并书写每张卡片；没有固定的原型列表，因此覆盖内容遵循文字记录的实际内容。"
+     "给 `./founder-clip.mp4` 配同步图形卡。9:16 竖屏，暖纸质感。全屏踢球加标题钩子开场；她报公司名时下三分之一落下；“200+ 团队 / $1.2M ARR”计数数据卡；最强一句引言卡。卡下讲者保持全屏，数据卡停留时缩她到角落画中画。剪辑原片不断。",
+     "你主理*卡片*——内容、时序、讲者如何与卡共享画布（全屏、分屏、画中画、玻璃覆盖）。智能体逐卡设计书写，没有固定原型，覆盖只跟转录实际内容走。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "在重要的时候说这些",
+    "h": "关键时说这些",
     "p": "",
     "paras": [
-     "**外观和语气（标题）。** 按内容描述外观：解释者/访谈/必读单词 → 清晰易读的栏杆；诗意/社会/电影→演讲者背后的英雄排版；炒作→更大胆、更有力的类型。不确定 → 干净的栏杆：文字被读取，场景保持安全。现成的字幕样式位于[字幕目录](https://hyperframes.heygen.com/prompting/captions-catalog.md)。",
-     "**逐字导轨与高潮嵌入。**导轨是默认设置，包含大部分文本。嵌入是一种提升——一个峰值词出现在主题后面，稀缺且间隔（大约每节拍一个，从来没有两个同时可见，最多一个顶点）。告诉代理*哪些*线路获得嵌入；将其余部分留在导轨上。",
-     "**样式、布局和画布（覆盖卡）。** 命名样式（暖纸、临床等）、布局（分割/堆叠/画中画/覆盖）和画布比例。匹配源比例是安全的默认设置，但你可以选择 — 桌面/YouTube 为 16:9，Reels/Shorts 为 9:16，Feed 为 4:5。",
-     "**关键字突出显示。** 在字幕栏上，打孔词可以携带内嵌 `emphasis` — 强调色或活动词弹出 — 无需离开字幕栏。要求“突出显示每行中的关键词”，这样就可以保持可读性。"
+     "**外观与语调（字幕）。** 按内容定外观：讲解/访谈/必读词 → 干净可读轨道；诗意/社交/电影感 → 讲者身后英雄排字；炒作 → 更粗更有力的字。不确定 → 干净轨道：字可读，画面守安。成套样式在[字幕目录](https://hyperframes.heygen.com/prompting/captions-catalog.md)。",
+     "**逐字轨道对高潮嵌入。** 轨道是默认，扛大段文字。嵌入是提级——峰值词压主题身后，稀缺隔段（约一拍一处，从不见双、高潮至多一）。告诉智能体*哪些*行配嵌入，余留轨道。",
+     "**样式、布局、画幅（覆盖卡）。** 点名风格（暖纸、临床……）、布局（分屏/堆叠/画中画/覆盖）与画幅。跟原画幅是稳妥默认，取舍在你——桌面/YouTube 16:9，Reels/Shorts 9:16，信息流 4:5。",
+     "**关键词高亮。** 轨道上， punch 词可带内联 `emphasis`——主题色或动词弹跳——不出轨道。说“每行高亮关键词”即可保可读。"
     ],
     "codeBlocks": []
    },
@@ -120,14 +126,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "[手风琴] 电影字幕嵌入（逐字表达情绪） > ./poem.mp4 上的电影字幕 — 无轨道、小写斜体英雄排版在扬声器后面合成，单词累积为一列。每个想法一个顶点词，它们之间有空气。 4:5。切勿对素材进行评分。",
-     "放下栏杆并将所有东西都放在扬声器后面，适合诗意/社交/“电影”询问情绪在哪里胜过严格的可读性，而不是在必须阅读单词的解释器上。",
-     "[手风琴] 明亮的场景字幕 > 将逐字字幕添加到 ./outdoor-vlog.mp4。这是明亮的日光场景，因此请使用打印在表面上的近乎黑色的字体，而不是会被洗掉的浅色外观。保持可读的导轨。 16:9。",
-     "浅色、屏幕混合类型在明亮的背景上显得黯淡（亮度高于 180）；深色、不透明类型。将外观与场景相匹配。",
-     "[手风琴] VFX 级主题字幕 > 在 ./hype-clip.mp4 上注入能量 — 我希望字幕具有强烈冲击力：带有爆炸顶点的逐字标记轨道。 Rail 逐字记录；赔付线是定位球。 9:16。",
-     "命名处理方式——冲压型、在支付线上爆炸——而不是“让它爆炸”。 A-roll 仍未评级。",
-     "[手风琴] 景观数据重新切割 > 将 ./analyst-interview\\.mp4 重新剪辑为具有临床风格的 16:9 解释者。分体式布局：扬声器在右侧，数据卡在左侧。每个主张都有卡片——标题数字的计数、两个选项的瑞士网格比较、技术部分的终端式标注。自动调整 5 分钟剪辑的卡片计数速度。影片未受影响。",
-     "布局（split/stack/pip/overlay）设置扬声器和卡片如何共享画布；如果不加说明，卡片密度会随着剪辑的长度而变化——在 5 分钟的剪辑中，大约每 12-20 秒一张卡片。"
+     "[accordion] 电影字幕嵌入（逐字带情绪）> `./poem.mp4` 电影字幕——无轨道，小写斜体英雄排字在讲者身后拼成，词逐字叠成一列。每想一顶点词，词间留气。4:5。素材不评级。",
+     "放下轨道，全部压讲者身后，适合诗意/社交/“电影感”——情绪重于可读，不用在必读的讲解片。",
+     "[accordion] 明亮场景字幕 > 给 `./outdoor-vlog.mp4` 加逐字字幕。日光太亮，用近黑印在面上的字体，别用浅色会被洗掉。保可读轨道。16:9。",
+     "浅色、屏幕混色在亮底上发虚（亮度高于 180）；深色不透明。外观贴合场景。",
+     "[accordion] VFX 级主题字幕 > 在 `./hype-clip.mp4` 上灌注能量——字幕要强冲击：逐字标记轨道带爆点顶点。轨道逐字记录， payoff 行是主罚球。9:16。",
+     "点名手法——冲压型、payoff 行爆开——而非“炸起来”。A-roll 不评级。",
+     "[accordion] 横屏数据精剪 > 把 `./analyst-interview.mp4` 重剪为 16:9 临床风讲解。分屏：讲者在右，数据卡在左。每主张一卡——标题数字计数、双选项瑞士格比较、技术段终端式标注。5 分钟剪辑自动调卡速。成片不动。",
+     "布局（分屏/堆叠/画中画/覆盖）定讲者与卡共享画布；不言明，卡速随片长变——5 分钟约每 12–20 秒一张。"
     ],
     "codeBlocks": []
    },
@@ -135,34 +141,34 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见错误",
     "p": "",
     "paras": [
-     "**剪辑前添加字幕。** 字幕按原样与剪辑同步。先剪切，再剪切字幕，否则字幕会偏离文字。",
-     "**嵌入每个单词。** 在会说话的头上，导轨是逐字默认的；把每一个标题都放在主题后面，就会掩盖文字，让高潮无所事事。",
-     "**多主题剪辑。** 演讲者后面的文本与一个人相对应；两个扬声器或硬剪切使其闪烁。"
+     "**先剪后加字幕。** 字幕按原剪同步，剪即偏。先剪，再加字幕。",
+     "**嵌入别滥用。** 讲者头上轨道是逐字默认，每条全压主题身后，文字被盖，高潮无活。",
+     "**别一剪跨双主。** 讲者身后文本对应一主；双主或硬切会闪烁。"
     ],
     "codeBlocks": [],
     "bullets": [
      "**避免：** `add captions, then remove the pauses`",
-     "**相反：** `remove the pauses, then add captions to the cut`",
-     "**避免：** `composite every caption behind the speaker for a cinematic look`（在解释器上）",
-     "**相反：** `verbatim rail; promote only the two payoff lines to an embed`",
+     "**改成：** `remove the pauses, then add captions to the cut`",
+     "**避免：** `composite every caption behind the speaker for a cinematic look`（讲解片）",
+     "**改成：** `verbatim rail; promote only the two payoff lines to an embed`",
      "**避免：** `caption this two-person podcast in one pass`",
-     "**相反：** `split the clip per shot / per speaker first, then caption each` — 或使用单主题剪辑。"
+     "**改成：** `split the clip per shot / per speaker first, then caption each`——或用单主剪辑。"
     ]
    },
    {
-    "h": "回顾重要的事情",
+    "h": "复核要点",
     "p": "",
     "paras": [
-     "然后[更改](https://hyperframes.heygen.com/studio-app/edit-with-the-agent.md)：询问代理更正的单词或时间，或者在编辑器中手动移动标题。",
-     "要从转录文件导入更正的单词，请运行`hyperframes transcribe transcript.json --dir ./my-video`。它会替换现有字幕中的完整文字记录，并保留其周围的字幕代码。"
+     "再[修改](https://hyperframes.heygen.com/studio-app/edit-with-the-agent.md)：让智能体改词或改时，或在编辑器手挪标题。",
+     "要从转录文件导入改词，跑 `hyperframes transcribe transcript.json --dir ./my-video`，它把整稿填回现有字幕，保留字幕代码。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "名称、产品术语和编号正确。",
-     "字幕跟随在所说的话之后。",
-     "图形避免了面孔和镜头的重要部分。",
-     "该视频有声音且静音。",
-     "最终字幕或图形会在视频结束前清除。"
+     "人名、产品词、数字正确。",
+     "字幕跟在词后。",
+     "图形避脸避要位。",
+     "有声未静默。",
+     "字幕/图形收于片尾前。"
     ]
    },
    {
@@ -181,100 +187,101 @@ export const DOCS_FULL: Record<string, DocContent> = {
   ]
  },
  "data-maps": {
-  "lede": "过渡指向数字，动画图表与计数显示数字本身。本页讲图表、计数与地图。",
+  "lede": "数字与地理是“给什么数据”与“怎么动”两分定定的主题。[数据](https://hyperframes.heygen.com/catalog/blocks/data-chart.md)区块给现成图表与地图，你喂数；计数[样例](https://hyperframes.heygen.com/catalog/blocks/apple-money-count.md)区块理里程表高潮。本页讲图表、计数、地图，皆可插进[一次性骨架](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)（数据入“文案”槽，块名入“手法”槽）。",
   "sections": [
    {
-    "h": "图表：命名块，或手绘",
+    "h": "图表：点名区块，或手绘",
     "p": "",
     "paras": [
-     "获取图表有两种方法，选择与控制有关： 内联或作为文件提供数据。小编按提示直走； CSV 在构建时被引用和解析（保持确定性 — 无[渲染时获取](https://hyperframes.heygen.com/concepts/definism.md)）。",
-     "12 秒 1920x1080 视频。标题“最常用的语言”，副标题“受访者比例，2026 年调查”。将其转换为动画条形图，每个条形上都有交错显示和计数的值标签，每个标签都带有后缀 `data-chart`： ```` Python 41、TypeScript 33、Rust 19、Go 14、Java 9",
-     "```` 使用`%`注册表块。没有音频。",
+     "拿图表两条路，取舍在控制权：",
+     "**点名 [`data-chart`](https://hyperframes.heygen.com/catalog/blocks/data-chart)** 得现成动画条 + 线（交错显现、数值标、NYT 体）喂数即可，快、稳、无设计定夺。",
+     "**说“全手绘——无图表库”**，智能体以行内 SVG 与 GSAP 自建。舍块精修，换形、动、布局全控——条赛中途超车、弧配计数、库无此布局皆可。",
+     "数据行内或文件：短系列直入提示，CSV 构建时引用解析（保确定性——无[渲染时获取](https://hyperframes.heygen.com/concepts/determinism.md)）。",
+     "做 12 秒 1920x1080 视频。标题“最常用语言”，副标题“受访比，2026  survey”。做成动画条（交错显现、数值逐条上计、标尾 `%`），基底 `data-chart`。不音频。",
      "<video aria-label=\"Chart languages\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/chart-languages.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示渲染，未经编辑 - 标签计数，而下一个条已经在增长。* 10 秒 1920x1080 视频，深色石板背景。标题“2026 年热门语言”位于左上角。五个水平条（Python、TypeScript、Rust、Go、Java）从零开始以交错的方式开始，在动画中间两次超越对方；每个条形都有一个右边缘值标签，计数到其最终百分比。最终状态保持 2 秒，活着——领导者脉冲一次，定时精确地完成最后一帧，绝不是冻结的尾巴。手工创作标记（没有图表库）并使它们“看起来”是手绘的：不稳定的墨水笔划，而不是干净的矩形。说出哪两对超车以及何时超车，否则揭晓者每次运行都会落在不同数量的交叉口上。没有音频。",
+     "*上提示所渲，未剪——标上计而次条已涨。*",
+     "做 10 秒 1920x1080 深石板底。标题“2026 头号语言”左上。五横条（Python、TypeScript、Rust、Go、Java）零起交错涨，中途两度超车，各右沿数值标上计至终%。终态留 2 秒，活——首脉冲一记，终帧精确收，不冻结。标记手写（无库），形“手绘”：晃墨非净矩。点名哪两对、何时超，否则每跑交叉数异。不音频。",
      "<video aria-label=\"Barrace handdrawn\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/barrace-handdrawn.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示渲染，未经编辑 - 手工创作的墨迹笔划，没有图表库；排名交换两次。* **说明该块*或*选择退出它 - 不要将其隐式保留。**“动画化此数据”没有决定在通用块和即兴布局之间漂移。",
-     "**为你要求的动画设置数字格式。** 里程表计数需要固定的数字列； `\n> Python 41, TypeScript 33, Rust 19, Go 14, Java 9\n> `范围迫使`\n>\n> Use the `尴尬的开始。"
+     "*上提示所渲，未剪——手墨无库，名次二易。*",
+     "**块与否明示，别含糊。**“动画这数据”不定，漂在通用块与即兴布之间。",
+     "**数字随动画定版。** 里程表须定列宽；`$0 → $4.2M` 逼出怪 `$0.0M` 起。"
     ],
-    "codeBlocks": [],
+    "codeBlocks": [
+     {
+      "code": "Python 41, TypeScript 33, Rust 19, Go 14, Java 9",
+      "file": "txt"
+     }
+    ],
     "bullets": [
-     "**命名 [`data-chart`](https://hyperframes.heygen.com/catalog/blocks/data-chart)** 以获得内置的动画条形图 + 折线图 - 交错显示、值标签、纽约时报风格的排版 - 并为其提供你的数字。快速、一致，无需设计决策。",
-     "**说“手绘所有内容 - 无图表库”** 让代理从内联 SVG 和 GSAP 构建图表。你放弃了块的抛光，以完全控制形状、运动和布局——超越动画中间的酒吧竞赛，绘制匹配柜台的弧线，没有图书馆提供的布局。",
-     "**避免：** ` registry block. No audio.\n\n<video aria-label=\"Chart languages\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/chart-languages.mp4#t=0.1\" loop playsInline preload=\"metadata\" />\n\n*Rendered from the prompt above, unedited — labels count up while the next bar is already growing.*\n\n> 10-second 1920x1080 video, dark slate background. Title \"Top languages 2026\" top-left. Five horizontal bars (Python, TypeScript, Rust, Go, Java) grow from zero with staggered starts, overtaking each other twice mid-animation; each bar has a right-edge value label counting up to its final %. End state holds 2s, alive — the leader pulses once, timed to finish exactly on the last frame, never a frozen tail. Hand-author the marks (no chart library) and make them *look* hand-drawn: wobbly ink strokes, not clean rectangles. Say which two pairs overtake and when, or the reveal will land on a different number of crossings each run. No audio.\n\n<video aria-label=\"Barrace handdrawn\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/barrace-handdrawn.mp4#t=0.1\" loop playsInline preload=\"metadata\" />\n\n*Rendered from the prompt above, unedited — hand-authored ink strokes, no chart library; ranks swap twice.*\n\n**State the block *or* opt out of it — don't leave it implicit.** \"Animate this data\" without a decision drifts between a generic block and an improvised layout.\n\n* **Avoid:** `",
-     "**改为：** `\n* **Instead:** ` **或** ` **or** `",
-     "**避免：** `\n\n**Format numbers for the animation you asked for.** An odometer count-up needs fixed digit columns; a `",
-     "**相反：** ` range forces an awkward `"
+     "**避免：** `animate this CSV as a chart`",
+     "**改成：** `turn this CSV into an animated bar chart — use the data-chart registry block` **或** `…hand-draw everything, no chart library`",
+     "**避免：** `counts from $0 to $4.2M`",
+     "**改成：** `counts up to $4.2M`"
     ]
    },
    {
-    "h": "统计统计",
+    "h": "计数统计",
     "p": "",
     "paras": [
-     "对于单个英雄数字，[` start.\n\n* **Avoid:** `](https://hyperframes.heygen.com/catalog/blocks/apple-money-count) 是苹果风格的财务计数器 - 它从 $0 开始滚动，闪烁绿色，并用声音爆裂金钱图标。当你想要那种精确的繁荣时，请说出它；当你想要自己类型的裸数字时，可以手绘。",
-     "6 秒 1920x1080 视频，深海军蓝背景。节拍 1（0-1 秒）：标签“ARR”在顶部中心逐渐变小。节拍 2（1-4 秒）：一个巨大的数字随着里程表滚动而计数达 420 万美元，在落地时逐渐消失。节拍 3（4-6 秒）：“+312% YoY”在下方以绿色标记，然后进入温和的环境空闲状态。使用`\n* **Instead:** `注册表块作为基础。没有旁白。",
+     "单主数字用 [`apple-money-count`](https://hyperframes.heygen.com/catalog/blocks/apple-money-count)，苹果风财务计数——自 $0 滚、绿闪、钱图爆音。求此精手即点名；要自家字裸数则手绘。",
+     "做 6 秒 1920x1080 深海军蓝。节拍 1（0-1s）：“ARR”标签顶中渐浮。节拍 2（1-4s）：巨数里程表滚至 $4.2M，落缓出。节拍 3（4-6s）：“+312% YoY”绿戳下方，后温和环境空闲。基底 `apple-money-count`。不旁白。",
      "<video aria-label=\"Money count\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/money-count.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示渲染，未经编辑。*"
+     "*上提示所渲，未剪。*"
     ],
     "codeBlocks": []
    },
    {
-    "h": "地图：将要求与地图相匹配",
+    "h": "地图：问要什么，配哪块",
     "p": "",
     "paras": [
-     "每个地图块回答不同的地理问题。说出地图的*用途*并命名匹配的块：",
-     "|你想要... |将此块命名为 |长度|",
-     "| - | - | - |",
-     "|按值（等值线）对美国各州进行着色 | [`\n\n### Count-up stats\n\nFor a single hero number, [`](https://hyperframes.heygen.com/catalog/blocks/us-map) | 12 秒 |",
-     "|按数值（比例气泡）计算美国城市规模 | [`](https://hyperframes.heygen.com/catalog/blocks/apple-money-count) is the Apple-style finance counter — it rolls from \\$0, flashes green, and bursts money icons with sound. Name it when you want that exact flourish; hand-draw when you want a bare number in your own type.\n\n> 6-second 1920x1080 video, dark navy background. Beat 1 (0-1s): label \"ARR\" fades up small, top-center. Beat 2 (1-4s): a giant number counts up to \\$4.2M with an odometer roll, easing out as it lands. Beat 3 (4-6s): \"+312% YoY\" stamps in below in green, then settles into a gentle ambient idle. Use the `](https://hyperframes.heygen.com/catalog/blocks/us-map-bubble) | 12 秒 |",
-     "|绘制美国城市之间的联系（出发地→目的地）| [` registry block as base. No narration.\n\n<video aria-label=\"Money count\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/money-count.mp4#t=0.1\" loop playsInline preload=\"metadata\" />\n\n*Rendered from the prompt above, unedited.*\n\n### Maps: match the ask to the map\n\nEach map block answers a different geographic question. Say what the map is *for* and name the matching block:\n\n| You want to… | Name this block | Length |\n| - | - | - |\n| Shade US states by a value (choropleth) | [`](https://hyperframes.heygen.com/catalog/blocks/us-map-flow) | 12 秒 |",
-     "|将美国各州显示为等权六角网格 | [`](https://hyperframes.heygen.com/catalog/blocks/us-map) | 12s |\n| Size US cities by a value (proportional bubbles) | [`](https://hyperframes.heygen.com/catalog/blocks/us-map-hex) | 10 秒 |",
-     "|自治区为西班牙遮阳 | [`](https://hyperframes.heygen.com/catalog/blocks/us-map-bubble) | 12s |\n| Draw connections between US cities (origin→dest) | [`](https://hyperframes.heygen.com/catalog/blocks/spain-map) | 12 秒 |",
-     "|一个国家一个国家地遮蔽世界| [`](https://hyperframes.heygen.com/catalog/blocks/us-map-flow) | 12s |\n| Show US states as an equal-weight hex grid | [`](https://hyperframes.heygen.com/catalog/blocks/world-map) | 14 秒 | 美国地图编码相结合 - 要求“对州进行阴影*并*绘制两个城市之间的流量”会得到一种组合：代理将源头的块合并到共享投影上，以便弧线准确落在分区统计图的州上。",
-     "12 秒 1920x1080 视频。美国的分区统计图通过交错显示和渐变图例按采用率对各州进行阴影，然后在旧金山、奥斯汀和纽约之间绘制连接弧。使用`](https://hyperframes.heygen.com/catalog/blocks/us-map-hex) | 10s |\n| Shade Spain by autonomous community | [`和`](https://hyperframes.heygen.com/catalog/blocks/spain-map) | 12s |\n| Shade the world country by country | [`注册表块。没有音频。",
+     "每块回一地理问。说清地图*之用*，点名匹配块（等值着色、气泡、网格、流四览）：",
      "<video aria-label=\"Validate us map flows\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/validate-us-map-flows.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示渲染，未经编辑。* [！笔记] 地图块在运行时从 CDN 获取地理数据，这违反了确定性渲染规则 - 代理将投影几何图形烘焙到合成中。你永远不需要提出这个要求；这是正确构建地图的一部分。",
-     "**选择编码，不要只说“地图”。** Choropleth（颜色）、气泡（大小）、十六进制（等权）和流（弧）从相同的数据讲述不同的故事。",
-     "**命名该地区的区块。** 等值线图是特定于地区的，带有烘焙投影（C0 是 D3 等角圆锥曲线，C1 是自然地球） - 没有通用的“任何国家”地图。"
+     "*上提示所渲，未剪。*",
+     "提示：地图块运行时自 CDN 取地理，这违确定性——智能体把投影几何烘进合成。你永不须求，此为正确建地图一环。",
+     "**选编码，别只说“地图”。** 等值（色）、气泡（径）、六格（等权）、流（弧）同数异事。",
+     "**点名地区块。** 等值多系地区专用，投影已烘（`spain-map` 为 D3 等角圆锥，`world-map` 为 Natural Earth），无通用“任意国”图。",
+     "| 你想要…… | 点名这块 | 长 |\n| 按值（等值）阴美国各州 | [`us-map`](https://hyperframes.heygen.com/catalog/blocks/us-map) | 12s |\n| 按值（气泡）缩美国城 | [`us-map-bubble`](https://hyperframes.heygen.com/catalog/blocks/us-map-bubble) | 12s |\n| 美国双城连线（起→终） | [`us-map-flow`](https://hyperframes.heygen.com/catalog/blocks/us-map-flow) | 12s |\n| 美国各州等权六格 | [`us-map-hex`](https://hyperframes.heygen.com/catalog/blocks/us-map-hex) | 10s |\n| 按自治区阴西班牙 | [`spain-map`](https://hyperframes.heygen.com/catalog/blocks/spain-map) | 12s |\n| 世界逐国阴 | [`world-map`](https://hyperframes.heygen.com/catalog/blocks/world-map) | 14s |"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**避免：** `](https://hyperframes.heygen.com/catalog/blocks/world-map) | 14s |\n\nThe US map encodings combine — asking to \"shade states *and* draw flows between two cities\" gets you one composition: the agent merges the blocks at source onto a shared projection so arcs land exactly on the choropleth's states.\n\n> 12-second 1920x1080 video. A US choropleth shades states by adoption rate with staggered reveals and a gradient legend, then connection arcs draw between San Francisco, Austin, and New York. Use the `",
-     "**相反：** ` and `→` registry blocks. No audio.\n\n<video aria-label=\"Validate us map flows\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/validate-us-map-flows.mp4#t=0.1\" loop playsInline preload=\"metadata\" />\n\n*Rendered from the prompt above, unedited.*\n\n> [!NOTE]\n>\n> The map blocks fetch their geo data from a CDN at runtime, which violates the deterministic-render rules — the agent bakes the projected geometry into the composition instead. You never need to ask for this; it's part of building the map correctly.\n\n**Pick the encoding, don't just say \"map.\"** Choropleth (color), bubble (size), hex (equal weight), and flow (arcs) tell different stories from the same data.\n\n* **Avoid:** `，或`\n* **Instead:** `→` → `",
-     "**避免：** `, or `（将投影和地理留给机会）",
-     "**相反：** ` → `"
+     "美国图编码可叠——“阴州*并*连双城”得一合成：智能体源端叠块于同投影，弧正落等值州上。",
+     "**避免：** `put California's number on a US map`",
+     "**改成：** `size each city as a proportional bubble` → `us-map-bubble`，或 `shade each state by value` → `us-map`",
+     "**避免：** `a map of Spain's regions`（投影地理听天命）",
+     "**改成：** `use the spain-map registry block`"
     ]
    },
    {
-    "h": "航线和航班",
+    "h": "航线与航班",
     "p": "",
     "paras": [
-     "对于点对点的旅程——在地图上绘制一条带有着陆节奏的路线——[C0](https://hyperframes.heygen.com/catalog/blocks/nyc-paris-flight)是苹果风格的飞行动画：一架飞机从纽约飞往巴黎，带有标记圆圈、着陆流行声和音效。使用它作为基础并在提示中重新指向端点。",
-     "6 秒 1920x1080 视频。一张逼真的地图，其中有一架飞机在两个城市之间飞行，在出发地有一个标记圆圈，在目的地有一个着陆弹出窗口。使用 `\n\n**Name the region's block.** The choropleths are region-specific with baked-in projections (` 注册表块作为基础 — 路线为纽约 (JFK) → 巴黎 (CDG)，两端都有标记。保留该街区自己的标题卡和路线标记。在已确定的地图上结束，而不是在该街区的白色交接框架上。没有音频。",
+     "点到点——图上画线带落拍——用 [`nyc-paris-flight`](https://hyperframes.heygen.com/catalog/blocks/nyc-paris-flight)，苹果风飞行动画：机自纽约飞巴黎，带标圈、落弹跳与音效。基底上改两端。",
+     "做 6 秒 1920x1080。真图，机飞双城，起标圈，终落弹跳。基底 `nyc-paris-flight`——路线纽约 (JFK) → 巴黎 (CDG)，两端标。保块自标题卡与路线刻。终于定图，非块白场缘帧。不音频。",
      "<video aria-label=\"Flight route\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/flight-route.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示渲染，未经编辑。* **路线是有车辆的流动，而不是静态弧线。**如果你想要绘制的弧线没有平面和声音，那就是` is D3 conic conformal, `；如果你想要旅途性能，那就是` is Natural Earth) — there's no generic \"any country\" map.\n\n* **Avoid:** `。"
+     "*上提示所渲，未剪。*",
+     "**路线是带车的流动，非静弧。** 要弧不要机声即 `us-map-flow`；要旅演出即 `nyc-paris-flight`。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**避免：** `draw a line from NYC to Paris`（仅弧线和全飞行之间不明确）",
-     "**相反：** ` (leaves the projection and geography to chance)\n* **Instead:** `→`\n\n### Routes and flights\n\nFor a point-to-point journey — a route drawing across a map with a landing beat — [`"
+     "**避免：** `draw a line from NYC to Paris`（弧与全飞 ambiguous）",
+     "**改成：** `a plane flies the route with a landing pop` → `nyc-paris-flight`"
     ]
    },
    {
-    "h": "下一步去哪里",
+    "h": "下一步去哪",
     "p": "",
     "paras": [
-     "[！笔记] **在真实的电影中**：[完整电影](https://hyperframes.heygen.com/prompting/capstone.md) 的“测量”和“无处不在”区域是本页的首尾相连：英雄计数落地时，C0 条从时间线上升起，然后同一根线在 C1 块的真实云渲染区域上变成大圆弧（从电影中剪切，如下）。",
-     "这是购买该作品的[完整顶点提示](https://hyperframes.heygen.com/prompting/capstone.md#the-prompt-word-for-word)中的条款 - 你可以为自己的视频提升提示语言： **测量（14-21秒）。** 电线成为图表基线（相同的线，相同的厚度 - 没有切割）：调整**C0°注册表块** - 六个标记条在语音提示上从电线本身升起，而英雄数字在巨大的表格单声道中在它们旁边计数：**50+目录块**（真实的注册表计数）\\[...]",
-     "**到处（21-28秒）。**电线弧线和地面脱落：调整**C0注册表块** - 虚线世界地图在下方滚动，而电线则变成一条弧形穿过它的大圆路线。真实的渲染基础设施，如实标记：脉冲在 AWS 和 Google Cloud 区域（US-EAST-1 · EU-WEST-1 · AP-SOUTH-1）亮起，带有“CLOUD RENDER · LAMBDA + CLOUD RUN”启动器 \\[…]",
+     "提示：**真片里**，[整片](https://hyperframes.heygen.com/prompting/capstone.md) Measure 与 Everywhere 区即本页全程：`data-chart` 条自时间线 Rising， hero 计数落，后同线成大圆弧覆 `world-map` 真云渲区（下为片中剪）。",
+     "整片[完整提示](https://hyperframes.heygen.com/prompting/capstone.md#the-prompt-word-for-word)买断此段——自家可借的措辞：**Measure（14-21s）** 线成图基线（同线同粗，无切）：改 **`data-chart` 块**——六标条自线升，spoken cues 催，hero 巨字单宽并计：**50+ CATALOG BLOCKS**（真注册数）……**Everywhere（21-28s）** 线成弧地落：改 **`world-map` 块**——虚世图下滚，线成大圆弧越之。真渲基建，实标：脉冲点 AWS 与 Google 区（US-EAST-1 · EU-WEST-1 · AP-SOUTH-1），kicker“CLOUD RENDER · LAMBDA + CLOUD RUN”……",
      "<video aria-label=\"Capstone region data map\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/capstone-region-data-map.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*该条款，渲染 - 从成品电影中剪切的区域。*"
+     "*该段所渲——片中区剪。*"
     ],
     "codeBlocks": [],
     "bullets": [
-     "[一次性提示的剖析](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt) — 骨架，以及为什么里程表需要固定的数字列。",
-     "[复制粘贴示例](https://hyperframes.heygen.com/prompting/examples.md) — 条形图竞赛和统计图块提示进行调整。",
-     "[生成的艺术作品](https://hyperframes.heygen.com/prompting/color-grading.md# generated-artwork) — 手绘 HTML/CSS/SVG 的闪光点和闪光点。",
-     "[规范转盘](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify) - 决定何时命名块而不是手绘。"
+     "[一次性提示解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)——骨架，里程表为何须定列。",
+     "[复制示例](https://hyperframes.heygen.com/prompting/examples.md)——条赛与统计块提示套用。",
+     "[生成美术](https://hyperframes.heygen.com/prompting/color-grading.md#generated-artwork)——手 HTML/CSS/SVG 闪处与不闪处。",
+     "[规格拨盘](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)——何时点名块、何时手绘。"
     ]
    },
    {
@@ -299,7 +306,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "保留什么作为图片",
     "p": "",
     "paras": [
-     "当这件作品刚刚放在那里并且看起来正确时，保留导出："
+     "作品成品且貌美，导出保留："
     ],
     "codeBlocks": [],
     "bullets": [
@@ -313,9 +320,9 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "在 HTML 中重建什么",
     "p": "",
     "paras": [
-     "当视频播放时内部发生变化时重建它： 运动，不要在完成的帧之间进行剪切。",
-     "品牌颜色和字体：导入一次，随处使用。",
-     "不要仅仅因为设计工具制作了一堆完成的屏幕截图而对其进行动画处理。截图为证。 HTML 是变化的部分。",
+     "播放中内容会变，HTML 重建：动效在帧间续，不剪。",
+     "品牌色字：导入一次，到处复用。",
+     "别只因设计工具给一堆完截图就动画截图。截图是证。变化在 HTML。",
      "<video aria-label=\"A design frame beside the same design rebuilt as working HTML\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/figma-to-html-demo-v1.mp4\" poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/figma-to-html-demo-v1.jpg\" playsInline preload=\"metadata\" />",
      "两个面板获得相同的点击次数。只有重建的一面才会做出反应，因为表单的图片无法接受输入。这就是本页的全部规则。"
     ],
@@ -331,12 +338,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "从 Figma 开始",
     "p": "",
     "paras": [
-     "向代理提供链接和结果： `/figma` 技能导入艺术品、读取品牌价值、将组件重建为可编辑的 HTML，并尽可能地转换动作。一切都落在项目中，因此渲染永远不依赖 Figma。令牌、命令和错误：[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。"
+     "甩给智能体链接与所要结果：`/figma` 技能引美术、读品牌值、组件重建成可编 HTML，动作尽量转。全落工程，渲染不赖 Figma。令牌与命令出错见[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。"
     ],
     "codeBlocks": [
      {
       "code": "Use this Figma section as the source for a 20-second product intro:\nhttps://www.figma.com/design/FILE/Project?node-id=10-20\n\nKeep the brand type and colors. Rebuild the states that must move. Treat the\nframes as key moments, not slides.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -344,7 +351,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "从Claude设计或开放设计开始",
     "p": "",
     "paras": [
-     "这些首先确定布局、调色板、类型和场景方向。",
+     "它们先定布局、板色、字与幕向。",
      "[Claude 设计说明](https://github.com/heygen-com/hyperframes/blob/main/docs/guides/claude-design-hyperframes.md) · [开放设计交接](https://github.com/heygen-com/hyperframes/blob/main/docs/guides/open-design-hyperframes.md)"
     ],
     "codeBlocks": [],
@@ -359,12 +366,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "交接好不好？",
     "p": "",
     "paras": [
-     "一个好的项目有明确的方向、真实的资产或诚实标记的占位符、可能发生变化的可编辑源、本地媒体和字体以及可打开的项目。自己检查一下： 然后观看它在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)中移动——剧照无法显示时间。"
+     "好工程须方向明，资产真或诚实标占位，可变处在可编源，媒字在本地，能开。验：跑一遍 check，后在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)看它动——剧照不显时。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes check\nnpx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -390,7 +397,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "重新混合你喜欢的视频",
     "p": "",
     "paras": [
-     "获得你喜欢的视频的最快方法就是从一个开始。下面的每个视频都是混音：某人的原创视频，在 HyperFrames 中用新词、人物和品牌重建。悬停即可播放。像一个？选择 **Remix in Studio** 并制作你自己的版本；请参阅[参考任何视频](https://hyperframes.heygen.com/studio-app/reference-video.md) 了解其工作原理。"
+     "拿想要的成片最快，是从一支成片起。下每支皆混音：他人原创，以 HyperFrames 以新词、人物、品牌重建。悬播。要哪支？选 **Remix in Studio** 做自版；机理见[参考任意视频](https://hyperframes.heygen.com/studio-app/reference-video.md)。"
     ],
     "codeBlocks": []
    },
@@ -398,7 +405,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "推出影片和动态图形",
     "p": "",
     "paras": [
-     "产品发布和以类型为主导的动作，根据原作的剪辑、时间和效果进行重建。"
+     "发布片与字主行动，沿原剪、时与效重建。"
     ],
     "codeBlocks": []
    },
@@ -406,7 +413,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "真人出镜编辑",
     "p": "",
     "paras": [
-     "流行 Reels、TikTok 和 Shorts 的编辑风格，采用不同的演示者：字幕、剪辑、标注和节奏。"
+     "Reels、TikTok、Shorts 的剪风，换演示者：字、剪、注、拍。"
     ],
     "codeBlocks": []
    },
@@ -414,7 +421,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "1:1 重新创建任何视频",
     "p": "",
     "paras": [
-     "将 HyperFrames 指向已完成的视频，它会以可编辑的 HTML 格式重建同一部电影——手势、类型、时间等等。下面，每个 **参考**（原始的，在左侧）位于其 **HyperFrames 复制品**（右侧）旁边，逐帧匹配。",
+     "HyperFrames 盯一已成品，以可编 HTML 重建同片——动、字、时皆复。下每对 **参考**（左原片）邻 **HyperFrames 复制**（右），逐帧对。",
      "**大佬** 38.58s · 60fps",
      "<video poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/reverse-oblist-reference.jpg\" playsInline preload=\"none\" />",
      "参考资料——原片",
@@ -431,21 +438,21 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "安装最多的块",
     "p": "",
     "paras": [
-     "这些可立即运行的示例是根据过去 30 天内人工请求的安装来订购的。将任何块添加到项目中，然后就地自定义其内容。",
-     "|示例|从这里开始 |",
+     "下皆可跑样，依近 30 天人工安装序。任块加进项目，就地改它。",
+     "|样例|从这起 |",
      "| - | - |",
-     "|标志结尾 | npx HyperFrames添加徽标结尾 |",
-     "|数据图表 | npx HyperFrames添加数据图表 |",
-     "|社论闪光覆盖 | npx HyperFrames添加编辑闪存叠加 |",
-     "|有机漏光覆盖 | npx HyperFrames添加有机光泄漏覆盖 |",
+     "|标志尾 | npx hyperframes add logo-ending |",
+     "|数据图 | npx hyperframes add data-chart |",
+     "|编辑闪盖 | npx hyperframes add editorial-flash-overlay |",
+     "|有机漏光盖 | npx hyperframes add organic-leak-overlay |",
      "| mk-进度统计 | npx HyperFrames添加 mk-progress-stat |",
      "|流程图| npx HyperFrames添加流程图 |",
-     "| mk 规格列表 | npx HyperFrames添加 mk-specs-list |",
+     "|mk 规格表 | npx hyperframes add mk-specs-list |",
      "| mk-标注-突出显示 | npx HyperFrames添加 mk-callout-highlight |",
-     "|硬件标题 | npx HyperFrames添加硬件标题 |",
-     "|代码输入 | npx HyperFrames添加代码输入 |",
-     "| lt-暗卡 | npx HyperFrames添加 lt-dark-card |",
-     "|电影变焦| npx HyperFrames添加电影缩放 |"
+     "|硬件标题 | npx hyperframes add hardware-title |",
+     "|代码录入 | npx hyperframes add code-typing |",
+     "|lt 暗卡 | npx hyperframes add lt-dark-card |",
+     "|电影变焦 | npx hyperframes add cinematic-zoom |"
     ],
     "codeBlocks": []
    },
@@ -454,17 +461,17 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "p": "",
     "paras": [
      "初始化模板仍然可用于搭建完整的项目。",
-     "|模板|良好的起点 |",
+     "|模板|善始 |",
      "| - | - |",
-     "|暖粒 |品牌、生活方式和编辑工作 |",
-     "|播放模式 |充满活力的社交视频和产品发布|",
-     "|瑞士电网|技术、结构和企业故事 |",
-     "|动力型 |以类型为主导的宣传片、简介和标题卡 |",
-     "|决策树|可解释的图表和教程 |",
-     "|产品促销|多场景产品展示|",
-     "| nyt-图 |编辑图表和数据故事|",
-     "|维涅利|大胆的肖像公告|",
-     "|空白|代理生成或完全定制的工作 | [！提示] 使用 npx hyperframes init my-video --example \\T0 来获取完整的项目模板，或者 npx hyperframes add \\T1 来从上面的示例之一开始。"
+     "|暖粒 |品牌、生活、编辑 |",
+     "|播放模式 |社媒与发布 |",
+     "|瑞士格 |技术与企业故事 |",
+     "|动力型 |字主宣传与标题 |",
+     "|决策树 |可解图与教程 |",
+     "|产品促销 |多幕产品展 |",
+     "|nyt 图 |编辑图与数据事 |",
+     "|维涅利 |大胆肖像告 |",
+     "|空白 |智能体自生或全定制 | 提示：整模板用 `npx hyperframes init my-video --example warm-grain`，散块用 `npx hyperframes add <块名>`。"
     ],
     "codeBlocks": []
    },
@@ -501,32 +508,32 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": []
    },
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "**从你喜欢的解释开始。** 在 Studio 应用程序中，在主页上打开 **参考** 并粘贴其链接（YouTube、TikTok、Instagram 或 X），上传文件，或在 **选择参考** 下选择一个。然后说出你的主题：你有关于你的主题的节奏和绘画风格。你不必热爱这一切；从一件你喜欢的事情开始就足够了。参考使用你的 HeyGen API 密钥，应用程序第一次会要求你提供该密钥。",
-     "**或者在**做某事**中描述它**，并附加或粘贴你的注释： 说明哪些事实或措辞必须准确。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
+     "**从你爱的讲解起。** Studio 首页开 **Reference**，粘链接（YouTube、TikTok、Instagram、X）、传文件，或在**选参考**挑一，再报你的题：节奏与绘画风格随它。你不必全爱，爱一角够了。Reference 用你的 HeyGen 密钥，应用首次索取。",
+     "**或在**做点什么**里描述**，附上或粘笔记：定必准的事实与措辞。用自家智能体而非应用时，以 `/hyperframes` 开头。"
     ],
     "codeBlocks": [
      {
       "code": "Turn these notes into a 60-second explainer for people new to the topic: [paste notes]",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "想法该如何落地？",
+    "h": "想法如何落地？",
     "p": "",
     "paras": [
-     "如果你提供经批准的脚本，请说明 HyperFrames 是否可以对其进行重组或必须保留每个单词。",
-     "当真实界面应提供证明时，请使用[产品和网站视频](https://hyperframes.heygen.com/guides/product-launch-video.md)。当现有素材应保留在下方时，请使用[字幕或设计的叠加层](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。"
+     "有批稿先说：HyperFrames 可重组还是逐字留。",
+     "真界面作证用[产品与网站视频](https://hyperframes.heygen.com/guides/product-launch-video.md)；现素材留底用[字幕或设计叠加](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**理解一个想法**——提出一个有用的问题，然后一次一层地揭示机制。",
-     "**遵循流程** — 保留一个视觉阶段并按照观众需要的顺序显示每个步骤。",
-     "**记住三点**——使想法平行、具体且视觉上清晰，足以供以后回忆。",
-     "**通过故事学习** — 使用一个案例从设置和紧张转向一般课程。"
+     "**吃透一想** —— 问有用的问，一层层揭机制。",
+     "**跟流走** —— 留一视觉期，按观众需顺序显每步。",
+     "**记三点** —— 想平行、具体、 When 眼即明，便回想。",
+     "**故事习得** —— 一案自设敌至通则。"
     ]
    },
    {
@@ -539,13 +546,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": []
    },
    {
-    "h": "提示有效",
+    "h": "有效提示",
     "p": "",
     "paras": [
-     "将你的文本粘贴到一封邮件中。对于一个完整的解释器来说这已经足够了。还没有场地，没有镜头，还没有设计决定。",
-     "已验证，来自 [examples](https://hyperframes.heygen.com/prompting/examples.md) 页面 - 来自粘贴文本的约 60 秒垂直解释： 将其转换为 \\~60 秒 1080x1920 垂直解释器：\\[粘贴你的文本]。每个场景一个想法，大排版，素材图表，品牌颜色#FF5533 为灰黑色。男声TTS，平静。嵌入标题，关键词以品牌颜色突出显示。",
+     "把文粘进信里。一完整讲解已够，场地、镜头、定调皆无。",
+     "已验，取自 [示例](https://hyperframes.heygen.com/prompting/examples.md) 页——约 60 秒竖讲解：转 ~60 秒 1080x1920 竖讲解：[粘你的文]。一意一幕，大字、图象、品牌色 #FF5533 上灰黑。TTS 男声，沉稳。嵌入标题，关键词品牌色亮。",
      "<video aria-label=\"Example explainer\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/example-explainer.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示制作。* 注意`~`。当你提供脚本时，运行时会遵循口语。所以要求“大约”一分钟，而不是一分钟。有关骨架的其余部分，请参阅[解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)。"
+     "*上提示所成。* 记 `~`。供稿即朗度，运行时依口语走，故要“大约一分”而非一分。余骨架见[解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)。"
     ],
     "codeBlocks": []
    },
@@ -562,7 +569,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "| **角度** | “概念”/“操作方法”/“listicle”/“故事”|角度决定故事的形态。代理会将你的文本重塑为文本，而不是按顺序阅读你的段落。 |",
      "| **标题样式** | “嵌入标题，关键词以强调色突出显示” |字幕被烧入。命名突出显示颜色将它们与你的调色板联系起来，而不是默认的药丸。 |",
      "| **调色板** | “灰黑色上的品牌颜色#FF5533”|由于没有网站可供借用，因此代理商选择了一个调色板。命名的口音和背景使其个性化。 |",
-     "| **语音** | 「男声TTS，冷静」/「温暖女声」|性别和语气是提示词。提供者是智能体的决定。 | [！提示] 场景密度是这里最大的质量杠杆。 “每个场景一个想法” 将密集的段落变成有节奏的序列。代理商重新订购并 压缩你的文本以命中它。这就是解释员教学的原因",
+     "| **语音** | 「男声TTS，冷静」/「温暖女声」|性别和语气是提示词。提供者是智能体的决定。 | 提示： 场景密度是这里最大的质量杠杆。 “每个场景一个想法” 将密集的段落变成有节奏的序列。代理商重新订购并 压缩你的文本以命中它。这就是解释员教学的原因",
      "的背诵。"
     ],
     "codeBlocks": []
@@ -571,12 +578,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "[手风琴] 30秒风景主题讲解 (16:9) > 为非技术受众制作一个约 30 秒的 1920x1080 解释，说明 HTTPS 如何保持请求的私密性 — 要点：你的数据在离开浏览器之前已被密封。概念角度：每个场景一个想法，大几何类型，一个简单的锁和钥匙图作为核心（将隐喻与主题交换）。灰白色近乎黑色墨水，带有深蓝色调。女声TTS，温暖而清晰。嵌入标题，关键术语以强调色突出显示。",
-     "更短的运行时间、YouTube 或嵌入的景观。更少的场景意味着 主题必须压缩。为外卖命名告诉代理要保留什么。",
-     "<video aria-label=\"One idea told four ways, with no footage to start from\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/faceless-explainer-demo-v2.mp4\" poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/faceless-explainer-demo-v2.jpg\" playsInline preload=\"metadata\" /> *从此提示渲染，主题交换为 HTTP 缓存（缓存图作为比喻），未编辑 — 26 秒，因为旁白设置了长度。* [手风琴] Listicle > 制作一个约 45 秒的 1080x1920 列表文章：“快速发货团队的 5 个习惯”。 Listicle角度——每个场景一个习惯，每个习惯都有一个大数字和一个单行标签，将能量升级到#1。灰黑色带有青柠色。男性TTS语音，乐观。嵌入字幕，习惯标签突出显示每个场景。",
-     "列表角度为每个项目提供了自己的场景。每个场景都重复使用相同的内容 数字和标签形状。结果读起来是倒计时，而不是一堵墙 点。",
-     "[手风琴] 图表说明 > 为开发人员制作一个时长 60 秒的 1920x1080 如何设置 CI 管道。如何角度：每个场景一个步骤，每个步骤都围绕一个简单的节点和箭头图构建，该图按照旁白的解释进行绘制。带有青色色调的木炭色。平静的男性 TTS 声音。嵌入标题，突出显示步骤名称。",
-     "操作方法依靠图表作为承载视觉。描述一下图表 每一步的*形状* — “节点和箭头”，或“向左填充的管道” 对”。让智能体发明细节。"
+     "[accordion] 30 秒横屏讲解（16:9）> 为非技术受众做约 30 秒 1920x1080 讲解：HTTPS 如何让请求私密——要点：数据离浏览器前已被密封。角度概念：一意一幕，大几何字，锁与钥图作核心（隐喻与题随之替换）。近黑墨白，藏青缀。女声 TTS，暖晰。嵌入标题，关键词品牌色亮。",
+     "更短横屏，宜 YouTube 或嵌入。幕少则题须压缩。点外卖名让智能体知留什么。",
+     "<video aria-label=\"One idea told four ways, with no footage to start from\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/faceless-explainer-demo-v2.mp4\" poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/faceless-explainer-demo-v2.jpg\" playsInline preload=\"metadata\" /> *从此提示渲染，主题交换为 HTTP 缓存（缓存图作为比喻），未编辑 — 26 秒，因为旁白设置了长度。* [accordion] Listicle > 制作一个约 45 秒的 1080x1920 列表文章：“快速发货团队的 5 个习惯”。 Listicle角度——每个场景一个习惯，每个习惯都有一个大数字和一个单行标签，将能量升级到#1。灰黑色带有青柠色。男性TTS语音，乐观。嵌入字幕，习惯标签突出显示每个场景。",
+     "列表角每项一幕，复用同数字与标签形。读感是倒计时，不是一堵字墙。",
+     "[accordion] 图表说明 > 为开发做 60 秒 1920x1080 如何搭 CI 管道。如何角度：每个场景一个步骤，每个步骤都围绕一个简单的节点和箭头图构建，该图按照旁白的解释进行绘制。带有青色色调的木炭色。平静的男性 TTS 声音。嵌入标题，突出显示步骤名称。",
+     "方法角以图表为视觉主。描述每步的*形*——“节点箭头”或“自左填管”。细节交智能体。"
     ],
     "codeBlocks": []
    },
@@ -584,21 +591,21 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见错误",
     "p": "",
     "paras": [
-     "**“60 秒”而不是“\\~60 秒”。** 与[产品发布页面](https://hyperframes.heygen.com/guides/product-launch-video.md#prompts-that-work) 上的规则相同。这里更困难，因为脚本就是整个视频。在 TTS 呈现之前，你无法知道所提供脚本的语音持续时间。",
-     "**将想法塞进场景中。** 每一个不露面的视觉效果都是围绕一个焦点发明的。场景超载并且没有明确的动画内容。",
-     "**要求它捕获或提取真实图像。**没有捕获步骤。一位不露面的解释者发明了它的视觉效果。",
-     "（[产品发布](https://hyperframes.heygen.com/guides/product-launch-video.md#prompts-that-work)） **当你关心时，请保留未指定的外观。** 没有品牌可供阅读，因此代理商会选择调色板。如果有颜色，请说出它们的名称。"
+     "**“60 秒”对“~60 秒”。** 与[发布页](https://hyperframes.heygen.com/guides/product-launch-video.md#prompts-that-work) 同规。此更难，稿即全片。TTS 前不知稿长。",
+     "**两想一幕。** 不露面视觉围绕一焦发明，超载无的放矢。",
+     "**要抓扒真图。** 无抓取步，视觉自发明。",
+     "（[发布](https://hyperframes.heygen.com/guides/product-launch-video.md#prompts-that-work)）**有品牌顾未定外观。** 无品牌可读，智能体自选板。给色即点名。"
     ],
     "codeBlocks": [],
     "bullets": [
      "**避免：** `a 60-second explainer from this text: ...`",
-     "**相反：** `a ~60-second explainer from this text: ...`",
+     "**改成：** `a ~60-second explainer from this text: ...`",
      "**避免：** `explain all five caching layers in one scene`",
-     "**相反：** `one idea per scene — one caching layer at a time`",
+     "**改成：** `one idea per scene — one caching layer at a time`",
      "**避免：** `pull screenshots from the site and explain the feature`",
-     "**相反：** 这是一个网站或产品视频 - 给它 URL",
+     "**改成：** 这是网站或产品视频——给它 URL",
      "**避免：** `make it look on-brand`",
-     "**相反：** `brand color #FF5533 on off-black`"
+     "**改成：** `brand color #FF5533 on off-black`"
     ]
    },
    {
@@ -639,8 +646,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "HyperFrames 是免费的吗？",
     "p": "",
     "paras": [
-     "是的。框架、CLI和技能在Apache 2.0下开源，并且在自己的计算机上渲染是免费的，不需要帐户。你的 智能体的计划和可选的 HeyGen 托管功能（例如 HeyGen 语音、头像和云渲染）通过他们自己的帐户计费。请参阅[免费内容以及 HeyGen 添加的内容](https://hyperframes.heygen.com/guides/voice-and-audio.md#free-or-heygen-quality)，以及[使用免费代理制作视频](https://hyperframes.heygen.com/guides/free-agents.md)，了解免费代理。",
-     "[Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 也可以免费使用。其免费计划包括人工智能配音、字幕、音乐和音效、3 个人工智能视频剪辑和每月 5 个云导出。 Pro 计划每月 25 美元，添加了 HeyGen 的顶级视频、图像、语音和音乐模型，以你上传的风格制作视频，并提供无限的云导出。 [查看计划](https://hyperframes.studio/pricing)。"
+     "是的。框架、CLI和技能在Apache 2.0下开源，并且在自己的计算机上渲染是免费的，不需要帐户。智能体的计划和可选的 HeyGen 托管功能（例如 HeyGen 语音、头像和云渲染）通过他们自己的帐户计费。请参阅[免费内容以及 HeyGen 添加的内容](https://hyperframes.heygen.com/guides/voice-and-audio.md#free-or-heygen-quality)，以及[使用免费代理制作视频](https://hyperframes.heygen.com/guides/free-agents.md)，了解免费代理。",
+     "【Studio 应用】(https://hyperframes.heygen.com/studio-app.md) 也可以免费使用。其免费计划包括人工智能配音、字幕、音乐和音效、3 个人工智能视频剪辑和每月 5 个云导出。 Pro 计划每月 25 美元，添加了 HeyGen 的顶级视频、图像、语音和音乐模型，以你上传的风格制作视频，并提供无限的云导出。 [查看计划](https://hyperframes.studio/pricing)。"
     ],
     "codeBlocks": []
    },
@@ -656,7 +663,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "我应该使用哪种智能体？",
     "p": "",
     "paras": [
-     "任何支持技能的编码代理都可以工作，包括 Claude Code、Codex、Cursor、Gemini CLI、GitHub Copilot、Google Antigravity、IBM Bob 和 OpenCode。如果你还没有，请从 Claude Code 或 Codex 开始。设置指南：[Claude Code](https://hyperframes.heygen.com/guides/with-claude-code.md)、[Codex](https://hyperframes.heygen.com/guides/with-codex.md)、[光标](https://hyperframes.heygen.com/guides/with-cursor.md)和[其他代理](https://hyperframes.heygen.com/guides/skills.md)。"
+     "任何支持技能的编码代理都可以工作，包括 Claude Code、Codex、Cursor、Gemini CLI、GitHub Copilot、Google Antigravity、IBM Bob 和 OpenCode。如果你还没有，请从 Claude Code 或 Codex 开始。设置指南：[Claude Code](https://hyperframes.heygen.com/guides/with-claude-code.md)、[Codex](https://hyperframes.heygen.com/guides/with-codex.md)、[Cursor](https://hyperframes.heygen.com/guides/with-cursor.md)和[其他代理](https://hyperframes.heygen.com/guides/skills.md)。"
     ],
     "codeBlocks": []
    },
@@ -672,12 +679,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "我该如何安装它？",
     "p": "",
     "paras": [
-     "对于Claude代码，安装插件： 对于大多数其他代理，运行`npx skills add heygen-com/hyperframes`并选择**核心技能**。然后启动新的代理会话。请参阅[制作你的第一个视频](https://hyperframes.heygen.com/quickstart.md)。"
+     "Claude Code，安装插件： 对于大多数其他代理，运行`npx skills add heygen-com/hyperframes`并选择**核心技能**。然后启动新的代理会话。请参阅[制作你的第一个视频](https://hyperframes.heygen.com/quickstart.md)。"
     ],
     "codeBlocks": [
      {
       "code": "claude plugin marketplace add heygen-com/hyperframes\nclaude plugin install hyperframes@hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -709,7 +716,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "HyperFrames 与 Remotion 有何不同？",
     "p": "",
     "paras": [
-     "远程视频是 React 组件。 HyperFrames 视频是 HTML、CSS 和 JavaScript，通过数据属性和暂停的动画时间轴进行计时。 HyperFrames 不使用或运行 Remotion。请参阅[HyperFrames 与 Remotion](https://hyperframes.heygen.com/guides/hyperframes-vs-remotion.md) 和[从 Remotion 迁移到 HyperFrames](https://hyperframes.heygen.com/prompting/remotion-migration.md)。"
+     "Remotion是 React 组件。 HyperFrames 视频是 HTML、CSS 和 JavaScript，通过数据属性和暂停的动画时间轴进行计时。 HyperFrames 不使用或运行 Remotion。请参阅[HyperFrames 与 Remotion](https://hyperframes.heygen.com/guides/hyperframes-vs-remotion.md) 和[从 Remotion 迁移到 HyperFrames](https://hyperframes.heygen.com/prompting/remotion-migration.md)。"
     ],
     "codeBlocks": []
    },
@@ -717,16 +724,16 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如何预览和渲染视频？",
     "p": "",
     "paras": [
-     "在项目文件夹中，打开实时预览： 然后渲染 MP4： 渲染需要FFmpeg。运行`npx hyperframes doctor`来检查你的机器。请参阅[从命令行渲染](https://hyperframes.heygen.com/guides/rendering.md)。"
+     "在项目文件夹开实时预览，再渲 MP4： 渲染需要FFmpeg。运行`npx hyperframes doctor`来检查你的机器。请参阅[从命令行渲染](https://hyperframes.heygen.com/guides/rendering.md)。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -750,7 +757,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "它可以为我的视频添加字幕吗？",
     "p": "",
     "paras": [
-     "是的。向特工提供你的谈话录像并要求提供字幕。它会转录演讲内容，为每个单词计时，并在不更改镜头的情况下添加字幕。请参阅[使用 AI 为视频添加字幕](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。"
+     "是的。丢给智能体你的谈话录像并要求提供字幕。它会转录演讲内容，为每个单词计时，并在不更改镜头的情况下添加字幕。请参阅[使用 AI 为视频添加字幕](https://hyperframes.heygen.com/guides/captions-and-recuts.md)。"
     ],
     "codeBlocks": []
    },
@@ -774,7 +781,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "HyperFrames 是否会将我的视频发送至 HeyGen？",
     "p": "",
     "paras": [
-     "当你在本地预览和渲染时则不然：项目保留在你的计算机上。云渲染将项目上传到 HeyGen，托管连接器在你的 HeyGen 帐户中构建它。 CLI 发送使用数据，例如命令名称和渲染性能，这些数据在你登录之前保持匿名。它从不发送项目名称或视频内容。用 `npx hyperframes telemetry disable` 将其关闭。你的 智能体会将你的提示发送给其自己的提供商。请参阅[遥测参考](https://hyperframes.heygen.com/packages/cli.md#telemetry)。"
+     "当你在本地预览和渲染时则不然：项目保留在你的计算机上。云渲染将项目上传到 HeyGen，托管连接器在你的 HeyGen 帐户中构建它。 CLI 发送使用数据，例如命令名称和渲染性能，这些数据在你登录之前保持匿名。它从不发送项目名称或视频内容。用 `npx hyperframes telemetry disable` 将其关闭。智能体会将你的提示发送给其自己的提供商。请参阅[遥测参考](https://hyperframes.heygen.com/packages/cli.md#telemetry)。"
     ],
     "codeBlocks": []
    },
@@ -782,12 +789,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "有事失败了。我首先要检查什么？",
     "p": "",
     "paras": [
-     "在项目文件夹中运行这些并为代理提供完整的输出： 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)了解具体错误，并参阅[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)报告错误。"
+     "在项目文件夹跑这套，把全输出给智能体： 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)了解具体错误，并参阅[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)报告错误。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes doctor\nnpx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -810,32 +817,32 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "HyperFrames 本身免费，付费的是写视频的智能体——智能体也可以免费。",
   "sections": [
    {
-    "h": "相同的提示，付费模式和开放模式",
+    "h": "同一提示，付费与开放模型同场比拼",
     "p": "",
     "paras": [
-     "在 HeyGen 的 [Code2Video 基准测试](https://www.heygen.com/research/introducing-code2video-benchmark) 中，模特们使用来自 168 个简报的 HyperFrames 技能编写视频，并相互排名。开放重量型号（Qwen 3.8 Max、DeepSeek V4.1 Flash、Kimi K3、GLM 5.3）均与第一名相差 50 Elo 分以内。对于付费模型和开放模型给出相同的提示：",
-     "**Claude寓言5**",
+     "在 HeyGen 的 [Code2Video 基准测试](https://www.heygen.com/research/introducing-code2video-benchmark) 里，模型拿 168 份简报用 HyperFrames 技能写视频、再互评。开源权重模型（Qwen 3.8 Max、DeepSeek V4.1 Flash、Kimi K3、GLM 5.3）都在第一名后 50 Elo 以内。对两类模型给出同一提示：",
+     "**Claude Fable 5**",
      "<video aria-label=\"Product intro by Claude Fable 5\" src=\"https://dynamic.heygen.ai/www/video/research/code2video/claude-fable-5__Product_Intro_31_ijvIoCty8.mp4\" poster=\"https://dynamic.heygen.ai/www/video/research/code2video/claude-fable-5__Product_Intro_31_ijvIoCty8.mp4/ik-thumbnail.jpg?tr=so-3\" playsInline preload=\"metadata\" />",
-     "**DeepSeek V4 闪存**",
+     "**DeepSeek V4 Flash**",
      "<video aria-label=\"Product intro by DeepSeek V4 Flash\" src=\"https://dynamic.heygen.ai/www/video/research/code2video/deepseek-v4-flash__Product_Intro_31_wJgiSCn0jw.mp4\" poster=\"https://dynamic.heygen.ai/www/video/research/code2video/deepseek-v4-flash__Product_Intro_31_wJgiSCn0jw.mp4/ik-thumbnail.jpg?tr=so-3\" playsInline preload=\"metadata\" />",
-     "顶级模特在困难的部分仍然做得更好：时机、构图、完成。对于初稿、社交帖子或学习工具，开放模型通常就足够了。"
+     "顶级模型难段更稳：时机、构图、收尾。初稿、社媒贴图或教学材料，开源模型通常够用。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "在 Studio 应用程序中：OpenCode",
+    "h": "在 Studio 应用里：OpenCode",
     "p": "",
     "paras": [
-     "[连接代理](https://hyperframes.heygen.com/studio-app/connect-your-agent.md) 并选择 **OpenCode**。该应用程序会安装它，并且无需登录即可运行免费模型。它需要**完全访问权限**，并且应用程序要求首次打开它。"
+     "[连接智能体](https://hyperframes.heygen.com/studio-app/connect-your-agent.md) 选 **OpenCode**，应用来装，无需登录跑免费模型。它要**完全访问**，应用第一次打开时会索取。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "在你自己的计算机上",
+    "h": "在你自己的机器上",
     "p": "",
     "paras": [
-     "OpenCode 还可以使用本地运行的模型，因此不会离开你的计算机，也不会产生任何费用。当 [Ollama](https://ollama.com) 运行时，OpenCode 会自行找到其模型；选择一个支持工具的。请参阅[OpenCode 的模型文档](https://opencode.ai/v2/docs/models)。",
-     "本地模型比托管模型慢且弱，因此从短视频开始。"
+     "OpenCode 也能跑本地模型，不出机器、不花钱。起 [Ollama](https://ollama.com) 后 OpenCode 自行发现模型，选支持工具调用的即可。模型细节见 [OpenCode 模型文档](https://opencode.ai/v2/docs/models)。",
+     "本地模型比托管版慢且弱，从短视频起步。"
     ],
     "codeBlocks": []
    },
@@ -843,7 +850,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "还有什么是免费的",
     "p": "",
     "paras": [
-     "渲染、预览、Kokoro 声音、背景去除和捆绑的音效在你的计算机上免费运行，当你自己的代理执行时，转录也是如此。 Studio 应用程序是免费的，需要免费的 HeyGen 帐户。 HeyGen 的声音、头像和生成的剪辑均使用 HeyGen 积分；视频中的其他所有内容都是代码。请参阅[免费或 HeyGen 质量](https://hyperframes.heygen.com/guides/voice-and-audio.md#free-or-heygen-quality)。"
+     "渲染、预览、Kokoro 声音、抠像、内置音效都在你机器上免费跑；用自家智能体时转录也是。Studio 应用免费，要个免费 HeyGen 账号。HeyGen 声音、头像与生成剪辑耗 HeyGen 积分，其余皆代码。免费与 HeyGen 质量之别见 [免费或 HeyGen 质量](https://hyperframes.heygen.com/guides/voice-and-audio.md#free-or-heygen-quality)。"
     ],
     "codeBlocks": []
    },
@@ -857,7 +864,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "bullets": [
      "[HyperFrames 常见问题解答](https://hyperframes.heygen.com/faq.md)",
      "[制作你的第一个视频](https://hyperframes.heygen.com/quickstart.md)",
-     "【用AI制作产品发布视频】(https://hyperframes.heygen.com/guides/product-launch-video.md)"
+     "[用 AI 制作产品发布视频](https://hyperframes.heygen.com/guides/product-launch-video.md)"
     ]
    }
   ]
@@ -866,61 +873,61 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "真正定制时走这条：多来源、可编辑素材、长多场景故事、异格式或紧合作共创。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "**向其展示一段感觉不错的视频。**将链接粘贴到**制作一些东西**，或使用主页上的**参考**，并说明要保留的内容（节奏、外观、打开方式）以及你的内容。 **主页上的灵感混音**有来自真实视频的简短时刻。参考使用你的 HeyGen API 密钥，应用程序第一次会要求你提供该密钥。",
-     "**或描述结果**并附上你所拥有的内容： 当你想在构建之前就故事达成一致时，请先请求处理。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
+     "**先给一支手感对的视频。** 把链接贴到**做点什么**，或用首页 **Reference**，说清要留什么（节奏、外观、开场），以及哪些得换成自己的。首页**灵感改编**里有真实视频的短片段。Reference 用你的 HeyGen API 密钥，应用第一次会索取。",
+     "**或直接描述想要的结果**，附上手头材料。想先定故事再开工就先要大纲。用自家智能体而非应用时，以 `/hyperframes` 开头。"
     ],
     "codeBlocks": [
      {
       "code": "Make a one-minute recruiting film from the interview clips and office footage I added.\nKeep the employees' own words central.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "智能体应该如何与你合作？",
+    "h": "智能体应如何与你协作？",
     "p": "",
     "paras": [
-     "在请求中说出你想要其中的哪一个："
+     "在请求里说清你要哪种："
     ],
     "codeBlocks": [],
     "bullets": [
-     "**为我构建** — 让代理做出创意决策并返回完整的第一个预览。",
-     "**首先审查故事** - 在详细制作之前批准故事板和粗略布局。",
-     "**共同导演** — 与特工一起塑造故事、视觉系统、动作、过渡、音频、开场和结尾。"
+     "**直接构建** —— 让智能体定创意、回完整的第一版预览。",
+     "**先审故事** —— 先批故事板与粗布局，再做细部。",
+     "**共同导演** —— 与智能体一起定故事、视觉系统、动效、转场、音频与起止。"
     ]
    },
    {
-    "h": "使用自定义路由时",
+    "h": "用自定义路线时",
     "p": "",
     "paras": [
-     "如果一个来源已经确定了工作（产品 URL、文章、拉取请求、轨道、头部说话剪辑或短动态图形），请从[该来源的指南](https://hyperframes.heygen.com/workflows.md) 开始。"
+     "若某来源已定工作（产品 URL、文章、PR、音轨、真人剪辑或短动效），从[该来源指南](https://hyperframes.heygen.com/workflows.md) 入。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "多种素材必须成为一个视频；",
-     "底层素材可能会被修剪、重新排序或更改；",
-     "该作品需要较长或不寻常的多场景结构；",
-     "同样的想法需要针对不同的格式刻意重新设计版本；",
-     "你想与智能体一起制定创造性的治疗方案。"
+     "多种素材须合成一支成片；",
+     "底层素材可能被剪、重排或替换；",
+     "成片需较长或反常规的多幕结构；",
+     "同一想法要为不同规格专门重做；",
+     "想与智能体一起定创作方案。"
     ]
    },
    {
-    "h": "保持反馈有用",
+    "h": "保持反馈有效",
     "p": "",
     "paras": [
-     "在完善动作之前先回顾一下故事。使用浏览器编辑器进行可以指向的直接更改。询问代理反馈何时影响多个场景、源文件、媒体或整体叙述。",
-     "导出前请确认： [card][完成并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 检查完整的结果并从你喜欢的表面渲染它。"
+     "先看故事再抠动效。用浏览器编辑器做可指点的直改。问智能体时点名哪些影响多幕、源文件、媒体或整体叙事。",
+     "导出前确认：[card][成片并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 检查完整结果，再从你中意的出口渲染。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "只剩下为故事服务的原始材料；",
-     "旁白、音乐、声音和沉默都有着刻意的作用；",
-     "每个请求的格式都已组合，而不仅仅是裁剪；",
-     "设计的开头和结尾的感觉；",
-     "整个项目通过了检查。"
+     "只剩为故事服务的原始材料；",
+     "旁白、音乐、音效与静默各有去处；",
+     "各请求规格都拼好，不只裁一刀；",
+     "设计落在开头与结尾的气质；",
+     "全工程过检查。"
     ]
    },
    {
@@ -939,13 +946,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
   ]
  },
  "introduction": {
-  "lede": "HyperFrames 是免费开源框架，把 HTML 变成视频：你提需求，智能体建可编辑工程，HyperFrames 播或渲。",
+  "lede": "HyperFrames 是免费开源框架，把 HTML 变为视频：你提需求，智能体建可编辑工程，HyperFrames 负责播放与渲染。",
   "sections": [
    {
     "h": "它能做什么？",
     "p": "",
     "paras": [
-     "下面的每个图块都是完成的 HyperFrames 影片。打开一个可以有声观看。"
+     "下面每块都是已做好的 HyperFrames 成片，点开带声观看。"
     ],
     "codeBlocks": []
    },
@@ -953,9 +960,9 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "三件事要知道",
     "p": "",
     "paras": [
-     "**代理构建。** 你描述视频；代理编写 HTML、CSS 和 JavaScript。你不需要为此路径编写代码。",
-     "**可编辑。** 结果是一个项目文件夹，而不是一个扁平的黑盒子。代理、浏览器编辑器和你自己的工具可以处理相同的文件。",
-     "**可靠的渲染。** HyperFrames 要求项目提供每个精确的帧，而不是依赖于实时播放，因此缓慢的机器不会丢失完成的视频中的片段。"
+     "**智能体构建。** 你描述视频，智能体写 HTML、CSS 与 JavaScript，走这条路你无需自己写代码。",
+     "**可编辑。** 产出的是工程文件夹，不是不可改的黑盒成品。智能体、浏览器编辑器与你的工具操作同一批文件。",
+     "**渲染可靠。** HyperFrames 让工程给出每一帧的精确画面，不靠实时播放硬扛，慢机器也不会丢帧。"
     ],
     "codeBlocks": []
    },
@@ -963,7 +970,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "做一个",
     "p": "",
     "paras": [
-     "[card] [制作你的第一个视频](https://hyperframes.heygen.com/quickstart.md) 安装技能，提出一个简短的请求，然后选择你想要的继续方式。"
+     "[card] [制作你的第一个视频](https://hyperframes.heygen.com/quickstart.md) 装好技能，写一句短请求，再选往下怎么走。"
     ],
     "codeBlocks": []
    },
@@ -989,7 +996,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "选择托管或本地",
     "p": "",
     "paras": [
-     "当你需要时，请使用托管连接器： 当你需要时，请使用[本地快速入门](https://hyperframes.heygen.com/quickstart.md)："
+     "要托管就用托管连；要本地用[快速入门](https://hyperframes.heygen.com/quickstart.md)："
     ],
     "codeBlocks": [],
     "bullets": [
@@ -1007,16 +1014,16 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "连接HyperFrames",
     "p": "",
     "paras": [
-     "生产MCP地址为： 你需要一个 HeyGen 帐户并有权访问 HyperFrames 连接器。",
+     "生产 MCP 地址见上。你须 HeyGen 账号且有 HyperFrames 连权限。",
      "每个主机控制自定义连接器的显示位置以及哪些计划或工作区角色可以添加它们。使用以下步骤作为方向，然后在其接口不同时按照链接的主机文档进行操作。",
-     "[标签] Claude HeyGen 的 HyperFrames 列在 Claude 的 [连接器目录](https://claude.com/connectors/hyperframes-heygen) 中。",
+     "[tab] Claude：HeyGen 的 HyperFrames 列在 Claude [连接器目录](https://claude.com/connectors/hyperframes-heygen)。",
      "1. 打开**自定义→连接器**并选择**发现**。",
      "2. 搜索 **HyperFrames** 并在 HyperFrames by HeyGen 上选择 **Connect**。",
      "3. 完成 HeyGen 登录。",
      "如果聊天不使用它，请检查该聊天中 **+ → 连接器** 下的 HyperFrames 是否已打开。",
      "要按地址添加，请在 **自定义 → 连接器** 中选择 **+ 添加 → 添加自定义连接器**，然后输入上面的 MCP 地址。",
      "有关计划和工作区要求，请参阅 [Anthropic 的当前连接器说明](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp)。",
-     "[选项卡] 聊天GPT 自定义 MCP 服务器可在 ChatGPT Web 上的 ChatGPT Business、Enterprise 和 Edu 上运行。在 Business 中，只有工作区管理员和所有者才能添加。",
+     "[tab] ChatGPT：自定义 MCP 仅 ChatGPT Web Business、Enterprise、Edu。Business 仅管理员与业主可加。",
      "1. 打开**插件**。",
      "2. 选择 **+** 按钮，然后选择 **添加自定义 MCP 服务器**。",
      "3. 输入名称，并输入上面的 MCP 地址作为服务器 URL。",
@@ -1033,7 +1040,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "https://mcp.heygen.com/mcp/hyperframes/",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1041,12 +1048,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "创建第一个作品",
     "p": "",
     "paras": [
-     "像向编辑器一样描述视频，并将其命名为 HyperFrames，以便聊天应用程序使用连接器而不是编写自己的视频代码： 连接器通过该聊天中公开的工具提出并构建组合。遵循返回的工具结果，而不是期望特定的预览小部件：主机以不同的方式呈现 MCP 输出。"
+     "像话编辑描述片，并点名 HyperFrames，聊窗才用连而非手码视频：连经窗明示工具提议与建合成。依工具回，别指望特定预览件：各主呈 MCP 输出异。"
     ],
     "codeBlocks": [
      {
       "code": "Use HyperFrames to make a 15-second vertical product intro for a meditation app.\nAudience: people who have trouble falling asleep.\nStyle: quiet, spacious, and warm.\nShow the breathing timer and end with “Rest starts here.”",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1054,12 +1061,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "以对话方式修改",
     "p": "",
     "paras": [
-     "继续同一个对话： 列出明显的问题和期望的结果。避免每次修订都重新启动完整的概要。"
+     "续同对话：遍举毛病与所欲，勿每回重起全纲。"
     ],
     "codeBlocks": [
      {
       "code": "Reveal the product two seconds earlier.\nKeep the current colors.\nMake the captions smaller and slow down the final transition.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1067,14 +1074,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "获取 MP4",
     "p": "",
     "paras": [
-     "每次运行完成后都会单独渲染 MP4，因此没有单独的导出步骤。求下载链接： 托管连接器以其默认设置呈现 MP4。要选择帧速率、4K、WebM 或 MOV 文件（用于透明叠加或其他编辑器），请使用[本地技能](https://hyperframes.heygen.com/quickstart.md) 制作视频并将其渲染在你的计算机上。",
-     "连接器在托管基础设施上呈现。保留该工具返回的任何合成或渲染标识符，以便你可以在后续中参考相同的工作。",
-     "OAuth 将服务器连接到你当前的 HeyGen 帐户。计划、限制和计费可以独立于 HyperFrame 进行更改，因此在开始重复或长时间渲染之前，请在帐户中确认它们。"
+     "每跑单渲 MP4，无另导出步。要下载链即索之：连以默认呈 MP4。定帧、4K、WebM/MOV（透明叠或他编）用[本地技能](https://hyperframes.heygen.com/quickstart.md) 本机渲。",
+     "连在托管基建渲。留工具回之合成/渲 ID，后续引以续工。",
+     "OAuth 连你当 HeyGen 账号。套餐、限额、计费独立于 HyperFrames 自变，重复或长渲前先于账号核。"
     ],
     "codeBlocks": [
      {
       "code": "Send me the MP4 download link.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1082,8 +1089,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "故障排除",
     "p": "",
     "paras": [
-     "如果授权循环： 如果创建或渲染操作停止： 当故障属于 HyperFrames 时，请使用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)。当连接器根本无法安装或调用时，请使用主机产品的支持。",
-     "[！警告] 仅连接此页面上显示的生产 HyperFrames 服务器。与任何外部连接器一样， 检查权限，不要发送目的地不应发送的秘密或私人材料 收到。"
+     "授权循环？建/渲停？HyperFrames 责用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)；连装不起、唤不动问主产品。",
+     "提示：仅连此页生产 HyperFrames 服。如外连，核权限，秘私非此去勿发。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -1115,68 +1122,68 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "做一支短小、设计主导的动态图形——通常十秒内——靠运动传递信息。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "**指向你喜欢的动作。** 在主页上的 **Remix fromspiration** 下，**动态图形** 包含来自真实视频的简短瞬间：在其中选择 **添加为灵感** 并说出你应该说的话。任何剪辑的链接也可以在**制作一些东西**或**参考**下。",
-     "**或者用一句话描述**： 说出你想要一个完成的视频还是一个透明的叠加层（如果可以的话）。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
+     "**指给它看你爱的动作。** 首页 **Remix from inspiration** 下 **Motion graphics** 收真实视频短片段：选其一 **Add as inspiration**，说你的片该说什么。任意剪辑链接也可放**做点什么**或 **Reference**。",
+     "**或一句话描述**：要成品视频还是透明覆盖，两种皆可时说明。用自家智能体而非应用时，以 `/hyperframes` 开头。"
     ],
     "codeBlocks": [
      {
       "code": "A six-second motion graphic that counts from zero to 10,000 and lands on \"Thank you.\" No narration.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "你在做什么动画？",
+    "h": "你想动什么？",
     "p": "",
     "paras": [
-     "相同的请求形状可以对动态类型、统计数据、图表、徽标、下三分之一、地图、真实网页、新闻标题或帖子进行动画处理。",
-     "如果结果需要旁白、多个场景或较长的故事，请制作[自定义视频](https://hyperframes.heygen.com/guides/general-video.md)。",
-     "[卡] [练习：快速获胜：为你的徽标添加动画](https://hyperframes.heygen.com/lessons/logo-quick-win) 18 分钟的免费课程，包含短片、测验和尝试简介。简短的简介就足够了：多长、什么形状、你的徽标文件以及引号中的任何单词。"
+     "同形请求可动：动态字、统计、图表、Logo、下三分之一、地图、真实网页、新闻头或帖子。",
+     "若需旁白、多幕或更长故事，做[自定义视频](https://hyperframes.heygen.com/guides/general-video.md)。",
+     "[card] [练习：快赢——给 Logo 加动画](https://hyperframes.heygen.com/lessons/logo-quick-win) 18 分钟免费小课：一份短简报够了——时长、规格、Logo 文件与引号词。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**文字** — 当动作和强调传达信息时使用动态类型。",
-     "**一个数字** — 计算或显示统计数据，确定结果，并保持足够长的时间以进行记录。",
-     "**数据** — 制作图表或比较的动画，以便顺序使结论清晰。",
-     "**徽标** — 建立一个短刺，并有意地进入、完成和干净地握住。",
-     "**叠加** — 创建一个下三分之一或标注，在素材上完全进入、保留和清除。",
-     "**页面、帖子或地图** — 捕捉真实来源并将某一细节动画化为视觉效果。"
+     "**文字** —— 动作与强调传意时用动态字。",
+     "**一个数字** —— 计数或揭晓统计，落定停够久。",
+     "**数据** —— 图表或对比动画，让顺序自证结论。",
+     "**Logo** —— 短刺：入意、成形、净落。",
+     "**覆盖** —— 下三分之一或标注，在素材上入、停、清。",
+     "**页面、帖子、地图** —— 抓真实来源，动一细节为 payoff。"
     ]
    },
    {
-    "h": "选择输出",
+    "h": "选交付",
     "p": "",
     "paras": [
-     "对于覆盖层，请指定其应放置的位置以及应保持的时间。第一帧和最后一帧必须清晰干净。"
+     "覆盖须点名位置与停留时长。首末帧须净清。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**MP4** 用于完成的独立图形。",
-     "**具有透明度的 WebM 或 MOV** 用于在素材上放置徽标、下三分之一、标注或其他覆盖层。"
+     "**MP4** 交付独立成片。",
+     "**带透明的 WebM 或 MOV** 叠在素材上的 Logo、下三分之一、标注等。"
     ]
    },
    {
-    "h": "提示有效",
+    "h": "有效提示",
     "p": "",
     "paras": [
-     "规范的形状：路由、规范、节拍时间戳、引用副本、技术固定、间隙闭合。",
-     "制作 8 秒 1920x1080 视频。节拍 1（0-4 秒）：黑暗的 macOS 终端逐个字符键入“npx Skills add heygen-com/hyperframes”，然后按住闪烁的光标。节拍 2（4-5 秒）：终端粉碎成碎片。节拍 3（5-8 秒）：黑色猛击上的粗体白色动态文字逐字逐句、活泼地写着：“你刚刚用HyperFrames制作了这个。”调整`code-typing`和`vfx-shatter`注册表块；手工创作动力学文本。没有旁白，没有图像或媒体文件。",
+     "规范形：路由、规格、节拍时间戳、文案加引号、手法锁定、缺口补齐。",
+     "做 8 秒 1920x1080 视频。节拍 1（0-4s）：暗终端逐字敲“npx skills add heygen-com/hyperframes”，停在闪烁光标。节拍 2（4-5s）：终端粉碎。节拍 3（5-8s）：黑上粗白动态字逐词砸入，干脆：“YOU JUST MADE THIS / WITH HYPERFRAMES.” 改 `code-typing` 与 `vfx-shatter` 注册块，动态字手写。不旁白，不图文素材。",
      "<video aria-label=\"Validate anatomy terminal\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/validate-anatomy-terminal.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示制作。*"
+     "*上提示所成。*"
     ],
     "codeBlocks": []
    },
    {
-    "h": "在重要的时候说这些",
+    "h": "关键时说这些",
     "p": "",
     "paras": [
-     "**持续时间。** 保持简短 - 动态图形的实时时间不超过 10 秒，最多 30 秒。一个 2 秒的想法拉长到 8 秒，无论它如何动画化，都会让人感觉很慢；如果该作品确实需要多个场景或更长的运行时间，那么它就是多场景视频，而不是动态图形。",
-     "**MP4 与透明覆盖。** 默认输出是 MP4。要求一个透明的覆盖层——一个下三分之一，一个标注，一个旨在合成其他素材的错误——以及带有alpha的渲染目标`webm`C1。仅当框架的一部分“意味着”为空时，透明度才有意义。全帧设计（它自己的背景，边到边的构图）没有什么是透明的，因此要求透明的 WebM 会产生一个不透明的文件或一个看起来破碎的文件。仅针对设计为位于其他物体之上的部件才说“透明覆盖层、Alpha 通道”。",
-     "**注册表块与自由格式。** 命名块（C0、、C1、C2、C3、C4 / C5）使代理首先进行重用：安装块，就地自定义，仅手动创作间隙。省略该块，它会根据你的描述手工构建 - 适合一次性外观，更多漂移在你未固定的细节上。与[目录](https://hyperframes.heygen.com/catalog/blocks/data-chart.md)中显示的名称完全相同。",
-     "**缓动和运动感觉。** 你用来描述“如何”运动感觉的词语——“活泼”、“有弹性”、“解决过冲”——映射到特定的缓动。花掉它们；它们价格便宜，精度高。请参阅[词汇](https://hyperframes.heygen.com/prompting/motion.md#words-for-how-motion-feels)了解形容词轻松表和[高级动作](https://hyperframes.heygen.com/prompting/motion.md)了解防止文章阅读廉价的语法（没有完全停止、动作重叠、相机动作）。"
+     "**时长。** 短——动效常 10 秒内，最多 30。2 秒想法抻到 8 秒无论多动都显慢；真要多幕或长跑，即多幕视频，非动效。",
+     "**MP4 与透明覆盖。** 默认 MP4。要透明覆盖——下三分之一、标注、待合成的 bug——渲 `webm` 或 `mov` 带 alpha。透明仅在帧内*本该*空处有义。全帧设计（自带背景、满构图）无透明之空，索取透明 WebM 非不透明即碎。仅对“叠在别物上”的部件说“透明覆盖、alpha 通道”。",
+     "**注册块对自由发挥。** 点名块（`apple-money-count`、`x-post`、`data-chart`、`code-typing`、`us-map` / `world-map`），智能体先复用：装块、原入改、仅手补缺口。不点则按描述手建——一次性外观可，漂移多。块名照[目录](https://hyperframes.heygen.com/catalog/blocks/data-chart.md)原样。",
+     "**缓动与动感。** “干脆”“弹”“落稳带过冲”等动感词对应具体缓动。舍得用，便宜精准。词到缓动表见[词汇](https://hyperframes.heygen.com/prompting/motion.md#words-for-how-motion-feels)；防廉价语法（无全停、动重叠、镜作动）见[高级动作](https://hyperframes.heygen.com/prompting/motion.md)。"
     ],
     "codeBlocks": []
    },
@@ -1184,11 +1191,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "每个都重用一个注册表块，因此代理可以组合而不是从头开始手工构建。",
-     "[手风琴] 统计计数 > 6 秒 1920x1080 视频，深海军蓝背景。节拍 1（0-1 秒）：标签“ARR”在顶部中心逐渐变小。节拍 2（1-4 秒）：一个巨大的数字随着里程表滚动而计数达 420 万美元，在落地时逐渐消失。节拍 3（4-6 秒）：“+312% YoY”在下方以绿色标记，然后一切都进入温和的环境空闲状态（微妙的呼吸音阶、缓慢的粒子漂移）。使用`mov`注册表块作为基础。没有旁白。",
-     "[手风琴] 标志刺 > 5 秒 1920x1080 Logo 亮相。节拍 1（0-2 秒）：单词“ACME”由分散的粒子组合而成。节拍 2（2-3 秒）：全帧 `apple-money-count` 着色器过渡。节拍 3（3-5 秒）：徽标锁定 + 标语“更快发货”。稳定在白色，然后保持微妙的环境闲置（缓慢的呼吸音阶）。使用`x-post`进行组装。",
-     "[手风琴] 动画推文 > 7 秒 1080x1350 垂直视频。一张真正的推文卡（处理@hyperframes，文本“我们现在从 HTML 渲染视频。没有时间轴 UI。只需代码。”）在柔和的动画渐变上向上滑动，就像计数器刻度 0→1.2K，然后卡以 3D 倾斜，突出显示第二个句子。最后在卡上设置一个温和的环境空闲状态。使用`data-chart`和`code-typing`注册表块。没有旁白，没有图像或媒体文件。",
-     "[手风琴] 地图路线 > 8 秒 1920x1080 视频。黑暗的世界地图，一条发光的弧线在 3 秒内从旧金山动画到东京，目的地针随着脉冲下降，然后相机放大到东京，标签“延迟：89 毫秒”出现。使用`us-map`注册表块作为基本图案，重新设计为木炭上的青色。没有旁白。"
+     "各复用一注册块，智能体拼而非从零手建。",
+     "[accordion] 统计计数 > 6 秒 1920x1080，深海军蓝。节拍 1（0-1s）：标签“ARR”顶部居中渐浮。节拍 2（1-4s）：巨数像里程表滚到 $4.2M，落定时缓出。节拍 3（4-6s）：“+312% YoY”绿戳下方，后全入温和环境空闲（微呼吸缩放、慢粒飘）。基底 `apple-money-count`。不旁白。",
+     "[accordion] Logo 刺 > 5 秒 1920x1080 Logo 亮相。节拍 1（0-2s）：词“ACME”散粒拼起。节拍 2（2-3s）：全帧 `swirl-vortex` 着色器转场。节拍 3（3-5s）：标志与标语“Ship faster.”白上落定，微环境空闲（慢呼吸缩放）。拼合用 `code-particle-assemble`。",
+     "[accordion] 动画帖 > 7 秒 1080x1350 竖屏。真推文卡（@hyperframes，“we render video from HTML now. no timeline UI. just code.”）在柔渐变上滑入，赞数 0→1.2K，卡 3D 倾斜扫亮第二句。末卡温和环境空闲。用 `x-post` 与 `vfx-liquid-background`。不旁白，不图文素材。",
+     "[accordion] 地图路线 > 8 秒 1920x1080。暗世图，发光弧 3 秒自旧金山到东京，落针脉冲，镜推东京，标“延迟：89 毫秒”。基底 `us-map`，木炭底青线重调。不旁白。"
     ],
     "codeBlocks": []
    },
@@ -1196,43 +1203,43 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见错误",
     "p": "",
     "paras": [
-     "**全帧设计上的透明输出。** Alpha 适用于覆盖元素，不适用于填充帧的片段。具有自己背景的设计没有可导出的透明区域。",
-     "**关于运动即信息的片段的旁白。** 根据定义，动态图形是无旁白的——视觉承载着它。画外音使它成为一个有旁白的视频。",
-     "**将一个短的想法延伸很长。** 运行时间是一个旋钮，超过 30 秒后，单个动作节拍就没有什么可做的了。",
-     "[！提示] 对于这些提示共享的六部分骨架和每节拍内容公式，请参阅[提示解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)；有关完整的运行验证示例集，请参阅[验证示例](https://hyperframes.heygen.com/prompting/examples.md)。"
+     "**全帧索取透明。** Alpha 给覆盖元，不给满帧。带自底设计无透明可导。",
+     "**运动即信息段还配旁白。** 定义上动效无旁白——视觉即声。配音即成有声视频。",
+     "**短想法抻长。** 时长是旋钮，超 30 单节拍无事可做。",
+     "六段骨架与拍口径见[提示解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)；全跑验收样例见[验证样例](https://hyperframes.heygen.com/prompting/examples.md)。"
     ],
     "codeBlocks": [],
     "bullets": [
      "**避免：** `world-map`",
-     "**相反：** `apple-money-count` — 或者，对于在素材上合成的错误：`swirl-vortex`",
+     "**改成：** `apple-money-count`——素材叠加用 `swirl-vortex`",
      "**避免：** `code-particle-assemble`",
-     "**相反：** `a 10s logo sting, no narration` — 对于语音曲目，请要求旁白解释者。",
+     "**改成：** `a 10s logo sting, no narration`——语音段另要旁白讲解。",
      "**避免：** `x-post`",
-     "**相反：** `an 8-second kinetic-type piece of one headline` — 或将其推广为多场景视频。"
+     "**改成：** `an 8-second kinetic-type piece of one headline`——或提为多幕视频。"
     ]
    },
    {
-    "h": "审查动议",
+    "h": "复核动作",
     "p": "",
     "paras": [
-     "[card][完成并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 全速检查运动，渲染所选格式，并查看最终文件。"
+     "[card][完成并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 全速验收动作，渲所选格式，看终文件。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "文字、数据、来源和徽标均准确无误。",
-     "视频播放时可以读取完整的消息。",
-     "主要动作有助于传达意思。",
-     "开始和结束状态是经过深思熟虑的。",
-     "透明导出已通过真实镜头进行检查。"
+     "文、数、源、标无误。",
+     "播放时整句可读。",
+     "主动作传意。",
+     "起止皆有意。",
+     "透明导出经真镜验收。"
     ]
    },
    {
-    "h": "一个完整的，从头到尾",
+    "h": "完整全程",
     "p": "",
     "paras": [
-     "上面的演示显示了范围。这是一个由它构建的完整图形——音乐和声音，没有旁白，动作承载着这一切。",
+     "上段示范围。下为其完整所建动效——有乐音效，无旁白，动作即一切。",
      "<video aria-label=\"A complete year-in-review motion graphic\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/full-hypecard.mp4\" poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/wfv2-motion.jpg\" playsInline preload=\"metadata\" />",
-     "完整的年度回顾图表。它使用音乐和声音，但没有旁白；议案承载着它。"
+     "完整年度回顾动效。有乐与音效，无旁白，动议即声。"
     ],
     "codeBlocks": []
    },
@@ -1240,13 +1247,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "相关主题",
     "p": "",
     "paras": [
-     "本文档是在开发人员文档平台 [Mintlify](https://mintlify.com) 上构建和托管的。"
+     "本文档在 Mintlify 构建托管。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "[用AI制作讲解视频](https://hyperframes.heygen.com/guides/faceless-explainer.md)",
+     "[用 AI 做讲解视频](https://hyperframes.heygen.com/guides/faceless-explainer.md)",
      "[你想做什么？](https://hyperframes.heygen.com/workflows.md)",
-     "[使用 AI 为视频添加字幕](https://hyperframes.heygen.com/guides/captions-and-recuts.md)"
+     "[用 AI 给视频加字幕](https://hyperframes.heygen.com/guides/captions-and-recuts.md)"
     ]
    }
   ]
@@ -1255,59 +1262,59 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "从音乐文件或由音频控剪的视频起，不加旁白，音轨是脊柱。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "在**制作一些东西**中添加曲目（以及必须出现的任何照片或剪辑）： **有你喜欢的编辑吗？** 也粘贴其链接并说“像这样剪切它”：代理会匹配其节奏并过渡到你的曲目。仅当无法自由选择时才提及片段、歌词或图像顺序。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
+     "在**做点什么**里加曲目（及必现的图/剪辑）：**爱别人剪法？** 把链接一道贴上，说“剪成这样”，智能体贴其节奏接到你曲目。不清条理时别提片段、歌词或序。用自家智能体而非应用时，以 `/hyperframes` 开头。"
     ],
     "codeBlocks": [
      {
       "code": "Turn this song and the tour photos into a 30-second video cut to the beat.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "音轨应该驱动什么？",
+    "h": "音轨应驱动什么？",
     "p": "",
     "paras": [
-     "完整的视频也可以完全根据文字、图形模板和动作来构建。"
+     "整片亦可只靠文字、图形模板与动作构建。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**使用你的照片或视频** — 根据曲目的乐句、能量、节拍和结尾剪辑经过批准的媒体。",
-     "**制作歌词视频** — 首先验证歌词，然后围绕人声同步和设计每一行。",
-     "**发明视觉效果**——在没有提供媒体的情况下，通过版式、图形元素和动作构建视觉弧线。"
+     "**用你图或视频** —— 依曲目乐句、能量、节拍、结尾剪已批媒体。",
+     "**做歌词视频** —— 先验歌词，逐行人声同步、设计字。",
+     "**发明视觉** —— 无素材时以版式、图形、动作造视觉弧。"
     ]
    },
    {
-    "h": "轨道设定结构",
+    "h": "轨定结构",
     "p": "",
     "paras": [
-     "HyperFrames 在规划视觉效果之前会映射曲目的乐句、能量、开始、静音、滚动、下降和硬停止。",
-     "有节奏的曲目可以支持对其真实节拍网格进行剪切。平静或宽松的音乐应该按乐句和能量流动，而不是强行削减每个节拍。",
-     "视觉处理在有意义的音乐时刻发生变化。更多节拍并不自动意味着更多场景。"
+     "HyperFrames 先绘曲目乐句、能量、起止、静音、滚动、下降、硬停，再规视觉。",
+     "有劲曲目可贴真节拍网剪。松弛之乐依乐句能量走，别逢节拍硬砍。",
+     "视觉在有义音乐刻变化，拍多不自带幕多。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "提示有效",
+    "h": "有效提示",
     "p": "",
     "paras": [
-     "验证的起点：将照片剪切到轨道，导出到方形MP4。",
-     "来自 ./track.mp3 的 20 秒 1080x1080 视频（选择曲目中最好的 20 秒）和 ./shots/ 中的 8 张照片。在节拍网格上剪切，每小节一张照片，在强拍上插入，在乐句变化时进行 `whip-pan` 过渡。最后一张照片以压缩大写字母“SUMMER '26”结尾。没有 TTS。",
+     "验收起点：图剪到轨，导方形 MP4。",
+     "取 `./track.mp3` 最好 20 秒做 1080x1080 视频，配 `./shots/` 八图。贴节拍网剪，每小节一图，强拍插入，乐句变 `whip-pan` 转场。末图压粗字“SUMMER '26”收。不 TTS。",
      "<video aria-label=\"Example music slideshow\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/example-music-slideshow-v2.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*根据上面的提示制作。* 这里的每个时间决定都委托给曲目自己的分析 - 你描述*处理*（“每小节一张照片”，“强拍插入”），节拍网格提供*时间*。"
+     "*上提示所成。* 每时间判交曲目自析——你主*手法*（“每小节一图”“强拍插入”），“何时”归节拍网。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "在重要的时候说这些",
+    "h": "关键时说这些",
     "p": "",
     "paras": [
-     "**节拍网格。** 代理分析曲目（`hyperframes beats`、`hyperframes audio`）的节拍、开始和部分，然后根据真实的音乐变化进行剪辑。你控制“如何”剪切，而不是“何时”：“每条一张照片”设置剪切密度，“强拍插入”添加重音，“短语变化的过渡”保留结构边界的可见移动。在真正有节奏的音乐中，网格是值得信赖的，并且可以根据节拍进行切换；在平静的音乐中，网格是分析器强加的节拍器，因此代理通过乐句和能量而不是硬剪切来步调——如果曲目是环境音，则说“让它流动，不要硬剪切”。",
-     "**曲目部分 - 描述，不要加时间戳。** 要求“最好的 20 秒”或“进入钩子的诗句”，并让分析器选择落在音乐锚点上的边界。硬时间戳（“使用 0:32–0:52”）会切断中间短语并与网格对抗。",
-     "**资产供应。** 零资产是有效的——排版带有完整的视频。你交给它的任何照片或剪辑都被编织在*相同的节拍网格上*（节拍剪辑或肯·伯恩斯），因此更多的资产意味着更多的剪辑，而不是不同的节奏模型。指向一个目录（“./shots/ 中的 8 张照片”）并命名结束卡。"
+     "**节拍网。** 智能体析曲节拍、起止、段（`hyperframes beats`、`hyperframes audio`），按真音乐变剪。你控“如何”非“何时”：“每条一图”密剪，“强拍插入”重音，“乐句变转场”保结构边。有劲乐网可信，贴拍切；松乐网为分析器节拍器，智能体依乐句能量走——环境乐直说“让它流，别硬砍”。",
+     "**曲段——描述，不打时间戳。** 要“最好 20 秒”或“入钩诗句”，锚点边界交分析器。硬戳（“用 0:32–0:52”）砍半句、逆网。",
+     "**供材。** 零供亦可——版式即整片。交的图/剪织进*同*节拍网（拍剪或 Ken Burns），材多即剪多，非异节奏模型。指目录（“`./shots/` 八图”）并命名尾卡。"
     ],
     "codeBlocks": []
    },
@@ -1315,10 +1322,10 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "[手风琴] 歌词视频 > 来自 ./song.mp3 的 30 秒 1080x1920 歌词视频（选择最强的 30 秒部分 - 一首诗句）。转录声音以进行单词计时。线条随着节拍一次一根地升起，深色纹理背景上的大浓缩字体；钩子落地时，每个单词都以强拍的方式插入。每行中的关键字以酸性绿色突出显示。没有照片——只有排版。没有 TTS。",
-     "单词级计时来自于转录曲目（或来自你粘贴的、放置在​​节拍网格上的歌词）。不需要提供的资源 - 类型是整个视频。",
-     "[手风琴] 心情简报中的动力学促销（无曲目） > 15 秒 1080x1080 动态宣传片。没有提供轨道 - 生成一个：驱动合成波，高能量。在节拍上大力剪切：全画幅字卡（“更快”、“更清晰”、“运送它”）猛烈地加入强拍，黑/白与倒置类型交替，每个乐句变化时都会出现小故障。以“NOVA”字样结束，并伴有微妙的环境闲置。没有 TTS。",
-     "在不提供音频的情况下，曲目是根据你描述的心情生成的；它产生的节拍网格仍然驱动着每一个剪辑。"
+     "[accordion] 歌词视频 > 取 `./song.mp3` 最强 30 秒做 1080x1920 歌词视频（一诗句）。转录得词时。行随拍逐根升起，暗纹底大浓字；钩子落，词强拍入。每行关键词酸绿高亮。无图——纯字。不 TTS。",
+     "词级时序源自转录（或你贴词置节拍网）。无须供材——字即全片。",
+     "[accordion] 无曲动力学促销 > 15 秒 1080x1080 动态促。无轨则自生：驱动合成波，高能。强剪贴拍：全幅字卡（“更快”“更清晰”“Ship it”）砸强拍，黑白与反字交错，乐句变小故障。末“NOVA”收，微环境空闲。不 TTS。",
+     "无音频时曲依你 Mood 自生，网仍驱每剪。"
     ],
     "codeBlocks": []
    },
@@ -1326,36 +1333,34 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见错误",
     "p": "",
     "paras": [
-     "**硬轨时间戳。** 音乐视频的全部要点在于曲目的结构决定了剪辑。字面上的时间窗口会忽略分析的节拍网格并在中间乐句中进行剪切。",
-     "**期望从演示文稿中获得 MP4。** 演示文稿是你点击浏览的现场演示文稿；它不会导出为一个视频文件。",
-     "**输出的交付内容错误。** 你将导出并发布的设置为音乐的照片是视频；你实时点击的内容就是演示文稿。仅仅通过“幻灯片”这个词来挑选就会产生错误的交付成果。",
-     "[！提示] 这里的音乐提示没有旁白；如果需要的话可以要求配音。对于这些提示共享的六部分骨架，请参阅[提示解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)；对于映射到缓和和过渡的形容词，[词汇](https://hyperframes.heygen.com/prompting/motion.md#words-for-how-motion-feels)。",
-     "较长电影提示中的一个条款，使剪辑遵循真实的节拍，准备好提升： **节奏（45-52 秒）。** 导线变成波形：**首先解析 BGM，在其上运行 `use the section from 0:32 to 0:52`，并在检测到的网格上驱动该区域** - 波形脉冲和紧凑型媒体卡（歌词线、照片卡、图表闪光）在相机持续移动时按真实分析的节拍捕捉到导线上；每个快照都会有一个刻度 SFX。至少六首热门歌曲。批准的接缝 #2：节拍命中可能会在节拍上硬切卡片内容 - 批准的例外，因为摄像机本身永远不会停止穿过它们。",
+     "**硬轨时间戳。** 乐视频精在曲自定剪，字面窗无视网，半句砍。",
+     "**指望牌组出 MP4。** 牌组是点击探讲的现场，非视频文件。",
+     "**交付认错。** 导之发之、置乐的图是视频；点着走的即牌组。仅以“幻灯片”挑会错交付。",
+     "乐提示无旁白，要则另点。六股贯通见[提示解剖](https://hyperframes.heygen.com/prompting/overview.md#the-shape-of-a-strong-prompt)；形容到缓转见[词汇](https://hyperframes.heygen.com/prompting/motion.md#words-for-how-motion-feels)。",
+     "长片提示条款，剪贴真拍，防备升级：**节奏（45-52 秒）。** 线成波：**先析 BGM，张开 `use the section from 0:32 to 0:52`，驱网**——波脉与紧凑媒体卡（词线、图卡、图闪）在镜不息时贴真析拍捉线，每镜一刻 SFX。至少六热歌。接缝 #2 批注：拍中硬切卡内容可批，镜自不断。",
      "<video aria-label=\"Capstone region rhythm\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/capstone-region-rhythm.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
-     "*剪切着陆在检测到的真实曲目的节拍上 (`pick the best 20 seconds of the track`)。*"
+     "*剪贴真析拍（`pick the best 20 seconds of the track`）。*"
     ],
     "codeBlocks": [],
     "bullets": [
      "**避免：** `a slideshow deck, then render it to MP4`",
-     "**相反：** `a music video from these photos`",
-     "**避免：** `a presentation`",
-     "**相反：** C0 表示要发布的文件，或 C1 表示实时点击"
+     "**改成：** `a music video from these photos`"
     ]
    },
    {
-    "h": "回顾一下节奏",
+    "h": "复核节奏",
     "p": "",
     "paras": [
-     "对于直接时间控制，请使用[浏览器编辑器时间线](https://hyperframes.heygen.com/studio/timeline.md) 根据节拍标记来优化剪切、保留和结尾。询问代理何时必须更改部分、媒体计划或整体处理。",
-     "[card][完成并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 检查最终项目，通过你喜欢的表面进行渲染，然后查看文件。"
+     "要直控时刻，用[浏览器编辑器时间线](https://hyperframes.heygen.com/studio/timeline.md) 按拍标优剪、保、收。问智能体何时该改段、改媒、改总法。",
+     "[card][完成并分享](https://hyperframes.heygen.com/guides/export-and-share.md) 查终工程，渲所喜之面，视文件。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "使用正确的轨道部分。",
-     "出现所需的媒体并且歌词与声音相匹配。",
-     "最强烈的视觉变化体现在有意义的音乐变化上。",
-     "重要的图像和文本保留足够长以便于理解。",
-     "结局达到音乐着陆或形成一个有意的循环。"
+     "用对曲段。",
+     "所要媒体在，词贴声。",
+     "最强视觉变贴有义音乐变。",
+     "要图/字留够读。",
+     "尾落乐结或有意循环。"
     ]
    },
    {
@@ -1386,19 +1391,19 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "claude plugin marketplace add heygen-com/hyperframes\nclaude plugin install hyperframes@hyperframes\nclaude plugin details hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "Using /hyperframes:hyperframes, make a 5-second title card that says \"Hello world\".",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "claude plugin update hyperframes@hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "claude plugin uninstall hyperframes@hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1412,11 +1417,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "copilot plugin marketplace add heygen-com/hyperframes\ncopilot plugin install hyperframes@hyperframes\ncopilot plugin list",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "copilot plugin update hyperframes\ncopilot plugin uninstall hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1424,8 +1429,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "VS代码",
     "p": "",
     "paras": [
-     "打开扩展视图并搜索`/skills list`。使用插件市场命令将 C1 添加为市场，然后安装 **hyperframes** 并在代理自定义中验证其技能。必须在 VS Code 设置中启用代理插件。",
-     "启用 C0 后，VS Code 每 24 小时检查一次更新。使用 **扩展：检查扩展更新** 进行手动检查。从扩展视图禁用或卸载插件。有关当前 UI 和工作区的建议，请参阅 [VS Code 的插件指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。"
+     "开扩展视野搜 `/skills list`。以外市命令加市场，装 **hyperframes**，于代理定制验技能。VS Code 须开代理插件。",
+     "起 `hyperframes` 后 VS Code 每 24h 自查更。手查走**扩展：查更新**。废装自扩展视野。UI 与工作区新注见 [VS Code 指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。"
     ],
     "codeBlocks": []
    },
@@ -1433,8 +1438,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "光标",
     "p": "",
     "paras": [
-     "对于团队市场，在 **仪表板 → 插件和 MCP** 中导入 `@agentPlugins` 并添加 HyperFrames 插件。队友从 **自定义** 安装它。 GitHub 市场自动刷新需要 Cursor GitHub 应用程序和市场的 **启用自动刷新** 设置。",
-     "对于本地安装，将提取的 HyperFrames 插件文件夹复制到 `heygen-com/hyperframes`，然后重新加载 Cursor 并选中 **自定义**。该文件夹必须包含`extensions.autoUpdate` 和`heygen-com/hyperframes`。本地副本需要手动替换才能更新；他们不订阅 GitHub 的更改。企业策略可能会禁用本地插件导入。删除本地文件夹以卸载该副本。",
+     "团队市：**Dashboard → 插件与 MCP** 引 `@agentPlugins` 加 HyperFrames。队友自**定制**装。GitHub 市自更须 Cursor GitHub app 与市内**启用自更**开。",
+     "本地装：解 HyperFrames 壤拷至 `heygen-com/hyperframes`，重载 Cursor 选**定制**。壤须含 `extensions.autoUpdate` 与 `heygen-com/hyperframes`。本地副本随 GitHub 更而手替，不订之。企策或禁地引。删壤即卸。",
      "此存储库的清单并不是公共 Cursor 市场列表的证明。公开列表及其更新要经过光标审核。有关市场和本地安装控件，请参阅 [Cursor 插件指南](https://cursor.com/docs/plugins)。"
     ],
     "codeBlocks": []
@@ -1443,17 +1448,17 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "双子座命令行界面",
     "p": "",
     "paras": [
-     "重新启动 Gemini CLI 并要求其对标题卡使用 HyperFrames 技能。要显式管理扩展： 要保留特定版本，请使用 `~/.cursor/plugins/local/hyperframes` 而不是`plugin.json` 安装。选择包含`skills/`的版本。请参阅[Gemini 的扩展指南](https://geminicli.com/docs/extensions/reference/)。",
+     "重启 Gemini CLI 唤其用 HyperFrames 技能做标题卡。显管拓：钉版用 `gemini extensions install <url> --pin`。版必含 `skills/`。见 [Gemini 指南](https://geminicli.com/docs/extensions/reference/)。",
      "该插件本身保持只读状态，不包括浏览器或模型权重。"
     ],
     "codeBlocks": [
      {
       "code": "gemini extensions install https://github.com/heygen-com/hyperframes --auto-update\ngemini extensions list",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "gemini extensions update hyperframes\ngemini extensions uninstall hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1461,7 +1466,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "版本和更新",
     "p": "",
     "paras": [
-     "该插件将来自一个源快照的工作流程捆绑在一起，并运行其清单中记录的 CLI 版本。你的代理应该使用其捆绑的插件启动器；它不应该在插件工作流程期间运行`--ref <release-tag>`。现有的项目依赖项、下载的媒体和外部服务都有自己的版本，并且不会被插件冻结。",
+     "插件束一源快照工序，跑清单录 CLI 版。代理走其束启，不在工序中跑 `--ref <tag>`。工程依、已下媒、外服各有版，不为插件冻。",
      "更新行为取决于客户端和源参考。例如，[Cursor GitHub 自动刷新](https://cursor.com/docs/plugins#keep-plugins-up-to-date) 会跟随推送到跟踪的分支，因此无需新的 CLI 版本即可更改技能内容。清单固定 CLI 版本，而不是已安装的技能提交。对于可重复安装，请保留版本标签或提取的版本存档并禁用自动更新。在每台计算机上安装相同的版本。基于 Git 的安装可以下载完整的源存储库。发布 ZIP 仅包含插件有效负载，但在本地加载提取的 ZIP 需要手动更新。只有具有 `--auto-update` 资产的版本才提供该便携式 ZIP。"
     ],
     "codeBlocks": []
@@ -1475,7 +1480,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "claude plugin uninstall core-skills@hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1483,7 +1488,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果工作流程丢失或过时",
     "p": "",
     "paras": [
-     "将较新版本的技能放入插件文件夹中。"
+     "把新版技能置入插件壤。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -1520,7 +1525,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Explain https://github.com/owner/repo/pull/123 to product and engineering teammates.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1528,7 +1533,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "为观众选择故事",
     "p": "",
     "paras": [
-     "说明它是变更日志、功能展示、修复还是重构，并提及任何重大变更。视频解释了这一变化；它不会大声朗读描述。"
+     "言明属变更日志、功能演、修复还是重构，并点要害。片阐新，不朗读述。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -1554,8 +1559,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "|旋钮|说什么 |为什么这很重要 |",
      "| - | - | - |",
      "| **影响与差异** | “以用户获得的内容为主导，而不是差异”|视频解释了*更改*，它没有大声读出差异；开场就影响力回答“我为什么要关心？”代码之前 |",
-     "| **有多少帅哥** | “仅一个`code-diff`节拍”/“最多两个帅哥”| Code Beats 共有 2-4 个真正的大块头，每个都是一个清晰的小片段 - 整个文件在视频规模下是无法读取的 |",
-     "| **哪个代码块** | C0 表示增量 · C1 表示重构 · C2 表示新代码 |该块与故事相匹配：差异显示添加/删除的线条，变形显示一种形状变成另一种形状 |",
+     "| **帅哥数** | “仅一 `code-diff` 拍” / “至多二” | 2-4 真大拍，每皆清小片——全档在片尺不可读 |",
+     "| **用哪块码** | `code-diff` 增 · `code-morph` 改形 · `code-typing` 新 | 块配故事：diff 示增删，morph 示形变 |",
      "| **角度** | “变更日志”/“功能揭示”/“修复解释器”/“重构演练”|设定故事的形式；代理将 PR 重塑为 PR，而不是按照 diff 顺序遍历文件 |",
      "| **观众** | “针对开发人员”（默认）/“混合技术”/“非技术利益相关者”|改变叙述的假设——非技术性的剪辑更注重影响，更注重代码 |",
      "| **结束卡** | “以版本号 + 存储库 URL 结尾”|代码解释器的常规结束语；说明发生了什么，这样它才是真正的 CTA，而不是事后的想法 |",
@@ -1568,12 +1573,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "[手风琴] 变更日志综述 > 从 \\[PR URL] 制作一个 \\~40 秒的 1920x1080 变更日志视频。变更日志角度：以发布行开头，然后为每个显着的变更打一个节拍——每个标签和一行“它的作用”。整个视频中最多显示两个`code-diff`帅哥。以版本 + 存储库 URL 结尾。平静的男性 TTS 旁白，无字幕。",
+     "[accordion] 变更日志综述 > 从 \\[PR URL] 制作一个 \\~40 秒的 1920x1080 变更日志视频。变更日志角度：以发布行开头，然后为每个显着的变更打一个节拍——每个标签和一行“它的作用”。整个视频中最多显示两个`code-diff`帅哥。以版本 + 存储库 URL 结尾。平静的男性 TTS 旁白，无字幕。",
      "<video aria-label=\"A pull request explained with code and before-and-after behavior\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/full-prvideo.mp4\" poster=\"https://static.heygen.ai/hyperframes-oss/docs/images/showcase/wfv2-pr.jpg\" playsInline preload=\"metadata\" /> *从此提示使用 \\[PR URL] = heygen-com/hyperframes#2092 渲染，未经编辑。* 变更日志以深度换取广度——许多小的变更，每个变更都是一个节拍，而不是深入探索一个变更。保持代码节拍稀疏，以便保持快速。 PR 不携带其发货版本 - 代理从发布标签或 main 上的包清单中找到它。",
-     "[手风琴] 修复解释器 > 从 \\[PR URL] 为开发人员制作一个 \\~40 秒的 1920x1080 修复解释器。修复角度：首先说明错误的症状，然后说明根本原因，然后在 `code-morph` 块上进行一行修复。以版本 + 存储库 URL 结尾。没有旁白，只有动态字幕。",
-     "修复解读为症状→原因→修复。引导用户看到的中断，而不是堆栈跟踪 - 差异是回报，而不是开头。",
-     "[手风琴] 重构演练 > 为开发人员从 [PR URL] 制作一个约 70 秒的 1920x1080 重构演练。重构角度：为什么旧形状会受到伤害，然后是新形状，显示关键文件的 `code-typing` 块之前/之后的情况。以版本 + 存储库 URL 结尾。冷静的男性 TTS 旁白。",
-     "重构改变了形状而不改变行为，所以故事是“为什么”新结构更好。 `code-diff` 将一种形式转变为另一种形式的动画 - 当该点是过渡时的右侧块，而不是逐行增量。"
+     "[accordion] 修复解释器 > 从 \\[PR URL] 为开发人员制作一个 \\~40 秒的 1920x1080 修复解释器。修复角度：首先说明错误的症状，然后说明根本原因，然后在 `code-morph` 块上进行一行修复。以版本 + 存储库 URL 结尾。没有旁白，只有动态字幕。",
+     "修复即症状→因→治。引观者睹断，而非堆栈。diff 是 payoff 非开。",
+     "[accordion] 重构演练 > 为开发人员从 [PR URL] 制作一个约 70 秒的 1920x1080 重构演练。重构角度：为什么旧形状会受到伤害，然后是新形状，显示关键文件的 `code-typing` 块之前/之后的情况。以版本 + 存储库 URL 结尾。冷静的男性 TTS 旁白。",
+     "重构变形不变行，故事在“新形何优”。形变动画用 `code-morph`，转场即正义，diff 逐行非此。"
     ],
     "codeBlocks": []
    },
@@ -1581,7 +1586,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见错误",
     "p": "",
     "paras": [
-     "**询问整个差异。** 公关视频解释了这一变化；它不会背诵每个文件。完整的差异在视频尺度下是无法读取的。",
+     "**全 diff 齐问。** 片阐新，不背档。全 diff 片尺不可读。",
      "**打开代码。** 差异是回报，而不是钩子——以更改的含义为主导。",
      "**对叙述剪辑进行硬计时。** 语音长度决定了运行时间，因此请给出一个范围。"
     ],
@@ -1599,12 +1604,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "验证证明",
     "p": "",
     "paras": [
-     "询问智能体何时必须更改解释或证据；在编辑器中手动修复时间、代码裁剪或标题。"
+     "问智能体何时须改阐释或证。在编辑器手修时、码剪、题。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "拉取请求和目标分支是正确的。",
-     "提议、合并、发布并不混淆。",
+     "PR 与目标支正确。",
+     "提议、合并、发布不混。",
      "面向用户的声明与实际行为相符。",
      "代码摘录仅显示相关行并保持可读性。",
      "测试和重构不作为产品功能呈现。",
@@ -1633,14 +1638,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "做到这一点",
     "p": "",
     "paras": [
-     "**在 Studio 应用程序**中，将 URL 粘贴到 **Make Something**（用一行关于视频的内容），然后选择 **Let's go**。打开**从故事板开始**，在任何内容移动之前将镜头批准为静止图像。",
+     "**Studio 应用**里，URL 贴 **Make something**(述一语片事) 选 **Let's go**。开**自故事板**，动前以静帧批镜。",
      "**看到你想要复制的发布？** 在主页上打开 **参考**，粘贴其链接（或在 **选择参考** 下选择一个），然后添加你的 URL：你将获得包含产品的结构和能量。参考使用你的 HeyGen API 密钥，应用程序第一次会要求你提供该密钥。",
      "只添加必须准确的内容：观众、主张、最终行动。当视频应仅使用你的简介时，请说**不要捕获网站**。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。"
     ],
     "codeBlocks": [
      {
       "code": "A 30-second launch video for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1661,7 +1666,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "提示有效",
     "p": "",
     "paras": [
-     "当你想自己设置结构、声音和音乐时： 为 [https://linear.app](https://linear.app) 制作 45 秒 1920x1080 启动视频。充满活力但又简约，使用网站自己的调色板和屏幕截图。结构：说明问题的钩子、带有 UI 捕获和一行标题的 3 个功能节拍、带有徽标的结束卡 +“免费试用”。女声TTS语音，自信的语气，-18dB以下微妙的电子BGM。",
+     "自定构、声、乐时：为 [https://linear.app](https://linear.app) 做 45 秒 1920x1080 发布片。利落简，具站自板色与图。构：诘题钩、三功能拍各 UI 捕一题行、尾卡标“免费试用”。女 TTS，自信，-18dB 下微电 BGM。",
      "<video aria-label=\"Example product launch\" src=\"https://static.heygen.ai/hyperframes-oss/docs/images/prompting/example-product-launch-v2.mp4#t=0.1\" loop playsInline preload=\"metadata\" />",
      "*根据此提示制作的启动影片。*"
     ],
@@ -1674,12 +1679,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "设置你关心的，剩下的交给代理。",
      "|旋钮|说什么 |为什么这很重要 |",
      "| - | - | - |",
-     "| **捕获与不捕获** |给出一个URL来捕获真实站点；当没有要捕获的站点时提供脚本或简介 | Capture借用了真实的调色板和屏幕截图；没有它，视觉效果就会被发明，所以为你的品牌颜色命名|",
+     "| **捕与否** | 给 URL 捕真站；无站给稿或述 | 捕借真板墨图；无则视自创，牌色须名 |",
      "| **调色板源** | “使用网站自己的调色板”|代理根据捕获的品牌标记构建 - 你获得产品的真实颜色，而不是通用主题 |",
      "| **结构** | “挂钩说明问题，N 个功能节拍带有字幕，结束卡带有 CTA”|为节拍命名可以防止钩子和 CTA 被丢弃 |",
-     "| **声音和语气** | “女声TTS，自信”/“冷静男声”|语音性别、语气均为提示词；提供者本身是代理的决定 - 有关提供者机制，请参阅[媒体和音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |",
-     "| **背景音乐级别** | “-18dB以下的微妙电子背景音乐”（或“无背景音乐”）|规定的上限使音乐低于声音；完全把它留作预告片|",
-     "| **长度和目的地** | “\\~45 秒”、“TikTok 9:16” |最佳点是 30-90 秒；目的地设置方面（16:9 嵌入 · 1:1 feed · 9:16 Shorts） | [！提示] 持续时间和目的地是两个最便宜、影响力最大的事情。如果你保持安静，代理会选择好的其他一切 - 请参阅[规范拨号](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)了解委托的数量。"
+     "| **声与调** | “女声 TTS，自信” / “沉稳男声” | 性别调皆提示词；供应方归智能体定——机理见[媒体音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |",
+     "| **BGM 幅** | “-18dB 下微电子”（或“无 BGM”） | 定顶一乐降于声；不，留作预告片 |",
+     "| **长与宿** | “~45 秒”、“TikTok 9:16” | 甜点 30-90 秒；宿定画幅（16:9 嵌 · 1:1 流 · 9:16 短） | 提示：时长与宿最廉最效。余交之，见[规格拨盘](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)。"
     ],
     "codeBlocks": []
    },
@@ -1687,11 +1692,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "变体",
     "p": "",
     "paras": [
-     "[手风琴] 20 秒垂直预告片 (9:16) > 为 [https://linear.app](https://linear.app) 制作一个约 20 秒的 1080x1920 预告片。超级简约，只有钩子。节拍1（0-4s）：问题在一行，大类型。节拍 2（4-16 秒）：两个功能节拍，一个 UI 捕获，每个节拍都带有三字标题。第 3 拍（16-20 秒）：徽标 +“免费尝试”结束卡，保持静止直至结束。使用网站自己的调色板。女TTS语音，自信；没有背景音乐。",
+     "[accordion] 20 秒垂直预告片 (9:16) > 为 [https://linear.app](https://linear.app) 制作一个约 20 秒的 1080x1920 预告片。超级简约，只有钩子。节拍1（0-4s）：问题在一行，大类型。节拍 2（4-16 秒）：两个功能节拍，一个 UI 捕获，每个节拍都带有三字标题。第 3 拍（16-20 秒）：徽标 +“免费尝试”结束卡，保持静止直至结束。使用网站自己的调色板。女TTS语音，自信；没有背景音乐。",
      "预告片以专题报道换取节奏——更少的节奏，每个想法。保留目的地（Shorts / TikTok → 9:16）并让代理将故事扩展到更短的运行时间。",
-     "[手风琴] 粘贴脚本，没有捕获 > 根据此脚本制作一个约 20 秒的 1920x1080 启动视频 - 逐字使用：“你的 CRM 每天需要三个小时的忙碌工作。AutoCRM 会为你记录每个电话、电子邮件和会议。200 个团队已切换。请在 autocrmhq.com 上免费试用。”无需捕获任何站点 - 从脚本中发明干净的产品视觉效果。男TTS语音，冷静自信； -18dB以下的微妙BGM。",
+     "[accordion] 粘贴脚本，没有捕获 > 根据此脚本制作一个约 20 秒的 1920x1080 启动视频 - 逐字使用：“你的 CRM 每天需要三个小时的忙碌工作。AutoCRM 会为你记录每个电话、电子邮件和会议。200 个团队已切换。请在 autocrmhq.com 上免费试用。”无需捕获任何站点 - 从脚本中发明干净的产品视觉效果。男TTS语音，冷静自信； -18dB以下的微妙BGM。",
      "如果没有 URL，就没有什么可捕获的：没有屏幕截图，没有可以借用的网站调色板，因此如果有的话，请命名你的品牌颜色和字体（或者代理发明一个调色板）。逐字脚本设定了持续时间——每分钟大约有 130 个口语单词，因此 30 秒的视频需要 65-70 个单词的脚本。说“逐字使用”可以确定代理是否可以重组你的措辞。",
-     "[手风琴] 现场游览（相同的 URL，游览简介） > 根据自己的屏幕截图构建 30 秒的 1920x1080 浏览 [https://example.com](https://example.com)。平静的编辑节奏——显示主页、两个内页和页脚。全程旁白，温暖男声。这是一个展示，而不是推销。",
+     "[accordion] 现场游览（相同的 URL，游览简介） > 根据自己的屏幕截图构建 30 秒的 1920x1080 浏览 [https://example.com](https://example.com)。平静的编辑节奏——显示主页、两个内页和页脚。全程旁白，温暖男声。这是一个展示，而不是推销。",
      "当目标是“展示网站”而不是销售产品时，就可以实现这一点。它是根据捕获的屏幕截图和网站的品牌资产构建的。来自同一 URL 的发布或促销是不同的简介 - 要求出售它。"
     ],
     "codeBlocks": []
@@ -1718,14 +1723,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "保持产品及其详细信息的联系",
     "p": "",
     "paras": [
-     "完整的界面显示任务发生的位置。特写镜头可以让重要的动作变得清晰易读。当孤立的特写镜头失去了完整产品的意义时，要求两者都提供： 例如，监控影片可以建立仪表板、绘制信号、显示诊断结果并将结果返回到报告视图。产品的实际屏幕或提供的源必须支持该流程。周围的界面提供了上下文；特写镜头带有观众需要阅读的标签和数字。",
+     "全界示事在。特写明要害。孤特易失全义，两者俱索：如监控片建盘、绘信、示诊、返报。流须真屏或供源撑。周界为境，写留签数供读。",
      "如果草稿感觉像幻灯片，请要求代理更改每个镜头中发生的情况：显示信号、填充结果或在继续之前打开面板。在同一静止页面上添加相机移动不会显示该动作。保留对更改内容的简短说明，而不是删除所有文本。",
      "对于颜色修改，请命名你想要的背景，并要求代理在每个场景和过渡中调整文本和图表。检查标签是否仍然可读，并且稍后的动画不会恢复旧的背景。"
     ],
     "codeBlocks": [
      {
       "code": "Show the real workspace, bring the relevant chart and result forward,\nthen carry the result back into the interface. Build the changing parts\nseparately, with short explanations where needed. Keep the actual labels\nand values; do not invent controls or interactions.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1737,10 +1742,10 @@ export const DOCS_FULL: Record<string, DocContent> = {
     ],
     "codeBlocks": [],
     "bullets": [
-     "每项产品声明都是最新的。",
+     "每品宣皆新。",
      "所显示的屏幕是真实的并且不使用任何私人材料。",
      "视频播放时界面保持可读。",
-     "特写镜头连接到整个产品，并且在两个视图之间移动时组件保持清晰。",
+     "特写连全品，双视流转件廓然。",
      "开头很快就证明了产品，结尾则要求采取一个明确的行动。"
     ]
    },
@@ -1770,7 +1775,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "**1.下载并安装** [下载 Studio 应用](https://hyperframes.studio/studio/download?src=docs-quickstart)，打开它，并使用免费的 HeyGen 帐户登录。 [安装 Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 包含每个系统的步骤。",
      "**2.索取视频** 在 **制作一些东西** 中输入你想要的内容并发送。弗莱米问了几个问题，展示了故事板，然后制作了影片。",
      "**3.改变它** 在聊天中要求更改，或指向图片。 [在应用程序中制作你的第一个视频](https://hyperframes.heygen.com/studio-app/first-video.md) 介绍了它。",
-     "[卡] [练习：简介](https://hyperframes.heygen.com/lessons/the-brief) 20 分钟的免费课程，包含短片、测验和尝试简介。简介是目标、目标对象、两到四个细节以及引号中的确切单词。"
+     "[card] [练习：简介](https://hyperframes.heygen.com/lessons/the-brief) 20 分钟的免费课程，包含短片、测验和尝试简介。简介是目标、目标对象、两到四个细节以及引号中的确切单词。"
     ],
     "codeBlocks": []
    },
@@ -1791,11 +1796,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes skills update",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "Set this folder up for HyperFrames and make me a video.\n\n1. If the HyperFrames plugin is installed, use its bundled skills and launcher. If the HyperFrames skills are missing, stop and tell me: I install them with npx hyperframes skills update\n2. Then, using /hyperframes, make a 10-second product intro for https://example.com\n3. Open the local preview when it is done and tell me the project folder.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1811,11 +1816,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx skills add heygen-com/hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "Using /hyperframes, make a 10-second product intro for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -1858,7 +1863,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "这使得什么",
     "p": "",
     "paras": [
-     "不是新视频——**翻译**。 [C0](https://hyperframes.heygen.com/prompting/overview) 技能读取现有 Remotion (React) 组合的源代码并将其重写为 HyperFrames HTML：相同的帧、相同的时序、相同的视觉输出，在 GSAP 上运行，而不是 React 的帧回调模型。",
+     "非自创新片——**翻译**。[Remotion→HyperFrames](https://hyperframes.heygen.com/prompting/overview) 技能读现有 Remotion (React) 源，改写为 HyperFrames HTML：同帧、同序、同视，GSAP 驱，不为 React 帧回。",
      "这是迁移，而不是创建工作流程。它仅在明确要求移植、转换、迁移或翻译 **Remotion** 源时触发。有两件事看起来很相似，但事实并非如此： 方向是单向的。没有导出回 Remotion 或任何其他框架。"
     ],
     "codeBlocks": [],
@@ -1871,8 +1876,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "基本提示",
     "p": "",
     "paras": [
-     "/remotion-to hyperframes 将`/remotion-to-hyperframes`（Remotion 项目根：`/hyperframes`）处的合成移植到 HyperFrames。保持相同的持续时间、fps 和尺寸。对于任何翻译不清晰的地方写下`src/HeroReveal.tsx`。",
-     "一旦一个项目注册了多个 C0 ，那么命名确切的文件（不仅仅是“我的 Remotion 项目”）就很重要了——说出是哪一个。"
+     "`/remotion-to-hyperframes` 把 Remotion 根（`src/HeroReveal.tsx`）合成移来。时长、帧、尺寸同。不清处落字 `TRANSLATION_NOTES.md`。",
+     "一项目多合成，必点确档（非“我的 Remotion”）——言何者。"
     ],
     "codeBlocks": []
    },
@@ -1880,11 +1885,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "什么无法翻译——以及为什么这是正确的",
     "p": "",
     "paras": [
-     "该技能在翻译任何内容之前都会对源代码进行检查，并且在遇到 HyperFrames 的搜索驱动模型无法确定性表示的模式时**拒绝**而不是近似： 如果你的源遇到阻碍，期望代理停止并解释互操作建议，而不是推动 - 这是正确的行为，而不是失败。不要要求它“只是近似”地越过障碍物；这项技能的重点是经过验证、测量的翻译，而不是尽力猜测。"
+     "技能先侦源，碰 HyperFrames 搜索驱模型不可定表之式即**拒**不近似：源触碍，望智能体止而释互操，不硬推——正为，不败。勿令“近似”越碍；所重验量准译，非尽猜。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**状态驱动动画** — 具有真实依赖性的`.`C1或`TRANSLATION_NOTES.md`C3。 HyperFrames 寻找任意帧并每次都期望相同的像素；对自己的历史做出反应的状态机不能保证这一点。该技能建议使用运行时互操作模式，而不是默默地生成“看起来正确”但不准确的翻译。",
+     "**状态驱画** —— `useState`/`useEffect`/`useReducer` 真依。HyperFrames 逐帧Seek，须同像素；忆史机不保。此技能建议运行时互操，非“看似对”错译。",
      "**第三方 React UI 套件** — MUI、Chakra、Mantine、antd、shadcn、Radix、NextUI。没有等效的 HTML/CSS/GSAP 可以将它们翻译成。",
      "**C0 部署配置** — 不是拦截器。它已被删除（部署配置，而不是动画），并且合成的其余部分仍然可以翻译。"
     ]
@@ -1893,8 +1898,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "验证不是可选的",
     "p": "",
     "paras": [
-     "每个翻译都会根据渲染帧上的 SSIM（结构相似性）对 Remotion 原始内容进行评分，而不是通过肉眼观察。如果你要移植一些重要的内容，请明确要求进行检查： 翻译后，渲染 Remotion 原始版本和 HyperFrames 版本并报告 SSIM 差异。",
-     "在预览中“看起来正确”的翻译仍然可以在经过验证的基线以下进行有意义的测量 - 这就是该技能旨在捕捉的差异。"
+     "每译皆以渲帧 SSIM 较 Remotion 原，非目验。重移须明要验：渲双版报 SSIM 差。",
+     "预览“对”的译或量远低验基——此技能正为揪此差。"
     ],
     "codeBlocks": []
    },
@@ -1904,9 +1909,9 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "paras": [
      "|旋钮|说什么 |为什么这很重要 |",
      "| - | - | - |",
-     "| **精确的源文件** | “在`<Composition>`下的组成” |一个 Remotion 项目可以注册多个 `useState` 说出你想要的那个 |",
+     "| **确源档** | “`<Composition>` 下合成” | 一项目多 `Composition`，言要者 |",
      "| **保持准确的时间** | “保持相同的持续时间、fps 和尺寸”|默认；无论如何都要说明，这样代理就不会舍入或调整大小 |",
-     "| **差距文档** | “对于任何翻译不清晰的地方，请写下`useReducer`”|近似的字体、降低的音量渐变和替换的演示文稿都会被记录下来，而不是默默地被吸收|",
+     "| **缺口文档** | “不清译处落 `TRANSLATION_NOTES.md`” | 近字、淡音替、代演示皆录，不默吸 |",
      "| **验证** | “报告 SSIM 与原始版本的差异”|使保真度检查成为可交付成果的一部分，而不是可选的事后想法 |"
     ],
     "codeBlocks": []
@@ -1915,18 +1920,18 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "常见故障模式",
     "p": "",
     "paras": [
-     "**请求以 Remotion 作为灵感的全新构建。** 如果你没有实际的 Remotion 源代码可供翻译，那么这不是技能 - 这是正常的构建。",
-     "**要求它通过 lint 拦截器。** `useEffect` 驱动的合成不是“无论如何翻译，尽力而为”的情况 - 这是一个不同的问题（运行时互操作），强制翻译会产生一些看起来合理但不准确的帧。",
-     "**跳过重要端口上的验证。** 仅视觉检查会错过仅在逐帧 SSIM 差异中显示的计时/缓动漂移。"
+     "**要 Remotion 灵感之自创新建。** 无真 Remotion 源即非技能——常建。",
+     "**令其越 lint 墙。** `useEffect` 驱非“尽译”之例——异问（运行时互操），硬译生似帧错。",
+     "**重口跳验。** 唯目验，漏仅 SSIM 显之时缓漂。"
     ],
     "codeBlocks": [],
     "bullets": [
      "**避免：** `useLayoutEffect`",
      "**相反：** `make an intro like this: [description]` — 无远程源，无迁移",
      "**避免：** `@remotion/lambda`",
-     "**相反：** 让代理推荐互操作模式，然后决定是否适合你的情况",
+     "**相反：** 令智能体荐互操式，再定合否",
      "**避免：** *（没有验证请求 - 接受“看起来正确”）*",
-     "**相反：** `src/HeroReveal.tsx`"
+     "**相反：** `report SSIM against the original`"
     ]
    },
    {
@@ -1951,14 +1956,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "为一个人安装",
     "p": "",
     "paras": [
-     "运行交互式安装程序： 从视频项目的目录运行此命令。如果你克隆了 HyperFrames 来贡献，请使用 `/hyperframes` 从该结帐中进行全局安装，或在单独的视频项目中运行项目安装程序。项目本地安装程序目标可以与签出的跟踪 `npx hyperframes skills update` 源重叠并覆盖未提交的编辑。",
-     "选择**核心技能**。这涵盖了所有类型的视频；其他技能会在请求需要时安装，因此你不需要预先提供完整的目录。",
-     "安装后启动新的代理聊天，然后要求其使用`skills/`。"
+     "交互装：盘自视频录跑。贡献克隆走 `/hyperframes` 全局装，自盘单录跑项目装。项地装或叠签源，未提编可覆。",
+     "选**核心技能**，裹众片物。余技需时自装，不必先齐全录。",
+     "装后新聊，令其用 `skills/`。"
     ],
     "codeBlocks": [
      {
       "code": "npx skills add heygen-com/hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1966,22 +1971,22 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "从代理安装或刷新",
     "p": "",
     "paras": [
-     "对于非交互式代理或 CI 环境，请使用： 这将安装或刷新全局安装中已存在的核心集和任何 HyperFrames 技能，然后将这些捆绑包链接到兼容的已安装代理中。它不会添加所有可选技能。",
-     "更新会检查安装程序写入的 Claude 全局存储（`/hyperframes` 或`~/.claude/skills` 下的`skills/` 文件夹）。仅在另一个代理的目录中找到的技能不会将缺少的核心技能计为安装在该目录中，并且该其他目录中的可选技能不会自动添加到托管存储中。明确命名可选技能以添加它。即使在托管商店存在之前，安装记录的发布者属性也会受到尊重。对另一个发布者拥有的技能的显式更新请求会失败，而不会覆盖它，包括当新鲜度检查离线时不可用时。",
-     "检查新鲜度而不改变任何东西： 显式安装或刷新一项技能："
+     "非交互或 CI 用：装或翻全集与 HyperFrames 技，链相合已装代理。不增选技。",
+     "翻查装入之 Claude 全储（`/hyperframes` 或 `~/.claude/skills` 下 `skills/`）。他代目录缺核心不算其装，他之选技不自入储。选技明名即增。装录发者性即在储前仍尊。他家技明更不覆，离线鲜不达亦然。",
+     "只验鲜不改：显装或翻一技："
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes skills update",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes skills check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes skills update slideshow",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -1989,17 +1994,17 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "使用 GitHub Copilot CLI 中的技能",
     "p": "",
     "paras": [
-     "运行`CLAUDE_CONFIG_DIR`，打开项目，然后启动 Copilot： 如果 Copilot 已在运行，请使用 `npx hyperframes skills update`。使用`/skills reload`或`/skills list`确认发现。 GitHub 的[当前技能指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列出了其项目和个人技能位置。",
-     "两个代理可以使用相同的第一个请求： 继续同一对话进行修改。对于托管创建而不是本地项目，请使用 [HyperFrames MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。"
+     "跑 `copilot`，开盘启 Copilot；既跑用 `/skills reload`。探得否由 `/skills list`。GitHub [现指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列项与个位。",
+     "双代可共首求：续同话改之。托管非本地用 [MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。"
     ],
     "codeBlocks": [
      {
       "code": "copilot",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "Using /hyperframes, make a 10-second product intro for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -2007,13 +2012,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "使用 Google Antigravity 中的技能",
     "p": "",
     "paras": [
-     "从你在 Antigravity 中打开的项目的根目录安装技能： 选择**核心技能**和**反重力**。这使用了反重力支持的项目位置`/skills info hyperframes`，并保留项目中的技能。安装后开始新的反重力对话。",
+     "盘自 Antigravity 开盘根装之：选**核心**与**Antigravity**。用 Antigravity 所撑项位 `.agents/skills`，技留项内。装后新聊。",
      "Antigravity 还支持全球 `.agents/skills` 目录。在手动管理该目录之前，请参阅 Google 的[当前技能指南](https://antigravity.google/docs/skills?app=antigravity-ide)。"
     ],
     "codeBlocks": [
      {
       "code": "npx skills add heygen-com/hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2021,12 +2026,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "使用 IBM Bob 的技能",
     "p": "",
     "paras": [
-     "运行`~/.gemini/config/skills`，然后在项目文件夹中打开或重新启动 Bob Shell，以便它发现`npx hyperframes skills update`下链接的技能： 要求 Bob 在第一个请求中使用 `~/.bob/skills`。再次运行更新会刷新相同的全局技能包，而无需更改项目格式。"
+     "跑 `bob`，盘开或重启 Bob Shell，探 `~/.bob/skills` 已链之。首求令 Bob 用之。再跑翻全包，不改项形。"
     ],
     "codeBlocks": [
      {
       "code": "bob",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2034,7 +2039,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "技能涵盖哪些内容",
     "p": "",
     "paras": [
-     "通过要求制作任何视频； `/hyperframes`技能包含合同和参考资料（各种电影、故事、动作、外观、声音、评论、字幕、叠加）。",
+     "直索制片；`/hyperframes` 携约参（片、事、动、观、声、评、字、叠）。",
      "|技能|它涵盖什么 |",
      "| - | - |",
      "| `/hyperframes` |首先阅读有关制作、编辑、动画或渲染视频、动态图形、字幕或叠加层的任何请求。保存渲染合同和工作循环，并指向格式、动作、外观、字幕、整部电影和故事板的参考。 |",
@@ -2053,17 +2058,17 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "仅在需要时安装更多",
     "p": "",
     "paras": [
-     "特意安装完整的发布集： `/remotion-to-hyperframes` 还安装完整的已发布集。默认情况下排除回购内部技能。",
-     "或者安装一项指定技能： 将全套用于必须跨多个 HyperFrames 任务运行而无需稍后获取的环境。对于正常的项目，核心集更小并且更容易保持最新。"
+     "明装全集：`/hyperframes` 另装全发集。默除补购内技。",
+     "或单装一技：跨多工无下取境用全。寻常项核心小而易新。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes skills",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx skills add heygen-com/hyperframes --skill slideshow",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2071,7 +2076,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果特工看不到技能",
     "p": "",
     "paras": [
-     "个人技能定义仍然是代理的真实来源，可在 [HyperFrames 存储库](https://github.com/heygen-com/hyperframes/tree/main/skills) 中找到。"
+     "个技定为代之真源，居 [HyperFrames 库](https://github.com/heygen-com/hyperframes/tree/main/skills)。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -2085,12 +2090,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果更新显示没有安装的技能匹配",
     "p": "",
     "paras": [
-     "对于`npx hyperframes skills update`C1将`skills@1.7.x`视为已安装的技能名称。即使安装了 HyperFrames 技能，它也会报告 `npx skills update heygen-com/hyperframes`。使用 HyperFrames 更新程序刷新已全局安装的核心集和 HyperFrames 技能： 独立的`heygen-com/hyperframes`命令接受技能名称，例如`No installed skills found matching`以仅更新全局`skills update`技能。存储库名称属于`npx skills update hyperframes -g`，如上面的安装步骤所示。"
+     "翻时 `skills@1.7.x` 视装名。即使安装了 HyperFrames 技能，它也会报告 `npx skills update heygen-com/hyperframes`。使用 HyperFrames 更新程序刷新已全局安装的核心集和 HyperFrames 技能： 独立的`heygen-com/hyperframes`命令接受技能名称，例如`No installed skills found matching`以仅更新全局`skills update`技能。存储库名称属于`npx skills update hyperframes -g`，如上面的安装步骤所示。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes skills update",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2098,13 +2103,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果安装的技能出现 YAML 解析错误",
     "p": "",
     "paras": [
-     "`/hyperframes` 警告指出无法读取的已安装文件。在编辑该文件之前备份该文件，尤其是当它包含自定义指令时。多行描述需要缩进连续行；例如： 保留文件已有的描述文字和技能体；该示例仅显示 YAML 格式。随后运行 C0 来验证全局发现，或者运行 C1 来进行项目安装。",
-     "回购内部技能，例如 `skills add` 被排除在已发布的集合之外。刷新核心技能并不能修复旧的、单独安装的内部技能副本。 YAML 警告和名称匹配错误可能会在同一运行中发生，并且需要这些单独的修复。"
+     "`/hyperframes` 警告点不可读装档。改前先备，尤自订。述多行续行须缩：续存档述体，此仅示 YAML 式。后跑 `npx hyperframes skills check` 验全，项装跑 `skills add`。",
+     "补购内技如 `hyperframes-catalog`、`hyperframes-cloud` 出发集外。翻核心不修旧单装内技。YAML 警与名误可同跑，须各修。"
     ],
     "codeBlocks": [
      {
       "code": "---\nname: seam-craft\ndescription: >-\n  Render-correctness doctrine for scene-to-scene seams.\n  Load when assembling the master timeline.\n---",
-      "file": "YAML THEME={NULL}"
+      "file": "yaml"
      }
     ]
    },
@@ -2127,55 +2132,55 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "HyperFrames 演示保持实时：像幻灯片一样点着讲，含显现、分支与演讲者备注，不播视频。",
   "sections": [
    {
-    "h": "做到这一点",
+    "h": "怎么做",
     "p": "",
     "paras": [
-     "向智能体提供演示文稿应支持的材料和决策： 智能体确认观众、主要结果，以及牌组是否需要揭示、分支或演示者注释；你无需计划每张幻灯片。使用你自己的代理而不是应用程序，以 `/hyperframes` 开始消息。",
-     "列出观众的姓名以及演示后应更改的内容。如果它应该在没有人在场的情况下从头到尾播放，请制作一个[视频](https://hyperframes.heygen.com/workflows.md)：一副牌还不能导出为 MP4。"
+     "给智能体演示应达的材料与决策：智能体确认受众、主诉，以及是否需要显现、分支或演讲者备注，每页内容你无需排好。用自家智能体而非应用时，以 `/hyperframes` 开头。",
+     "点名受众姓名，以及演示后希望听众改变什么。若要无人值守从头播到尾就做[视频](https://hyperframes.heygen.com/workflows.md)，牌组还不能直接导出 MP4。"
     ],
     "codeBlocks": [
      {
       "code": "Turn this product strategy outline into a presentation for our leadership review: [paste outline]",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
    {
-    "h": "一套好的演示是如何打造的",
+    "h": "一套好演示怎么做",
     "p": "",
     "paras": [
-     "要手动更改顺序、注释、显示或分支，请使用浏览器编辑器中的[幻灯片面板](https://hyperframes.heygen.com/studio/export.md#build-a-slideshow)。"
+     "要手改顺序、备注、显现或分支，用浏览器编辑器里的[演示面板](https://hyperframes.heygen.com/studio/export.md#build-a-slideshow)。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "**每张幻灯片一个主张**，并用一张视觉效果来证明这一点。",
-     "**显示**演示者何时应一次添加一个想法。",
-     "**分支和热点**用于可选细节，因此即使没有人打开它们，主要故事仍然有效。",
-     "**演讲者备注** 帮助演示者而不是重复幻灯片。"
+     "**每页一主张**，配一张视觉证据。",
+     "**显现**在演示者恰当时一次加一个想法。",
+     "**分支与热点**放可选细节，不碰主故事也能讲通。",
+     "**演讲者备注**为讲者服务，不复读页面。"
     ]
    },
    {
     "h": "提示有效",
     "p": "",
     "paras": [
-     "按名称询问该套牌的活动部分：“一次显示一个项目符号”、“从热点分支到详细幻灯片”、“添加演讲者注释”。一次提示即可提供完整的宣传材料： 构建 5 张幻灯片的演示文稿，1920x1080。每张幻灯片一个想法，每个标题都是一个完整的句子主张（不是标签），重点在前。幻灯片 2 以片段形式一次揭示了三个痛点。幻灯片 3 显示了自下而上的市场数学（账户 × ACV），而不是纯粹的“\\$40B TAM”。向每张幻灯片添加演示者注释，并在幻灯片 3 上添加一个热点，该热点分支到“调整方法”详细幻灯片。我将用 `hyperframes present` 来呈现它。",
-     "这使得你可以点击浏览甲板，而不是视频。每次显示都是幻灯片内的一个停止点；热点会打开一张详细信息幻灯片，然后“后退”会返回到包含该幻灯片的幻灯片。"
+     "点名牌组活动部件：“一次显现一个 bullet”“从热点分岔到细节页”“加演讲者备注”。一次提示给全套：做 5 页 1920×1080 演示，每页一想法，标题即完整主张句（非标签），重点在前。页 2 分三次显现三个痛点；页 3 用自下而上市场账（账号数 × ACV），而非一句“$40B 市场”。每页加演讲者备注，页 3 挂热点分岔到“测算方法”细节页。用 `hyperframes present` 放映。",
+     "把牌组当翻页讲，不是播视频。每次显现都是页内停点，热点开细节页，“后退”回到含该页的组。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "呈现它",
+    "h": "放映它",
     "p": "",
     "paras": [
-     "打开本地链接并按 **P**（或单击 **呈现**）。观众获得清晰的全屏视图；你可以看到实时幻灯片、笔记、接下来的内容和计时器。在 Google Meet 中，分享观众**选项卡**；在“缩放”中，将该选项卡移动到其自己的窗口中并共享该窗口。",
-     "使用**下一步**逐步显示内容，包括最后一张幻灯片上的内容。一旦显示最后一张幻灯片的最后一张，“下一步”按钮就会消失。",
-     "[！警告] 不要在甲板上运行`hyperframes render`。它不会失败——套牌没有 主根组合，因此渲染仅解析**第一**幻灯片并且 默默地写下被截断的 MP4。你可以得到四十秒中的六秒 甲板上并没有警告任何东西丢失。",
-     "对于现场甲板使用 `hyperframes present` 或对于现场甲板使用`hyperframes snapshot` 每张幻灯片的剧照。"
+     "打开本地链接按 **P**（或点**放映**）。观众拿到干净全屏，你同时看到实时页、备注、下一页与计时器。Meet 分享选观众**选项卡**，Zoom 移到独立窗口再共享。",
+     "用**下一页**逐步放，包括末页内容。末页最后一项显现完，按钮消失。",
+     "提示：不要对牌组跑 `hyperframes render`。它不会报错——牌组没有根合成，渲染只取**第一**页，静默截掉成片，得 6 秒而非 40 秒，丢了什么不告知。",
+     "现场牌组用 `hyperframes present`，或 `hyperframes snapshot` 每页一张静帧。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes present <project-directory>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2201,8 +2206,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "同一请求，两个代理",
     "p": "",
     "paras": [
-     "我们向 Claude Code (Opus 5.5) 两次提出了相同的单段落请求：一次只安装了 Remotion 的官方代理技能，一次只安装了 HyperFrames。每次运行一次，无需重试，之后也不进行任何编辑。",
-     "为名为 Inkwell 的虚构笔记应用程序制作 15 秒 1920x1080 启动视频（口号：“写下来。查找” 稍后再说。”）。标志显示，三个简短的特征线，然后是带有标语的结束卡。没有声音。渲染最终的 MP4 到此文件夹中的 out.mp4。不要问我问题；自己做出选择。",
+     "同段求问 Claude Code (Opus 5.5) 两度：一供 Remotion 官技，一供 HyperFrames。各跑一回，不重，不改。",
+     "为虚构笔记 Inkwell 做 15 秒 1920x1080 发布片（签：“写下来。查找”稍后说”。标显、三短征行、签尾卡。无声。MP4 渲至此夹 `out.mp4`。勿问，自择。",
      "**远程**",
      "<video aria-label=\"Inkwell, made with Remotion\" src=\"https://static.heygen.ai/hyperframes-oss/docs/films/vs-remotion-v1.mp4\" poster=\"/public/images/films/vs-remotion-v1.jpg\" playsInline preload=\"metadata\" />",
      "**超级框架**",
@@ -2210,9 +2215,9 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "| |远程|HyperFrames |",
      "| - | - | - |",
      "|渲染 MP4 的时间到了 | 12 分 30 秒 | 11 分 50 秒 |",
-     "|写了什么| 10 个 TypeScript 文件，1,037 行 | 4 个 HTML 文件，822 行 |",
-     "|安装到项目中 |约 950 MB `node_modules` |什么都没有|",
-     "|声音|无 |它选择了一张音乐床和五种音效| 两个都是不错的视频；单次运行并不能决定质量。持续的区别在于你剩下的东西：一个用于继续在代码中构建的 React 项目，或者你可以在浏览器中打开、使用代理进行编辑或在 [Studio 应用程序](https://hyperframes.heygen.com/studio-app/index.md) 中不断更改的 HTML 文件。"
+     "|写了何 | 10 TS 档，1,037 行 | 4 HTML 档，822 行 |",
+     "|带进项 |约 950 MB `node_modules` | 无 |",
+     "|声|无 |自选乐床与五音效 | 双片皆可，一跑不定性。恒差在所留：一 React 续码工，或 HTML 开浏、代改、[Studio 应用](https://hyperframes.heygen.com/studio-app/index.md) 常更。"
     ],
     "codeBlocks": []
    },
@@ -2221,20 +2226,20 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "p": "",
     "paras": [
      "这是同样的三秒钟——一个淡入、保持和淡出的标题——用两种方式写成。这两个版本都没有为了表达观点而进行填充或削弱。",
-     "**远程。** 该分量是当前帧编号的函数。你自己以帧为单位进行计时数学计算。",
-     "另一个文件中的 C0 条目将其注册为 30fps、1280×720 的 90 帧。",
-     "**HyperFrames。** 标记声明事物何时出现在屏幕上。 GSAP 时间表声明了它们的移动方式。两者都存在于一个文件中。",
-     "这是除 `<Composition>` 样板文件之外的整个文件。三个规则使其渲染：每个可见槽都带有 C1 和 C2 、C3 、C4 和 C5 ；时间线已创建**暂停**；并且它以与根元素相同的 id 注册在`<head>`上。错过最后一个，你就会得到一个没有运动的静止帧。 [HTML schema](https://hyperframes.heygen.com/reference/html-schema.md) 列出了每个属性。",
-     "这两个文件显然都不是更好。 Remotion 是一种可以在头脑中进行推理的纯函数。 HyperFrames 是一个可以在浏览器中打开并使用开发工具检查的页面。"
+     "**Remotion。** 件为今帧之函。时数算术，自具帧之。",
+     "他档 `Composition` 注册 30fps、1280×720、90 帧。",
+     "**HyperFrames。** 标宣何时入屏。GSAP 轴宣何动。同档兼之。",
+     "此为除 `<Composition>` 样外全档。三规动其渲：可见槽俱带 `data-hf-id` 与 `data-start`/`data-duration`；轴建**暂**；且以根同 id 注册 `<head>`。缺末得静帧。[HTML 式](https://hyperframes.heygen.com/reference/html-schema.md) 列诸属。",
+     "双档明无孰优。Remotion 为可脑推纯函。HyperFrames 为开浏可具检页。"
     ],
     "codeBlocks": [
      {
       "code": "import { AbsoluteFill, interpolate, useCurrentFrame } from \"remotion\";\n\nexport const TitleCard = () => {\n  const frame = useCurrentFrame();\n\n  // fade in over frames 0-15, hold to 75, fade out by 90\n  const opacity = interpolate(frame, [0, 15, 75, 90], [0, 1, 1, 0], {\n    extrapolateLeft: \"clamp\",\n    extrapolateRight: \"clamp\",\n  });\n\n  return (\n    <AbsoluteFill\n      style={{ backgroundColor: \"#0a0a0a\", justifyContent: \"center\", alignItems: \"center\" }}\n    >\n      <div style={{ fontSize: 160, fontWeight: 800, color: \"#fff\", opacity }}>HELLO</div>\n    </AbsoluteFill>\n  );\n};",
-      "file": "TSX THEME={NULL}"
+      "file": "tsx"
      },
      {
       "code": "<style>\n  #stage { position: relative; width: 1280px; height: 720px; overflow: hidden; background: #0a0a0a; }\n  .clip  { position: absolute; inset: 0; display: grid; place-items: center; }\n  #title { font-size: 160px; font-weight: 800; color: #fff; opacity: 0; }\n</style>\n\n<div id=\"stage\" data-composition-id=\"title-card\" data-start=\"0\"\n     data-width=\"1280\" data-height=\"720\" data-duration=\"3\" data-fps=\"30\">\n  <div id=\"card\" class=\"clip\" data-start=\"0\" data-duration=\"3\" data-track-index=\"0\">\n    <div id=\"title\">HELLO</div>\n  </div>\n</div>\n\n<script src=\"https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js\"></script>\n<script>\n  // same fade, written in seconds instead of frames\n  const tl = gsap.timeline({ paused: true });\n  tl.to(\"#title\", { opacity: 1, duration: 0.5, ease: \"none\" }, 0);\n  tl.to(\"#title\", { opacity: 1, duration: 2.0, ease: \"none\" }, 0.5);\n  tl.to(\"#title\", { opacity: 0, duration: 0.5, ease: \"none\" }, 2.5);\n\n  window.__timelines = window.__timelines || {};\n  window.__timelines[\"title-card\"] = tl;\n</script>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -2245,10 +2250,10 @@ export const DOCS_FULL: Record<string, DocContent> = {
      "| |HyperFrames |远程|",
      "| - | - | - |",
      "|你写的是什么| HTML、CSS 和 JavaScript | React 和 TypeScript |",
-     "|运动如何计时？渲染器会暂停你的动画并“寻找”它 - 将其跳转到精确的时刻 - 在捕获每一帧之前 |你的代码读取帧编号并返回该帧的值 |",
+     "|动何计时 |渲暂停你动并“Seek”——跳确刻——后捕帧 | 你码读帧号回帧值 |",
      "|现有网页材料| HTML、CSS 和 GSAP 或 Lottie 动画通常接近原样 |重写为 React 组件 |",
      "|许可证| [Apache 2.0](https://github.com/heygen-com/hyperframes/blob/main/LICENSE) |它有自己的许可证——对个人和最多三人的公司免费，高于此则付费。查看[当前条款](https://www.remotion.pro/license) |",
-     "寻找模型是一个有趣的模型。由于 HyperFrames 驱动动画而不是观看时钟，因此 GSAP、Web 动画、Lottie 和其他浏览器运行时会确定性地渲染 — 每次都会显示相同的帧。请参阅[帧适配器](https://hyperframes.heygen.com/concepts/frame-adapters.md)和[确定性渲染](https://hyperframes.heygen.com/concepts/determinism.md)。",
+     "Seek 模有意。HyperFrames 驱画非视钟，故 GSAP、Web 动、Lottie 诸浏运定渲——每回同帧。见[帧配](https://hyperframes.heygen.com/concepts/frame-adapters.md) 与[定渲](https://hyperframes.heygen.com/concepts/determinism.md)。",
      "这两个项目都附带了可视化编辑器，并且都将更改保存回源。 [HyperFrames 浏览器编辑器](https://hyperframes.heygen.com/studio.md) 编辑渲染器捕获的相同 DOM。 Remotion Studio 编辑 React 组合。它们不可互换，也不能取代编辑源代码以进行真正的结构更改。",
      "两者都在 AWS Lambda 上呈现。 HyperFrames 还在 HeyGen 的托管云和 Google Cloud Run 上进行本地渲染 - 请参阅[渲染路径](https://hyperframes.heygen.com/deploy/overview.md)。"
     ],
@@ -2258,10 +2263,10 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "Remotion 做得更好",
     "p": "",
     "paras": [
-     "坦白地说，因为今天的选择很重要。",
-     "远程控制更古老，也更成熟。它有更多的模板、更多的教程、更多已解答的问题以及更多的生产历史。 Remotion Lambda 尤其是一个成熟的、有大量文档记录的渲染系统；我们的比较新。",
-     "如果你的团队已经编写了 React，Remotion 会免费为你提供组件、设计系统、图表库以及类型化、经过验证的组合输入。没什么可翻译的。",
-     "而且它的模型确实更容易记住。一个纯粹的帧数函数，没有时间线来注册，没有合同会出现微妙的错误。 HyperFrames 要求你遵守规则——暂停的时间线、没有挂钟、没有未种子的随机性——如果你不这样做，就会悄悄地中断。"
+     "直言，今日选要。",
+     "Remotion 更老更熟。模板、教程、已解问与产史皆多。Remotion Lambda 尤成文繁；我方新。",
+     "队已有 React，Remotion 馈件、设系、图库、型验组输。无译之需。",
+     "且其模更易记。纯帧函，无轴注，无约微错。HyperFrames 须守规——轴暂、无挂钟、无种未随——违则悄断。"
     ],
     "codeBlocks": []
    },
@@ -2269,8 +2274,8 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "HyperFrames 做得更好的地方",
     "p": "",
     "paras": [
-     "你不需要 React、构建步骤或组件重写。网站、HTML 原型、导出的设计或现有的浏览器动画已经接近合成。",
-     "它是为智能体进行创作而构建的。 [代理技能](https://hyperframes.heygen.com/guides/skills.md) 对框架的规则进行编码，因此代理可以编写有效的组合而不是猜测，然后人类可以在浏览器编辑器中编辑相同的文件。",
+     "React、构建步、件重写皆免。站、HTML 型、导出设、现浏动近合。",
+     "此为代创而造。[技](https://hyperframes.heygen.com/guides/skills.md) 码框规，代作有合非猜，人浏编同档。",
      "Apache 2.0 意味着没有席位数，也没有许可证审查。"
     ],
     "codeBlocks": []
@@ -2279,14 +2284,14 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "跨区域移动 Remotion 项目",
     "p": "",
     "paras": [
-     "有一条真正的迁移路径，而不是承诺。安装技能： 然后要求你的代理移植该组合物。它将 C0 和 C1 映射到时间线补间，将 C2 映射到剪辑，并将帧转换为秒。",
-     "越难的情况才是技能的重点。它拒绝翻译不适合的内容：基于 C0 或 C1 构建的 React 状态机、异步元数据、第三方 React UI 库。这些内容会被标记，而不是默默地误译。它还对自己的输出进行评分——它渲染两个版本并逐帧比较它们，并记下它丢弃的任何内容。",
+     "有一条真正的迁移路径，而不是承诺。装技：令代移合。它把 data-start/duration 映射轴缓，把 data-track-index 映剪，帧入秒。",
+     "难例正技之的。其拒不合者：`useState`/`useEffect` 机、异步元、他家件 UI 皆标，不默错译。自亦评己——渲双版逐帧较，弃者皆录。",
      "迁移是因为你的源材料或你的团队更适合这一侧。并不是因为某个框架看起来较新。"
     ],
     "codeBlocks": [
      {
       "code": "npx skills add heygen-com/hyperframes --skill remotion-to-hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2312,7 +2317,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "开始之前",
     "p": "",
     "paras": [
-     "或 Anthropic 控制台帐户。它的使用费用记入该帐户。"
+     "或 Anthropic 控制台账号，用量记其账。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -2325,24 +2330,34 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "安装",
     "p": "",
     "paras": [
-     "[选项卡] 插件（推荐） 在终端中运行上面的两个命令。然后开始新的Claude代码 会话，或在当前会话中运行 `/reload-plugins`。",
-     "要自行获取更新，请运行`/plugin`，打开**市场**，选择 **HyperFrames**，然后选择**启用自动更新**。看 [安装 HyperFrames 插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code) 进行手动更新和",
-     "移动。",
-     "[tab] 单机技能 在你的项目文件夹中运行它并选择 **核心技能**： ```bash 主题={null} npx 技能添加 heygen-com/hyperframes ```` 或者为你的用户安装核心集，不带选择器： ```bash 主题={null}",
-     "npxHyperFrames技能更新 ```` 之后开始新的Claude代码会话。看 [安装和更新代理技能](https://hyperframes.heygen.com/guides/skills.md)。"
+     "[tab] 插件（荐）：终端跑上二命，新起 Claude Code 话，或今话跑 `/reload-plugins`。自更：跑 `/plugin`，开**市场**，选 **HyperFrames**，选**启用自更**。手更与程见 [装插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code)。",
+     "[tab] 单技：项目夹跑之选 **核心**，新话续。见 [装更技](https://hyperframes.heygen.com/guides/skills.md)。"
     ],
-    "codeBlocks": []
+    "codeBlocks": [
+     {
+      "code": "claude plugin marketplace add heygen-com/hyperframes\nclaude plugin install hyperframes@hyperframes",
+      "file": "bash"
+     },
+     {
+      "code": "npx skills add heygen-com/hyperframes",
+      "file": "bash"
+     },
+     {
+      "code": "npx hyperframes skills update",
+      "file": "bash"
+     }
+    ]
    },
    {
     "h": "询问你的第一个视频",
     "p": "",
     "paras": [
-     "在空文件夹中打开 Claude Code 并粘贴： 对于独立技能，技能是`bash theme={null}\n> npx skills add heygen-com/hyperframes\n> `而不是`\n>\n> Or install the core set for your user, with no picker:\n>\n> `。将 URL 替换为你希望视频显示的页面。"
+     "空夹开 Claude Code 粘（插件）——单技则 `/hyperframes`："
     ],
     "codeBlocks": [
      {
       "code": "Using /hyperframes:hyperframes, make a 10-second product intro for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -2350,12 +2365,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "会发生什么",
     "p": "",
     "paras": [
-     "启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。",
-     "在同一对话中观看第一个版本并说出要更改的内容。"
+     "启或讲片，盘内造工。长事片先呈三线任选。",
+     "同话观首版，言改处。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "Claude Code 阅读适合你的视频类型（例如产品）的 HyperFrames 指南",
+     "Claude Code 读尔类 HyperFrames 指南",
      "它检查项目并打开本地预览。"
     ]
    },
@@ -2363,16 +2378,16 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "预览和渲染",
     "p": "",
     "paras": [
-     "要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你也可以要求 Claude Code 渲染它。"
+     "后重开览，盘内跑：浏编开览，可手改片。自渲 MP4：亦可令 Claude Code 渲之。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2380,7 +2395,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "更喜欢应用程序？",
     "p": "",
     "paras": [
-     "适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Claude Code 作为其代理。它会为你安装 Claude Code，并在一个窗口中为你提供聊天、预览和编辑器。要在 Claude 聊天应用程序内创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。"
+     "Mac/Win/Linux [Studio 应用](https://hyperframes.heygen.com/studio-app.md) 可径用 Claude Code 为代。为尔装 Code，一窗聊、览、编。聊内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。"
     ],
     "codeBlocks": []
    },
@@ -2388,13 +2403,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果出现问题",
     "p": "",
     "paras": [
-     "`bash theme={null}\n> npx hyperframes skills update\n> `。对于独立技能，请运行`\n>\n> Start a new Claude Code session afterwards. See\n> [Install and update agent skills](https://hyperframes.heygen.com/guides/skills.md).\n\n## Ask for your first video\n\nOpen Claude Code in an empty folder and paste:\n\n\nWith standalone skills, the skill is `。"
+     "按型修："
     ],
     "codeBlocks": [],
     "bullets": [
-     "**Claude Code 没有看到该技能。** 开始新会话或运行",
-     "**渲染失败。**运行` instead of\n`并修复它报告的内容。",
-     "**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。"
+     "**未见技。** 新起或跑 `npx hyperframes skills check`。",
+     "**渲败。** 跑 `npx hyperframes doctor` 修报。",
+     "**余问。** 见 [疑难](https://hyperframes.heygen.com/help.md)。"
     ]
    },
    {
@@ -2419,7 +2434,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "开始之前",
     "p": "",
     "paras": [
-     "帐户或 OpenAI API 密钥。它的使用费用记入该帐户。"
+     "账或 OpenAI 钥，用量记其账。"
     ],
     "codeBlocks": [],
     "bullets": [
@@ -2432,13 +2447,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "安装",
     "p": "",
     "paras": [
-     "运行上面的命令一次。稍后再次运行以更新技能。",
-     "要将技能保留在一个项目中，请在项目文件夹中运行此命令，然后在选择器中选择 **Core Skills** 和 **Codex**： 安装后启动新的 Codex 会话。请参阅【安装和更新代理技能】(https://hyperframes.heygen.com/guides/skills.md)进行检查和更新。"
+     "上命跑一回，后复跑翻技。",
+     "技留项：盘内跑此，选 **核心** 与 **Codex**。装后新起 Codex 话。验更见 [装更技](https://hyperframes.heygen.com/guides/skills.md)。"
     ],
     "codeBlocks": [
      {
       "code": "npx skills add heygen-com/hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2446,12 +2461,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "询问你的第一个视频",
     "p": "",
     "paras": [
-     "在空文件夹中打开 Codex 并粘贴： `npx hyperframes doctor` 将 HyperFrames 技能命名为“HyperFrames”技能。将 URL 替换为你希望视频显示的页面。"
+     "空夹开 Codex 粘：名技 hyperframes。将 URL 替尔欲片示页。"
     ],
     "codeBlocks": [
      {
       "code": "Use $hyperframes to make a 10-second product intro for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -2459,12 +2474,12 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "会发生什么",
     "p": "",
     "paras": [
-     "启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。",
-     "Codex 可能会在运行命令或使用网络之前询问。技能安装包、启动预览服务器并运行渲染器，因此请批准此文件夹的这些步骤。在同一对话中观看第一个版本并说出要更改的内容。"
+     "启或讲片，盘内造工。长事先三线任选。",
+     "Codex 行命或网前或询。技囊、启览服、驱渲，此夹批之。同话观首版，言改处。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "Codex 会读取适合你的视频类型（例如产品）的 HyperFrames 指南",
+     "Codex 读尔类指南",
      "它检查项目并打开本地预览。"
     ]
    },
@@ -2472,16 +2487,16 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "预览和渲染",
     "p": "",
     "paras": [
-     "要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你还可以要求 Codex 渲染它。"
+     "后重开览，盘内跑：浏编开览，手改片。自渲 MP4：可令 Codex 渲。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2489,7 +2504,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "更喜欢应用程序？",
     "p": "",
     "paras": [
-     "适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Codex 作为其代理。请参阅[连接你的代理](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。要在 ChatGPT 内部创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。"
+     "Mac/Win/Linux [Studio](https://hyperframes.heygen.com/studio-app.md) 可径用 Codex 为代。见[连代](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。ChatGPT 内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。"
     ],
     "codeBlocks": []
    },
@@ -2497,13 +2512,13 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "如果出现问题",
     "p": "",
     "paras": [
-     "`$hyperframes`。"
+     "按型修："
     ],
     "codeBlocks": [],
     "bullets": [
-     "**Codex 没有看到该技能。** 启动一个新会话，然后运行",
-     "**渲染失败。**运行`npx hyperframes skills check`并修复它报告的内容。",
-     "**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。"
+     "**Codex 未见技。** 新起跑",
+     "**渲败。**跑 `npx hyperframes skills check` 修报者。",
+     "**余问。** 见[疑难](https://hyperframes.heygen.com/help.md)。"
     ]
    },
    {
@@ -2525,26 +2540,42 @@ export const DOCS_FULL: Record<string, DocContent> = {
   "lede": "在项目里装 HyperFrames 技能，向 Cursor 智能体要视频：它在文件夹写 HTML 项目，开实时预览，在本机渲 MP4。",
   "sections": [
    {
-    "h": "安装",
+    "h": "准备工作",
     "p": "",
     "paras": [
-     "[选项卡] 项目技能 在项目文件夹中运行上面的命令。技能就这样 项目。重新加载光标或随后开始新的代理聊天。",
-     "[选项卡] 对于你的用户 为每个项目安装一次核心集： ```bash 主题={null} npxHyperFrames技能更新 ```` 安装 Cursor 后，会将技能链接到`npx hyperframes doctor`。",
-     "稍后再次运行以更新它们。",
-     "[标签] 插件 团队可以通过 Cursor 团队市场添加 HyperFrames 插件，或者 加载本地副本。请参阅[安装HyperFrames插件](https://hyperframes.heygen.com/guides/plugins.md#cursor)。"
+     "装好 HyperFrames 技能，打开 Cursor，智能体即按你的话写视频，预览并在本机渲 MP4。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "询问你的第一个视频",
+    "h": "安装",
     "p": "",
     "paras": [
-     "在空项目中打开新的代理聊天并粘贴： 将 URL 替换为你希望视频显示的页面。"
+     "[tab] 项目技能：在项目文件夹跑上方命令，技能随项目走，装完重载 Cursor 或新开一轮智能体对话。",
+     "[tab] 用户级：每个项目装一次核心集，Cursor 装有则链入 `~/.cursor/skills`，以后再跑即更新。",
+     "[tab] 插件：团队走 Cursor 团队市场加 HyperFrames 插件，或加载本地副本，见[装插件](https://hyperframes.heygen.com/guides/plugins.md#cursor)。"
+    ],
+    "codeBlocks": [
+     {
+      "code": "npx skills add heygen-com/hyperframes",
+      "file": "bash"
+     },
+     {
+      "code": "npx hyperframes skills update",
+      "file": "bash"
+     }
+    ]
+   },
+   {
+    "h": "要你的第一个视频",
+    "p": "",
+    "paras": [
+     "在新空项目开智能体新对话，粘贴："
     ],
     "codeBlocks": [
      {
       "code": "Using /hyperframes, make a 10-second product intro for https://example.com.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -2552,51 +2583,53 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "h": "会发生什么",
     "p": "",
     "paras": [
-     "启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。",
-     "代理运行终端命令来安装包、启动预览和渲染。当光标询问时批准它们。在同一个聊天中观看第一个版本并说出要更改的内容。"
+     "智能体读你的视频类型（如发布片或讲解片）的 HyperFrames 指南，在文件夹建工程。长故事型先给三条故事情节任选。",
+     "智能体跑终端命令装包、启预览、渲成片，Cursor 弹窗请批准。同对话看第一版，直接说改哪。"
     ],
     "codeBlocks": [],
     "bullets": [
-     "代理会阅读适合你的视频类型（例如产品）的 HyperFrames 指南",
-     "它检查项目并打开本地预览。"
+     "智能体读对应类型的 HyperFrames 指南。",
+     "工程检查完开本地预览。"
     ]
    },
    {
-    "h": "预览和渲染",
+    "h": "预览与渲染",
     "p": "",
     "paras": [
-     "要稍后重新打开预览，请在项目文件夹内的 Cursor 终端中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你也可以要求代理渲染它。"
+     "日后重开预览，在项目文件夹的 Cursor 终端跑：",
+     "预览开在浏览器编辑器，可手改。渲 MP4：",
+     "也可让智能体替你渲。"
     ],
     "codeBlocks": [
      {
       "code": "npx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
    {
-    "h": "更喜欢应用程序？",
+    "h": "更喜欢应用？",
     "p": "",
     "paras": [
-     "适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 为你提供在一个窗口中进行聊天、预览和编辑的功能。它运行 Claude Code、Codex 和其他代理，但不运行 Cursor。请参阅[连接你的代理](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。"
+     "Mac、Windows、Linux 的 [HyperFrames Studio 应用](https://hyperframes.heygen.com/studio-app.md) 把对话、预览、编辑收一窗。它跑 Claude Code、Codex 与其他智能体，不跑 Cursor。见[连接你的智能体](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。"
     ],
     "codeBlocks": []
    },
    {
-    "h": "如果出现问题",
+    "h": "出问题？",
     "p": "",
     "paras": [
-     "`bash theme={null}\n> npx hyperframes skills update\n> `（项目安装）或`\n>\n> When Cursor is installed, this links the skills into `（用户安装）包含`.\n> Run it again later to update them.\n\n> [tab] Plugin\n>\n> Teams can add the HyperFrames plugin through a Cursor team marketplace, or\n> load a local copy. See [Install the HyperFrames plugin](https://hyperframes.heygen.com/guides/plugins.md#cursor).\n\n## Ask for your first video\n\nOpen a new agent chat in an empty project and paste:\n\n\nReplace the URL with the page you want the video to show.\n\n## What happens\n\n1. The agent reads the HyperFrames guide for your kind of video, such as a product\n   launch or an explainer, and builds the project in your folder. For a longer\n   film that tells a story, it first offers three storylines to pick from.\n2. It checks the project and opens a local preview.\n\nThe agent runs terminal commands to install packages, start the preview, and\nrender. Approve them when Cursor asks. Watch the first version and say what to\nchange, in the same chat.\n\n## Preview and render\n\nTo reopen the preview later, run this in Cursor's terminal, inside the project\nfolder:\n\n\nThe preview opens in the browser editor, where you can also edit the video by\nhand. To make the MP4 yourself:\n\n\nYou can also ask the agent to render it.\n\n## Prefer an app?\n\nThe [HyperFrames Studio app](https://hyperframes.heygen.com/studio-app.md) for Mac, Windows and Linux gives you a chat, a\npreview, and an editor in one window. It runs Claude Code, Codex, and other\nagents, but not Cursor. See [Connect your agent](https://hyperframes.heygen.com/studio-app/connect-your-agent.md).\n\n## If something goes wrong\n\n* **The agent does not see the skill.** Start a new agent chat. Confirm that\n  `，然后运行` (project install) or `。"
+     "按类型修："
     ],
     "codeBlocks": [],
     "bullets": [
-     "**客服人员看不到技能。** 开始新的客服人员聊天。确认",
-     "**渲染失败。**运行` (user install)\n  contains `并修复它报告的内容。",
-     "**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。"
+     "**智能体看不到技能。** 新开一轮对话，确认 `.agents/skills`（项目装）或 `~/.cursor/skills`（用户装）含 `hyperframes`，再跑 `npx hyperframes skills check`。",
+     "**渲染失败。** 跑 `npx hyperframes doctor`，按报告修。",
+     "**其余。** 见[疑难解答](https://hyperframes.heygen.com/help.md)。"
     ]
    },
    {
@@ -2721,11 +2754,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div id=\"root\" data-composition-id=\"root\"\n     data-start=\"0\" data-width=\"1920\" data-height=\"1080\">\n  <img class=\"clip\" src=\"assets/logo.png\"\n       data-start=\"0\" data-duration=\"2\" data-track-index=\"0\" />\n  <video class=\"clip\" src=\"assets/video.mp4\"\n         data-start=\"2\" data-duration=\"3\" data-track-index=\"0\"></video>\n</div>",
-      "file": "HTML INDEX.HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "flowchart TD\n    A[\"index.html<br/>img: start 0, duration 2<br/>video: start 2, duration 3\"]\n    A --> B[\"One timeline, 5 seconds<br/>30 fps = 150 frames\"]\n    B --> C[\"frames 0-59<br/>image on screen\"]\n    B --> D[\"frames 60-149<br/>video on screen, playing<br/>from its own second 0\"]",
-      "file": "MERMAID THEME={NULL}"
+      "file": "mermaid"
      }
     ]
    },
@@ -2795,11 +2828,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  data-composition-id=\"card-pro\"\n  data-composition-src=\"compositions/card.html\"\n  data-start=\"0\"\n  data-duration=\"3\"\n  data-track-index=\"1\"\n  data-variable-values='{\"title\":\"Pro\",\"color\":\"#ff4d4f\"}'\n></div>\n<div\n  data-composition-id=\"card-enterprise\"\n  data-composition-src=\"compositions/card.html\"\n  data-start=\"card-pro\"\n  data-duration=\"3\"\n  data-track-index=\"1\"\n  data-variable-values='{\"title\":\"Enterprise\",\"color\":\"#22c55e\"}'\n></div>",
-      "file": "HTML INDEX.HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "<html data-composition-variables='[\n  {\"id\":\"title\",\"type\":\"string\",\"label\":\"Title\",\"default\":\"Fallback\"},\n  {\"id\":\"color\",\"type\":\"color\",\"label\":\"Color\",\"default\":\"#111827\"}\n]'>\n  <body>\n    <div data-composition-id=\"card\" data-width=\"1920\" data-height=\"1080\">\n      <h1 class=\"title\"></h1>\n\n      <style>\n        [data-composition-id=\"card\"] .title { color: var(--card-color, #111827); }\n      </style>\n\n      <script>\n        const { title, color } = __hyperframes.getVariables();\n        const root = document.querySelector('[data-composition-id=\"card\"]');\n        root.querySelector(\".title\").textContent = title;\n        root.style.setProperty(\"--card-color\", color);\n      </script>\n    </div>\n  </body>\n</html>",
-      "file": "HTML COMPOSITIONS/CARD.HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -2819,7 +2852,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div data-composition-id=\"globe\" data-width=\"1920\" data-height=\"1080\">\n  <script>\n    const texture = new THREE.TextureLoader().load(\n      __hyperframes.assetUrl(\"assets/earth.jpg\"),\n    );\n  </script>\n</div>",
-      "file": "HTML COMPOSITIONS/GLOBE/GLOBE.HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -2830,7 +2863,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes compositions",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -2862,7 +2895,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  id=\"intro\"\n  data-start=\"0\"\n  data-duration=\"4\"\n  data-track-index=\"0\"\n  src=\"./intro.mp4\"\n  muted\n  playsinline\n></video>\n<section id=\"result\" class=\"clip\" data-start=\"intro - 0.5\" data-duration=\"3\" data-track-index=\"1\">\n  The result\n</section>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -2876,11 +2909,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "#root {\n  position: relative;\n  background: #0a0a0a;\n}\n#backdrop {\n  position: absolute;\n  inset: 0;\n  background: #f5e6c8;\n  z-index: -1;\n}",
-      "file": "CSS THEME={NULL}"
+      "file": "css"
      },
      {
       "code": "#root {\n  isolation: isolate;\n}",
-      "file": "CSS THEME={NULL}"
+      "file": "css"
      }
     ]
    },
@@ -2893,7 +2926,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "data-start=\"intro\" data-start=\"intro + 0.5\" data-start=\"intro - 0.5\"",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -2934,7 +2967,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "flowchart TD\n    F[\"Frame 90\"] --> T\n    L[\"Locked before frame 0:<br/>fps, width, height, variables\"] --> T\n    T[\"t = 90 / fps<br/>integer math, never a clock\"] --> S[\"Every animation seeked<br/>to exactly t\"]\n    S --> P[\"The same pixels, every run\"]\n    S -.-> X[\"Breaks if a frame reads:<br/>Date.now, unseeded Math.random,<br/>or a mid-render fetch\"]",
-      "file": "MERMAID THEME={NULL}"
+      "file": "mermaid"
      }
     ],
     "bullets": [
@@ -2968,7 +3001,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --docker --output output.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3008,7 +3041,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { FrameAdapter, FrameAdapterContext } from \"@hyperframes/core\";\n\ntype FrameAdapter = {\n  id: string;\n  init?: (context: FrameAdapterContext) => Promise<void> | void;\n  getDurationFrames: () => number;\n  seekFrame: (frame: number) => Promise<void> | void;\n  destroy?: () => Promise<void> | void;\n};",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -3021,7 +3054,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createGSAPFrameAdapter } from \"@hyperframes/core\";\n\nconst adapter = createGSAPFrameAdapter({\n  id: \"intro\",\n  fps: 30,\n  timeline,\n});\n\nawait adapter.init?.({\n  compositionId: \"intro\",\n  fps: 30,\n  width: 1920,\n  height: 1080,\n});\n\nawait adapter.seekFrame(90); // three seconds",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -3092,7 +3125,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "project/\n├── BRIEF.md              what the video must communicate\n├── STORYBOARD.md         the planned sequence and review state\n├── SCRIPT.md             locked narration, when the video has it\n├── frame.md              visual direction, when the project needs one\n├── index.html            the main composition\n├── hyperframes.json      project settings\n├── compositions/         scenes and reusable visual parts\n├── assets/               images, video, audio, and fonts\n└── renders/              finished files",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -3107,11 +3140,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "flowchart LR\n    M[\"index.html<br/>the main composition\"]\n    M --> O[\"Opening<br/>0s - 4s\"]\n    M --> P[\"Product demo<br/>4s - 10s<br/>compositions/product-demo.html\"]\n    M --> C[\"Customer proof<br/>10s - 15s\"]\n    M --> Z[\"Closing<br/>15s - 18s\"]",
-      "file": "MERMAID THEME={NULL}"
+      "file": "mermaid"
      },
      {
       "code": "<div\n  data-composition-id=\"product-demo\"\n  data-composition-src=\"compositions/product-demo.html\"\n  data-start=\"4\"\n  data-duration=\"6\"\n  data-track-index=\"1\"\n></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -3124,7 +3157,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<img\n  id=\"product-shot\"\n  class=\"clip\"\n  data-start=\"2\"\n  data-duration=\"3\"\n  data-track-index=\"1\"\n  src=\"./assets/product.png\"\n/>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -3207,7 +3240,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<html\n  data-composition-variables='[\n  {\"id\":\"title\",\"type\":\"string\",\"label\":\"Title\",\"default\":\"Pro\"},\n  {\"id\":\"accent\",\"type\":\"color\",\"label\":\"Accent color\",\"default\":\"#6c5ce7\"},\n  {\"id\":\"logo\",\"type\":\"string\",\"label\":\"Logo\",\"default\":\"assets/logo.svg\"}\n]'\n></html>",
-      "file": "HTML COMPOSITIONS/CARD.HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -3248,7 +3281,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\"id\":\"appName\",\"type\":\"string\",\"label\":\"App name\",\n \"description\":\"Name of the brand this video promotes, credited in the corner of every banner.\",\n \"portrays\":[\"subject_name\"],\"default\":\"HyperFrames\"}",
-      "file": "HTML COMPOSITIONS/CARD.HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -3261,11 +3294,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<h1 data-var-text=\"title\">Pro</h1>\n\n<img data-var-src=\"logo\" src=\"assets/logo.svg\" alt=\"\" />\n\n<style>\n  .card-title {\n    color: var(--accent);\n  }\n</style>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "const { featured = false } = window.__hyperframes.getVariables();\ndocument.querySelector(\".badge\").hidden = !featured;",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ],
     "bullets": [
@@ -3284,11 +3317,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<html\n  data-composition-variables='[\n  {\"id\":\"welcomeClip\",\"type\":\"string\",\"label\":\"Welcome clip\",\"default\":\"assets/placeholder.mp4\"}\n]'\n>\n  <video\n    data-var-src=\"welcomeClip\"\n    src=\"assets/placeholder.mp4\"\n    data-start=\"0\"\n    data-track-index=\"0\"\n    playsinline\n  ></video>\n</html>",
-      "file": "HTML INDEX.HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "npx hyperframes render \\\n  --variables '{\"welcomeClip\":\"https://example.com/clips/northstar.mp4\"}' \\\n  --output northstar.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -3307,7 +3340,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  data-composition-id=\"card-pro\"\n  data-composition-src=\"compositions/card.html\"\n  data-start=\"0\"\n  data-duration=\"3\"\n  data-track-index=\"1\"\ndata-variable-values='{\"title\":\"Pro\",\"accent\":\"#ff4d4f\"}'\n></div>\n\n<div\n  data-composition-id=\"card-enterprise\"\n  data-composition-src=\"compositions/card.html\"\n  data-start=\"card-pro\"\n  data-duration=\"3\"\n  data-track-index=\"1\"\ndata-variable-values='{\"title\":\"Enterprise\",\"accent\":\"#22c55e\"}'\n></div>",
-      "file": "HTML INDEX.HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -3320,7 +3353,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render \\\n  --variables '{\"title\":\"Enterprise\",\"accent\":\"#22c55e\"}' \\\n  --strict-variables \\\n  --output enterprise.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3335,11 +3368,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "[\n  { \"name\": \"acme\", \"title\": \"Acme Pro\" },\n  { \"name\": \"northstar\", \"title\": \"Northstar Pro\" }\n]",
-      "file": "JSON ROWS.JSON THEME={NULL}"
+      "file": "json"
      },
      {
       "code": "npx hyperframes render \\\n  --batch rows.json \\\n  --strict-variables \\\n  --output \"renders/{name}.mp4\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3368,7 +3401,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3400,7 +3433,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run package:agent-plugin\nbun run package:codex-plugin",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -3466,11 +3499,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  name: \"my-feature\",\n  percentage: 0,\n  description: \"One line on what turning this on actually changes.\",\n  owner: \"your-handle\",\n  sunsetAfter: \"2026-12-01\",\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { isCanaryEnabled } from \"../telemetry/canary.js\";\n\nif (isCanaryEnabled(\"my-feature\")) {\n  // new path\n} else {\n  // existing path\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -3485,7 +3518,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "HF_CANARY_MY_FEATURE=on   # or off / true / false / 1 / 0 / yes / no",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3499,7 +3532,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "rm -rf ~/.hyperframes    # clears telemetry id, canary cohorts, and breaker state",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3577,7 +3610,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "registry/blocks/my-block/\n  my-block.html\n  registry-item.json\n\nregistry/components/my-effect/\n  my-effect.html\n  demo.html\n  registry-item.json",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -3592,7 +3625,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"$schema\": \"https://hyperframes.heygen.com/schema/registry-item.json\",\n  \"name\": \"my-block\",\n  \"type\": \"hyperframes:block\",\n  \"title\": \"My Block\",\n  \"description\": \"What this block does in one sentence\",\n  \"tags\": [\"category\", \"subcategory\"],\n  \"dimensions\": { \"width\": 1920, \"height\": 1080 },\n  \"duration\": 5,\n  \"params\": [\n    {\n      \"key\": \"--accent\",\n      \"label\": \"Accent\",\n      \"type\": \"color\",\n      \"default\": \"#ff4d4d\"\n    }\n  ],\n  \"files\": [\n    {\n      \"path\": \"my-block.html\",\n      \"target\": \"compositions/my-block.html\",\n      \"type\": \"hyperframes:composition\"\n    }\n  ]\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -3606,7 +3639,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"path\": \"assets/carousel-images/one.jpg\",\n  \"url\": \"https://static.heygen.ai/hyperframes-oss/registry-assets/deadbeefdeadbeef.jpg\",\n  \"target\": \"assets/carousel-images/one.jpg\",\n  \"type\": \"hyperframes:asset\"\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -3622,7 +3655,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"minCliVersion\": \"0.6.96\",\n  \"registryDependencies\": [\"grain-overlay\"],\n  \"deprecated\": \"Use my-block-v2 instead.\"\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -3661,15 +3694,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run lint:registry-items my-block",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes init scratch && cd scratch\nnpx hyperframes add my-block\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx tsx scripts/generate-catalog-pages.ts\nnpx tsx scripts/generate-catalog-previews.ts --only my-block",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3730,11 +3763,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run release:prepare 0.6.53",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "bun run release:prepare 0.6.53",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -3756,7 +3789,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run changelog:draft 0.6.53 --write --force",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3773,7 +3806,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run changelog:weekly --from 2026-06-01 --to 2026-06-07 --write",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -3843,7 +3876,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run release:prepare <version>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3857,11 +3890,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "git checkout next\nbun run set-version 0.4.25-alpha.1\ngit push origin next\ngit push origin v0.4.25-alpha.1",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npm install hyperframes@alpha\nnpm install @hyperframes/core@alpha",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3908,7 +3941,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun install\nbun run build",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3930,15 +3963,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "cd packages/cli\nbun link\n\nhyperframes --version\nwhich hyperframes",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "cd /path/to/a/video-project\nhyperframes lint\nhyperframes check\nhyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "cd /path/to/hyperframes/packages/cli\nbun unlink",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3951,7 +3984,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "node /path/to/hyperframes/packages/cli/dist/cli.js preview /path/to/a/video-project",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -3965,11 +3998,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "cd packages/cli\nnpm pack\nnpx ./hyperframes-<version>.tgz --help",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "kill \"$(lsof -ti tcp:<port> -sTCP:LISTEN)\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4025,11 +4058,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "git clone https://github.com/YOUR_USERNAME/hyperframes.git\ncd hyperframes\nbun install\nbun run build",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "bun run dev",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4043,15 +4076,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run lint\nbun run format:check\nbun run --filter '*' typecheck\nbun run test",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes lint ./my-video\nnpx hyperframes check ./my-video",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "bun run lint:registry-items              # every item\nbun run lint:registry-items my-block     # just one",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4118,7 +4151,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "┌──────────────────────────────────────────────────────────────────┐\n│ Step Functions state machine                                     │\n│   Plan → Map(N) RenderChunk → Assemble                           │\n└──────────────────────────────────────────────────────────────────┘\n                              │ dispatches by event.Action\n                              ▼\n┌──────────────────────────────────────────────────────────────────┐\n│ One Lambda function (packages/aws-lambda/dist/handler.zip)       │\n│   handler.mjs                                                    │\n│     ├─ Action=\"plan\"        → @hyperframes/producer/distributed  │\n│     ├─ Action=\"renderChunk\" → @hyperframes/producer/distributed  │\n│     └─ Action=\"assemble\"    → @hyperframes/producer/distributed  │\n│   bin/ffmpeg                — ffmpeg-static                      │\n│   node_modules/@sparticuz/chromium/ — Lambda-optimised Chromium  │\n└──────────────────────────────────────────────────────────────────┘\n                              │ pure functions over local paths\n                              ▼\n┌──────────────────────────────────────────────────────────────────┐\n│ S3 bucket — plan tarball + per-chunk outputs + final mp4         │\n└──────────────────────────────────────────────────────────────────┘",
-      "file": "EXAMPLE"
+      "file": "example"
      }
     ]
    },
@@ -4149,11 +4182,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes lambda deploy \\\n  --stack-name=hyperframes-prod \\\n  --region=us-east-1 \\\n  --memory=10240",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes lambda render ./my-project --width 1920 --height 1080 --wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4167,7 +4200,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes lambda sites create ./my-project\n# → Site ID: a1b2c3d4e5f6g7h8 (content-addressed)\n\nhyperframes lambda render ./my-project --site-id=a1b2c3d4e5f6g7h8 \\\n  --width 1920 --height 1080 --wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4189,7 +4222,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "cd packages/aws-lambda\nbun run build:zip                     # produces dist/handler.zip\ncd ../../examples/aws-lambda\nsam deploy \\\n  --stack-name=hyperframes-prod \\\n  --region=us-east-1 \\\n  --resolve-s3 \\\n  --capabilities CAPABILITY_IAM \\\n  --no-confirm-changeset \\\n  --parameter-overrides ChromeSource=sparticuz ReservedConcurrency=8",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -4208,7 +4241,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { App, CfnOutput, Stack } from \"aws-cdk-lib\";\nimport { HyperframesRenderStack } from \"@hyperframes/aws-lambda/cdk\";\n\nconst app = new App();\nconst stack = new Stack(app, \"MyApp\");\nconst render = new HyperframesRenderStack(stack, \"Render\", {\n  projectName: \"hyperframes\",\n  lambdaMemoryMb: 10240,\n  reservedConcurrency: 8,\n  chromeSource: \"sparticuz\",\n});\n\nnew CfnOutput(stack, \"RenderBucketName\", { value: render.bucket.bucketName });\nnew CfnOutput(stack, \"StateMachineArn\", { value: render.stateMachine.stateMachineArn });",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -4222,7 +4255,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Print an inline policy doc to attach to the IAM user that runs the CLI.\nhyperframes lambda policies user\n\n# Print { TrustRelationship, InlinePolicy } for a CloudFormation service role.\nhyperframes lambda policies role\n\n# Validate a checked-in policy still covers the CLI's needs (exit non-zero on missing).\nhyperframes lambda policies validate ./infra/iam/hyperframes-deploy.json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4235,7 +4268,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes lambda progress my-render-id\n# Status:    SUCCEEDED\n# Progress:  100%\n# Frames:    480 / 480\n# Lambdas:   5\n# Cost:      $0.0214 (Lambda $0.0210 + SFN $0.0004)\n# Output:    s3://hyperframes-renders/.../output.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4272,7 +4305,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun run --cwd packages/aws-lambda build:zip\nhyperframes lambda deploy --stack-name=<your-stack>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4298,7 +4331,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "render.renderFunction.addEnvironment(\"FFMPEG_PROCESS_TIMEOUT_MS\", \"600000\");",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -4356,19 +4389,19 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes auth login\nhyperframes cloud render",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes cloud render . \\\n  --composition compositions/intro.html \\\n  --output renders/intro.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes auth login --device",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "echo \"$HEYGEN_API_KEY\" | hyperframes auth login --api-key",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4387,7 +4420,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloud render --quality high --fps 60\nhyperframes cloud render --resolution 4k",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4401,11 +4434,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloud render --dry-run",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "/exports/\n/source-masters/",
-      "file": "GITIGNORE THEME={NULL}"
+      "file": "gitignore"
      }
     ]
    },
@@ -4420,11 +4453,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloud render \\\n  --variables '{\"title\":\"Q4 recap\",\"theme\":\"dark\"}' \\\n  --strict-variables",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes cloud render \\\n  --asset-id asst_abc123 \\\n  --variables '{\"title\":\"Customer update\"}'",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4437,11 +4470,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloud render \\\n  --callback-url https://example.com/hyperframes-hook \\\n  --no-wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes cloud list\nhyperframes cloud get hfr_abc123\nhyperframes cloud delete hfr_abc123",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4502,7 +4535,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloudrun deploy --project my-gcp-project",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4516,11 +4549,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloudrun render ./my-project \\\n  --width 1920 \\\n  --height 1080 \\\n  --wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes cloudrun render ./card-template \\\n  --width 1920 \\\n  --height 1080 \\\n  --variables '{\"name\":\"Ada\"}' \\\n  --wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4534,15 +4567,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloudrun sites create ./my-project",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes cloudrun render-batch ./card-template \\\n  --batch ./recipients.jsonl \\\n  --width 1920 \\\n  --height 1080 \\\n  --max-concurrent 10",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "{\"outputKey\":\"renders/ada.mp4\",\"variables\":{\"name\":\"Ada\"}}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -4556,7 +4589,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes cloudrun progress <execution-name>\nhyperframes cloudrun destroy --project my-gcp-project",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4613,7 +4646,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<!doctype html>\n<html lang=\"en\">\n  <body>\n    <div\n      id=\"stage\"\n      data-composition-id=\"intro\"\n      data-start=\"0\"\n      data-width=\"1920\"\n      data-height=\"1080\"\n      data-duration=\"10\"\n      data-fps=\"30\"\n      data-no-timeline\n    >\n      <h1 id=\"title\" class=\"clip\" data-start=\"0\" data-duration=\"10\" data-track-index=\"0\">Hello</h1>\n    </div>\n  </body>\n</html>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -4746,7 +4779,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes check\nnpx hyperframes render --output video.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4760,7 +4793,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createRenderJob, executeRenderJob } from \"@hyperframes/producer\";\n\nconst job = createRenderJob({ fps: 30, quality: \"standard\" });\nawait executeRenderJob(job, \"./project\", \"./video.mp4\");",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -4783,7 +4816,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes cloud render ./project --output video.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4805,7 +4838,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "CLI → Producer → Engine",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -4836,7 +4869,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<!doctype html>\n<html\n  data-composition-variables='[\n    {\"id\":\"title\",\"type\":\"string\",\"label\":\"Headline\",\"default\":\"Welcome\"},\n    {\"id\":\"accent\",\"type\":\"color\",\"label\":\"Accent\",\"default\":\"#6d5dfc\"}\n  ]'\n>\n  <body>\n    <div\n      id=\"stage\"\n      data-composition-id=\"welcome\"\n      data-start=\"0\"\n      data-width=\"1920\"\n      data-height=\"1080\"\n      data-duration=\"5\"\n      data-no-timeline\n      style=\"color:var(--accent)\"\n    >\n      <h1 data-var-text=\"title\">Welcome</h1>\n    </div>\n  </body>\n</html>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -4849,7 +4882,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes render ./my-template \\\n  --variables '{\"title\":\"Hello Ada\",\"accent\":\"#ff4d67\"}' \\\n  --strict-variables \\\n  --output renders/ada-preview.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4862,11 +4895,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes lambda render ./my-template \\\n  --width 1920 \\\n  --height 1080 \\\n  --variables '{\"title\":\"Hello Ada\",\"accent\":\"#ff4d67\"}' \\\n  --output-key renders/ada.mp4 \\\n  --wait",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes lambda progress <render-id>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4879,11 +4912,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes lambda sites create ./my-template",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes lambda render ./my-template \\\n  --site-id <site-id> \\\n  --width 1920 \\\n  --height 1080 \\\n  --variables '{\"title\":\"Hello Lin\"}'",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4898,15 +4931,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\"outputKey\":\"renders/ada.mp4\",\"variables\":{\"title\":\"Hello Ada\",\"accent\":\"#ff4d67\"}}\n{\"outputKey\":\"renders/lin.mp4\",\"variables\":{\"title\":\"Hello Lin\",\"accent\":\"#36b37e\"}}",
-      "file": "JSONL THEME={NULL}"
+      "file": "jsonl"
      },
      {
       "code": "hyperframes lambda render-batch ./my-template \\\n  --batch ./recipients.jsonl \\\n  --width 1920 \\\n  --height 1080 \\\n  --max-concurrent 10",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "hyperframes lambda render-batch ./my-template \\\n  --batch ./recipients.jsonl \\\n  --width 1920 \\\n  --height 1080 \\\n  --strict-variables \\\n  --dry-run \\\n  --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -4920,7 +4953,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"title\": \"Hello Ada\",\n  \"avatarUrl\": \"https://cdn.example.com/avatars/ada.png\"\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -5054,7 +5087,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun scripts/catalog/build-local-vectors.ts",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -5118,7 +5151,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes audio recording.wav --place-at 4 --skip-file-seconds 1800 --only moments",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -5151,7 +5184,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "HYPERFRAMES_NO_ORPHAN_CLEANUP=1 npx hyperframes preview ./my-video",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -5201,11 +5234,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{ \"transport\": { \"type\": \"ndjson-file\", \"path\": \"/absolute/events.ndjson\" } }",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      },
      {
       "code": "{\n  \"version\": 1,\n  \"type\": \"artifact.created\",\n  \"command\": \"snapshot\",\n  \"artifact\": { \"role\": \"contact-sheet\", \"path\": \"/project/.hyperframes/artifacts/snapshots/…/contact-sheet.jpg\", \"mediaType\": \"image/jpeg\" }\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -5219,7 +5252,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{ \"waitMs\": 90000 }",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -5237,7 +5270,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{ \"skipContrastInMotion\": true, \"findingFrames\": true, \"inspect\": true }",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -5292,15 +5325,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes init my-video --example blank\ncd my-video\nnpx hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "<div\n  id=\"root\"\n  data-composition-id=\"main\"\n  data-start=\"0\"\n  data-duration=\"10\"\n  data-width=\"1920\"\n  data-height=\"1080\"\n>\n  <div class=\"clip\" data-start=\"0\" data-duration=\"10\" data-track-index=\"1\">\n    <!-- Ordinary HTML, CSS, images, and timed media. -->\n  </div>\n</div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "npx hyperframes check\nnpx hyperframes render --output video.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -5353,7 +5386,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<!doctype html>\n<html lang=\"en\">\n  <body>\n    <div\n      id=\"main\"\n      data-composition-id=\"intro\"\n      data-start=\"0\"\n      data-duration=\"5\"\n      data-width=\"1920\"\n      data-height=\"1080\"\n      data-no-timeline\n    >\n      <img\n        id=\"product\"\n        class=\"clip\"\n        data-start=\"0\"\n        data-duration=\"5\"\n        data-track-index=\"1\"\n        src=\"./assets/product.png\"\n      />\n    </div>\n  </body>\n</html>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -5383,7 +5416,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes check\nnpx hyperframes render --output video.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -5398,7 +5431,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst html = `<div class=\"clip\" data-start=\"0\" data-duration=\"5\"\n  data-hf-id=\"hf-title\">Old title</div>`;\n\nconst comp = await openComposition(html);\ncomp.setText(\"hf-title\", \"A new title\");\nconst updatedHtml = comp.serialize();",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -5413,7 +5446,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<script\n  type=\"module\"\n  src=\"https://cdn.jsdelivr.net/npm/@hyperframes/player\"\n></script>\n\n<hyperframes-player\n  src=\"/compositions/intro.html\"\n  controls\n></hyperframes-player>",
-      "file": "HTML TITLE=\"INDEX.HTML\" THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -5442,7 +5475,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "composition → inspect or edit → play or render",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5477,7 +5510,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Literal paths, relative to the project root\nout.json\nscratch/",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5749,7 +5782,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Keep this scene's content, but rebuild its layout so the product stays readable at phone size.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5798,7 +5831,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Keep the same curved route, but make the move finish with the voiceover instead of two beats later.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5854,7 +5887,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Keep the current narration and scene order. Make this product panel readable\nat the final video size, and do not change the following scene.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5868,7 +5901,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "This appeared after I shortened the intro clip. I expected the title animation\nto keep its current timing. Fix the issue without changing the rest of the\nopening.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -5882,7 +5915,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6000,7 +6033,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes present <project-directory>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6071,7 +6104,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6255,7 +6288,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --resolution 4k --output final-4k.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6268,7 +6301,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes init my-video --resolution 4k",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6310,7 +6343,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "ffprobe -v error -select_streams v:0 \\\n  -show_entries stream=width,height final-4k.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6345,15 +6378,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes auth login\n# ✓ Signed in.",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes auth login --api-key            # hidden-input prompt\necho \"$HEYGEN_API_KEY\" | npx hyperframes auth login --api-key   # from stdin",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes auth status",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6488,7 +6521,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "uv sync\nsource .venv/bin/activate\nmodal setup\nmodal deploy src/app.py",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6506,7 +6539,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes init my-video\ncd my-video\nnpx hyperframes preview\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6588,7 +6621,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "export FIGMA_TOKEN=\"figd_…\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -6615,11 +6648,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes figma asset 'https://www.figma.com/design/KEY/Title?node-id=1-2'",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "imported image_007 → .media/images/image_007.svg\n<img src=\".media/images/image_007.svg\" alt=\"image_007\" data-figma-id=\"1:2\" />",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ],
     "bullets": [
@@ -6638,7 +6671,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes figma tokens KEY",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6652,7 +6685,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes figma component 'https://www.figma.com/design/KEY/Title?node-id=10-20'",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -6742,7 +6775,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <script src=\"https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js\"></script>\n  </head>\n  <body>\n    <div\n      id=\"root\"\n      data-composition-id=\"intro\"\n      data-start=\"0\"\n      data-duration=\"3\"\n      data-width=\"1920\"\n      data-height=\"1080\"\n    >\n      <h1 id=\"title\" class=\"clip\" data-start=\"0\" data-duration=\"3\" data-track-index=\"0\">\n        HyperFrames\n      </h1>\n    </div>\n\n    <script>\n      const timeline = gsap.timeline({ paused: true });\n\n      timeline.fromTo(\n        \"#title\",\n        { opacity: 0, y: 32 },\n        { opacity: 1, y: 0, duration: 0.6, ease: \"power3.out\" },\n        0,\n      );\n\n      window.__timelines = window.__timelines || {};\n      window.__timelines.intro = timeline;\n    </script>\n  </body>\n</html>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -6773,7 +6806,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const title = document.getElementById(\"title\");\nconst underline = document.getElementById(\"underline\");\ntitle.textContent = \"Build with HyperFrames\";\n\ndocument.fonts.load('700 64px \"LocalFace\"', title.textContent).then(() => {\n  underline.style.width = `${title.getBoundingClientRect().width}px`;\n\n  const timeline = gsap.timeline({ paused: true });\n  timeline.fromTo(\n    [\"#title\", \"#underline\"],\n    { opacity: 0, y: 32 },\n    { opacity: 1, y: 0, duration: 0.6, ease: \"power3.out\" },\n    0,\n  );\n\n  window.__timelines = window.__timelines || {};\n  window.__timelines.intro = timeline;\n});",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -6787,7 +6820,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div data-composition-id=\"demo\" data-duration=\"12\"></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -6800,7 +6833,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Do not do this.\ndocument.querySelector(\"video\").play();\ndocument.querySelector(\"audio\").currentTime = 5;",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -6813,7 +6846,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  data-composition-id=\"intro\"\n  data-composition-src=\"compositions/intro.html\"\n  data-start=\"2\"\n  data-duration=\"4\"\n></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -6826,7 +6859,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check\nnpx hyperframes snapshot --at 0,0.6,2.9",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6857,15 +6890,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --output final-hdr.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "ffprobe -v error -select_streams v:0 -show_entries \\\n  stream=codec_name,pix_fmt,color_space,color_primaries,color_transfer \\\n  final-hdr.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "codec_name=hevc\npix_fmt=yuv420p10le\ncolor_space=bt2020nc\ncolor_primaries=bt2020\ncolor_transfer=smpte2084",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -6933,11 +6966,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes add vfx-iphone-device",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes add html-in-canvas",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6952,7 +6985,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes browser ensure --force",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -6965,15 +6998,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<canvas id=\"capture\" layoutsubtree width=\"1920\" height=\"1080\">\n  <section id=\"source\">\n    <h1>Revenue: $4.2M</h1>\n  </section>\n</canvas>\n\n<canvas id=\"scene\" width=\"1920\" height=\"1080\"></canvas>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "var captureCanvas = document.getElementById(\"capture\");\nvar source = document.getElementById(\"source\");\nvar captureContext = captureCanvas.getContext(\"2d\");\n\nfunction supportsHtmlInCanvas() {\n  var probe = document.createElement(\"canvas\");\n  probe.setAttribute(\"layoutsubtree\", \"\");\n  var context = probe.getContext(\"2d\");\n\n  return \"layoutSubtree\" in probe && typeof context?.drawElementImage === \"function\";\n}\n\nif (supportsHtmlInCanvas()) {\n  captureContext.drawElementImage(source, 0, 0, 1920, 1080);\n} else {\n  // Draw a simpler canvas version or use a static image.\n}",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      },
      {
       "code": "var texture = new THREE.CanvasTexture(captureCanvas);\nvar material = new THREE.MeshBasicMaterial({ map: texture });",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -6987,7 +7020,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check\nnpx hyperframes render --output html-in-canvas.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7030,7 +7063,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "window.__hyperframes.registerFrameSource({\n  element: sceneHost,\n  ready: bridge.ready,\n  render: bridge.render,\n  dispose: bridge.dispose,\n  sourceRange: { start: 3, duration: 4, fps: 60 },\n});",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -7069,7 +7102,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  id=\"root\"\n  data-composition-id=\"main\"\n  data-width=\"1920\"\n  data-height=\"1080\"\n  data-duration=\"10\"\n  data-motion-blur=\"on\"\n>\n  ...\n</div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -7130,7 +7163,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7207,7 +7240,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --quality draft --output review.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7220,7 +7253,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --format webm --vp9-cpu-used 2 --output overlay.webm",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7260,11 +7293,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes lint\nnpx hyperframes check\nnpx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7284,7 +7317,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Transparent web overlay\nnpx hyperframes render --format webm --output overlay.webm\n\n# ProRes editing file\nnpx hyperframes render --format mov --output master.mov\n\n# Short looping preview\nnpx hyperframes render --format gif --fps 15 --output preview.gif\n\n# RGBA frames in a directory\nnpx hyperframes render --format png-sequence --output frames\n\n# HLS VOD stream in a directory\nnpx hyperframes render --format hls --output stream",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7300,11 +7333,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --format webm --output overlay.webm\nnpx hyperframes render --format mov --output overlay.mov",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "ffmpeg -c:v libvpx-vp9 -i overlay.webm -frames:v 1 -pix_fmt rgba overlay-frame.png",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7318,7 +7351,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --format hls --output stream\nnpx hyperframes render --format hls --hls-segment-seconds 6 --output stream",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7343,15 +7376,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --format mov --prores-profile hq --output edit.mov",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --keyframe-interval 2 --max-bitrate 8M --output delivery.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "# Faster review version\nnpx hyperframes render --quality draft --output review.mp4\n\n# Larger final master\nnpx hyperframes render --quality high --output master.mp4\n\n# Explicit frame rate\nnpx hyperframes render --fps 60 --output final-60fps.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7377,7 +7410,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --chroma-subsampling 444 --output master.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7391,11 +7424,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --docker --output final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7408,7 +7441,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render \\\n  --composition compositions/intro.html \\\n  --output intro.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7431,15 +7464,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "ffprobe -v error -show_entries format_tags -of json out.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "{ \"hyperframes_renderer\": \"hyperframes\", \"hyperframes_version\": \"0.7.107\" }",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      },
      {
       "code": "ffmpeg -i out.mp4 -map_metadata -1 -c copy clean.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7555,7 +7588,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes doctor\nnpx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -7591,7 +7624,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div id=\"rw-main-text\" class=\"clip\" data-start=\"0\" data-duration=\"8.8\"\n     data-vfx-chain='{\"version\":1,\"nodes\":[{\"type\":\"displacement-map\",\"id\":\"n1\",\"params\":{\"useH\":1,\"useV\":2,\"edge\":0,\"expand\":true}},{\"type\":\"wave-warp\",\"id\":\"n2\",\"params\":{\"waveType\":1,\"direction\":0,\"speed\":1,\"pinning\":1,\"phase\":0}}]}'\n     style=\"--vfx-n1-maxH:150;--vfx-n1-maxV:150;--vfx-n2-height:21;--vfx-n2-width:93.4\">\n  <canvas layoutsubtree class=\"hf-vfx-src\"><div class=\"hf-vfx-in\">…layer content, with any PRECEDING CSS/SVG effects already applied on this wrapper…</div></canvas>\n  <canvas class=\"hf-vfx-out\"></canvas>\n</div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -7690,7 +7723,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "studio_look                                      -> find the headline and copy its handle\nstudio_select    {\"handle\":\"hf:abc123\"}          -> share the target with the person in Studio\nstudio_inspect   {\"handle\":\"hf:abc123\"}          -> read its styles, text, and capabilities\nstudio_set_style {\"handle\":\"hf:abc123\",\n                  \"styles\":{\"color\":\"red\"}}     -> write that source-backed element\nstudio_frame     {\"time\":2.4}                    -> capture the composition at 2.4 seconds",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -7712,11 +7745,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "chrome://flags/#enable-webmcp-testing",
-      "file": "TEXT CHROME://FLAGS THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "const tools = await document.modelContext.getTools();\nconsole.log(tools.map((tool) => tool.name));\n// [\"studio_look\", \"studio_select\", \"studio_seek\", ...]",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -7788,7 +7821,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const KEY = \"hf-studio-ui-preferences\";\nconst prefs = JSON.parse(localStorage.getItem(KEY) ?? \"{}\");\nlocalStorage.setItem(KEY, JSON.stringify({ ...prefs, agentToolsEnabled: false }));\nlocation.reload();",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -7867,7 +7900,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes@latest upgrade --project . --check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8079,7 +8112,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8132,11 +8165,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div id=\"video-wrapper\">\n  <video src=\"./assets/video.mp4\" style=\"width:100%;height:100%\"></video>\n</div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "tl.to(\"#video-wrapper\", { width: 500, height: 280, x: 1200 }, 2);",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -8158,7 +8191,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes compositions",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8172,7 +8205,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<h1 class=\"clip\" data-start=\"2\" data-duration=\"5\" data-track-index=\"0\">\n  Hello\n</h1>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -8186,7 +8219,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const timeline = gsap.timeline({ paused: true });\nwindow.__timelines = window.__timelines || {};\nwindow.__timelines[\"my-video\"] = timeline;",
-      "file": "JAVASCRIPT THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -8210,7 +8243,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes preview --background --port 4567",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8225,15 +8258,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes doctor",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes snapshot --at 0,3,8",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8247,7 +8280,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes init my-video",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8261,15 +8294,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "brew install ffmpeg",
-      "file": "BASH MACOS THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "sudo apt install ffmpeg",
-      "file": "BASH UBUNTU OR DEBIAN THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "# Download a 64-bit Windows build from:\n# https://ffmpeg.org/download.html#build-windows\n# Then add its bin directory to PATH.",
-      "file": "POWERSHELL WINDOWS THEME={NULL}"
+      "file": "powershell"
      }
     ]
    },
@@ -8300,7 +8333,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --docker --output output.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8324,7 +8357,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  data-composition-id=\"promo\"\n  data-no-timeline\n  data-width=\"1920\"\n  data-height=\"1080\"\n  data-duration=\"6\"\n></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -8355,15 +8388,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "[hyperframes] browserGpuMode probe → software (WebGL unavailable)\n[hyperframes] WSL: the GPU check found no hardware GPU, so this render uses software WebGL ...",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "sudo usermod -aG render $USER\n# then, in Windows PowerShell:\nwsl --shutdown",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes render --output final.mp4",
-      "file": "POWERSHELL THEME={NULL}"
+      "file": "powershell"
      }
     ]
    },
@@ -8385,7 +8418,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes info",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -8423,11 +8456,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes feedback --rating 7 --comment \"The render finished, but the captions were missing.\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes feedback --comment \"MISSING FEATURE: trim a clip from the timeline | WORKAROUND: none\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    }
@@ -8445,7 +8478,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Make the product clip feel like a clean two-ink editorial print. Keep the label readable.\nThe interview looks too dark and slightly cold. Keep skin natural, no filtered look.\nPixelate the email address in the screen recording from 0:04 to 0:07.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -8568,7 +8601,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8589,7 +8622,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Run the HyperFrames checks, fix any failures, and show me the final preview.\nWhen I approve it, render an MP4 to renders/final.mp4.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -8612,7 +8645,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes render --output renders/final.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8664,7 +8697,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes publish",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8677,7 +8710,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes doctor\nnpx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8839,11 +8872,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes remove-background subject.mp4 -o subject.webm",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes remove-background subject.mp4 -o subject.webm --background-output plate.webm",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -8897,7 +8930,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Use assets/product-tour.mp4 from 00:04 to 00:10, muted.\nCrop around the editor canvas and place it under the captions.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -8920,7 +8953,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<img class=\"clip\" src=\"assets/logo.svg\"\n     data-start=\"0\" data-duration=\"3\" data-track-index=\"1\" />\n\n<video class=\"clip\" src=\"assets/product-tour.mp4\" muted playsinline\n       data-start=\"3\" data-duration=\"6\" data-media-start=\"4\" data-track-index=\"0\"></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -8979,7 +9012,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Add a warm, unhurried narration of this script: [paste script]\nPut a calm piano bed under it, quieter while she speaks.\nA soft whoosh on each scene change, nothing else.\nCaptions: two lines at most, key words in the brand color.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -9005,7 +9038,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes transcribe interview.mp4 --language es",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9020,7 +9053,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes audio reference.mp4 --read --quality best",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9041,7 +9074,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<audio id=\"music\" src=\"music.wav\" data-start=\"0\" data-duration=\"30\" loop></audio>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -9144,7 +9177,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { deploySite, getRenderProgress, renderToLambda } from \"@hyperframes/aws-lambda/sdk\";\n\nconst site = await deploySite({\n  projectDir: \"./my-composition\",\n  bucketName: \"hyperframes-render-bucket\",\n});\n\nconst handle = await renderToLambda({\n  siteHandle: site,\n  bucketName: site.bucketName,\n  stateMachineArn: \"arn:aws:states:us-east-1:123456789012:stateMachine:hyperframes-render\",\n  config: {\n    fps: 30,\n    width: 1920,\n    height: 1080,\n    format: \"mp4\",\n    chunkSize: 240,\n    maxParallelChunks: 16,\n    runtimeCap: \"lambda\",\n  },\n});\n\nconst progress = await getRenderProgress({ executionArn: handle.executionArn });\nconsole.log(progress.status, progress.overallProgress, progress.costs.displayCost);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -9155,7 +9188,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { App, Stack } from \"aws-cdk-lib\";\nimport { HyperframesRenderStack } from \"@hyperframes/aws-lambda/cdk\";\n\nconst app = new App();\nconst stack = new Stack(app, \"VideoRender\");\n\nconst render = new HyperframesRenderStack(stack, \"HyperframesRender\", {\n  // reservedConcurrency: 8,\n  // lambdaMemoryMb: 10240,\n  // chromeSource: \"sparticuz\",\n});\n\nconsole.log(render.bucket.bucketName, render.stateMachine.stateMachineArn);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -9168,7 +9201,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "bun install\nbun run --cwd packages/aws-lambda build:zip\nbun run --cwd packages/aws-lambda verify:zip-size",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9244,15 +9277,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"name\": \"my-video\",\n  \"duration\": 10.5,\n  \"_meta\": {\n    \"version\": \"0.1.4\",\n    \"latestVersion\": \"0.1.5\",\n    \"updateAvailable\": true,\n    \"checkedAt\": \"2026-11-03T08:00:00.000Z\",\n    \"skillsOutdated\": 2,\n    \"skillsMissing\": 0,\n    \"updateNotice\": \"For the user: HyperFrames CLI 0.1.5 is available (this run is 0.1.4), and 2 installed HyperFrames skills are out of date. To update both, run: hyperframes update\"\n  }\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      },
      {
       "code": "{\n  \"ok\": false,\n  \"error\": {\n    \"code\": \"unknown_flag\",\n    \"message\": \"Unknown flag: --search\",\n    \"hint\": \"Did you mean --query? Its flags: --type, --tag, --json, --human-friendly, --query, --yes, --on-device. Run 'hyperframes catalog --help' for what each does.\"\n  }\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      },
      {
       "code": "  Update available: 0.1.4 → 0.1.5\n  Run: npx hyperframes@latest",
-      "file": "EXAMPLE"
+      "file": "example"
      }
     ]
    },
@@ -9280,7 +9313,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Default: centered Inter blank. Non-TTY skips the wizard.\nnpx hyperframes init my-video\n\n# Start from a video file\nnpx hyperframes init my-video --video video.mp4 --non-interactive\n\n# With the Tailwind browser runtime\nnpx hyperframes init my-video --tailwind",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9298,7 +9331,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes add claude-code-window          # a block\nnpx hyperframes add shader-wipe                 # a component\nnpx hyperframes add captions                    # every block with this tag\nnpx hyperframes add shader-wipe --dir ./my-video\nnpx hyperframes add shader-wipe --no-clipboard --json   # headless / CI",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9313,7 +9346,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes catalog                          # table of everything\nnpx hyperframes catalog --type block --tag social\nnpx hyperframes catalog --json\nnpx hyperframes catalog --human-friendly         # picker; installs on select",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9352,19 +9385,19 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes capture https://stripe.com\nnpx hyperframes capture https://linear.app -o linear-capture\nnpx hyperframes capture https://example.com --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "◇  Captured Stripe | Financial Infrastructure → capture\n\n  Screenshots: 12\n  Assets: 45\n  Dropped: 9 (6 size-floor, 3 cap-reached)\n  Sections: 15\n  Fonts: sohne-var",
-      "file": "EXAMPLE"
+      "file": "example"
      },
      {
       "code": "HYPERFRAMES_CAPTURE_PROXY=http://127.0.0.1:3128 npx hyperframes capture https://stripe.com",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "{\n  \"assets\": 45,\n  \"dropped\": { \"size-floor\": 6, \"budget-exhausted\": 0, \"cap-reached\": 3, \"unavailable\": 0 }\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -9378,7 +9411,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes capture --local-file ./upload/index.html -o upload-capture --json\nnpx hyperframes capture --local-file ./site/pages/about.html --local-root ./site",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9405,7 +9438,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Local transcription\nnpx hyperframes transcribe audio.mp3\nnpx hyperframes transcribe video.mp4 --model medium.en --language en\n\n# Import from another tool\nnpx hyperframes transcribe subtitles.srt\nnpx hyperframes transcribe openai-response.json\n\n# Export a caption sidecar, from a transcript or straight from the media\nnpx hyperframes transcribe transcript.json --to srt\nnpx hyperframes transcribe video.mp4 --to vtt",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9420,7 +9453,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes models list                      # Parakeet and any downloaded whisper models\nnpx hyperframes models list --json               # { ok, models: [{ engine, model, installed, runner, path }] }\nnpx hyperframes models install parakeet          # progress on stderr\nnpx hyperframes models install parakeet --json   # one JSON result",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9442,7 +9475,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes tts \"Welcome to HyperFrames\"\nnpx hyperframes tts \"Intro\" --voice bf_emma --output narration.wav\nnpx hyperframes tts \"Slow and clear\" --speed 0.8\nnpx hyperframes tts script.txt\nnpx hyperframes tts --list",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9471,7 +9504,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Default: VP9-with-alpha WebM, plays natively in HTML5\nnpx hyperframes remove-background avatar.mp4 -o transparent.webm\n\n# ProRes 4444 for an editing round-trip\nnpx hyperframes remove-background avatar.mp4 -o transparent.mov\n\n# One image → transparent PNG\nnpx hyperframes remove-background portrait.jpg -o cutout.png\n\n# Cutout and inverse-alpha background plate in one pass\nnpx hyperframes remove-background avatar.mp4 -o subject.webm --background-output plate.webm\n\n# What providers does this machine have?\nnpx hyperframes remove-background --info",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9501,7 +9534,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Find out what exists, then look at one family or effect\nnpx hyperframes media-treatment --capabilities --json\nnpx hyperframes media-treatment --capability kuwahara --json\n\n# Measure a selected local source\nnpx hyperframes media-treatment --selector '#hero' --analyze --json\n\n# Apply, preview, or clear\nnpx hyperframes media-treatment --selector '#hero' \\\n  --grading '{\"preset\":\"skin-soft\",\"intensity\":0.6}' --apply\nnpx hyperframes media-treatment --file compositions/scene.html --selector 'video' \\\n  --grading '{\"preset\":\"warm-daylight\"}' --dry-run --json\nnpx hyperframes media-treatment --selector '#hero' --clear",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9558,7 +9591,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Find or make one asset and save it in the project\nnpx hyperframes media-use resolve --type sfx --intent \"whoosh\"\nnpx hyperframes media-use resolve --type logo --entity linkedin --intent \"LinkedIn logo\"\nnpx hyperframes media-use resolve --type grade --intent \"warm daylight\" --json\n\n# Look at what you already have before fetching more\nnpx hyperframes media-use candidates --type bgm --intent \"upbeat tech launch\"\nnpx hyperframes media-use resolve --type bgm --reuse 06e052c0\n\n# Bring in a file you already have\nnpx hyperframes media-use resolve --type image --from ./photo.jpg\n\n# The voice clones and avatar looks on the account that makes the film\nnpx hyperframes media-use voices\nnpx hyperframes media-use avatars --limit 10\n\n# Check the setup, and see what has been used\nnpx hyperframes media-use doctor\nnpx hyperframes media-use stats --days 7",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9575,11 +9608,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes beats [dir]\nnpx hyperframes beats [dir] --json   # { ok, file, count, bpm }\nnpx hyperframes beats <file> --json  # { ok, file, count, bpm, beatTimes }",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "{\n  \"version\": 1,\n  \"audio\": \"music.wav\",\n  \"beats\": [{ \"time\": 2.027, \"strength\": 0.924 }]\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -9595,7 +9628,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes audio sfx/whoosh.mp3                  # one file, in file seconds\nnpx hyperframes audio sfx/hit.wav sfx/whoosh.mp3      # several files, one report\nnpx hyperframes audio sfx/hit.wav --place-at 4.2      # not in the film yet: where it lands if it starts at 4.2 s\nnpx hyperframes audio --element '#riser'              # one clip of the film, in film seconds\nnpx hyperframes audio --at 12                         # every sound playing at 12 s\nnpx hyperframes audio --range 10,14 --only onsets     # every hit between 10 and 14 s",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -9633,11 +9666,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes audio refs/episode.mp4 --read                 # the whole recording\nnpx hyperframes audio refs/episode.mp4 --read --range 60,70   # only what overlaps 60–70 s",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "  uv init --bare ~/.beat-this\n  uv add --project ~/.beat-this \"beat-this @ git+https://github.com/CPJKU/beat_this\" torch torchaudio soundfile\n  ~/.beat-this/.venv/bin/python -c \"from beat_this.inference import load_checkpoint; load_checkpoint('small0')\"\n  export HYPERFRAMES_BEAT_THIS_PYTHON=~/.beat-this/.venv/bin/python",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ],
     "bullets": [
@@ -9671,7 +9704,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Measure only (the default)\nnpx hyperframes normalize-audio --reference target-audio --target user-audio\n\n# Persist the computed gain on #user-audio\nnpx hyperframes normalize-audio --reference target-audio --target user-audio --write\n\n# Agent-readable result\nnpx hyperframes normalize-audio --reference target-audio --target user-audio --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9704,11 +9737,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes preview [dir]\nnpx hyperframes preview --port 4567\nnpx hyperframes preview --background     # keep running after the command exits\nnpx hyperframes preview --foreground     # stay attached in a non-interactive shell\nnpx hyperframes preview --status --json  # inspect a managed preview from an agent\nnpx hyperframes preview --list           # every running preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "HYPERFRAMES_PREVIEW_ALLOWED_HOSTS=demo.tunnels.example hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9724,11 +9757,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes present [dir]\nnpx hyperframes present [dir] --port 3004",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "HYPERFRAMES_PREVIEW_ALLOWED_HOSTS=demo.tunnels.example hyperframes present",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9751,7 +9784,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes publish [dir]\nnpx hyperframes publish --yes\nnpx hyperframes publish --update <url-or-id>\nnpx hyperframes publish --space <space-id>",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9774,11 +9807,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes .               # the project in the current directory\nnpx hyperframes ./my-video      # any folder that isn't a command name\nnpx hyperframes open            # the same, naming the command\nnpx hyperframes open --json     # for agents",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes catch-up\nnpx hyperframes catch-up ./my-video\nnpx hyperframes catch-up --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9794,11 +9827,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint [dir]\nnpx hyperframes lint [dir] --verbose   # include info-level findings\nnpx hyperframes lint [dir] --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "◆  Linting my-project/index.html\n\n  ✗ missing_gsap_script: Composition uses GSAP but no GSAP script is loaded.\n  ⚠ video_missing_muted [clip-1]: <video id=\"clip-1\"> has data-start but declares neither muted nor data-has-audio. If the file has sound, add data-has-audio=\"true\" (the sound stays on this clip). If it is silent, add muted.\n\n◇  1 error(s), 1 warning(s)",
-      "file": "EXAMPLE"
+      "file": "example"
      }
     ]
    },
@@ -9849,7 +9882,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes check [dir]\nnpx hyperframes check [dir] --json         # {ok, browserSkipped, scope, lint, runtime, layout, motion, contrast, craft, audio, hdr, snapshots}\nnpx hyperframes check [dir] --snapshots\nnpx hyperframes check [dir] --at 1.5,4,7.25\nnpx hyperframes check [dir] --strict       # warnings fail too",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -9912,7 +9945,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\n  \"duration\": 6,\n  \"assertions\": [\n    { \"kind\": \"appearsBy\", \"selector\": \"#headline\", \"bySec\": 0.5 },\n    { \"kind\": \"before\", \"a\": \"#headline\", \"b\": \"#cta\" },\n    { \"kind\": \"staysInFrame\", \"selector\": \".card\" },\n    { \"kind\": \"keepsMoving\", \"withinSelector\": \".scene\" }\n  ]\n}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -9944,11 +9977,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes snapshot my-project --at 2.9,10.4,18.7\nnpx hyperframes snapshot my-project --frames 10\nnpx hyperframes snapshot my-project --zoom '#headline'\nnpx hyperframes snapshot my-project --at 1.5,4.3 --against ref.mp4\nnpx hyperframes snapshot my-project --review --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "◆  Capturing 3 frames at [2.9s, 10.4s, 18.7s] from my-project\n\n◇  3 snapshots saved to <project>/.hyperframes/artifacts/snapshots/<id>\n   .hyperframes/artifacts/snapshots/<id>/frame-00-at-2.9s.png\n   .hyperframes/artifacts/snapshots/<id>/frame-01-at-10.4s.png\n   .hyperframes/artifacts/snapshots/<id>/frame-02-at-18.7s.png",
-      "file": "EXAMPLE"
+      "file": "example"
      }
     ]
    },
@@ -9973,7 +10006,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes keyframes [dir]\nnpx hyperframes keyframes [dir] --selector \"#card\" --shot card-motion.png",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10004,11 +10037,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes compare ./variant-a ./variant-b --labels \"A,B\"",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "npx hyperframes grade-compare --for frame.png --luts warm.cube,cool.cube",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10040,7 +10073,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes reverse start ref.mp4 --dir my-rebuild\nnpx hyperframes reverse start original.mp4   # resume inside the project",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10065,7 +10098,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes measure probe ref.mp4\nnpx hyperframes measure cuts ref.mp4\nnpx hyperframes measure frames ref.mp4 --events\nnpx hyperframes measure face ref.mp4 --start 1 --end 2.5",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10089,7 +10122,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes diff original.mp4 renders/final.mp4\nnpx hyperframes diff original.mp4 . --at 0.5,2.4,3.1\nnpx hyperframes diff original.mp4 renders/final.mp4 --segments segments.md --sbs",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10126,15 +10159,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes timeline [dir]\nnpx hyperframes timeline --json",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "timeline 10s\n\ngraphics (3)\n  |████████████████████████████████████████| #title title 0-10s\n  |████████████                            | #intro intro 0-3s\n  |                    ████████████        | #outro outro 5-8s",
-      "file": "EXAMPLE"
+      "file": "example"
      },
      {
       "code": "npx hyperframes timeline move '#outro' +1 --plan   # show the result and diff, write nothing\nnpx hyperframes timeline move '#outro' after:#intro\nnpx hyperframes timeline trim '#intro' --duration 2\nnpx hyperframes timeline split '#outro' 6.5\nnpx hyperframes timeline set '#music' volume=0.5\nnpx hyperframes timeline duplicate '#intro' --at 3\nnpx hyperframes timeline delete '#outro' --json\nnpx hyperframes timeline delete '#outro' --start 6 --end 7   # cut one second out",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10166,7 +10199,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes history                              # newest 20 entries\nnpx hyperframes history --since mine --who claude    # what changed since your last entry\nnpx hyperframes history begin --who claude --label \"Bigger title\"\nnpx hyperframes history end\nnpx hyperframes history undo --who claude            # undo your newest turn",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10230,7 +10263,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "# Fast iteration\nnpx hyperframes render --output output.mp4\n\n# Deterministic output\nnpx hyperframes render --docker --output output.mp4\n\n# Transparent, for overlays and lower thirds\nnpx hyperframes render --format webm --output overlay.webm\n\n# HLS VOD stream (output is a directory of playlists and .ts segments)\nnpx hyperframes render --format hls --output stream\n\nnpx hyperframes render --output output.mp4 --fps 60 --quality high\nnpx hyperframes render --gpu --output gpu.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10275,7 +10308,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type {\n  CanvasResolution,\n  CompositionSpec,\n  CompositionVariable,\n  TimelineCompositionElement,\n  TimelineElement,\n  TimelineMediaElement,\n  TimelineTextElement,\n} from \"@hyperframes/core\";",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10290,11 +10323,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { extractCompositionMetadata, parseHtml } from \"@hyperframes/core\";\n\nconst parsed = parseHtml(html);\nconst metadata = extractCompositionMetadata(html);\n\nconsole.log(metadata.compositionId, metadata.compositionDuration, metadata.variables);",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { generateHyperframesHtml } from \"@hyperframes/core\";\n\nconst html = generateHyperframesHtml(elements, 6, {\n  compositionId: \"product-intro\",\n  resolution: \"landscape\",\n  animations,\n  styles,\n});",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10307,11 +10340,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { getVariables } from \"@hyperframes/core\";\n\nconst { title } = getVariables<{ title: string }>();",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { formatVariableValidationIssue, validateVariables } from \"@hyperframes/core\";\n\nconst issues = validateVariables({ title: \"Launch day\" }, metadata.variables);\n\nfor (const issue of issues) {\n  console.warn(formatVariableValidationIssue(issue));\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10329,7 +10362,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { bundleToSingleHtml, compileHtml } from \"@hyperframes/core/compiler\";\n\nconst compiled = await compileHtml(rawHtml, \"./project\", async (mediaPath) =>\n  probeDuration(mediaPath),\n);\n\nconst bundled = await bundleToSingleHtml(\"./project\", {\n  entryFile: \"index.html\",\n});",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10342,7 +10375,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { validateHyperframeHtmlContract } from \"@hyperframes/core/compiler\";\n\nconst result = await validateHyperframeHtmlContract(html);\n\nif (!result.isValid) {\n  console.error(result.missingKeys);\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10355,7 +10388,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createGSAPFrameAdapter } from \"@hyperframes/core\";\n\nconst adapter = createGSAPFrameAdapter({\n  id: \"product-intro\",\n  fps: 30,\n  timeline,\n});\n\nawait adapter.init?.({\n  compositionId: \"product-intro\",\n  fps: 30,\n  width: 1920,\n  height: 1080,\n});\n\nawait adapter.seekFrame(42);",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10407,7 +10440,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  captureFrame,\n  closeCaptureSession,\n  createCaptureSession,\n  getCompositionDuration,\n  initializeSession,\n} from \"@hyperframes/engine\";\n\nconst fps = { num: 30, den: 1 };\nconst session = await createCaptureSession(\n  serverUrl,\n  \"./frames\",\n  {\n    width: 1920,\n    height: 1080,\n    fps,\n    format: \"jpeg\",\n  },\n);\n\ntry {\n  await initializeSession(session);\n  const duration = await getCompositionDuration(session);\n  const totalFrames = Math.ceil(duration * 30);\n\n  for (let frame = 0; frame < totalFrames; frame += 1) {\n    const time = frame / 30;\n    await captureFrame(session, frame, time);\n  }\n} finally {\n  await closeCaptureSession(session);\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10514,7 +10547,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "gcloud builds submit . \\\n  --tag REGION-docker.pkg.dev/PROJECT/REPO/hyperframes-render:TAG\n\nterraform -chdir=node_modules/@hyperframes/gcp-cloud-run/terraform init\nterraform -chdir=node_modules/@hyperframes/gcp-cloud-run/terraform apply \\\n  -var project_id=PROJECT \\\n  -var region=us-central1 \\\n  -var image=REGION-docker.pkg.dev/PROJECT/REPO/hyperframes-render:TAG",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -10538,7 +10571,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { getRenderProgress, renderToCloudRun } from \"@hyperframes/gcp-cloud-run/sdk\";\n\nconst handle = await renderToCloudRun({\n  projectDir: \"./my-composition\",\n  config: { fps: 30, width: 1920, height: 1080, format: \"mp4\" },\n  bucketName: \"hyperframes-render-my-project\",\n  projectId: \"my-project\",\n  location: \"us-central1\",\n  workflowId: \"hyperframes-render\",\n  serviceUrl: \"https://hyperframes-render-abc.us-central1.run.app\",\n});\n\nlet progress = await getRenderProgress({ executionName: handle.executionName });\nwhile (progress.status === \"running\") {\n  await new Promise((resolve) => setTimeout(resolve, 5000));\n  progress = await getRenderProgress({ executionName: handle.executionName });\n}\n\nconsole.log(progress.status, progress.outputFile, progress.costs.displayCost);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10593,7 +10626,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  lintHyperframeHtml,\n  lintMediaUrls,\n  lintProject,\n  shouldBlockRender,\n} from '@hyperframes/lint';\nimport type {\n  HyperframeLintResult,\n  HyperframeLintFinding,\n  HyperframeLintSeverity,   // \"error\" | \"warning\" | \"info\"\n  HyperframeLinterOptions,\n  ProjectLintResult,\n} from '@hyperframes/lint';",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10604,7 +10637,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { lintHyperframeHtml, lintMediaUrls } from '@hyperframes/lint';\n\nconst result = await lintHyperframeHtml(html, { filePath: 'index.html' });\n// result.ok, result.errorCount, result.warningCount, result.findings\n\nfor (const finding of result.findings) {\n  console.log(finding.severity, finding.code, finding.message);\n  // finding.file, finding.selector, finding.elementId, finding.fixHint, finding.snippet\n}\n\n// Additional media URL validation\nconst mediaFindings = await lintMediaUrls(html);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10617,7 +10650,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { lintProject, shouldBlockRender } from '@hyperframes/lint';\nimport type { ProjectLintResult } from '@hyperframes/lint';\n\nconst result: ProjectLintResult = await lintProject('./my-composition');\n// result.totalErrors, result.totalWarnings, result.results[]\n//   each result entry: { file, result: HyperframeLintResult }\n\nif (shouldBlockRender(true, false, result.totalErrors, result.totalWarnings)) {\n  throw new Error(`Lint found ${result.totalErrors} blocking error(s)`);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10631,7 +10664,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { lintHyperframeHtml, shouldBlockRender } from '@hyperframes/lint/browser';\n\nconst result = await lintHyperframeHtml(htmlString, { filePath: 'index.html' });\nif (!result.ok) {\n  for (const f of result.findings) console.warn(f.code, f.message);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10731,7 +10764,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  parseHtml,\n  extractCompositionMetadata,\n  validateCompositionHtml,\n} from '@hyperframes/parsers';\nimport type { ParsedHtml, CompositionMetadata } from '@hyperframes/parsers';\n\n// Parse HTML into structured data\nconst parsed: ParsedHtml = parseHtml(htmlString);\n// parsed.elements, parsed.gsapScript, parsed.styles, parsed.resolution, parsed.keyframes\n\n// Extract composition metadata (id, duration, dimensions, variables)\nconst meta: CompositionMetadata = extractCompositionMetadata(htmlString);\n\n// Validate HTML structure\nconst result = validateCompositionHtml(htmlString);\n// result.valid, result.errors",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10742,7 +10775,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  updateElementInHtml,\n  addElementToHtml,\n  removeElementFromHtml,\n} from '@hyperframes/parsers';\n\nconst updated = updateElementInHtml(html, 'el-1', { start: 5 });\nconst added = addElementToHtml(html, newElement);\nconst cleaned = removeElementFromHtml(html, 'el-1');",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10756,11 +10789,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { parseGsapScriptAcorn, extractGsapLabels } from '@hyperframes/parsers/gsap-parser-acorn';\nimport {\n  updateAnimationInScript,\n  addAnimationToScript,\n  removeAnimationFromScript,\n  updateKeyframeInScript,\n  addKeyframeToScript,\n  shiftPositionsInScript,\n  scalePositionsInScript,\n} from '@hyperframes/parsers/gsap-writer-acorn';\nimport type { GsapAnimation, GsapMethod, ParsedGsap } from '@hyperframes/parsers';\n\nconst parsed: ParsedGsap = parseGsapScriptAcorn(scriptContent);\n// parsed.animations, parsed.timelineVar, parsed.preamble, parsed.postamble\n\n// Mutation helpers operate on the script text and preserve unrelated code\nconst next = updateAnimationInScript(scriptContent, animationId, { duration: 2 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import {\n  serializeGsapAnimations,\n  getAnimationsForElementId,\n  validateCompositionGsap,\n  keyframesToGsapAnimations,\n  gsapAnimationsToKeyframes,\n} from '@hyperframes/parsers';",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10771,7 +10804,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  SUPPORTED_PROPS,    // animatable properties\n  SUPPORTED_EASES,    // available easing functions\n  PROPERTY_GROUPS,\n} from '@hyperframes/parsers/gsap-constants';\nimport type { PropertyGroupName } from '@hyperframes/parsers/gsap-constants';",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10784,7 +10817,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ensureHfIds, mintHfId } from '@hyperframes/parsers/hf-ids';\n\n// Stamp hf-id attributes onto every editable element in a document\nconst withIds = ensureHfIds(htmlString);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10795,7 +10828,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { generateSpringEaseData, SPRING_PRESETS } from '@hyperframes/parsers/spring-ease';",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10838,15 +10871,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<script type=\"module\" src=\"https://cdn.jsdelivr.net/npm/@hyperframes/player\"></script>\n\n<hyperframes-player\n  src=\"./my-composition/index.html\"\n  controls\n  style=\"width: 100%; max-width: 800px; aspect-ratio: 16/9\"\n></hyperframes-player>",
-      "file": "HTML TITLE=\"INDEX.HTML\" THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "import \"@hyperframes/player\";",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      },
      {
       "code": "<hyperframes-player\n  src=\"/compositions/intro.html\"\n  controls\n></hyperframes-player>",
-      "file": "HTML TITLE=\"INDEX.HTML\" THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -10891,7 +10924,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const player = document.querySelector(\"hyperframes-player\");\n\nplayer.play();\nplayer.pause();\nplayer.seek(2.5);\n\nplayer.currentTime = 5;\nplayer.playbackRate = 1.5;\nplayer.muted = true;\n\nconsole.log(player.duration, player.paused, player.ready);\nconsole.log(player.compositionWidth, player.compositionHeight);",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -10918,7 +10951,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const player = document.querySelector(\"hyperframes-player\");\n\nplayer.addEventListener(\"ready\", (event) => {\n  console.log(\"Duration:\", event.detail.duration);\n});\n\nplayer.addEventListener(\"timeupdate\", (event) => {\n  console.log(\"Time:\", event.detail.currentTime);\n});",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -10933,11 +10966,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const player = document.querySelector(\"hyperframes-player\");\nconst iframe = player.iframeElement;\n\n// Reach into the composition's DOM\niframe.contentDocument.querySelectorAll(\"[data-composition-id]\");\n\n// Read the runtime (GSAP timelines, element registry, etc.)\niframe.contentWindow.__timelines;",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      },
      {
       "code": "import { resolveIframe, useTimelinePlayer } from \"@hyperframes/studio\";\n\nconst { iframeRef } = useTimelinePlayer();\nconst player = document.createElement(\"hyperframes-player\");\nplayer.setAttribute(\"src\", src);\ncontainer.appendChild(player);\n\n// Forward the inner iframe so useTimelinePlayer can drive play/pause/seek.\niframeRef.current = resolveIframe(player);",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -10977,11 +11010,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  createRenderJob,\n  executeRenderJob,\n} from \"@hyperframes/producer\";\n\nconst job = createRenderJob({\n  fps: 30,\n  quality: \"standard\",\n  format: \"mp4\",\n});\n\nawait executeRenderJob(\n  job,\n  \"./my-hyperframes-project\",\n  \"./renders/video.mp4\",\n  (currentJob, message) => {\n    console.log(\n      `${Math.round(currentJob.progress)}% ${message}`,\n    );\n  },\n);",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const job = createRenderJob({\n  fps: { num: 30000, den: 1001 },\n  quality: \"high\",\n  entryFile: \"compositions/launch.html\",\n});",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11003,7 +11036,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const job = createRenderJob({\n  fps: 30,\n  quality: \"high\",\n  format: \"mp4\",\n  hdrMode: \"auto\",\n});",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11017,7 +11050,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const job = createRenderJob({\n  fps: 30,\n  format: \"hls\",\n  hlsSegmentSeconds: 4,\n});",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11046,7 +11079,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "{\"reference_background\":{\"kind\":\"solid\",\"rgb\":[10,46,138]}}",
-      "file": "JSON THEME={NULL}"
+      "file": "json"
      }
     ]
    },
@@ -11059,7 +11092,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const controller = new AbortController();\n\nawait executeRenderJob(\n  job,\n  \"./my-hyperframes-project\",\n  \"./renders/video.mp4\",\n  undefined,\n  controller.signal,\n);\n\n// Call controller.abort() from your cancellation path.",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11078,7 +11111,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { startServer } from \"@hyperframes/producer\";\n\nawait startServer({ port: 8080 });",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11154,7 +11187,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html);\n\nconst [headlineId] = comp.find({ text: \"Old headline\" });\nif (headlineId) {\n  comp.setText(headlineId, \"New headline\");\n  comp.setStyle(headlineId, {\n    color: \"#FFD60A\",\n    fontSize: \"96px\",\n  });\n}\n\nconst updatedHtml = comp.serialize();\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11167,7 +11200,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const allElements = comp.getElements();\nconst imageIds = allElements\n  .filter((element) => element.tag === \"img\")\n  .map((element) => element.id);\n\nfor (const id of imageIds) {\n  comp.setAttribute(id, \"loading\", \"eager\");\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11180,11 +11213,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setText(\"hf-title\", \"Launch day\");\ncomp.setStyle(\"hf-title\", { color: \"#ffffff\", transform: \"translateY(24px)\" });\ncomp.setAttribute(\"hf-logo\", \"src\", \"/assets/logo.png\");\ncomp.setTiming(\"hf-title\", { start: 0.5, duration: 2.5 });\ncomp.setVariableValue(\"brandColor\", \"#6C5CE7\");\ncomp.removeElement(\"hf-old-caption\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.batch(() => {\n  comp.setText(\"hf-title\", \"Version 2\");\n  comp.setStyle(\"hf-title\", { color: \"#22C55E\" });\n  comp.setTiming(\"hf-title\", { start: 1, duration: 3 });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11197,11 +11230,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setStyle\",\n  target: \"hf-card\",\n  styles: { borderRadius: \"24px\" },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const result = comp.can({\n  type: \"setGsapTween\",\n  animationId: \"anim-1\",\n  properties: { ease: \"power3.out\" },\n});\n\nif (result.ok) {\n  comp.setGsapTween(\"anim-1\", { ease: \"power3.out\" });\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11215,11 +11248,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\nimport { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nconst comp = await openComposition(html, {\n  persist: createFsAdapter({ root: \"./project\" }),\n  persistPath: \"index.html\",\n});\n\ncomp.setText(\"hf-title\", \"Saved title\");\nawait comp.flush();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.on(\"persist:error\", ({ error }) => {\n  console.error(\"Autosave failed:\", error.message);\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11232,11 +11265,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setText(\"hf-title\", \"Draft\");\ncomp.undo();\ncomp.redo();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const unsubscribe = comp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  saveToHostHistory({ patches, inversePatches, origin });\n});\n\nunsubscribe();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11250,7 +11283,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(templateHtml, {\n  overrides: {\n    \"hf-title.text\": \"Customer-specific title\",\n    \"hf-logo.attr.src\": \"/customers/acme/logo.png\",\n  },\n  history: false,\n});\n\ncomp.setStyle(\"hf-title\", { color: \"#0EA5E9\" });\n\nconst nextOverrides = comp.getOverrides();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11263,7 +11296,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition, createHeadlessAdapter } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html, {\n  preview: createHeadlessAdapter(),\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11337,11 +11370,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { init } from \"@hyperframes/shader-transitions\";\n\nconst timeline = init({\n  bgColor: \"#0a0a0a\",\n  accentColor: \"#ff6b2b\",\n  scenes: [\"scene-1\", \"scene-2\", \"scene-3\"],\n  transitions: [\n    { time: 3, shader: \"domain-warp\", duration: 0.8 },\n    { time: 8, shader: \"light-leak\", duration: 0.7 },\n  ],\n});\n\nwindow.__timelines ??= {};\nwindow.__timelines.hero = timeline;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const timeline = gsap.timeline({ paused: true });\ntimeline.from(\"#headline\", { opacity: 0, y: 40, duration: 0.6 });\n\ninit({\n  bgColor: \"#000000\",\n  scenes: [\"intro\", \"demo\", \"outro\"],\n  transitions: [\n    { time: 5, shader: \"cinematic-zoom\" },\n    { time: 12, shader: \"glitch\", duration: 0.5 },\n  ],\n  timeline,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11369,7 +11402,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { SHADER_NAMES } from \"@hyperframes/shader-transitions\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11382,7 +11415,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type TransitionConfig = {\n  time: number;\n  shader?: string;\n  duration?: number;\n  ease?: string;\n};\n\ntype HyperShaderConfig = {\n  bgColor: string;\n  accentColor?: string;\n  scenes: string[];\n  transitions: TransitionConfig[];\n  timeline?: gsap.core.Timeline;\n  compositionId?: string;\n  previewCaptureFps?: number;\n};",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11436,19 +11469,19 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { Hono } from \"hono\";\nimport {\n  createStudioApi,\n  type StudioApiAdapter,\n} from \"@hyperframes/studio-server\";\n\nexport function mountStudioApi(\n  app: Hono,\n  adapter: StudioApiAdapter,\n) {\n  app.route(\"/api\", createStudioApi(adapter));\n}",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "app.route(\n  \"/api\",\n  createStudioApi(adapter, { allowedHosts: [\"studio.example.com\"] }),\n);",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "HYPERFRAMES_PREVIEW_ALLOWED_HOSTS=demo.tunnels.example hyperframes preview",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "bundle: (dir, options) => bundleToSingleHtml(dir, { runtime: \"inline\", ...options }),",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -11486,7 +11519,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "gsapLocalRoot: \"/api/vendor/npm\", // serves /api/vendor/npm/gsap@3.15.0/dist/gsap.min.js",
-      "file": "TS THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -11509,11 +11542,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "HYPERFRAMES_GSAP_BASE_URL=http://127.0.0.1:8080/vendor/npm \\\n  npx hyperframes preview ./my-video",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "<mirror-root>/gsap@3.15.0/dist/gsap.min.js\n<mirror-root>/gsap@3.15.0/dist/CustomEase.min.js\n<mirror-root>/gsap@3.15.0/dist/MotionPathPlugin.min.js",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -11654,7 +11687,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import studioPreset from \"@hyperframes/studio/tailwind-preset\";\n\nexport default {\n  presets: [studioPreset],\n};",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -11667,7 +11700,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import {\n  GridOverlay,\n  PreviewGuides,\n  PreviewOverlayProvider,\n  SnapToolbar,\n} from \"@hyperframes/studio\";\nfunction Preview({ iframe }: { iframe: HTMLIFrameElement | null }) {\n  return (\n    <PreviewOverlayProvider iframe={iframe}>\n      <PreviewGuides />\n      <GridOverlay />\n      <SnapToolbar />\n    </PreviewOverlayProvider>\n  );\n}",
-      "file": "TSX THEME={NULL}"
+      "file": "tsx"
      }
     ]
    },
@@ -11724,7 +11757,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<audio\n  id=\"narration\"\n  src=\"assets/vo.wav\"\n  data-start=\"0\"\n  data-duration=\"12\"\n  data-fx-chain=\"{&quot;version&quot;:1,&quot;nodes&quot;:[\n    {&quot;type&quot;:&quot;highpass&quot;,&quot;id&quot;:&quot;n1&quot;,&quot;label&quot;:&quot;Remove Rumble&quot;,\n     &quot;params&quot;:{&quot;frequency&quot;:120,&quot;q&quot;:0.707,&quot;poles&quot;:&quot;2&quot;}},\n    {&quot;type&quot;:&quot;peaking&quot;,&quot;id&quot;:&quot;n2&quot;,&quot;label&quot;:&quot;Reduce Mud&quot;,\n     &quot;params&quot;:{&quot;frequency&quot;:250,&quot;gain&quot;:-3,&quot;q&quot;:1.2}},\n    {&quot;type&quot;:&quot;limiter&quot;,&quot;id&quot;:&quot;n3&quot;,&quot;enabled&quot;:false,\n     &quot;params&quot;:{&quot;limit&quot;:-1,&quot;attack&quot;:5,&quot;release&quot;:50,&quot;level_out&quot;:0}}\n  ]}\"\n></audio>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -11752,7 +11785,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "data-automation=\"{&quot;version&quot;:1,&quot;lanes&quot;:[\n  {&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:1},{&quot;t&quot;:2.5,&quot;v&quot;:0.4}]},\n  {&quot;target&quot;:&quot;fx.n2.gain&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:1,&quot;v&quot;:-6,&quot;curve&quot;:0.4}]}\n]}\"",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -11805,7 +11838,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "data-fx-carve=\"{&quot;enabled&quot;:true,&quot;sources&quot;:[&quot;voiceover&quot;],&quot;strength&quot;:0.25}\"",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -11823,7 +11856,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<style>hf-audio-group { display: none !important; }</style>\n\n<hf-audio-group id=\"voiceover\" data-label=\"Voiceover\" data-volume=\"1\"></hf-audio-group>\n\n<audio id=\"vo-intro\"  data-audio-group=\"voiceover\" src=\"assets/vo1.wav\" …></audio>\n<audio id=\"vo-middle\" data-audio-group=\"voiceover\" src=\"assets/vo2.wav\" …></audio>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -11843,7 +11876,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div id=\"root\" data-composition-id=\"main\" data-width=\"1920\" data-height=\"1080\"\n  data-fx-chain=\"{&quot;version&quot;:1,&quot;nodes&quot;:[\n    {&quot;type&quot;:&quot;truepeak&quot;,&quot;id&quot;:&quot;m1&quot;,&quot;label&quot;:&quot;Delivery ceiling&quot;,\n     &quot;params&quot;:{&quot;ceiling&quot;:-1.5,&quot;lookahead&quot;:3,&quot;release&quot;:80}}\n  ]}\"\n>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -12024,11 +12057,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "node <SKILL_DIR>/audio/scripts/carve.mjs --comp index.html",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "bed    music-bed (name looks like music)\nvoice  narration (only track left)\ncarve  strength 0.25\nbands  400Hz -6dB q1.4, 1000Hz -3dB q1.4, 1600Hz -3.17dB q1.4\nlevel  216-point envelope, floor -6 dB",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -12098,11 +12131,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  id=\"interview\"\n  src=\"./assets/interview.mp4\"\n  data-color-grading='{\"preset\":\"skin-soft\",\"intensity\":0.7}'\n></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "npx hyperframes media-treatment \\\n  --selector '#interview' \\\n  --grading '{\"preset\":\"skin-soft\",\"intensity\":0.7}' \\\n  --apply",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -12115,7 +12148,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<hf-color-group\n  id=\"tamer-cam\"\n  data-label=\"Tamer\"\n  data-color-grading='{\"preset\":\"skin-soft\",\"intensity\":0.7}'\n></hf-color-group>\n\n<video id=\"tamer-01\" data-color-group=\"tamer-cam\" src=\"./assets/tamer.mp4\" …></video>\n<video id=\"tamer-02\" data-color-group=\"tamer-cam\" src=\"./assets/tamer.mp4\" …></video>\n<video\n  id=\"tamer-03\"\n  data-color-group=\"tamer-cam\"\n  data-color-grading='{\"adjust\":{\"exposure\":0.3}}'\n  src=\"./assets/tamer.mp4\"\n  …\n></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ],
     "bullets": [
@@ -12137,11 +12170,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "--hf-color-grading-ascii\n--hf-color-grading-bloom\n--hf-color-grading-blur\n--hf-color-grading-dither\n--hf-color-grading-exposure\n--hf-color-grading-intensity\n--hf-color-grading-kuwahara\n--hf-color-grading-pixelate\n--hf-color-grading-lut-intensity",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "tl.to(\n  \"#plate\",\n  {\n    \"--hf-color-grading-pixelate\": 0.5,\n    duration: 3,\n    ease: \"power2.inOut\",\n  },\n  0.3,\n);",
-      "file": "JS THEME={NULL}"
+      "file": "js"
      }
     ]
    },
@@ -12159,7 +12192,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  src=\"media/room.mp4\"\n  muted\n  data-start=\"0\"\n  data-duration=\"4\"\n  data-track-index=\"2\"\n></video>\n<video\n  src=\"media/subject.webm\"\n  muted\n  data-start=\"0\"\n  data-duration=\"4\"\n  data-track-index=\"3\"\n></video>\n<video\n  src=\"media/subject.webm\"\n  muted\n  data-start=\"0\"\n  data-duration=\"4\"\n  data-track-index=\"4\"\n  style=\"clip-path: ellipse(9.8% 15.5% at 50.7% 14.5%)\"\n  data-color-grading='{\"intensity\":1,\"effects\":{\"pixelate\":0.5}}'\n></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12190,7 +12223,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<!doctype html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=1920, height=1080\" />\n    <script src=\"https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js\"></script>\n    <style>\n      body { margin: 0; }\n      #root {\n        position: relative;\n        width: 1920px;\n        height: 1080px;\n        overflow: hidden;\n      }\n      .clip {\n        position: absolute;\n        inset: 0;\n        display: grid;\n        place-items: center;\n      }\n    </style>\n  </head>\n  <body>\n    <div\n      id=\"root\"\n      data-composition-id=\"main\"\n      data-start=\"0\"\n      data-duration=\"5\"\n      data-width=\"1920\"\n      data-height=\"1080\"\n    >\n      <section\n        id=\"title-card\"\n        class=\"clip\"\n        data-start=\"0\"\n        data-duration=\"5\"\n        data-track-index=\"1\"\n      >\n        <h1 id=\"title\">Hello HyperFrames</h1>\n      </section>\n    </div>\n\n    <script>\n      window.__timelines = window.__timelines || {};\n      const timeline = gsap.timeline({ paused: true });\n      timeline.fromTo(\n        \"#title\",\n        { y: 48, opacity: 0 },\n        { y: 0, opacity: 1, duration: 0.6, ease: \"power3.out\" },\n        0.2,\n      );\n      window.__timelines.main = timeline;\n    </script>\n  </body>\n</html>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12247,7 +12280,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  id=\"demo\"\n  src=\"./assets/demo.mp4\"\n  data-start=\"0\"\n  data-duration=\"8\"\n  data-track-index=\"0\"\n  muted\n  playsinline\n></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12263,7 +12296,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  id=\"demo\"\n  src=\"./assets/demo.mp4\"\n  data-color-grading='{\n    \"preset\": \"clean-studio\",\n    \"intensity\": 0.8,\n    \"adjust\": { \"highlights\": -0.08, \"shadows\": 0.06 },\n    \"details\": { \"grain\": 0.12, \"vignette\": 0.08 },\n    \"effects\": { \"bloom\": 0.12 },\n    \"colorSpace\": \"rec709\"\n  }'\n></video>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12276,7 +12309,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<video\n  id=\"intro\"\n  data-start=\"0\"\n  data-duration=\"4\"\n  data-track-index=\"0\"\n  src=\"./intro.mp4\"\n  muted\n  playsinline\n></video>\n\n<section\n  id=\"result\"\n  class=\"clip\"\n  data-start=\"intro + 0.5\"\n  data-duration=\"3\"\n  data-track-index=\"0\"\n>\n  Result\n</section>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12290,11 +12323,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<div\n  id=\"pricing-scene\"\n  data-composition-id=\"pricing\"\n  data-composition-src=\"./compositions/pricing.html\"\n  data-start=\"4\"\n  data-duration=\"6\"\n  data-track-index=\"1\"\n  data-width=\"1920\"\n  data-height=\"1080\"\n></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "<template>\n  <style>\n    #root {\n      position: absolute;\n      inset: 0;\n    }\n  </style>\n\n  <div\n    id=\"root\"\n    data-composition-id=\"pricing\"\n    data-width=\"1920\"\n    data-height=\"1080\"\n  >\n    <!-- scene content -->\n  </div>\n\n  <script>\n    window.__timelines = window.__timelines || {};\n    const timeline = gsap.timeline({ paused: true });\n    // scene animation\n    window.__timelines.pricing = timeline;\n  </script>\n</template>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12307,11 +12340,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "<html\n  data-composition-variables='[\n    {\"id\":\"title\",\"type\":\"string\",\"label\":\"Title\",\"default\":\"Hello\"}\n  ]'\n>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      },
      {
       "code": "<div\n  data-composition-id=\"pricing\"\n  data-composition-src=\"./compositions/pricing.html\"\n  data-variable-values='{\"title\":\"Built for teams\"}'\n  data-start=\"0\"\n  data-duration=\"6\"\n  data-track-index=\"1\"\n  data-width=\"1920\"\n  data-height=\"1080\"\n></div>",
-      "file": "HTML THEME={NULL}"
+      "file": "html"
      }
     ]
    },
@@ -12341,7 +12374,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes lint\nnpx hyperframes check",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -12792,7 +12825,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { PersistAdapter } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12810,7 +12843,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PersistAdapter {\n  read(path: string): Promise<string | undefined>;\n  write(path: string, content: string): Promise<void>;\n  flush(): Promise<void>;\n  listVersions(path: string): Promise<PersistVersionEntry[]>;\n  loadFrom(path: string, versionKey: string): Promise<string | undefined>;\n  on(event: \"persist:error\", handler: (event: PersistErrorEvent) => void): () => void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12824,7 +12857,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PersistVersionEntry {\n  /** Opaque key identifying this version (adapter-defined format). */\n  key: string;\n  /** Full HTML content — may be omitted by adapters that load content lazily via loadFrom(). */\n  content?: string;\n  timestamp?: number;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12837,7 +12870,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { PreviewAdapter } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12863,15 +12896,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PreviewAdapter {\n  elementAtPoint(x: number, y: number, opts?: { atTime?: number }): ElementAtPointResult | null;\n  isProvablyEmptyAt?(x: number, y: number, opts?: PaintQueryOptions): boolean;\n  applyDraft(id: string, props: DraftProps): void;\n  commitPreview(): void;\n  cancelPreview(): void;\n  select(ids: string[], opts?: { additive?: boolean }): void;\n  on(event: \"selection\", handler: (ids: string[]) => void): () => void;\n  attachSync(comp: Composition): () => void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "if (preview.isProvablyEmptyAt?.(x, y)) passThrough();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const adapter = createIframePreviewAdapter(iframe, dispatch);\nconst comp = await openComposition(html, { preview: adapter });\nconst detach = adapter.attachSync(comp);\n\n// later, if the host tears down the preview:\ndetach();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12884,7 +12917,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface ElementAtPointResult {\n  id: string;\n  tag: string;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12897,7 +12930,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface DraftProps {\n  dx?: number;\n  dy?: number;\n  width?: number;\n  height?: number;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12914,7 +12947,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PaintQueryOptions {\n  fullBleedFraction?: number;\n  addressableOnly?: boolean;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12930,11 +12963,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createMemoryAdapter } from \"@hyperframes/sdk\";\n\nfunction createMemoryAdapter(): PersistAdapter & { injectFault(message: string): void };",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const persist = createMemoryAdapter();\n\nconst comp = await openComposition(html, { persist });\ncomp.setText(\"hf-title\", \"Hello\");\nawait comp.flush();\n\nconst saved = await persist.read(\"composition.html\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12947,7 +12980,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nfunction createFsAdapter(opts: FsAdapterOptions): PersistAdapter;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12964,11 +12997,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface FsAdapterOptions {\n  /** Root directory for composition files. */\n  root: string;\n  /** Max versions to keep per file. Default: 20. */\n  maxVersions?: number;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\nimport { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nconst comp = await openComposition(html, {\n  persist: createFsAdapter({ root: \"./project\", maxVersions: 50 }),\n  persistPath: \"index.html\",\n});\n\ncomp.setText(\"hf-title\", \"Saved\");\nawait comp.flush();\n\n// List saved versions\nconst adapter = createFsAdapter({ root: \"./project\" });\nconst versions = await adapter.listVersions(\"index.html\");\nconst previous = await adapter.loadFrom(\"index.html\", versions[1].key);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -12985,11 +13018,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createHeadlessAdapter } from \"@hyperframes/sdk\";\n\nfunction createHeadlessAdapter(): PreviewAdapter;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { openComposition, createHeadlessAdapter } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html, {\n  preview: createHeadlessAdapter(),\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13005,15 +13038,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createIframePreviewAdapter } from \"@hyperframes/sdk\";\n\nfunction createIframePreviewAdapter(\n  iframe: HTMLIFrameElement,\n  dispatch?: (op: EditOp) => void,\n): PreviewAdapter;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import {\n  elementPaintsInk,\n  compositionPaintsAt,\n  imageAlphaOpaqueAt,\n  alphaIsOpaque,\n  mapPointToImagePixel,\n} from \"@hyperframes/sdk/adapters/iframe\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { openComposition, createIframePreviewAdapter } from \"@hyperframes/sdk\";\n\nconst iframe = document.querySelector<HTMLIFrameElement>(\"#preview-frame\")!;\n// Optional, and dispatched with `?.` — the callback cannot fire before\n// openComposition() resolves, but strict TypeScript cannot prove that and\n// rejects a definite `let` captured before assignment (TS2454).\nlet comp: Awaited<ReturnType<typeof openComposition>> | undefined;\nconst preview = createIframePreviewAdapter(iframe, (op) => comp?.dispatch(op));\ncomp = await openComposition(html, { preview });\n\n// Hit-test at pointer position\nconst hit = preview.elementAtPoint(pointerX, pointerY);\nif (hit) {\n  preview.select([hit.id]);\n\n  // Drag: call applyDraft at 60fps, commitPreview on pointer-up\n  preview.applyDraft(hit.id, { dx: 12, dy: -5 });\n  preview.commitPreview();\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -13064,7 +13097,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { resolveElementAffordances } from \"@hyperframes/sdk/editing\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13075,7 +13108,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function resolveElementAffordances(\n  liveEl: HTMLElement,\n  modelEl: Pick<HyperFramesElement, \"text\" | \"animationIds\" | \"start\"> | null,\n  ctx?: AffordanceContext,\n): EditingAffordances",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -13093,7 +13126,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface AffordanceContext {\n  isCompositionHost?: boolean;      // default false\n  isCompositionRoot?: boolean;      // default false\n  isInsideLockedComposition?: boolean; // default false\n  isMasterView?: boolean;           // default false\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13104,7 +13137,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface EditingAffordances {\n  capabilities: DomEditCapabilities;\n  sections: EditingSectionApplicability;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13117,7 +13150,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface DomEditCapabilities {\n  canSelect: boolean;\n  canEditStyles: boolean;\n  /** Apply a non-destructive clip-path crop. */\n  canCrop: boolean;\n  /** Directly editable authored left/top style fields. */\n  canMove: boolean;\n  /** Directly editable authored width/height style fields. */\n  canResize: boolean;\n  /** Canvas translate-drag maps here, not to canMove. */\n  canApplyManualOffset: boolean;\n  canApplyManualSize: boolean;\n  canApplyManualRotation: boolean;\n  /** Set when canEditStyles / canMove / canResize is false; explains why. */\n  reasonIfDisabled?: string;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13130,7 +13163,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface EditingSectionApplicability {\n  text: boolean;         // true when the element has editable text content\n  media: boolean;        // true for <video> and <audio>\n  colorGrading: boolean; // true for <video> and <img> — element-level only\n  timing: boolean;       // true when data-start is present or animationCount > 0\n  animation: boolean;    // true when animationCount > 0\n  layout: boolean;       // position, size, rotation, and stacking controls apply\n  style: boolean;        // fill, radius, stroke, shadow, blend, and clip controls apply\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13141,7 +13174,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition, createIframePreviewAdapter } from \"@hyperframes/sdk\";\nimport { resolveElementAffordances } from \"@hyperframes/sdk/editing\";\n\nconst iframe = document.querySelector<HTMLIFrameElement>(\"#composition-frame\")!;\nconst preview = createIframePreviewAdapter(iframe, (op) => comp.dispatch(op));\nconst comp = await openComposition(compositionHtml, { preview });\n\nfunction onElementSelected(hfId: string) {\n  // 1. Get the live DOM element from the iframe.\n  const liveEl = iframe.contentDocument?.querySelector<HTMLElement>(\n    `[data-hf-id=\"${hfId}\"]`,\n  );\n  if (!liveEl) return;\n\n  // 2. Get the SDK model element — null for script-generated elements.\n  const modelEl = comp.getElement(hfId);\n\n  // 3. Resolve affordances.\n  const { capabilities, sections } = resolveElementAffordances(liveEl, modelEl);\n\n  // 4. Render controls conditionally.\n  renderInspector({ capabilities, sections, hfId });\n}\n\nfunction renderInspector({\n  capabilities,\n  sections,\n  hfId,\n}: {\n  capabilities: ReturnType<typeof resolveElementAffordances>[\"capabilities\"];\n  sections: ReturnType<typeof resolveElementAffordances>[\"sections\"];\n  hfId: string;\n}) {\n  // Show a disabled-state tooltip when editing is locked.\n  if (!capabilities.canEditStyles && capabilities.reasonIfDisabled) {\n    showDisabledBanner(capabilities.reasonIfDisabled);\n    return;\n  }\n\n  // Style panel — always show when editing is allowed.\n  if (capabilities.canEditStyles) {\n    showStylePanel(hfId);\n  }\n\n  // Position/size fields — only for absolutely positioned elements with px values.\n  if (capabilities.canMove) {\n    showPositionFields(hfId);\n  }\n  if (capabilities.canResize) {\n    showSizeFields(hfId);\n  }\n\n  // Canvas drag handles — use canApplyManualOffset, NOT canMove.\n  if (capabilities.canApplyManualOffset) {\n    showDragHandles(hfId);\n  }\n\n  // Section panels.\n  if (sections.text) showTextPanel(hfId);\n  if (sections.media) showMediaPanel(hfId);\n  if (sections.colorGrading && myFeatureFlags.colorGrading) showColorGradingPanel(hfId);\n  if (sections.timing) showTimingPanel(hfId);\n  if (sections.animation) showAnimationPanel(hfId);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13196,7 +13229,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition, createIframePreviewAdapter } from \"@hyperframes/sdk\";\n\n// Assume `compositionHtml` is the composition's source HTML string.\nconst iframe = document.querySelector<HTMLIFrameElement>(\"#composition-frame\")!;\n\n// Build the adapter first so you can pass it to openComposition.\n// The dispatch callback is called by commitPreview() after a drag completes.\nconst preview = createIframePreviewAdapter(iframe, (op) => {\n  comp.dispatch(op);\n});\n\nconst comp = await openComposition(compositionHtml, { preview });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13211,7 +13244,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const detach = preview.attachSync(comp);\n\n// later, when the editor unmounts or swaps compositions:\ndetach();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13226,7 +13259,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "iframe.addEventListener(\"load\", () => {\n  const frameDocument = iframe.contentDocument;\n  if (!frameDocument) return;\n\n  // Events inside an iframe do not bubble to the outer <iframe> element.\n  frameDocument.addEventListener(\"click\", (event) => {\n    const hit = preview.elementAtPoint(event.clientX, event.clientY);\n    if (hit) {\n      // hit.id  — the data-hf-id value\n      // hit.tag — the lowercased tag name (e.g. \"div\", \"img\", \"video\")\n      preview.select([hit.id]);\n    }\n  });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13240,7 +13273,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { resolveNearestHfElement } from \"@hyperframes/sdk\";\n\n// Inside the iframe's own document context:\niframeDoc.addEventListener(\"click\", (e) => {\n  const result = resolveNearestHfElement(\n    e.target as Element | null,\n    (el) => {\n      // Return false to treat this element as invisible and continue the walk.\n      const style = el.ownerDocument.defaultView?.getComputedStyle(el);\n      return style ? parseFloat(style.opacity) !== 0 : true;\n    },\n  );\n  if (result) {\n    // result.id, result.tag\n  }\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13260,7 +13293,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const wrapper = document.querySelector<HTMLElement>(\"#composition-wrapper\")!;\n\n/**\n * Host-page pointer coordinates → the iframe document's own client space, which is what\n * the paint query samples against. The iframe renders at the composition's native size and is\n * CSS-scaled to fit, so the on-screen scale has to be divided out — skip this and you\n * sample the wrong pixel, and pass-through toggles over the wrong regions.\n */\nfunction toCompositionPoint(clientX: number, clientY: number) {\n  const rect = iframe.getBoundingClientRect();\n  if (!rect.width || !rect.height) return null;\n  const scaleX = rect.width / compositionNativeWidth;\n  const scaleY = rect.height / compositionNativeHeight;\n  if (!scaleX || !scaleY) return null;\n  return { x: (clientX - rect.left) / scaleX, y: (clientY - rect.top) / scaleY };\n}\n\nfunction updatePassThrough(clientX: number, clientY: number, altKey: boolean) {\n  const point = toCompositionPoint(clientX, clientY);\n  // Alt is the escape hatch for grabbing the composition itself in an empty region.\n  // Every uncertain case — no point, still loading, adapter without the method — is\n  // falsy here, so the composition stays clickable rather than vanishing.\n  const passThrough =\n    !!point && !altKey && !!preview.isProvablyEmptyAt?.(point.x, point.y);\n  wrapper.style.pointerEvents = passThrough ? \"none\" : \"\";\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13276,7 +13309,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "let dragging = false;\nlet startX = 0;\nlet startY = 0;\nlet targetId: string | null = null;\n\niframe.addEventListener(\"load\", () => {\n  const frameDocument = iframe.contentDocument;\n  if (!frameDocument) return;\n\n  frameDocument.addEventListener(\"pointerdown\", (event) => {\n    const hit = preview.elementAtPoint(event.clientX, event.clientY);\n    if (!hit) return;\n\n    dragging = true;\n    targetId = hit.id;\n    startX = event.clientX;\n    startY = event.clientY;\n    // The target comes from the iframe's realm, so `instanceof Element` against\n    // this window's constructor is always false and capture would be skipped —\n    // then a pointer leaving the frame loses `pointerup` and drag state sticks.\n    if (event.target && \"setPointerCapture\" in event.target) {\n      (event.target as Element).setPointerCapture(event.pointerId);\n    }\n  });\n\n  frameDocument.addEventListener(\"pointermove\", (event) => {\n    if (!dragging || !targetId) return;\n    preview.applyDraft(targetId, {\n      dx: event.clientX - startX,\n      dy: event.clientY - startY,\n    });\n  });\n\n  frameDocument.addEventListener(\"pointerup\", () => {\n    if (!dragging || !targetId) return;\n    preview.commitPreview();\n    dragging = false;\n    targetId = null;\n  });\n\n  frameDocument.addEventListener(\"pointercancel\", () => {\n    preview.cancelPreview();\n    dragging = false;\n    targetId = null;\n  });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13290,7 +13323,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Replace selection\npreview.select([\"hf-title\"]);\n\n// Extend selection (e.g. shift-click)\npreview.select([\"hf-logo\"], { additive: true });\n\n// Clear selection\npreview.select([]);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13303,7 +13336,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(templateHtml, {\n  preview,\n  overrides: existingOverrides,\n  history: false,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13352,11 +13385,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setStyle(id: HfId, styles: Record<string, string | null>): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setStyle(\"hf-title\", { color: \"#FFD60A\", fontSize: \"96px\" });\ncomp.setStyle(\"hf-card\", { borderRadius: null }); // removes border-radius",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13369,11 +13402,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setText(id: HfId, value: string): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setText(\"hf-headline\", \"Product launch — June 2026\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13386,11 +13419,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setAttribute(id: HfId, name: string, value: string | null): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setAttribute(\"hf-logo\", \"src\", \"/assets/logo-v2.png\");\ncomp.setAttribute(\"hf-video\", \"autoplay\", null); // removes autoplay",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13403,11 +13436,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setTiming(id: HfId, timing: { start?: number; duration?: number; trackIndex?: number }): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setTiming(\"hf-title\", { start: 0.5, duration: 2.5 });\ncomp.setTiming(\"hf-cta\", { trackIndex: 1 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13420,11 +13453,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "removeElement(id: HfId): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.removeElement(\"hf-old-badge\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13437,11 +13470,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "addElement(parent: HfId | null, index: number, html: string): HfId",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const newId = comp.addElement(\"hf-scene\", 0, '<div class=\"clip\">New clip</div>');\ncomp.setText(newId, \"Inserted clip\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13455,11 +13488,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setVariableValue(id: string, value: string | number | boolean | FontValue | ImageValue): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setVariableValue(\"brandColor\", \"#6C5CE7\");\ncomp.setVariableValue(\"brandFont\", { name: \"Inter\", source: \"https://fonts.googleapis.com/css2?family=Inter\" });\ncomp.setVariableValue(\"heroImage\", { url: \"/assets/hero.jpg\", fit: \"cover\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13473,11 +13506,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getVariableValue(id: string, opts?: { base?: boolean }): string | number | boolean | FontValue | ImageValue | undefined",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const color = comp.getVariableValue(\"brandColor\"); // \"#6C5CE7\"",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13490,11 +13523,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "listVariables(): CompositionVariable[]",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "for (const v of comp.listVariables()) {\n  console.log(v.id, v.type, v.default);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13508,11 +13541,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "declareVariable(declaration: CompositionVariable): void\nupdateVariableDeclaration(id: string, declaration: CompositionVariable): void\nremoveVariableDeclaration(id: string): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.declareVariable({ id: \"title\", type: \"string\", label: \"Title\", default: \"Hello\" });\ncomp.updateVariableDeclaration(\"title\", { id: \"title\", type: \"string\", label: \"Headline\", default: \"Hello\" });\ncomp.removeVariableDeclaration(\"title\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13525,7 +13558,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getVariableDeclarations(): CompositionVariable[]\ngetVariableValues(overrides?: Record<string, unknown>): Record<string, unknown>\nvalidateVariableValues(values: Record<string, unknown>): VariableValidationIssue[]\ngetVariableUsage(): VariableUsageReport",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13538,7 +13571,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setPreviewVariables(values: Record<string, unknown> | null): boolean",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13551,11 +13584,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getElementTimings(): Record<HfId, ElementTimingSnapshot>",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const timings = comp.getElementTimings();\nfor (const [id, t] of Object.entries(timings)) {\n  console.log(id, t.enterAt, t.exitAt, t.labels);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13568,11 +13601,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setElementTiming(map: Record<HfId, { start?: number; duration?: number; trackIndex?: number }>): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setElementTiming({\n  \"hf-title\":   { start: 0,   duration: 2   },\n  \"hf-caption\": { start: 1.5, duration: 1.5 },\n  \"hf-cta\":     { start: 3,   duration: 2   },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13585,11 +13618,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setHold(id: HfId, hold: ElasticHold): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setHold(\"hf-hero\", { start: 2, end: 5, fill: \"freeze\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13602,11 +13635,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "addGsapTween(target: HfId, tween: GsapTweenSpec): string",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const animId = comp.addGsapTween(\"hf-title\", {\n  method: \"from\",\n  position: 0,\n  duration: 0.6,\n  ease: \"power3.out\",\n  properties: { opacity: 0, y: 40 },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13619,11 +13652,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setGsapTween(animationId: string, properties: Partial<GsapTweenSpec>): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setGsapTween(animId, { ease: \"back.out(1.7)\", duration: 0.8 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13636,11 +13669,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "removeGsapTween(animationId: string): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.removeGsapTween(animId);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13653,11 +13686,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "addWithKeyframes(\n  targetSelector: string,\n  position: number,\n  duration: number,\n  keyframes: KeyframeSpec[],\n  ease?: string,\n): string",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const animId = comp.addWithKeyframes(\n  \"#hf-logo\",\n  0.5,\n  1.2,\n  [\n    { percentage: 0,   properties: { opacity: 0, scale: 0.8 } },\n    { percentage: 100, properties: { opacity: 1, scale: 1   } },\n  ],\n  \"power2.out\",\n);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13670,11 +13703,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "replaceWithKeyframes(\n  animationId: string,\n  targetSelector: string,\n  position: number,\n  duration: number,\n  keyframes: KeyframeSpec[],\n  ease?: string,\n): string",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const newId = comp.replaceWithKeyframes(\n  oldAnimId,\n  \"#hf-card\",\n  1.0,\n  0.8,\n  [\n    { percentage: 0,   properties: { x: -100 } },\n    { percentage: 100, properties: { x: 0     } },\n  ],\n);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13687,11 +13720,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "undo(): void\nredo(): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setText(\"hf-title\", \"Draft\");\ncomp.undo(); // reverts to original text\ncomp.redo(); // re-applies \"Draft\"",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13705,11 +13738,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "canUndo(): boolean\ncanRedo(): boolean",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "undoButton.disabled = !comp.canUndo();\nredoButton.disabled = !comp.canRedo();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13723,11 +13756,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getElements(): ElementSnapshot[]",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const elements = comp.getElements();\nconst images = elements.filter((el) => el.tag === \"img\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13740,11 +13773,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getRootElements(): ElementSnapshot[]",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const roots = comp.getRootElements();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13757,11 +13790,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getElement(id: HfId): ElementSnapshot | null",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const el = comp.getElement(\"hf-title\");\nif (el) {\n  console.log(el.tag, el.inlineStyles);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13781,11 +13814,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "find(query: FindQuery): string[]",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const headlineIds = comp.find({ name: \"headline\" });\nconst allImages   = comp.find({ tag: \"img\" });\nconst track1Ids   = comp.find({ track: 1 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13799,11 +13832,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getAllAnimationIds(): Set<string>",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const allIds = comp.getAllAnimationIds();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13816,11 +13849,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "selection(): SelectionProxy",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const sel = comp.selection();\nsel.setStyle({ opacity: \"0.5\" });\nsel.removeElement(); // removes all currently selected elements",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13833,11 +13866,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "element(id: HfId): ElementHandle",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const title = comp.element(\"hf-title\");\ntitle.setText(\"Hello\");\ntitle.setStyle({ fontWeight: \"700\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13850,11 +13883,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "getSelection(): string[]",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const ids = comp.getSelection();\nconsole.log(`${ids.length} elements selected`);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13868,11 +13901,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "setSelection(ids: string[]): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.setSelection([\"hf-title\", \"hf-subtitle\"]);\ncomp.setSelection([]); // clear",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13887,15 +13920,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "dispatch(op: EditOp, opts?: { origin?: unknown }): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.dispatch({ type: \"setStyle\", target: \"hf-card\", styles: { borderRadius: \"24px\" } });\ncomp.dispatch({ type: \"reorderElements\", entries: [{ target: \"hf-bg\", zIndex: 0 }] });\ncomp.dispatch({ type: \"setCompositionMetadata\", width: 1920, height: 1080, duration: 30 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.dispatch({ type: \"setText\", target: [\"hf-title\", \"hf-subtitle\"], value: \"Coming soon\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13908,11 +13941,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "batch(fn: () => void, opts?: { origin?: unknown }): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.batch(() => {\n  comp.setText(\"hf-title\", \"Version 2\");\n  comp.setStyle(\"hf-title\", { color: \"#22C55E\" });\n  comp.setTiming(\"hf-title\", { start: 1, duration: 3 });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13929,11 +13962,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "can(op: EditOp): CanResult",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const result = comp.can({\n  type: \"setGsapTween\",\n  animationId: \"anim-1\",\n  properties: { ease: \"power3.out\" },\n});\n\nif (result.ok) {\n  comp.setGsapTween(\"anim-1\", { ease: \"power3.out\" });\n} else {\n  console.warn(result.code, result.message);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13946,7 +13979,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "on(event: \"change\",         handler: () => void): () => void\non(event: \"selectionchange\", handler: (ids: string[]) => void): () => void\non(event: \"patch\",           handler: (event: PatchEvent) => void): () => void\non(event: \"persist:error\",   handler: (event: PersistErrorEvent) => void): () => void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13959,7 +13992,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const off = comp.on(\"change\", () => {\n  canvas.render(comp.getElements());\n});\n\noff(); // unsubscribe",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13972,7 +14005,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.on(\"selectionchange\", (ids) => {\n  propertiesPanel.show(ids);\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -13986,7 +14019,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\ncomp.on(\"patch\", ({ patches, inversePatches, origin, opTypes }) => {\n  if (origin !== ORIGIN_APPLY_PATCHES) {\n    hostHistory.push({ patches, inversePatches });\n  }\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14001,7 +14034,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.on(\"persist:error\", ({ error }) => {\n  toast.error(`Autosave failed: ${error.message}`);\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    }
@@ -14019,11 +14052,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch(op: EditOp, opts?: { origin?: unknown }): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.dispatch(\n  { type: \"setStyle\", target: \"hf-title\", styles: { color: \"#FFD60A\" } },\n  { origin: \"agent\" },\n);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14036,11 +14069,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.batch(fn: () => void, opts?: { origin?: unknown }): void",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.batch(() => {\n  comp.dispatch({ type: \"setText\", target: \"hf-title\", value: \"Launch Day\" });\n  comp.dispatch({ type: \"setStyle\", target: \"hf-title\", styles: { fontSize: \"96px\" } });\n  comp.dispatch({ type: \"setTiming\", target: \"hf-title\", start: 0.5, duration: 3 });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14062,11 +14095,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.can(op: EditOp): CanResult",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const result = comp.can({\n  type: \"setGsapTween\",\n  animationId: \"anim-1\",\n  properties: { ease: \"power3.out\" },\n});\n\nif (result.ok) {\n  comp.setGsapTween(\"anim-1\", { ease: \"power3.out\" });\n} else {\n  console.warn(result.code, result.message);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14096,7 +14129,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setStyle\",\n  target: \"hf-card\",\n  styles: {\n    borderRadius: \"24px\",\n    backgroundColor: \"#1A1A1A\",\n    color: null,          // removes the color property\n  },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14107,7 +14140,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setText\",\n  target: [\"hf-headline\", \"hf-sub\"],\n  value: \"Coming soon\",\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14118,7 +14151,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setAttribute\",\n  target: \"hf-logo\",\n  name: \"src\",\n  value: \"/assets/logo-v2.png\",\n});\n\n// Remove an attribute:\ncomp.dispatch({\n  type: \"setAttribute\",\n  target: \"hf-video\",\n  name: \"autoplay\",\n  value: null,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14129,7 +14162,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setTiming\",\n  target: \"hf-title\",\n  start: 1.5,\n  duration: 3,\n  trackIndex: 0,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14142,7 +14175,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setHold\",\n  target: \"hf-badge\",\n  hold: {\n    start: 2,\n    end: 5,\n    fill: \"freeze\",   // \"freeze\" | \"loop\"\n  },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14156,7 +14189,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"moveElement\",\n  target: \"hf-logo\",\n  x: 120,\n  y: 48,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14185,7 +14218,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"addElement\",\n  parent: \"hf-scene-1\",\n  index: 2,\n  html: '<div class=\"clip\" data-start=\"3\" data-duration=\"2\">New layer</div>',\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14198,7 +14231,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"reorderElements\",\n  entries: [\n    { target: \"hf-bg\",   zIndex: 0 },\n    { target: \"hf-logo\", zIndex: 10 },\n    { target: \"hf-text\", zIndex: 20 },\n  ],\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14209,7 +14242,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setClassStyle\",\n  selector: \".caption\",\n  styles: { fontSize: \"14px\", fontWeight: \"600\" },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14220,7 +14253,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"deleteAllForSelector\",\n  selector: \".debug-overlay\",\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14233,7 +14266,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setCompositionMetadata\",\n  width: 1920,\n  height: 1080,\n  duration: 30,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14250,7 +14283,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Scalar variable\ncomp.dispatch({\n  type: \"setVariableValue\",\n  id: \"brandColor\",\n  value: \"#6C5CE7\",\n});\n\n// Font variable (object-valued — never a CSS string)\ncomp.dispatch({\n  type: \"setVariableValue\",\n  id: \"brand-font\",\n  value: {\n    name: \"Inter\",\n    source: \"https://fonts.googleapis.com/css2?family=Inter:wght@400;700\",\n  },\n});\n\n// Image variable (object-valued)\ncomp.dispatch({\n  type: \"setVariableValue\",\n  id: \"hero-image\",\n  value: {\n    url: \"/assets/hero.jpg\",\n    alt: \"Product hero\",\n    fit: \"cover\",\n  },\n});\n\n// Create a new variable declaration\ncomp.dispatch({\n  type: \"declareVariable\",\n  declaration: {\n    id: \"brandColor\",\n    type: \"color\",\n    label: \"Brand color\",\n    default: \"#6C5CE7\",\n  },\n});\n\n// Remove a variable's declaration\ncomp.dispatch({ type: \"removeVariable\", id: \"brandColor\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14290,7 +14323,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"addGsapTween\",\n  target: \"hf-title\",\n  tween: {\n    method: \"from\",\n    position: 0,\n    duration: 0.8,\n    ease: \"power3.out\",\n    properties: { opacity: 0, y: 40 },\n  },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14303,7 +14336,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setGsapTween\",\n  animationId: \"anim-1\",\n  properties: { ease: \"elastic.out(1, 0.3)\", duration: 1.2 },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14316,7 +14349,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Remove 'scale' from the to-properties of an existing tween\ncomp.dispatch({\n  type: \"removeGsapProperty\",\n  animationId: \"anim-1\",\n  property: \"scale\",\n});\n\n// Remove 'opacity' from the from-properties\ncomp.dispatch({\n  type: \"removeGsapProperty\",\n  animationId: \"anim-2\",\n  property: \"opacity\",\n  from: true,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14350,7 +14383,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"materializeKeyframes\",\n  animationId: \"anim-3\",\n  keyframes: [\n    { percentage: 0,   properties: { opacity: 0, y: 30 } },\n    { percentage: 100, properties: { opacity: 1, y: 0 }, ease: \"power2.out\" },\n  ],\n  easeEach: \"none\",\n  resolvedSelector: \"#hf-title\",\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14371,7 +14404,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Create a new keyframed tween:\ncomp.dispatch({\n  type: \"addWithKeyframes\",\n  targetSelector: \"#hf-card\",\n  position: 1.5,\n  duration: 0.6,\n  keyframes: [\n    { percentage: 0,   properties: { scale: 0.8, opacity: 0 } },\n    { percentage: 100, properties: { scale: 1,   opacity: 1 } },\n  ],\n  ease: \"back.out(1.7)\",\n});\n\n// Replace an existing tween atomically:\ncomp.dispatch({\n  type: \"replaceWithKeyframes\",\n  animationId: \"anim-4\",\n  targetSelector: \"#hf-card\",\n  position: 1.5,\n  duration: 0.6,\n  keyframes: [\n    { percentage: 0,   properties: { scale: 0.9 } },\n    { percentage: 100, properties: { scale: 1 } },\n  ],\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14389,7 +14422,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({ type: \"addLabel\", name: \"intro\", position: 0 });\ncomp.dispatch({ type: \"addLabel\", name: \"outro\", position: 8 });\n\n// Tween positioned relative to a label:\ncomp.dispatch({\n  type: \"addGsapTween\",\n  target: \"hf-cta\",\n  tween: {\n    method: \"from\",\n    position: \"outro-=0.5\",\n    duration: 0.4,\n    properties: { opacity: 0 },\n  },\n});\n\ncomp.dispatch({ type: \"removeLabel\", name: \"intro\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14420,7 +14453,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"setArcPath\",\n  animationId: \"anim-5\",\n  config: {\n    enabled: true,\n    autoRotate: true,            // boolean, or a number (degrees offset)\n    segments: [\n      {\n        curviness: 1.5,\n        cp1: { x: 200, y: -80 }, // first control point\n        cp2: { x: 400, y: 20 },  // second control point\n      },\n    ],\n  },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14431,7 +14464,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.dispatch({\n  type: \"updateArcSegment\",\n  animationId: \"anim-5\",\n  segmentIndex: 0,\n  update: { curviness: 2, cp1: { x: 220, y: -100 } },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14462,7 +14495,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\n// Stored delta — loaded from your database or storage layer.\nconst storedOverrides = {\n  \"hf-title.text\": \"Acme Corp Launch\",\n  \"hf-logo.attr.src\": \"/customers/acme/logo.png\",\n  \"hf-subtitle.style.color\": \"#0EA5E9\",\n};\n\nconst comp = await openComposition(templateHtml, {\n  overrides: storedOverrides,\n  history: false, // host owns undo — see below\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14476,11 +14509,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setText(\"hf-cta\", \"Get started free\");\ncomp.setStyle(\"hf-cta\", { backgroundColor: \"#22C55E\" });\n\nconst nextOverrides = comp.getOverrides();\n// { \"hf-title.text\": \"Acme Corp Launch\", ..., \"hf-cta.text\": \"Get started free\", ... }\n\nawait db.saveOverrides(sessionId, nextOverrides);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const id = comp.addElement(\"hf-stage\", 1, \"<p>Available today</p>\");\ncomp.setText(id, \"Available worldwide\");\n\nconst reopened = await openComposition(templateHtml, {\n  overrides: comp.getOverrides(),\n});\nreopened.getElement(id)?.text; // \"Available worldwide\"",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14510,7 +14543,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { FontValue, ImageValue } from \"@hyperframes/sdk\";\n\n// Font variable — name is the CSS font-family, source is the stylesheet URL.\nconst fontOverride: FontValue = {\n  name: \"Inter\",\n  source: \"https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap\",\n};\n\n// Image variable — url is the src; alt and fit are optional.\nconst imageOverride: ImageValue = {\n  url: \"/customers/acme/hero.jpg\",\n  alt: \"Acme hero image\",\n  fit: \"cover\",\n};\n\ncomp.setVariableValue(\"brand-font\", fontOverride);\ncomp.setVariableValue(\"hero-image\", imageOverride);\n\nconst overrides = comp.getOverrides();\n// {\n//   \"var.brand-font\": { name: \"Inter\", source: \"https://…\" },\n//   \"var.hero-image\": { url: \"/customers/acme/hero.jpg\", alt: \"…\", fit: \"cover\" },\n// }",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14524,7 +14557,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(templateHtml, {\n  overrides: storedOverrides,\n  history: false,\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14539,7 +14572,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\n// Host undo stack entry — inversePatches came from a prior 'patch' event.\nfunction hostUndo(inversePatches: JsonPatchOp[]) {\n  comp.applyPatches(inversePatches);\n}\n\n// Guard against undo loops — skip ORIGIN_APPLY_PATCHES events in the patch listener.\ncomp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return; // already from host undo — do not re-push\n  hostHistory.push({ patches, inversePatches });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14555,7 +14588,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition, ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\nimport type { JsonPatchOp, OverrideSet } from \"@hyperframes/sdk\";\n\nasync function openUserSession(\n  templateHtml: string,\n  storedOverrides: OverrideSet,\n) {\n  const hostHistory: Array<{ patches: readonly JsonPatchOp[]; inversePatches: readonly JsonPatchOp[] }> = [];\n  let historyIndex = hostHistory.length;\n\n  const comp = await openComposition(templateHtml, {\n    overrides: storedOverrides,\n    history: false,\n  });\n\n  // Record every user edit in the host undo stack.\n  comp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n    if (origin === ORIGIN_APPLY_PATCHES) return;\n    // Discard any redo entries ahead of the cursor.\n    hostHistory.splice(historyIndex);\n    hostHistory.push({ patches, inversePatches });\n    historyIndex = hostHistory.length;\n  });\n\n  return {\n    comp,\n\n    undo() {\n      if (historyIndex === 0) return;\n      const { inversePatches } = hostHistory[--historyIndex];\n      comp.applyPatches([...inversePatches]);\n    },\n\n    redo() {\n      if (historyIndex >= hostHistory.length) return;\n      const { patches } = hostHistory[historyIndex++];\n      comp.applyPatches([...patches]);\n    },\n\n    async save() {\n      // Only store the delta — not the full HTML.\n      return comp.getOverrides();\n    },\n  };\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14589,7 +14622,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "openComposition(html: string, opts?: OpenCompositionOptions): Promise<Composition>",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14632,7 +14665,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html);\n\nconst [titleId] = comp.find({ name: \"headline\" });\nif (titleId) {\n  comp.setText(titleId, \"New headline\");\n  comp.setStyle(titleId, { color: \"#FFD60A\" });\n}\n\nconst updatedHtml = comp.serialize();\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14643,7 +14676,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\nimport { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nconst comp = await openComposition(html, {\n  persist: createFsAdapter({ root: \"./project\" }),\n  persistPath: \"index.html\",\n});\n\ncomp.on(\"persist:error\", ({ error }) => {\n  console.error(\"Autosave failed:\", error.message);\n});\n\ncomp.setText(\"hf-title\", \"Launch day\");\nawait comp.flush(); // drain any pending write before process exit\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14654,7 +14687,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\nimport { openComposition } from \"@hyperframes/sdk\";\n\n// Stored override delta for one customer\nconst savedOverrides = {\n  \"hf-title.text\": \"Acme — Q3 Review\",\n  \"hf-logo.attr.src\": \"/customers/acme/logo.png\",\n};\n\nconst comp = await openComposition(baseTemplateHtml, {\n  overrides: savedOverrides,\n  history: false,\n});\n\n// Host drives undo; SDK just accumulates overrides\ncomp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  if (origin !== ORIGIN_APPLY_PATCHES) {\n    hostHistoryStack.push({ patches, inversePatches });\n  }\n});\n\ncomp.setStyle(\"hf-title\", { color: \"#0EA5E9\" });\n\n// Persist the updated delta only — not the full HTML\nconst nextOverrides = comp.getOverrides();\nawait db.save(customerId, nextOverrides);\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14667,7 +14700,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(html, {\n  persist: createFsAdapter({ root: \"./output\" }),\n  history: false, // host owns undo; persist still runs\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14717,7 +14750,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Ensure the latest state is committed before the process exits.\nawait comp.flush();\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14730,7 +14763,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.on(\"persist:error\", ({ error }) => {\n  console.error(\"Autosave failed:\", error.message, error.cause);\n  showToast(\"Could not save — retrying next change.\");\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14744,7 +14777,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createMemoryAdapter } from \"@hyperframes/sdk\";\n\nconst adapter = createMemoryAdapter();\n\nconst comp = await openComposition(html, {\n  persist: adapter,\n});\n\ncomp.setText(\"hf-title\", \"v1\");\nawait comp.flush();\ncomp.setText(\"hf-title\", \"v2\");\nawait comp.flush();\n\nconst versions = await adapter.listVersions(\"composition.html\");\n// versions[0] is newest — key \"v2\", versions[1] is \"v1\"\n\nconst v1Html = await adapter.loadFrom(\"composition.html\", versions[1].key);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14761,11 +14794,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nconst adapter = createFsAdapter({\n  root: \"./project\",   // required — directory for composition files\n  maxVersions: 20,     // optional — versions to retain per file (default: 20)\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const versions = await adapter.listVersions(\"composition.html\");\n// [ { key: \"1751234567890-0003\", timestamp: 1751234567890 }, ... ]\n// Entries are newest-first.\n\nconst olderHtml = await adapter.loadFrom(\"composition.html\", versions[2].key);\nif (olderHtml) {\n  // Re-open the old snapshot.\n  const restored = await openComposition(olderHtml, { persist: adapter });\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14780,11 +14813,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "export interface PersistAdapter {\n  read(path: string): Promise<string | undefined>;\n  write(path: string, content: string): Promise<void>;\n  flush(): Promise<void>;\n  listVersions(path: string): Promise<PersistVersionEntry[]>;\n  loadFrom(path: string, versionKey: string): Promise<string | undefined>;\n  on(event: \"persist:error\", handler: (event: PersistErrorEvent) => void): () => void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import type { PersistAdapter, PersistVersionEntry, PersistErrorEvent } from \"@hyperframes/sdk\";\n\nexport function createHttpAdapter(baseUrl: string): PersistAdapter {\n  const errorHandlers: Array<(e: PersistErrorEvent) => void> = [];\n\n  return {\n    async read(path) {\n      const res = await fetch(`${baseUrl}/${path}`);\n      if (res.status === 404) return undefined;\n      return res.text();\n    },\n\n    async write(path, content) {\n      try {\n        await fetch(`${baseUrl}/${path}`, {\n          method: \"PUT\",\n          body: content,\n          headers: { \"Content-Type\": \"text/html\" },\n        });\n      } catch (err) {\n        const message = err instanceof Error ? err.message : String(err);\n        errorHandlers.forEach((h) => h({ error: { message, cause: err } }));\n      }\n    },\n\n    async flush() {\n      // No queuing — writes are immediate.\n    },\n\n    async listVersions(path): Promise<PersistVersionEntry[]> {\n      const res = await fetch(`${baseUrl}/${path}/versions`);\n      if (!res.ok) return [];\n      return res.json() as Promise<PersistVersionEntry[]>;\n    },\n\n    async loadFrom(path, versionKey) {\n      const res = await fetch(`${baseUrl}/${path}/versions/${versionKey}`);\n      if (!res.ok) return undefined;\n      return res.text();\n    },\n\n    on(event, handler) {\n      if (event !== \"persist:error\") return () => {};\n      errorHandlers.push(handler);\n      return () => {\n        const i = errorHandlers.indexOf(handler);\n        if (i !== -1) errorHandlers.splice(i, 1);\n      };\n    },\n  };\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -14837,7 +14870,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const elements = comp.getElements();\n\n// Filter in userland\nconst images = elements.filter((el) => el.tag === \"img\");\nconst timed = elements.filter((el) => el.start !== null);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14851,7 +14884,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const el = comp.getElement(\"hf-title\");\nif (el) {\n  console.log(el.text, el.inlineStyles.color);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14872,7 +14905,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import type { FindQuery } from \"@hyperframes/sdk\";\n\n// By tag\nconst imgIds = comp.find({ tag: \"img\" });\n\n// By text content (substring match)\nconst headlineIds = comp.find({ text: \"Launch\" });\n\n// By data-name attribute\nconst logoIds = comp.find({ name: \"brand-logo\" });\n\n// By track index\nconst track1Ids = comp.find({ track: 1 });\n\n// Filter to elements inside a specific sub-composition (by host hf-id)\nconst innerIds = comp.find({ composition: \"hf-intro-scene\" });\n\n// Combine fields — all must match\nconst [targetId] = comp.find({ tag: \"h1\", track: 0 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14885,7 +14918,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Wrong — bare id for a sub-composition element\ncomp.setText(\"hf-inner-title\", \"New text\"); // may silently no-op\n\n// Correct — use the scopedId returned by find() or getElements()\nconst [id] = comp.find({ name: \"inner-title\" }); // returns \"hf-scene/hf-inner-title\"\nif (id) comp.setText(id, \"New text\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14906,7 +14939,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setText(\"hf-title\", \"Shipped.\");\ncomp.setText(\"hf-subtitle\", \"Available now in all regions.\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14919,7 +14952,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setStyle(\"hf-card\", {\n  backgroundColor: \"#1A1A2E\",\n  borderRadius: \"16px\",\n  opacity: \"0.9\",\n});\n\n// Remove a previously-set inline style\ncomp.setStyle(\"hf-card\", { opacity: null });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14932,7 +14965,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setAttribute(\"hf-hero-img\", \"src\", \"/assets/hero-v2.jpg\");\ncomp.setAttribute(\"hf-hero-img\", \"alt\", \"Product screenshot\");\n\n// Remove an attribute\ncomp.setAttribute(\"hf-hero-img\", \"loading\", null);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14945,7 +14978,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.removeElement(\"hf-old-badge\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14959,7 +14992,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const newId = comp.addElement(\"hf-card\", 0, `<span class=\"badge\">New</span>`);\n// newId is a fresh stable hf-id, e.g. \"hf-a3k7\"\n\n// Append at the end (index >= child count)\ncomp.addElement(\"hf-card\", 999, `<div class=\"footer-note\">v2.0</div>`);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14972,7 +15005,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// String variable\ncomp.setVariableValue(\"tagline\", \"The fast path to production.\");\n\n// Font variable\ncomp.setVariableValue(\"headingFont\", {\n  name: \"Inter\",\n  source: \"https://fonts.googleapis.com/css2?family=Inter:wght@400;700\",\n});\n\n// Image variable\ncomp.setVariableValue(\"heroBg\", {\n  url: \"/assets/hero.jpg\",\n  fit: \"cover\",\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -14987,7 +15020,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.batch(() => {\n  comp.setText(\"hf-title\", \"Summer Drop\");\n  comp.setStyle(\"hf-title\", { color: \"#FF6B35\", fontSize: \"112px\" });\n  comp.setTiming(\"hf-title\", { start: 0, duration: 3.5 });\n  comp.setAttribute(\"hf-logo\", \"src\", \"/assets/logo-summer.svg\");\n});\n// One undo entry. One disk write. One change event.",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15001,7 +15034,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const title = comp.element(\"hf-title\");\n\ntitle.setText(\"Shipped.\");\ntitle.setStyle({ color: \"#FFD60A\", letterSpacing: \"-0.02em\" });\ntitle.setTiming({ start: 0.5, duration: 3 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15016,11 +15049,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setSelection([\"hf-title\", \"hf-subtitle\"]);\n\nconst sel = comp.selection();\nconsole.log(sel.ids); // [\"hf-title\", \"hf-subtitle\"]\n\n// Applies setStyle to both ids as a single batch\nsel.setStyle({ opacity: \"0.5\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const current = comp.getSelection();\ncomp.setSelection([\"hf-logo\"]);\ncomp.setSelection([]); // clear",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15066,27 +15099,27 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npm install @hyperframes/sdk",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst html = `<div class=\"clip\" data-start=\"0\" data-duration=\"5\"\n                data-hf-id=\"hf-title\">Launch day</div>`;\n\nconst comp = await openComposition(html);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "// All elements\nconst all = comp.getElements();\n\n// Elements whose text contains \"Launch\"\nconst ids = comp.find({ text: \"Launch\" });\n\n// A specific element by its hf-id\nconst el = comp.getElement(\"hf-title\");\nconsole.log(el?.text); // \"Launch day\"",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "// Change text\ncomp.setText(\"hf-title\", \"Launch day — we shipped!\");\n\n// Change inline styles (camelCase property names)\ncomp.setStyle(\"hf-title\", {\n  color: \"#FFD60A\",\n  fontSize: \"96px\",\n  fontWeight: \"700\",\n});\n\n// Adjust clip timing\ncomp.setTiming(\"hf-title\", { start: 0.5, duration: 4 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.batch(() => {\n  comp.setText(\"hf-title\", \"Launch day — we shipped!\");\n  comp.setStyle(\"hf-title\", { color: \"#FFD60A\" });\n  comp.setTiming(\"hf-title\", { start: 0.5, duration: 4 });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const updatedHtml = comp.serialize();\ncomp.dispose();\n\n// updatedHtml is ready to write to disk, send to a renderer, or store in a database.",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15102,7 +15135,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\nimport { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\nimport { readFile } from \"node:fs/promises\";\n\n// Load the current HTML from disk (or use a template string on first run).\nconst html = await readFile(\"./project/index.html\", \"utf8\").catch(() => \"<div></div>\");\n\nconst comp = await openComposition(html, {\n  persist: createFsAdapter({ root: \"./project\" }),\n  persistPath: \"index.html\",\n});\n\n// Persistence failures surface as events, not thrown errors.\ncomp.on(\"persist:error\", ({ error }) => {\n  console.error(\"Autosave failed:\", error.message);\n});\n\ncomp.setText(\"hf-title\", \"Autosaved title\");\ncomp.setStyle(\"hf-title\", { color: \"#22C55E\" });\n\n// Drain any pending write before the process exits.\nawait comp.flush();\ncomp.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15148,7 +15181,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html);\nconst timings = comp.getElementTimings();\n\nfor (const [id, t] of Object.entries(timings)) {\n  console.log(id, t.enterAt, \"→\", t.exitAt, \"labels:\", t.labels);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15163,7 +15196,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Move hf-title to start at 1.0 s, last 2.5 s, on track 0\ncomp.setTiming(\"hf-title\", { start: 1.0, duration: 2.5, trackIndex: 0 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15176,7 +15209,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setElementTiming({\n  \"hf-title\": { start: 0.5, duration: 2.0 },\n  \"hf-logo\": { start: 0.0, duration: 5.0, trackIndex: 1 },\n  \"hf-cta\": { start: 3.0, duration: 2.5 },\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15193,7 +15226,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.setHold(\"hf-card\", {\n  start: 1.5, // hold begins at this time within the composition\n  end: 4.0, // hold ends at this time\n  fill: \"freeze\", // \"freeze\" | \"loop\"\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15214,7 +15247,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const animId = comp.addGsapTween(\"hf-title\", {\n  method: \"from\",\n  position: 0.5,\n  duration: 0.6,\n  ease: \"power3.out\",\n  properties: { opacity: 0, y: 40 },\n});\n// animId is the newly-assigned animation ID — store it for subsequent edits",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15244,7 +15277,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Change ease and duration — all other fields stay as-is\ncomp.setGsapTween(animId, { ease: \"elastic.out(1, 0.5)\", duration: 0.9 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15255,7 +15288,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.removeGsapTween(animId);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15268,7 +15301,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const el = comp.getElement(\"hf-title\");\nconst [firstAnimId] = el?.animationIds ?? [];\nif (firstAnimId) {\n  comp.setGsapTween(firstAnimId, { ease: \"none\" });\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15288,7 +15321,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const op = {\n  type: \"addGsapTween\",\n  target: \"hf-title\",\n  tween: { method: \"to\", properties: { opacity: 1 }, duration: 0.5 },\n} as const;\n\nconst check = comp.can(op);\nif (!check.ok) {\n  if (check.code === \"E_NO_GSAP_TIMELINE\") {\n    // No gsap.timeline() in this composition — add one (var tl = gsap.timeline(...)) or skip\n    console.warn(\"GSAP timeline not available:\", check.message);\n  }\n  return;\n}\n\ncomp.dispatch(op);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15309,7 +15342,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const animId = comp.addWithKeyframes(\n  \"#hf-badge\", // CSS selector targeting the element\n  1.0, // timeline position in seconds (number only)\n  0.8, // duration in seconds\n  [\n    { percentage: 0, properties: { opacity: 0, scale: 0.8 } },\n    { percentage: 60, properties: { opacity: 1, scale: 1.05 }, ease: \"power2.out\" },\n    { percentage: 100, properties: { scale: 1 } },\n  ],\n  \"power2.inOut\", // optional overall ease\n);",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15322,7 +15355,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const newAnimId = comp.replaceWithKeyframes(oldAnimId, \"#hf-badge\", 1.0, 1.2, [\n  { percentage: 0, properties: { x: -60, opacity: 0 } },\n  { percentage: 100, properties: { x: 0, opacity: 1 }, ease: \"back.out(1.7)\" },\n]);\n// newAnimId !== oldAnimId — position-derived IDs renumber after the remove",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15377,7 +15410,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type HfId = string;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15403,7 +15436,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface HyperFramesElement {\n  readonly id: string;\n  readonly scopedId: string;\n  readonly tag: string;\n  readonly children: readonly HyperFramesElement[];\n  readonly inlineStyles: Readonly<Record<string, string>>;\n  readonly classNames: readonly string[];\n  readonly attributes: Readonly<Record<string, string>>;\n  readonly text: string | null;\n  readonly start: number | null;\n  readonly duration: number | null;\n  readonly trackIndex: number | null;\n  readonly animationIds: readonly string[];\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15417,7 +15450,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type ElementSnapshot = HyperFramesElement;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15438,7 +15471,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface SdkDocument {\n  readonly roots: readonly HyperFramesElement[];\n  readonly gsapScript: string | null;\n  readonly styles: string | null;\n  readonly width: number | null;\n  readonly height: number | null;\n  readonly compositionDuration: number | null;\n  readonly html: string;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15454,11 +15487,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type OverrideSet = Record<\n  string,\n  string | number | boolean | Record<string, unknown> | null\n>;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const overrides: OverrideSet = {\n  \"hf-title.text\": \"Customer headline\",\n  \"hf-logo.attr.src\": \"/customers/acme/logo.png\",\n  \"hf-title.style.color\": \"#0EA5E9\",\n  \"hf-old-badge\": null,                         // element removed\n  \"var.brand-font\": {                            // font variable\n    name: \"Inter\",\n    source: \"https://fonts.googleapis.com/css2?family=Inter\",\n  },\n};",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -15485,11 +15518,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface FindQuery {\n  tag?: string;\n  text?: string;\n  name?: string;\n  track?: number;\n  composition?: string;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "// Find all text elements on track 2:\nconst ids = comp.find({ tag: \"p\", track: 2 });\n\n// Find inside a sub-composition:\nconst subIds = comp.find({ composition: \"hf-scene-2\", tag: \"img\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15513,7 +15546,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface GsapTweenSpec {\n  method: \"from\" | \"to\" | \"fromTo\" | \"set\";\n  position?: number | string;\n  duration?: number;\n  ease?: string;\n  fromProperties?: Record<string, unknown>;\n  toProperties?: Record<string, unknown>;\n  properties?: Record<string, unknown>;\n  repeat?: number;\n  yoyo?: boolean;\n  stagger?: number | Record<string, unknown>;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15531,7 +15564,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface KeyframeSpec {\n  percentage: number;\n  properties: Record<string, number | string>;\n  ease?: string;\n  auto?: boolean;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15548,7 +15581,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface ElasticHold {\n  start: number;\n  end: number;\n  fill: \"freeze\" | \"loop\";\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15569,7 +15602,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface CompositionVariableBase {\n  id: string;\n  type: \"string\" | \"number\" | \"color\" | \"boolean\" | \"enum\" | \"font\" | \"image\";\n  label: string;\n  description?: string;\n}\n\ninterface StringVariable extends CompositionVariableBase {\n  type: \"string\";\n  default: string;\n  placeholder?: string;\n  maxLength?: number;\n}\n\ninterface NumberVariable extends CompositionVariableBase {\n  type: \"number\";\n  default: number;\n  min?: number;\n  max?: number;\n  step?: number;\n  unit?: string;\n}\n\ninterface ColorVariable extends CompositionVariableBase {\n  type: \"color\";\n  default: string;\n  brandRole?: string;\n}\n\ninterface BooleanVariable extends CompositionVariableBase {\n  type: \"boolean\";\n  default: boolean;\n}\n\ninterface EnumVariable extends CompositionVariableBase {\n  type: \"enum\";\n  default: string;\n  options: { value: string; label: string }[];\n}\n\ninterface FontVariable extends CompositionVariableBase {\n  type: \"font\";\n  default: string | FontValue;\n  source?: string;\n  default_name?: string;\n  default_source?: string;\n}\n\ninterface ImageVariable extends CompositionVariableBase {\n  type: \"image\";\n  default: string | ImageValue;\n  brandRole?: string;\n}\n\ntype CompositionVariable =\n  | StringVariable\n  | NumberVariable\n  | ColorVariable\n  | BooleanVariable\n  | EnumVariable\n  | FontVariable\n  | ImageVariable;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15585,7 +15618,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface FontValue {\n  name: string;\n  source: string;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15602,7 +15635,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface ImageValue {\n  url: string;\n  alt?: string;\n  fit?: \"cover\" | \"contain\" | \"fill\" | \"none\" | \"scale-down\";\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15620,7 +15653,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface JsonPatchOp {\n  op: \"add\" | \"remove\" | \"replace\";\n  path: string;\n  value?: unknown;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15639,11 +15672,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PatchEvent {\n  readonly formatVersion: 1;\n  readonly patches: readonly JsonPatchOp[];\n  readonly inversePatches: readonly JsonPatchOp[];\n  readonly origin: unknown;\n  readonly opTypes: readonly string[];\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return;\n  saveToHostHistory({ patches, inversePatches });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15661,7 +15694,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type CanResult =\n  | { ok: true }\n  | { ok: false; code: string; message: string; hint?: string };",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15678,7 +15711,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface ElementTimingSnapshot {\n  enterAt: number;\n  exitAt: number;\n  labels: string[];\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15693,11 +15726,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface SelectionProxy {\n  readonly ids: readonly string[];\n  setStyle(styles: Record<string, string | null>): void;\n  setText(value: string): void;\n  setAttribute(name: string, value: string | null): void;\n  setTiming(timing: { start?: number; duration?: number; trackIndex?: number }): void;\n  removeElement(): void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const sel = comp.selection();\nif (sel.ids.length > 0) {\n  sel.setStyle({ opacity: \"0.5\" });\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15711,11 +15744,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface ElementHandle {\n  readonly id: string;\n  setStyle(styles: Record<string, string | null>): void;\n  setText(value: string): void;\n  setAttribute(name: string, value: string | null): void;\n  setTiming(timing: { start?: number; duration?: number; trackIndex?: number }): void;\n  removeElement(): void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const title = comp.element(\"hf-title\");\ntitle.setText(\"Launch Day\");\ntitle.setStyle({ color: \"#FFD60A\", fontSize: \"96px\" });\ntitle.setTiming({ start: 0.5, duration: 3 });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15728,7 +15761,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type CompositionVariableType =\n  | \"string\" | \"number\" | \"color\" | \"boolean\" | \"enum\" | \"font\" | \"image\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15741,7 +15774,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface VariableUsageScan {\n  usedIds: string[];\n  scanIncomplete: boolean;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15754,11 +15787,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const ORIGIN_APPLY_PATCHES = \"@hyperframes/sdk:applyPatches\";\nconst ORIGIN_LOCAL = \"local\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.on(\"patch\", ({ origin }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return; // skip — would loop\n  if (origin === ORIGIN_LOCAL) {\n    // user-driven edit — sync to collaboration layer\n  }\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ],
     "bullets": [
@@ -15776,7 +15809,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "type EditOp =\n  | { type: \"setStyle\"; target: HfId | HfId[]; styles: Record<string, string | null> }\n  | { type: \"setText\"; target: HfId | HfId[]; value: string }\n  | { type: \"setAttribute\"; target: HfId | HfId[]; name: string; value: string | null }\n  | { type: \"setTiming\"; target: HfId | HfId[]; start?: number; duration?: number; trackIndex?: number }\n  | { type: \"setHold\"; target: HfId | HfId[]; hold: ElasticHold }\n  | { type: \"moveElement\"; target: HfId | HfId[]; x: number; y: number }\n  | { type: \"removeElement\"; target: HfId | HfId[] }\n  | { type: \"addElement\"; parent: HfId | null; index: number; html: string }\n  | { type: \"reorderElements\"; entries: Array<{ target: HfId; zIndex: number }> }\n  | { type: \"setClassStyle\"; selector: string; styles: Record<string, string | null> }\n  | { type: \"setCompositionMetadata\"; width?: number; height?: number; duration?: number }\n  | { type: \"setVariableValue\"; id: string; value: string | number | boolean | FontValue | ImageValue }\n  | { type: \"declareVariable\"; declaration: CompositionVariable }\n  | { type: \"removeVariable\"; id: string }\n  | { type: \"addGsapTween\"; target: HfId; tween: GsapTweenSpec }\n  | { type: \"setGsapTween\"; animationId: string; properties: Partial<GsapTweenSpec> }\n  | { type: \"removeGsapTween\"; animationId: string }\n  | { type: \"removeGsapProperty\"; animationId: string; property: string; from?: boolean }\n  | { type: \"setGsapKeyframe\"; animationId: string; keyframeIndex: number; position?: number; value?: Record<string, unknown>; ease?: string }\n  | { type: \"addGsapKeyframe\"; animationId: string; position: number; value: Record<string, unknown> }\n  | { type: \"removeGsapKeyframe\"; animationId: string; percentage: number }\n  | { type: \"removeAllKeyframes\"; animationId: string }\n  | { type: \"convertToKeyframes\"; animationId: string; resolvedFromValues?: Record<string, number | string> }\n  | { type: \"materializeKeyframes\"; animationId: string; keyframes: Array<{ percentage: number; properties: Record<string, number | string>; ease?: string }>; easeEach?: string; resolvedSelector?: string }\n  | { type: \"splitIntoPropertyGroups\"; animationId: string }\n  | { type: \"splitAnimations\"; originalId: string; newId: string; splitTime: number; elementStart: number; elementDuration: number }\n  | { type: \"addLabel\"; name: string; position: number }\n  | { type: \"removeLabel\"; name: string }\n  | { type: \"setArcPath\"; animationId: string; config: { enabled: boolean; autoRotate: boolean | number; segments: Array<{ curviness?: number; cp1?: { x: number; y: number }; cp2?: { x: number; y: number } }> } }\n  | { type: \"updateArcSegment\"; animationId: string; segmentIndex: number; update: { curviness?: number; cp1?: { x: number; y: number }; cp2?: { x: number; y: number } } }\n  | { type: \"removeArcPath\"; animationId: string }\n  | { type: \"unrollDynamicAnimations\"; animationId: string; elements: Array<{ selector: string; keyframes: Array<{ percentage: number; properties: Record<string, number | string> }>; easeEach?: string }> }\n  | { type: \"addWithKeyframes\"; targetSelector: string; position: number; duration: number; keyframes: KeyframeSpec[]; ease?: string }\n  | { type: \"replaceWithKeyframes\"; animationId: string; targetSelector: string; position: number; duration: number; keyframes: KeyframeSpec[]; ease?: string }\n  | { type: \"deleteAllForSelector\"; selector: string };",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15792,7 +15825,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PersistErrorEvent {\n  error: { message: string; hint?: string; cause?: unknown };\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15824,7 +15857,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(html);\n\ncomp.setText(\"hf-title\", \"Draft A\");\ncomp.setText(\"hf-title\", \"Draft B\");\n\ncomp.canUndo(); // true\ncomp.undo();    // reverts \"Draft B\" → \"Draft A\"\ncomp.redo();    // reapplies \"Draft B\"\ncomp.canRedo(); // false — already at tip",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15837,7 +15870,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(html, {\n  overrides: storedOverrides,\n  history: false,\n});\n// comp.undo() / comp.redo() are no-ops — host drives history via applyPatches()",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15852,7 +15885,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const comp = await openComposition(html, {\n  coalesceMs: 500, // ms — increase for slower interactions\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15865,7 +15898,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "const off = comp.on(\"patch\", ({ formatVersion, patches, inversePatches, origin, opTypes }) => {\n  if (formatVersion !== 1) throw new Error(\"Unexpected patch format version\");\n  saveToDB({ patches, inversePatches, origin, opTypes });\n});\n\n// Unsubscribe when done\noff();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15891,7 +15924,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface JsonPatchOp {\n  op: \"add\" | \"remove\" | \"replace\";\n  path: string;   // JSON Pointer (RFC 6901), e.g. \"/elements/hf-title/style/color\"\n  value?: unknown;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15916,7 +15949,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_LOCAL } from \"@hyperframes/sdk\";\n\ncomp.dispatch(\n  { type: \"setStyle\", target: \"hf-title\", styles: { color: \"#0EA5E9\" } },\n  { origin: \"ui:color-picker\" },\n);\n\ncomp.batch(() => {\n  comp.setText(\"hf-cta\", \"Buy Now\");\n  comp.setStyle(\"hf-cta\", { backgroundColor: \"#22C55E\" });\n}, { origin: \"template-wizard\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15929,7 +15962,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "// Host undo stack entry (built from PatchEvent)\ntype HostEntry = {\n  patches: JsonPatchOp[];\n  inversePatches: JsonPatchOp[];\n};\n\nlet history: HostEntry[] = [];\n\ncomp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  // Skip — this is the SDK replaying a host-initiated undo\n  if (origin === ORIGIN_APPLY_PATCHES) return;\n  history.push({ patches, inversePatches });\n});\n\nfunction hostUndo() {\n  const entry = history.pop();\n  if (!entry) return;\n  comp.applyPatches(entry.inversePatches);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15943,7 +15976,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\ncomp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return; // <-- required guard\n  history.push({ patches, inversePatches });\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15957,7 +15990,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "comp.applyPatches(entry.inversePatches, { origin: \"host:undo\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -15974,7 +16007,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { openComposition, ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\nconst comp = await openComposition(baseTemplateHtml, {\n  overrides: storedUserOverrides,\n  history: false,\n});\n\nlet hostStack: HostEntry[] = [];\n\ncomp.on(\"patch\", ({ patches, inversePatches, origin }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return;\n  hostStack.push({ patches, inversePatches });\n  // Persist the updated override set\n  saveOverrides(comp.getOverrides());\n});\n\nfunction undo() {\n  const entry = hostStack.pop();\n  if (entry) comp.applyPatches(entry.inversePatches);\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16005,7 +16038,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createHistory } from \"@hyperframes/sdk\";\nimport type { HistoryModule, HistoryOptions, HistoryEntry } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16018,11 +16051,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function createHistory(session: Composition, opts?: HistoryOptions): HistoryModule;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { openComposition, createHistory } from \"@hyperframes/sdk\";\n\n// Custom history — host controls undo/redo buttons\nconst comp = await openComposition(html, { history: false });\nconst history = createHistory(comp, { coalesceMs: 500, maxEntries: 50 });\n\ncomp.setText(\"hf-title\", \"Draft v1\");\n\nhistory.canUndo(); // true\nhistory.undo();    // reverts to original\nhistory.redo();    // re-applies\n\nhistory.dispose(); // unsubscribes from patch events",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16039,7 +16072,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface HistoryModule {\n  undo(): boolean;\n  redo(): boolean;\n  canUndo(): boolean;\n  canRedo(): boolean;\n  dispose(): void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16054,7 +16087,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface HistoryOptions {\n  trackedOrigins?: unknown[];\n  coalesceMs?: number;\n  maxEntries?: number;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16069,7 +16102,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface HistoryEntry {\n  readonly patches: readonly JsonPatchOp[];\n  readonly inversePatches: readonly JsonPatchOp[];\n  readonly opTypes: readonly string[];\n  readonly origin: unknown;\n  readonly timestamp: number;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16082,7 +16115,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { createPersistQueue } from \"@hyperframes/sdk\";\nimport type { PersistQueueModule, PersistQueueOptions } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16093,11 +16126,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function createPersistQueue(\n  session: Composition,\n  adapter: PersistAdapter,\n  opts?: PersistQueueOptions,\n): PersistQueueModule;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { openComposition, createPersistQueue } from \"@hyperframes/sdk\";\nimport { createFsAdapter } from \"@hyperframes/sdk/adapters/fs\";\n\nconst adapt = createFsAdapter({ root: \"./project\" });\nconst comp = await openComposition(html, { history: false });\n\nconst queue = createPersistQueue(comp, adapt, {\n  path: \"my-comp.html\",\n  onError: ({ error }) => console.error(\"Write failed:\", error.message),\n});\n\ncomp.setText(\"hf-title\", \"Autosaved\");\n\n// Force immediate flush before app close\nawait queue.flush();\nqueue.dispose();",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16111,7 +16144,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PersistQueueModule {\n  flush(): Promise<void>;\n  dispose(): void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16126,7 +16159,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "interface PersistQueueOptions {\n  path?: string;\n  onError?: (e: PersistErrorEvent) => void;\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16139,7 +16172,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { buildDocument, buildRoots, flatElements } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16152,7 +16185,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function buildDocument(html: string): SdkDocument;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16165,7 +16198,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function buildRoots(document: Document): HyperFramesElement[];",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16179,11 +16212,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function flatElements(roots: readonly HyperFramesElement[]): HyperFramesElement[];",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "import { buildDocument, flatElements } from \"@hyperframes/sdk\";\n\nconst doc = buildDocument(html);\nconst all = flatElements(doc.roots);\nconst images = all.filter((el) => el.tag === \"img\");",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16196,7 +16229,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { resolveScoped, findById, bareId, escapeHfId, isNewHostBoundary } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16209,7 +16242,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function resolveScoped(document: Document, id: string): Element | null;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16222,7 +16255,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function findById(document: Document, id: string): Element | null;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16235,7 +16268,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function bareId(scopedId: string): string;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16248,7 +16281,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function escapeHfId(id: string): string;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16262,7 +16295,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function isNewHostBoundary(el: Element): boolean;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16273,7 +16306,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { readVariableDefault } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16287,7 +16320,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "function readVariableDefault(declarationElement: Element | null, id: string): unknown;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16300,11 +16333,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_APPLY_PATCHES } from \"@hyperframes/sdk\";\n\nconst ORIGIN_APPLY_PATCHES = \"@hyperframes/sdk:applyPatches\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "comp.on(\"patch\", ({ origin, patches }) => {\n  if (origin === ORIGIN_APPLY_PATCHES) return; // SDK-internal replay — skip\n  forwardToCollaborationLayer(patches);\n});",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16318,7 +16351,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { ORIGIN_LOCAL } from \"@hyperframes/sdk\";\n\nconst ORIGIN_LOCAL = \"local\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16332,15 +16365,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { UnsupportedOpError } from \"@hyperframes/sdk\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "class UnsupportedOpError extends Error {\n  readonly code = \"E_UNSUPPORTED_OP\";\n}",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      },
      {
       "code": "const result = comp.can({ type: \"setGsapTween\", animationId: id, properties: { ease: \"power2.out\" } });\nif (!result.ok) {\n  console.warn(result.message);\n  return;\n}\ncomp.setGsapTween(id, { ease: \"power2.out\" });",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16355,7 +16388,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { resolveNearestHfElement } from \"@hyperframes/sdk\";\n\nfunction resolveNearestHfElement(\n  el: Element | null,\n  isVisible: (el: Element) => boolean,\n): ElementAtPointResult | null;",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16370,7 +16403,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "import { resolveElementAffordances } from \"@hyperframes/sdk/editing\";",
-      "file": "TYPESCRIPT THEME={NULL}"
+      "file": "ts"
      }
     ]
    },
@@ -16665,11 +16698,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes open",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      },
      {
       "code": "◇  Opening Spring Launch in the HyperFrames desktop app\n   Its chat picks up this Claude Code conversation.\n   When the person is back here, run npx hyperframes catch-up to see what they did in the app.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -16693,7 +16726,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "npx hyperframes catch-up",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -17235,7 +17268,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes render --variables '{\"ground\":\"#0d1420\",\"ink\":\"#c8ff3d\"}' --strict-variables",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -17620,7 +17653,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "adjust → wheels → curves → hueCurves → secondaries → lut → details → effects",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18252,7 +18285,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "hyperframes render --output default.mp4\nhyperframes render --variables '{\"ground\":\"#0d1420\",\"ink\":\"#c8ff3d\"}' --strict-variables --output reskin.mp4",
-      "file": "BASH THEME={NULL}"
+      "file": "bash"
      }
     ]
    },
@@ -18358,7 +18391,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "[type]        the frame's category      hook · benefit_highlight · social_proof · cta\n[persuasion]  the rhetorical device     before/after · numbered enumeration · counterexample · callback + distillation\n[beat]        the emotional beat        recognition + tension · aha · resolve + inevitability\n[focal]       the one thing the eye lands on\n[roles]       what's foreground / supporting / background, assigned explicitly",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18823,15 +18856,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "The narration sounds muffled, like it's behind cardboard. Fix it.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "The voice sounds amateur — clean it up but don't make it sound processed.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "There's a hum under the interview audio the whole way through.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18846,15 +18879,15 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Put the music under the narration properly — carve it so the voice stays clear\nwithout the track going limp.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "The music is fighting the voiceover. Make room for the voice in the music\nrather than just turning the music down.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "Too far — the music sounds notched now. Back it off.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ],
     "bullets": [
@@ -18871,7 +18904,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Check the actual loudness of the voiceover against the music before touching\nthe carve — the voice may just be quieter than the bed.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18885,7 +18918,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Group all the narration clips as one voiceover group, then carve the music\nagainst that group.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18898,11 +18931,11 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Fade the music out over the last three seconds.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      },
      {
       "code": "Bring the ambience up while the wide shot is on screen, then pull it back\nunder the interview.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18918,7 +18951,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "The s sounds are spitting. I know there's no real de-esser — put a narrow cut\nwhere this voice actually sibilates and tell me what it cost.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -18932,7 +18965,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "Render an audio-only pass and check the mix end to end: voice clear through\nthe loudest musical moment, effects where the action is, nothing surprising\nat the open, and the music finishing on purpose rather than at the file edge.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },
@@ -19192,7 +19225,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "[route]      /hyperframes\n[spec]       8-second 1920x1080 video.\n[beats]      Beat 1 (0-4s): ...  Beat 2 (4-5s): ...  Beat 3 (5-8s): ...\n[copy]       the exact on-screen text, quoted\n[technique]  Adapt the `code-typing` and `vfx-shatter` registry blocks.\n[negatives]  No narration, no image or media files.",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ],
     "bullets": [
@@ -19214,7 +19247,7 @@ export const DOCS_FULL: Record<string, DocContent> = {
     "codeBlocks": [
      {
       "code": "[element]   what's on screen        a giant number · the tweet card · \"SHOWREEL\"\n[motion]    what it does            counts up with an odometer roll · slides up · fades in per letter\n[layout]    where it sits           top-center · filling the lower half · bottom-right\n[style]     how it looks            dark navy, green accent · 8-bit pixel · thin geometric sans\n[timing]    when, inside the beat   at 1s · over 3s, easing out as it lands · staggered 0.1s apart",
-      "file": "TEXT THEME={NULL}"
+      "file": "text"
      }
     ]
    },

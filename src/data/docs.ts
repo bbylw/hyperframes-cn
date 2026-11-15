@@ -550,6 +550,7 @@ export interface DocSection {
   codeComment?: string;
   paras?: string[];
   codeBlocks?: { code: string; file?: string }[];
+  table?: string[][];
 }
 
 export interface DocContent {
