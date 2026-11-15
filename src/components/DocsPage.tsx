@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import CodeBlock from "./CodeBlock";
 import QuickstartArticle from "./QuickstartArticle";
 import { DOCS_FLAT, DOCS_GROUPS, findDoc, groupOf } from "../data/docs";
@@ -25,6 +25,15 @@ function extractDocAnchor(hash: string): string {
   const hashIdx = rest.indexOf("#");
   if (hashIdx === -1) return "";
   return rest.slice(hashIdx + 1).split("?")[0] ?? "";
+}
+
+function subscribeLocationHash(onStoreChange: () => void) {
+  window.addEventListener("hashchange", onStoreChange);
+  return () => window.removeEventListener("hashchange", onStoreChange);
+}
+
+function getLocationHashSnapshot() {
+  return typeof window === "undefined" ? "" : window.location.hash;
 }
 
 interface ResolvedHref {
@@ -582,20 +591,15 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
   const isQuickstart = item.slug === "quickstart";
   const [loaded, setLoaded] = useState<{ slug: string; content: DocContent | null } | null>(null);
   const [loadFailedSlug, setLoadFailedSlug] = useState<string | null>(null);
-  const [hashAnchor, setHashAnchor] = useState<string>(() =>
-    typeof window === "undefined" ? "" : extractDocAnchor(window.location.hash),
+  const locationHash = useSyncExternalStore(
+    subscribeLocationHash,
+    getLocationHashSnapshot,
+    () => "",
   );
+  const hashAnchor = extractDocAnchor(locationHash);
+  const prevScrolledSlugRef = useRef<string | null>(null);
 
   const official = officialUrl(item.url);
-
-  useEffect(() => {
-    const syncHash = () => {
-      setHashAnchor(extractDocAnchor(window.location.hash));
-    };
-    window.addEventListener("hashchange", syncHash);
-    syncHash();
-    return () => window.removeEventListener("hashchange", syncHash);
-  }, [slug]);
 
   useEffect(() => {
     if (isQuickstart) return;
@@ -621,7 +625,8 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
 
   useEffect(() => {
     if (!hashAnchor) {
-      window.scrollTo({ top: 0 });
+      window.scrollTo({ top: 0, behavior: "instant" });
+      prevScrolledSlugRef.current = item.slug;
     }
   }, [item.slug, hashAnchor]);
 
@@ -633,11 +638,17 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
     const raf = window.requestAnimationFrame(() => {
       const target = document.getElementById(hashAnchor);
       if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        const isCrossPageJump = prevScrolledSlugRef.current !== item.slug;
+        const isFarJump = Math.abs(target.getBoundingClientRect().top) > window.innerHeight * 4;
+        target.scrollIntoView({
+          behavior: isCrossPageJump || isFarJump ? "instant" : "smooth",
+          block: "start",
+        });
+        prevScrolledSlugRef.current = item.slug;
       }
     });
     return () => window.cancelAnimationFrame(raf);
-  }, [isQuickstart, content, hashAnchor]);
+  }, [isQuickstart, content, item.slug, hashAnchor]);
 
   const sectionAnchors = useMemo(() => {
     if (!content) return [] as Array<{ id?: string; aliases: string[] }>;
