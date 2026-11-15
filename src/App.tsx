@@ -734,7 +734,9 @@ function Footer() {
           HYPERFRAMES
         </div>
         <div className="footer-bottom">
-          <span>React 19 + TypeScript + Vite+ + Bun</span>
+          <a href="https://www.npmjs.com/package/hyperframes" target="_blank" rel="noreferrer">
+            npm
+          </a>
           <Timecode interactive />
           <span>APACHE-2.0 LICENSE</span>
         </div>
