@@ -173,6 +173,7 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
                       className="skill-copy-btn"
                       onClick={() => copyCommand(skill.cliCommand!)}
                       title="复制安装与更新指令"
+                      aria-label={`复制 ${skill.name} 的安装与更新指令`}
                     >
                       复制 ⎘
                     </button>
@@ -198,6 +199,7 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
                           type="button"
                           className="btn btn-ghost btn-xs"
                           style={{ marginTop: "8px" }}
+                          aria-label={`复制 ${skill.name} 的示例 Prompt`}
                           onClick={async () => {
                             soundFX.playSnap();
                             const ok = await copyToClipboard(skill.examplePrompt!);

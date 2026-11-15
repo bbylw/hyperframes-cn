@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { soundFX } from "../utils/audioFX";
 import { Timecode } from "./Motion";
 import { VolumeUpIcon, VolumeMuteIcon } from "./Icons";
@@ -7,52 +7,91 @@ interface CinemaHUDProps {
   onShowToast: (msg: string) => void;
 }
 
+const SCENES = [
+  { id: "top", name: "SC.HERO" },
+  { id: "quickstart", name: "SC.01 / 快速开始" },
+  { id: "playground", name: "SC.LIVE / 实时工坊" },
+  { id: "wizard", name: "SC.WIZARD / PROMPT" },
+  { id: "build", name: "SC.02 / 构建范围" },
+  { id: "how-it-works", name: "SC.03 / 工作原理" },
+  { id: "skills", name: "SC.04 / SKILLS 矩阵" },
+  { id: "stack", name: "SC.05 / 技术栈" },
+  { id: "frame-gallery", name: "SC.FRAME / 设计系统" },
+  { id: "catalog", name: "SC.06 / 组件库" },
+  { id: "why", name: "SC.07 / 为什么选 HF" },
+  { id: "compare", name: "SC.08 / REMOTION 对比" },
+  { id: "docs", name: "SC.09 / 文档与包" },
+  { id: "community", name: "SC.10 / 社区" },
+];
+
 export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
   const [activeScene, setActiveScene] = useState<string>("SC.HERO");
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [sfxActive, setSfxActive] = useState<boolean>(soundFX.isEnabled());
   const [showBackTop, setShowBackTop] = useState<boolean>(false);
+  const barRef = useRef<HTMLDivElement>(null);
 
+  // 阅读进度：支持 scroll timeline 时由 CSS 驱动，否则用滚动监听兜底
   useEffect(() => {
-    const handleScroll = () => {
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      const current = window.scrollY;
-      const progress = total > 0 ? (current / total) * 100 : 0;
-      setScrollProgress(progress);
-      setShowBackTop(current > 500);
+    const bar = barRef.current;
+    const nativeTimeline = CSS.supports("animation-timeline", "scroll()");
+    let raf = 0;
 
-      // 自动侦测当前视口处于哪一幕
-      const sections = [
-        { id: "top", name: "SC.HERO" },
-        { id: "quickstart", name: "SC.01 / 快速开始" },
-        { id: "playground", name: "SC.LIVE / 实时工坊" },
-        { id: "wizard", name: "SC.WIZARD / PROMPT" },
-        { id: "build", name: "SC.02 / 构建范围" },
-        { id: "how-it-works", name: "SC.03 / 工作原理" },
-        { id: "skills", name: "SC.04 / SKILLS 矩阵" },
-        { id: "stack", name: "SC.05 / 技术栈" },
-        { id: "frame-gallery", name: "SC.FRAME / 设计系统" },
-        { id: "catalog", name: "SC.06 / 组件库" },
-        { id: "why", name: "SC.07 / 为什么选 HF" },
-        { id: "compare", name: "SC.08 / REMOTION 对比" },
-        { id: "docs", name: "SC.09 / 文档与包" },
-        { id: "community", name: "SC.10 / 社区" },
-      ];
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i].id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= window.innerHeight * 0.4) {
-            setActiveScene(sections[i].name);
-            break;
-          }
-        }
+    const update = () => {
+      raf = 0;
+      const scrolled = window.scrollY;
+      setShowBackTop(scrolled > 500);
+      if (!nativeTimeline && bar) {
+        const total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.transform = `scaleX(${total > 0 ? Math.min(scrolled / total, 1) : 0})`;
       }
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => {
+      if (!raf) raf = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // 当前幕：IntersectionObserver 取代每次滚动遍历 getBoundingClientRect
+  useEffect(() => {
+    const visible = new Set<string>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        for (let i = SCENES.length - 1; i >= 0; i--) {
+          if (visible.has(SCENES[i].id)) {
+            setActiveScene(SCENES[i].name);
+            break;
+          }
+        }
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 },
+    );
+
+    const observed: Element[] = [];
+    for (const scene of SCENES) {
+      const el = document.getElementById(scene.id);
+      if (el) {
+        io.observe(el);
+        observed.push(el);
+      }
+    }
+
+    return () => {
+      observed.forEach((el) => io.unobserve(el));
+      io.disconnect();
+    };
   }, []);
 
   const toggleSound = () => {
@@ -69,8 +108,8 @@ export default function CinemaHUD({ onShowToast }: CinemaHUDProps) {
   return (
     <aside className="cinema-hud" aria-label="放映控制台">
       {/* 滚动进度细线 */}
-      <div className="hud-progress-track">
-        <div className="hud-progress-bar" style={{ width: `${scrollProgress}%` }} />
+      <div className="hud-progress-track" aria-hidden="true">
+        <div className="hud-progress-bar" ref={barRef} />
       </div>
 
       <div className="hud-content">

@@ -320,7 +320,13 @@ function Stack() {
           title="HyperFrames 技术栈"
           lede="开源渲染引擎，加上围绕 HTML 原生视频创作不断成长的一整套工具生态。"
         />
-        <div className="table-wrap" data-reveal>
+        <div
+          className="table-wrap"
+          data-reveal
+          role="region"
+          tabIndex={0}
+          aria-label="HyperFrames 技术栈一览"
+        >
           <table>
             <thead>
               <tr>
@@ -496,7 +502,13 @@ function DocsAndPackages() {
             </a>
           ))}
         </div>
-        <div className="table-wrap" data-reveal>
+        <div
+          className="table-wrap"
+          data-reveal
+          role="region"
+          tabIndex={0}
+          aria-label="HyperFrames 软件包一览"
+        >
           <table>
             <thead>
               <tr>
