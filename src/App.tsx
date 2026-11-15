@@ -785,7 +785,7 @@ export default function App() {
   const [docSlug, setDocSlug] = useState<string | null>(() => {
     if (typeof window === "undefined") return null;
     const h = window.location.hash;
-    if (h.startsWith("#docs/")) return h.slice(6) || "introduction";
+    if (h.startsWith("#docs/")) return h.slice(6).split(/[#?]/)[0] || "introduction";
     if (h === "#docs") return "introduction";
     return null;
   });
@@ -801,7 +801,7 @@ export default function App() {
     const onHashChange = () => {
       const h = window.location.hash;
       if (h.startsWith("#docs/")) {
-        setDocSlug(h.slice(6) || "introduction");
+        setDocSlug(h.slice(6).split(/[#?]/)[0] || "introduction");
       } else if (h === "#docs") {
         setDocSlug("introduction");
       } else {
