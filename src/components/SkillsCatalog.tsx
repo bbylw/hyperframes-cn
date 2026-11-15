@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { workflowSkills, domainSkills, type SkillRow } from "../data/content";
+import { coreSkills, onDemandSkills, type SkillRow } from "../data/content";
 import { soundFX } from "../utils/audioFX";
 import { copyToClipboard } from "../utils/clipboard";
 import { SearchIcon, CloseIcon } from "./Icons";
@@ -13,7 +13,7 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [expandedSkill, setExpandedSkill] = useState<string | null>(null);
 
-  // 合并全部 20+ 个技能
+  // 合并全部 9 个已发布技能：路由器 + 核心集合 + 按需安装
   const allSkills: SkillRow[] = useMemo(() => {
     return [
       {
@@ -28,27 +28,22 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
         usage:
           "任何「制作 / 创建 / 编辑 / 动效化 / 渲染」视频、动画或动态图形的请求都请先读它 —— 它是领域 skills 的能力地图，也是创作工作流的意图路由器。",
       },
-      ...workflowSkills,
-      ...domainSkills,
+      ...coreSkills,
+      ...onDemandSkills,
     ];
   }, []);
 
   const categories = [
     { id: "all", label: "全部技能", count: allSkills.length },
     {
-      id: "workflow",
-      label: "创作工作流",
-      count: allSkills.filter((s) => s.category === "workflow").length,
+      id: "core",
+      label: "核心集合",
+      count: allSkills.filter((s) => s.category === "core").length,
     },
     {
-      id: "domain",
-      label: "领域原子能力",
-      count: allSkills.filter((s) => s.category === "domain").length,
-    },
-    {
-      id: "media-audio",
-      label: "媒体与混音",
-      count: allSkills.filter((s) => s.category === "media" || s.category === "audio").length,
+      id: "ondemand",
+      label: "按需安装",
+      count: allSkills.filter((s) => s.category === "ondemand").length,
     },
   ];
 
@@ -56,9 +51,8 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
     return allSkills.filter((s) => {
       const matchCat =
         activeCategory === "all" ||
-        (activeCategory === "workflow" && s.category === "workflow") ||
-        (activeCategory === "domain" && s.category === "domain") ||
-        (activeCategory === "media-audio" && (s.category === "media" || s.category === "audio"));
+        (activeCategory === "core" && s.category === "core") ||
+        (activeCategory === "ondemand" && s.category === "ondemand");
 
       const query = searchQuery.trim().toLowerCase();
       const matchQuery =
@@ -92,10 +86,10 @@ export default function SkillsCatalog({ onShowToast }: SkillsCatalogProps) {
             </span>
             <span className="scene-rule" data-draw />
           </div>
-          <h2 className="scene-title">内置 20 个智能体 Skills 矩阵</h2>
+          <h2 className="scene-title">内置 9 个智能体 Skills 矩阵</h2>
           <p className="scene-lede">
-            按需加载的智能体能力生态 —— 先读 <strong>/hyperframes</strong> 路由器；
-            智能体会根据任务意图自动挑选并组合调用创作工作流与底层领域能力，
+            先读 <strong>/hyperframes</strong> —— 它承载合成契约与全部参考文档；
+            默认安装 <strong>核心集合</strong>（六个），其余三个技能按需安装，
             <strong>没有任何操作会在你背后偷偷拉取整套集合</strong>。
           </p>
         </div>

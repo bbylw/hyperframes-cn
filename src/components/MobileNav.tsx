@@ -107,7 +107,7 @@ export default function MobileNav() {
                 </a>
                 <a
                   className="btn btn-primary btn-block"
-                  href="https://discord.gg/EbK98HBPdk"
+                  href="https://discord.gg/fzbdWyjphr"
                   target="_blank"
                   rel="noreferrer"
                   onClick={handleLinkClick}

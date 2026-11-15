@@ -1,7 +1,7 @@
 export interface SkillRow {
   name: string;
   usage: string;
-  category?: "router" | "workflow" | "domain" | "audio" | "media";
+  category?: "router" | "core" | "ondemand";
   categoryLabel?: string;
   tag?: string;
   badge?: string;
@@ -39,7 +39,7 @@ export const badges = [
   { label: "LICENSE", value: "APACHE-2.0" },
   { label: "RUNTIME", value: "NODE ≥ 22" },
   { label: "OUTPUT", value: "DETERMINISTIC MP4" },
-  { label: "AGENTS", value: "20+ SKILLS" },
+  { label: "AGENTS", value: "9 SKILLS" },
 ];
 
 export interface NavLinkItem {
@@ -124,185 +124,103 @@ export const useCases = [
   },
 ];
 
-export const workflowSkills: SkillRow[] = [
-  {
-    name: "/product-launch-video",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "URL/Brief → 宣传片",
-    badge: "RECOMMENDED",
-    inputFormat: "产品网址 URL、产品 Brief 或推广脚本",
-    cliCommand: "npx hyperframes skills update product-launch-video",
-    examplePrompt: "使用 /product-launch-video，根据 https://example.com 制作一段 30 秒的产品发布宣传片，突出核心卖点和行动按钮。",
-    usage: "任何网站 —— 对产品进行营销 / 发布 / 推广（通过其 URL、简报或脚本），或以网站自身视觉为主的站点导览 / 展示 / 社交短片。最长约 3 分钟（最佳区间为 30–90 秒）。",
-  },
-  {
-    name: "/faceless-explainer",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "文本 → 科普解说",
-    inputFormat: "任意纯文本、科普话题或分步教案",
-    cliCommand: "npx hyperframes skills update faceless-explainer",
-    examplePrompt: "使用 /faceless-explainer，解释「什么是量子计算的叠加态」，时长 45 秒，使用抽象图示和数据可视化。",
-    usage: "基于任意文本解释某个主题 / 概念 —— 没有产品、没有 URL、不抓取网站；所有视觉都由 LLM 生成（排版 / 抽象 / 图示 / 数据可视化）。",
-  },
-  {
-    name: "/pr-to-video",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "PR / Commit → 代码讲解",
-    badge: "GITHUB NATIVE",
-    inputFormat: "GitHub PR URL 或本地 git 变更",
-    cliCommand: "npx hyperframes skills update pr-to-video",
-    examplePrompt: "使用 /pr-to-video，针对当前 PR 的 diff 变化制作 20 秒的技术更新日志短片，重点展示重构后的核心架构。",
-    usage: "一个 GitHub 拉取请求（PR URL、owner/repo#N 引用，或「这个 PR」）→ 更新日志 / 功能揭晓 / 修复 / 重构讲解视频。",
-  },
-  {
-    name: "/embedded-captions",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "视频 → 电影字幕",
-    inputFormat: "已有真人出镜 MP4 视频",
-    cliCommand: "npx hyperframes skills update embedded-captions",
-    examplePrompt: "使用 /embedded-captions，为这段 footage.mp4 添加电影感嵌入式字幕，重要关键词在人像背后浮现发光。",
-    usage: "为已有的真人出镜视频添加字幕 / 标题（原片不动）—— 逐字字幕条、主体身后的嵌入式高潮画面，或纯电影感嵌入。",
-  },
-  {
-    name: "/talking-head-recut",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "访谈/播客 → 图形包装",
-    inputFormat: "播客或访谈视频文件",
-    cliCommand: "npx hyperframes skills update talking-head-recut",
-    examplePrompt: "使用 /talking-head-recut，为这期播客片段添加下三分之一栏人名条、数据引用卡片与图表标注。",
-    usage: "为已有的真人出镜 / 访谈 / 播客视频套上设计过的图形叠层 —— 下三分之一栏、数据标注、动态标题、引语卡片、侧边栏、画中画。",
-  },
-  {
-    name: "/motion-graphics",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "短图形 → MP4/透明",
-    inputFormat: "Logo 矢量图、数字指标或推文文本",
-    cliCommand: "npx hyperframes skills update motion-graphics",
-    examplePrompt: "使用 /motion-graphics，制作一个 6 秒的 Logo 粒子汇聚片头，输出透明背景通道。",
-    usage: "一段简短、无旁白、设计主导的动态图形（约 10 秒以内）—— 动态字体、数据 / 图表爆点、Logo 片头、下三分之一栏、动态推文 / 标题。输出 MP4 或透明叠层。",
-  },
-  {
-    name: "/music-to-video",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "音轨 → 卡点短片",
-    inputFormat: "WAV/MP3 音频音轨或情绪简报",
-    cliCommand: "npx hyperframes skills update music-to-video",
-    examplePrompt: "使用 /music-to-video，导入 background-beat.mp3，根据音乐鼓点精准卡点切换 8 张产品渲染大图。",
-    usage: "一段音乐音轨（音频文件、可提取音频的视频，或根据情绪简报生成的音乐）→ 一段卡点同步的视频 —— 歌词、幻灯片，或动态推广；节奏由音乐驱动。",
-  },
-  {
-    name: "/slideshow",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "Deck → 交互式路演",
-    inputFormat: "大纲文本或 Markdown 幻灯片",
-    cliCommand: "npx hyperframes skills update slideshow",
-    examplePrompt: "使用 /slideshow，制作一份 10 页商业路演 Deck，包含步骤揭示动画与演讲者模式备注。",
-    usage: "一场演示文稿 / 路演 deck / 交互式 deck —— 离散幻灯片、分段揭示、分支、热点导航、演讲者模式。输出是可导航的 deck，而不是渲染出的视频。",
-  },
-  {
-    name: "/general-video",
-    category: "workflow",
-    categoryLabel: "创作工作流",
-    tag: "万能兜底 / Companion",
-    inputFormat: "多场景自由组合素材与文本",
-    cliCommand: "npx hyperframes skills update general-video",
-    examplePrompt: "使用 /general-video，自由编排包含 4 个场景的企业形象宣传片，包含片头、客户证言与行动呼吁。",
-    usage: "其他一切 —— 更长或多场景的作品、品牌 / 集锦短片、标题卡、静态循环、自由式合成。对输入和时长都无要求的兜底方案。",
-  },
-  {
-    name: "/remotion-to-hyperframes",
-    category: "workflow",
-    categoryLabel: "迁移工具",
-    tag: "React → HTML 迁移",
-    badge: "MIGRATION",
-    inputFormat: "已有的 Remotion React 代码工程",
-    cliCommand: "npx hyperframes skills update remotion-to-hyperframes",
-    examplePrompt: "使用 /remotion-to-hyperframes，将此 React Remotion 组件转换为标准 HyperFrames HTML + GSAP 合成。",
-    usage: "将已有的 Remotion（React）合成的源码迁移到 HyperFrames HTML。属于单向迁移，而非创作。",
-  },
-];
-
-export const domainSkills: SkillRow[] = [
-  {
-    name: "/hyperframes-core",
-    category: "domain",
-    categoryLabel: "领域原子能力",
-    tag: "合成契约与生命周期",
-    cliCommand: "npx hyperframes skills update hyperframes-core",
-    usage: "合成契约 —— data-* 计时属性、clip 类名、轨道、子合成、变量、框架自有的媒体播放、确定性规则。",
-  },
-  {
-    name: "/hyperframes-animation",
-    category: "domain",
-    categoryLabel: "领域原子能力",
-    tag: "多引擎动画适配",
-    cliCommand: "npx hyperframes skills update hyperframes-animation",
-    usage: "全部动画知识 —— 原子化运动规则、场景蓝图、转场、运行时适配器（GSAP / Lottie / Three.js / Anime.js / CSS / WAAPI / TypeGPU）。",
-  },
-  {
-    name: "/hyperframes-keyframes",
-    category: "domain",
-    categoryLabel: "领域原子能力",
-    tag: "逐帧精准关键帧",
-    cliCommand: "npx hyperframes skills update hyperframes-keyframes",
-    usage: "可安全定位（seek-safe）的关键帧创作 —— GSAP 时间线、CSS 关键帧、FLIP、路径、遮罩、SVG 形变 / 描边、3D 景深，外加诊断已渲染运动。",
-  },
-  {
-    name: "/hyperframes-creative",
-    category: "domain",
-    categoryLabel: "领域原子能力",
-    tag: "视觉创意与分镜规约",
-    cliCommand: "npx hyperframes skills update hyperframes-creative",
-    usage: "非动画类的创意方向 —— frame.md / design.md、调色板、排版、旁白、节拍规划、音频响应式视觉、合成模式。",
-  },
-  {
-    name: "/media-use",
-    category: "media",
-    categoryLabel: "媒体引擎",
-    tag: "素材解析与生成",
-    badge: "MEDIA OS",
-    cliCommand: "npx hyperframes skills update media-use",
-    usage: "媒体操作系统 —— 将任意媒体需求（BGM、音效、图片、图标、Logo、配音、调色、LUT）解析为冻结的本地文件；缺货时通过 TTS / 音乐 / 图像模型生成；转录、加字幕、去背景并跨项目复用素材。",
-  },
+export const coreSkills: SkillRow[] = [
   {
     name: "/hyperframes-cli",
-    category: "domain",
-    categoryLabel: "开发工具",
-    tag: "CLI 研发闭环",
+    category: "core",
+    categoryLabel: "核心集合",
+    tag: "CLI 全流程",
+    inputFormat: "脚手架、检查、帧查看、时间线编辑、预览、渲染、分享",
     cliCommand: "npx hyperframes skills update hyperframes-cli",
-    usage: "CLI 开发闭环 —— init、lint、check、snapshot、preview、render、publish、doctor，外加 HeyGen 托管云端渲染与 AWS Lambda 分布式渲染。",
-  },
-  {
-    name: "/hyperframes-audio",
-    category: "audio",
-    categoryLabel: "混音系统",
-    tag: "旁白雕刻与混音链",
-    cliCommand: "npx hyperframes skills update hyperframes-audio",
-    usage: "混音 —— 旁白雕刻、效果链（EQ、压缩器、限制器、门、饱和、延迟、混响等）、自动化包络与子混音总线。音频来源由 /media-use 提供。",
+    examplePrompt:
+      "使用 /hyperframes-cli，帮我把这个项目渲染成 1080p 的 MP4；如果有失败，读取 CLI 的 JSON 输出定位原因。",
+    usage:
+      "按任务使用 HyperFrames CLI —— 脚手架、检查、查看帧、编辑时间线、预览、本地或云端渲染、分享、项目历史 —— 外加读取它的 JSON 输出，以及从构建或渲染失败中恢复。",
   },
   {
     name: "/hyperframes-registry",
-    category: "domain",
-    categoryLabel: "生态注册表",
-    tag: "模块与组件安装",
+    category: "core",
+    categoryLabel: "核心集合",
+    tag: "约 450 个现成块与组件",
+    inputFormat: "需要转场、叠层、标题、图表、地图或 3D 等具名视觉",
     cliCommand: "npx hyperframes skills update hyperframes-registry",
-    usage: "通过 hyperframes add 将注册表中的块和组件安装并接入合成。编写新的块或组件以回馈上游。",
+    examplePrompt: "使用 /hyperframes-registry，从组件库安装一个数据图表块并接入当前合成。",
+    usage:
+      "约 450 个现成的块与组件，以可编辑源码的形式安装 —— 转场、叠层、标题、动态字体、字幕、图表、地图、3D、镜头运动。在手工搭建任何具名视觉之前先用它；也用于 hyperframes add 与 catalog。",
   },
   {
+    name: "/media-use",
+    category: "core",
+    categoryLabel: "核心集合",
+    tag: "素材获取与混音",
+    badge: "MEDIA OS",
+    inputFormat: "音乐、音效、图片、图标、Logo、配音、生成视频、转录、抠像、调色",
+    cliCommand: "npx hyperframes skills update media-use",
+    examplePrompt:
+      "使用 /media-use，为这支 30 秒宣传片挑选并放置背景音乐与转场音效，再把人声与音乐混好。",
+    usage:
+      "为视频获取或制作任何媒体 —— 音乐、音效、图片、图标、Logo、配音、数字人、生成视频、转录、抠像、调色与视觉风格 —— 可用 HeyGen 或免费的本地工具，并完成已放置音频的混音。也用于处理偏暗、偏平、发闷的素材。",
+  },
+  {
+    name: "/reverse-any-video",
+    category: "core",
+    categoryLabel: "核心集合",
+    tag: "任意视频 → 可编辑工程",
+    badge: "PRO",
+    inputFormat: "任意已有的视频文件",
+    cliCommand: "npx hyperframes skills update reverse-any-video",
+    examplePrompt: "使用 /reverse-any-video，把这段参考视频重建为可编辑的 HyperFrames 工程，并逐帧校验。",
+    usage:
+      "把任意视频文件重建为可编辑的 HyperFrames 工程（动态图形、真人出镜、实拍、AI 生成素材），并与原片逐帧比对校验。HyperFrames Pro。",
+  },
+  {
+    name: "/style-sampling",
+    category: "core",
+    categoryLabel: "核心集合",
+    tag: "五种成熟风格复用",
+    badge: "PRO",
+    inputFormat: "节目主题 + 目标风格",
+    cliCommand: "npx hyperframes skills update style-sampling",
+    examplePrompt: "使用 /style-sampling，用「动画科学解说」风格做一期 45 秒的量子计算节目。",
+    usage:
+      "用五种经过验证的风格为你的主题制作新一期节目：拼贴解说、财经解说、动画科学解说、3D 品牌解说、3D 真实犯罪。HyperFrames Pro。",
+  },
+];
+
+export const onDemandSkills: SkillRow[] = [
+  {
     name: "/figma",
-    category: "domain",
-    categoryLabel: "设计导入",
+    category: "ondemand",
+    categoryLabel: "按需安装",
     tag: "Figma 资产与动效",
+    inputFormat: "figma.com 链接",
     cliCommand: "npx hyperframes skills update figma",
-    usage: "将 Figma 素材、令牌、组件和分镜段落导入并重建为运动（帧被当作状态而非幻灯片读取），引入 Motion 动画与着色器。",
+    examplePrompt: "使用 /figma，把这个 figma.com 设计稿的分镜帧重建为可定位的运动序列。",
+    usage:
+      "把 Figma 带入视频 —— 渲染素材、品牌令牌、组件、重建为运动的分镜帧、着色器，以及连接器辅助的动效。当你粘贴 figma.com 链接时使用。",
+  },
+  {
+    name: "/slideshow",
+    category: "ondemand",
+    categoryLabel: "按需安装",
+    tag: "Deck → 交互式演示",
+    inputFormat: "大纲文本、Markdown 或既有幻灯片",
+    cliCommand: "npx hyperframes skills update slideshow",
+    examplePrompt: "使用 /slideshow，制作一份 10 页商业路演 Deck，包含分段揭示与演讲者模式备注。",
+    usage:
+      "一份演示文稿、路演 deck 或交互式 deck —— 离散幻灯片、分段揭示、分支、热点导航、带演讲者备注的演讲者模式。输出是可导航的 deck，而不是渲染出的 MP4。",
+  },
+  {
+    name: "/remotion-to-hyperframes",
+    category: "ondemand",
+    categoryLabel: "按需安装",
+    tag: "既有视频代码 → 迁移",
+    badge: "MIGRATION",
+    inputFormat: "Remotion 源码，或 Motion Canvas、Lottie、Three.js、canvas 工程",
+    cliCommand: "npx hyperframes skills update remotion-to-hyperframes",
+    examplePrompt: "使用 /remotion-to-hyperframes，把这个 Remotion 组件迁移为 HyperFrames HTML + GSAP 合成，并逐帧校验。",
+    usage:
+      "把已有的视频代码或素材迁入 HyperFrames（优先 Remotion；也支持 Motion Canvas、Lottie、Three.js、canvas 及其他工具的渲染结果），并逐帧校验。",
   },
 ];
 
@@ -348,23 +266,28 @@ export const stackRows: StackRow[] = [
     status: "已可用",
     role: "把通用 Web 文档所缺失的视频生产模式教给编程智能体",
   },
-  { component: "Studio", status: "持续演进", role: "用于预览与编辑合成的浏览器界面" },
+  {
+    component: "Studio",
+    status: "已可用，持续演进",
+    role: "用于预览与编辑合成的浏览器界面，另有 macOS / Windows / Linux 桌面应用",
+    link: "https://hyperframes.studio/studio",
+  },
   {
     component: "AWS Lambda 渲染",
     status: "已可用",
     role: "部署分布式渲染栈，并从你的笔记本或 CI 驱动渲染",
   },
   {
-    component: "hyperframes.dev",
+    component: "hyperframes.studio",
     status: "已可用",
     role: "用于预览、迭代、分享与渲染 HTML 原生视频项目的社区演练场",
-    link: "https://www.hyperframes.dev/",
+    link: "https://hyperframes.studio/",
   },
   {
     component: "frame.md",
     status: "已可用",
     role: "为镜头反转你的设计系统 —— 一份智能体可据此编排视频的 DESIGN.md 超集",
-    link: "https://www.hyperframes.dev/design",
+    link: "https://hyperframes.studio/design",
   },
 ];
 
@@ -466,7 +389,7 @@ cd my-video
 npx hyperframes preview      # 在浏览器中实时预览，支持热重载
 npx hyperframes render       # 渲染输出确定性 MP4`;
 
-export const agentSample = `npx skills add heygen-com/hyperframes`;
+export const agentSample = `# Claude Code 插件\nclaude plugin marketplace add heygen-com/hyperframes\nclaude plugin install hyperframes@hyperframes\n\n# 独立 skills（含 OpenCode）\nnpx skills add heygen-com/hyperframes`;
 
 export const addSamples = `npx hyperframes add flash-through-white   # 着色器转场
 npx hyperframes add instagram-follow      # 社交叠层
@@ -474,7 +397,7 @@ npx hyperframes add data-chart            # 动态图表`;
 
 export const docsLinks = [
   { label: "快速开始", href: "https://hyperframes.heygen.com/quickstart" },
-  { label: "作品展示", href: "https://hyperframes.heygen.com/showcase" },
+  { label: "作品展示", href: "https://hyperframes.heygen.com/examples" },
   { label: "GSAP 动画指南", href: "https://hyperframes.heygen.com/guides/gsap-animation" },
   { label: "API 核心参考", href: "https://hyperframes.heygen.com/packages/core" },
   { label: "组件库 Catalog", href: "https://hyperframes.heygen.com/catalog/blocks/data-chart" },

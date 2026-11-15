@@ -22,7 +22,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#0A0A0A",
     fontPair: "Anton + Noto Serif SC",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/biennale-yellow",
+    link: "https://hyperframes.studio/design/biennale-yellow",
   },
   {
     id: "blockframe",
@@ -34,7 +34,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#131110",
     fontPair: "JetBrains Mono + Inter",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/blockframe",
+    link: "https://hyperframes.studio/design/blockframe",
   },
   {
     id: "blue-professional",
@@ -46,7 +46,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#09111E",
     fontPair: "Plus Jakarta Sans + Roboto",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/blue-professional",
+    link: "https://hyperframes.studio/design/blue-professional",
   },
   {
     id: "bold-poster",
@@ -58,7 +58,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#181818",
     fontPair: "Outfit + Noto Sans SC",
     ratio: "9:16",
-    link: "https://www.hyperframes.dev/design/bold-poster",
+    link: "https://hyperframes.studio/design/bold-poster",
   },
   {
     id: "broadside",
@@ -70,7 +70,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#1C1814",
     fontPair: "Noto Serif SC + Garamond",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/broadside",
+    link: "https://hyperframes.studio/design/broadside",
   },
   {
     id: "capsule",
@@ -82,7 +82,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#110E1A",
     fontPair: "SF Pro + HarmonyOS Sans",
     ratio: "9:16",
-    link: "https://www.hyperframes.dev/design/capsule",
+    link: "https://hyperframes.studio/design/capsule",
   },
   {
     id: "cartesian",
@@ -94,7 +94,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#091512",
     fontPair: "JetBrains Mono + Fira Code",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/cartesian",
+    link: "https://hyperframes.studio/design/cartesian",
   },
   {
     id: "cobalt-grid",
@@ -106,7 +106,7 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#081325",
     fontPair: "Space Grotesk + JetBrains Mono",
     ratio: "16:9",
-    link: "https://www.hyperframes.dev/design/cobalt-grid",
+    link: "https://hyperframes.studio/design/cobalt-grid",
   },
   {
     id: "coral",
@@ -118,6 +118,6 @@ export const frameTemplates: FrameTemplate[] = [
     bgColor: "#1A0F0A",
     fontPair: "Outfit + PingFang SC",
     ratio: "9:16",
-    link: "https://www.hyperframes.dev/design/coral",
+    link: "https://hyperframes.studio/design/coral",
   },
 ];

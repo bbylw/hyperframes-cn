@@ -11,18 +11,18 @@
   <a href="https://www.npmjs.com/package/hyperframes"><img src="https://img.shields.io/npm/dm/hyperframes.svg?style=flat" alt="npm downloads"></a>
   <a href="https://github.com/heygen-com/hyperframes/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="License"></a>
   <a href="https://nodejs.org"><img src="https://img.shields.io/badge/node-%3E%3D22-brightgreen" alt="Node.js"></a>
-  <a href="https://discord.gg/EbK98HBPdk"><img src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
+  <a href="https://discord.gg/fzbdWyjphr"><img src="https://img.shields.io/badge/Discord-Join-5865F2?logo=discord&logoColor=white" alt="Discord"></a>
 </p>
 
 <p align="center"><b>用 HTML 写视频。由 AI 智能体驱动。</b></p>
 
 <p align="center">
   <a href="https://hyperframes.heygen.com/quickstart">快速开始</a> |
-  <a href="https://hyperframes.heygen.com/showcase">作品展示</a> |
-  <a href="https://www.hyperframes.dev/">在线演练场</a> |
+  <a href="https://hyperframes.heygen.com/examples">作品展示</a> |
+  <a href="https://hyperframes.studio/">在线演练场</a> |
   <a href="https://hyperframes.heygen.com/catalog/blocks/data-chart">组件库</a> |
   <a href="https://hyperframes.heygen.com/introduction">文档</a> |
-  <a href="https://discord.gg/EbK98HBPdk">Discord</a>
+  <a href="https://discord.gg/fzbdWyjphr">Discord</a>
 </p>
 
 <p align="center">
@@ -31,33 +31,63 @@
 
 HyperFrames 是一个开源框架，可将 HTML、CSS、媒体与可定位（seekable）动画转化为确定性的 MP4 视频。你可以在本地通过 CLI 使用它，让 AI 编程智能体借助 skills 使用它，或者把它作为托管创作工作流背后的渲染核心。
 
+[HyperFrames Studio 桌面应用](https://hyperframes.studio/studio) 同样可以免费使用；它的 [Pro 计划](https://hyperframes.studio/pricing) 额外提供 HeyGen 顶尖的视频、图像、语音与音乐模型。
+
+正在使用 Claude Code、Codex、Cursor 或其他编程智能体？先运行一次 `npx hyperframes skills update`，然后让你的智能体去制作视频。
+
+<p align="center">
+  <b>下载桌面应用：</b>
+  <a href="https://hyperframes.studio/studio/download?os=mac">macOS</a> ·
+  <a href="https://hyperframes.studio/studio/download?os=windows">Windows</a> ·
+  <a href="https://hyperframes.studio/studio/download?os=deb">Linux (.deb)</a>
+</p>
+
 ## 快速开始
 
 ### 与 AI 编程智能体一起使用
 
-安装 HyperFrames skills，然后描述你想要的视频：
+#### Claude Code 插件
+
+安装带版本号的插件：
+
+```bash
+claude plugin marketplace add heygen-com/hyperframes
+claude plugin install hyperframes@hyperframes
+```
+
+要为 **hyperframes** 市场启用自动更新，请在你项目的终端中运行 `claude`。在 Claude Code 的终端界面里执行 `/plugin`，然后选择 **Marketplaces** → **hyperframes** → **Enable auto-update**。之后使用 `/hyperframes:hyperframes`。关于 Copilot、VS Code、Cursor、Gemini CLI、更新与迁移，请参阅[插件指南](docs/guides/plugins.mdx)。
+
+#### 独立 skills
+
+独立安装的 skills（包括 OpenCode）请使用：
 
 ```bash
 npx skills add heygen-com/hyperframes
 ```
 
-> 选择器打开时默认不预选任何项 —— 你只需要 **核心 Skills** 分组：`/hyperframes` 路由会按需安装各个创作工作流。智能体与非交互式运行应改用 `npx hyperframes skills update`，它会精确安装核心集合；而非交互式的 `skills add`（不带 `--skill`）会安装全部 20 个。
+> 选择器打开时默认不预选任何项 —— 你只需要 **核心 Skills** 分组；`/slideshow`、`/remotion-to-hyperframes` 与 `/figma` 按需安装。在没有选择器的场景（脚本或 CI），`npx hyperframes skills update` 会精确安装核心集合，而 `skills add --all` 会安装全部 9 个已发布 skills。`.claude/skills` / `.agents/skills` 下的六个仓库内部 skills 默认被排除。完整的已发布集合请使用 `npx hyperframes skills`。
 >
-> `skills add` 解析的是 skills.sh 注册表的 blob，可能比 `main` 分支滞后数小时。`npx hyperframes skills update` 则从当前 `main` 分支安装，因此当你需要某个 skill 的最新副本时，请优先使用它。
+> `skills add` 解析的是 skills.sh 注册表的 blob，可能比 `main` 分支滞后数小时。`npx hyperframes skills update` 会安装与你 CLI 版本相匹配的 release tag 中的 skills，因此它们与你正在运行的 CLI 保持一致。
+
+请在你的视频项目目录中运行项目内安装。如果你在 HyperFrames 仓库内，请改用 `npx hyperframes skills update` 做全局安装：项目内的安装目标可能与仓库跟踪的 `skills/` 源码目录重叠，并覆盖未提交的改动。参见[贡献者环境搭建](CONTRIBUTING.md#getting-started)。
 
 试着这样提问：
 
 > 使用 `/hyperframes`，制作一段 10 秒的产品宣传片，包含淡入标题、背景视频，以及轻微的背景音乐。
 
-这些 skills 会教智能体掌握 HyperFrames 的生产闭环：规划视频、编写合法的 HTML、接入可定位动画、添加媒体、做 lint 检查、预览并渲染。它们适用于 Claude Code、Cursor、Gemini CLI、Codex 以及其他支持 skills 的编程智能体。
+这些 skills 会教智能体掌握 HyperFrames 的生产闭环：规划视频、编写合法的 HTML、接入可定位动画、添加媒体、做 lint 检查、预览并渲染。它们适用于 Claude Code、Codex、Cursor、Gemini CLI、IBM Bob 以及其他支持 skills 的编程智能体。
 
 ## Skills
 
-HyperFrames 内置 20 个智能体可按需加载的 skills。请先阅读 `/hyperframes` —— 它是路由器和能力地图；对于任何「帮我做一个…」的请求（视频、演示文稿，还是合成搬运），它都能挑选合适的工作流，并指向下方的领域 skills。
+HyperFrames 内置 9 个 skills。想要任何视频，直接开口要就行；`/hyperframes` 承载合成契约与全部参考文档（影片、字幕、叠层、运动、视觉风格），请先读它。
 
-默认使用 **核心集合** —— 路由器会按需安装各个创作工作流。`npx hyperframes skills update` 可以在任何地方精确安装这套集合；交互式选择器（`npx skills add heygen-com/hyperframes`）将其列为 “Core Skills” 分组，且默认不预选任何项。该选择器仅支持交互操作 —— 非交互式或缺少 `--skill` 的智能体运行会安装全部 20 个。使用 `npx skills add heygen-com/hyperframes --all` 可主动安装全部 20 个（跳过选择器），或使用 `npx skills add heygen-com/hyperframes --skill <name>` 只安装单个（用裸名，不带前导 `/`）。
+独立安装时请默认使用 **核心集合**（`/hyperframes`、`/hyperframes-cli`、`/hyperframes-registry`、`/media-use`、`/reverse-any-video`、`/style-sampling`）。`npx hyperframes skills update` 可以在任何地方精确安装这套集合；交互式选择器（`npx skills add heygen-com/hyperframes`）将其列为 “Core Skills” 分组，默认不预选任何项。该选择器仅支持交互操作 —— 非交互式或缺少 `--skill` 的智能体运行会安装全部 9 个。使用 `npx skills add heygen-com/hyperframes --all` 可主动安装完整的已发布集合（跳过选择器），或使用 `npx skills add heygen-com/hyperframes --skill <name>` 只安装单个（用裸名，不带前导 `/`）。
 
-此后安装始终保持精简：`npx hyperframes init` 会让 **核心集合** 保持最新（路由器、`hyperframes-*` 领域 skills 以及 `media-use` —— 外加已经安装的内容；`/figma` 仍按需加载），且绝不会擅自扩展局部安装；创作工作流 **按需安装** —— 路由器在进入某个工作流前会先运行 `npx hyperframes skills update <workflow>`。没有任何操作会在你背后偷偷重新拉取整套集合。
+此后独立安装始终保持精简：`npx hyperframes init` 仅在缺失时安装 **核心集合**，且绝不会改动你已安装的 skill（`npx hyperframes skills update` 负责刷新，且从不删除任何一个）；`/figma`、`/slideshow` 与 `/remotion-to-hyperframes` 通过 `npx hyperframes skills update <name>` **按需安装**。没有任何操作会在你背后偷偷重新拉取整套集合。
+
+### 插件包
+
+插件打包完整的 skill 目录，并使用各自智能体的更新管理器。`bun run package:agent-plugin` 会构建已提交的可移植 ZIP、源元数据与 SHA-256 校验和。详见[维护者清单](docs/contributing/agent-plugins.mdx)。
 
 ### 上传到 Codex
 
@@ -69,44 +99,26 @@ bun run package:codex-plugin
 
 该命令会写出 `dist/hyperframes-plugin.zip`，其根目录为 `hyperframes/`，若压缩包超过 Codex 的 100 MB 上传上限则会构建失败。
 
-### 路由器
+### 核心集合
 
-| Skill          | 适用场景                                                                                                                                                                                                                                                                        |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/hyperframes` | **任何「制作 / 创建 / 编辑 / 动效化 / 渲染」视频、动画或动态图形的请求都请先读它。** 领域 skills 的能力地图、在开头确认每份创作需求的意图层，以及下方创作工作流的意图路由器。                                                                                                    |
+| Skill                   | 适用场景                                                                                                                                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/hyperframes`          | **任何「制作 / 编辑 / 动效化 / 渲染」视频、动态图形、字幕或叠层的请求都请先读它**（HTML 渲染成视频）。它承载渲染契约与工作循环，并指向格式、运动、视觉风格、字幕、完整影片与分镜的参考文档。                                  |
+| `/hyperframes-cli`      | 按任务使用 HyperFrames CLI —— 脚手架、检查、查看帧、编辑时间线、预览、本地或云端渲染、分享、项目历史 —— 外加读取它的 JSON 输出，以及从构建或渲染失败中恢复。                                                                |
+| `/hyperframes-registry` | 约 450 个现成的块与组件，以可编辑源码的形式安装 —— 转场、叠层、标题、动态字体、字幕、图表、地图、3D、镜头运动。在手工搭建任何具名视觉之前先用它；也用于 `hyperframes add` 与 `catalog`。                                     |
+| `/media-use`            | 为视频获取或制作任何媒体 —— 音乐、音效、图片、图标、Logo、配音、数字人、生成视频、转录、抠像、调色与视觉风格 —— 可用 HeyGen 或免费的本地工具，并完成已放置音频的混音。也用于处理偏暗、偏平、发闷的素材。                    |
+| `/reverse-any-video`    | 把任意视频文件重建为可编辑的 HyperFrames 工程（动态图形、真人出镜、实拍、AI 生成素材），并与原片逐帧比对校验。HyperFrames Pro。                                                                                             |
+| `/style-sampling`       | 用五种经过验证的风格为你的主题制作新一期节目：拼贴解说、财经解说、动画科学解说、3D 品牌解说、3D 真实犯罪。HyperFrames Pro。                                                                                                 |
 
-### 创作工作流
+### 按需安装
 
-| Skill                      | 适用场景                                                                                                                                                                                                                                          |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/product-launch-video`    | 任何**网站** —— 对产品进行营销 / 发布 / 推广（通过其 URL、简报或脚本），或以网站自身视觉为主的站点导览 / 展示 / 社交短片。最长约 3 分钟（最佳区间为 30–90 秒）。                                                                                   |
-| `/faceless-explainer`      | 基于任意文本**解释某个主题 / 概念** —— 没有产品、没有 URL、不抓取网站；所有视觉都由 LLM 生成（排版 / 抽象 / 图示 / 数据可视化）。                                                                                                                  |
-| `/pr-to-video`             | 一个 **GitHub 拉取请求**（PR URL、`owner/repo#N` 引用，或“这个 PR”）→ 更新日志 / 功能揭晓 / 修复 / 重构讲解视频，通过 `gh` CLI 读取。                                                                                                              |
-| `/embedded-captions`       | 为已有的真人出镜视频**添加字幕 / 标题**（原片不动）—— 逐字字幕条、主体身后的嵌入式高潮画面，或纯电影感嵌入。                                                                                                                                       |
-| `/talking-head-recut`      | 为已有的真人出镜 / 访谈 / 播客视频**套上设计过的图形叠层** —— 下三分之一栏、数据标注、动态标题、引语卡片、侧边栏、画中画。                                                                                                                         |
-| `/motion-graphics`         | 一段简短、**无旁白、设计主导的动态图形**（约 10 秒以内）—— 动态字体、数据 / 图表爆点、Logo 片头、下三分之一栏、动态推文 / 标题。输出 MP4 或透明叠层。                                                                                              |
-| `/music-to-video`          | 一段**音乐音轨**（音频文件、可提取音频的视频，或根据情绪简报生成的音乐）→ 一段**卡点同步**的视频 —— 歌词、幻灯片，或动态推广；节奏由音乐驱动。                                                                                                     |
-| `/slideshow`               | 一场**演示文稿 / 路演 deck / 交互式 deck** —— 离散幻灯片、分段揭示、分支、热点导航、演讲者模式。输出是可导航的 deck，而不是渲染出的视频。                                                                                                           |
-| `/general-video`           | **其他一切** —— 更长或多场景的作品、品牌 / 集锦短片、标题卡、静态循环、自由式合成。对输入和时长都无要求的兜底方案，也是 companion 模式（用全套工具箱协同创作）的所在。                                                                            |
-| `/remotion-to-hyperframes` | 将已有的 Remotion（React）**合成的源码迁移**到 HyperFrames HTML。属于单向迁移，而非创作。                                                                                                                                                          |
+| Skill                      | 适用场景                                                                                                                                                                     |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/figma`                   | 把 Figma 带入视频 —— 渲染素材、品牌令牌、组件、重建为运动的分镜帧、着色器，以及连接器辅助的动效。当你粘贴 figma.com 链接时使用。                                             |
+| `/slideshow`               | 一份演示文稿、路演 deck 或交互式 deck —— 离散幻灯片、分段揭示、分支、热点导航、带演讲者备注的演讲者模式。输出是可导航的 deck，而不是渲染出的 MP4。                             |
+| `/remotion-to-hyperframes` | 把已有的视频代码或素材迁入 HyperFrames（优先 Remotion；也支持 Motion Canvas、Lottie、Three.js、canvas 及其他工具的渲染结果），并逐帧校验。                                    |
 
-### 领域 skills（按需加载）
-
-创作工作流所组合调用的原子化能力 —— 当你需要某一特定层时，单独拉取一个即可。
-
-| Skill                    | 覆盖范围                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/hyperframes-core`      | 合成契约 —— `data-*` 计时属性、`class="clip"`、轨道、子合成、变量、框架自有的媒体播放、确定性规则。                                                                                                                                                                                                                                                                                                                                            |
-| `/hyperframes-animation` | 全部动画知识 —— 原子化运动规则、场景蓝图、转场、运行时适配器（GSAP / Lottie / Three.js / Anime.js / CSS / WAAPI / TypeGPU）。                                                                                                                                                                                                                                                                                                                     |
-| `/hyperframes-keyframes` | 跨运行时的、可安全定位（seek-safe）的关键帧创作 —— GSAP 时间线、CSS 关键帧、Anime.js、WAAPI、FLIP、路径、遮罩、SVG 形变 / 描边、3D 景深 —— 外加用于诊断已渲染运动的 `hyperframes keyframes`。                                                                                                                                                                                                                                                     |
-| `/hyperframes-creative`  | 非动画类的创意方向 —— `frame.md` / `design.md`、调色板、排版、旁白、节拍规划、音频响应式视觉、合成模式。                                                                                                                                                                                                                                                                                                                                        |
-| `/media-use`             | 媒体操作系统 —— 将任意媒体需求（BGM、音效、图片、图标、Logo、配音、调色、LUT）解析为一个冻结的本地文件，或一段可粘贴的块 + 账目记录；当组件库缺货时通过 TTS / 音乐 / 图像模型生成；转录、加字幕、去背景，并在多个项目间复用素材。一个共享的音频引擎 + 清单追踪。                                                                                                                                                                                   |
-| `/hyperframes-cli`       | CLI 开发闭环 —— `init`、`lint`、`check`、`snapshot`、`preview`、`render`、`publish`、`doctor`，外加 HeyGen 托管的云端渲染（`cloud render`）与 AWS Lambda 渲染（`lambda deploy / render / progress`）。                                                                                                                                                                                                                                          |
-| `/hyperframes-audio`     | 为合成中已放置的音频做混音 —— 旁白雕刻（仅在人声所占频段内压低音乐底床，静态或动态皆可，含电平匹配）、效果链（EQ、压缩器、限制器、门、饱和、延迟、混响、合唱、移相、比特压碎）、音量或任意效果参数的自动化包络，以及可承载一条链、推子和多个轨道统一自动化时钟的子混音总线（`<hf-audio-group>`）。音频的来源是 `/media-use`。                                                                                                                      |
-| `/hyperframes-registry`  | 通过 `hyperframes add` 将注册表中的块和组件安装并接入合成。编写新的块或组件以回馈上游。                                                                                                                                                                                                                                                                                                                                                         |
-| `/figma`                 | 将 Figma 素材、令牌、组件和分镜段落导入并重建为运动（帧被当作状态而非幻灯片读取）（REST/CLI），外加将 Motion 动画（MCP）与着色器（MCP 来源 / 原生导出）引入合成。                                                                                                                                                                                                                                                                                                                 |
-
-关于可视化设计交付工作流，请参阅 [Claude Design 指南](https://hyperframes.heygen.com/guides/claude-design) 与 [Open Design 指南](https://hyperframes.heygen.com/guides/open-design)。
+关于可视化设计交付工作流，请参阅 [Claude Design 指南](https://hyperframes.heygen.com/guides/design-tools#start-from-claude-design-or-open-design) 与 [Open Design 指南](https://hyperframes.heygen.com/guides/design-tools#start-from-claude-design-or-open-design)。
 
 ### 手动使用 CLI
 
@@ -121,7 +133,7 @@ npx hyperframes render       # 渲染为 MP4
 
 ## 你能构建什么
 
-需要灵感？浏览 [作品展示](https://hyperframes.heygen.com/showcase)，观看、阅读、运行并混编其中已完成的视频。
+需要灵感？浏览 [作品展示](https://hyperframes.heygen.com/examples)，观看、阅读、运行并混编其中已完成的视频。
 
 - 产品发布视频与功能公告
 - 带有动态代码 diff、旁白与字幕的 PR 讲解视频
@@ -141,57 +153,57 @@ npx hyperframes render       # 渲染为 MP4
 <table>
   <tr>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/biennale-yellow"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png" alt="Biennale Yellow" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/biennale-yellow">Biennale Yellow</a></b>
+      <a href="https://hyperframes.studio/design/biennale-yellow"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/biennale-yellow.png" alt="Biennale Yellow" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/biennale-yellow">Biennale Yellow</a></b>
     </td>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/blockframe"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/blockframe.png" alt="BlockFrame" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/blockframe">BlockFrame</a></b>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/blue-professional"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/blue-professional.png" alt="Blue Professional" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/blue-professional">Blue Professional</a></b>
-    </td>
-    <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/bold-poster"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/bold-poster.png" alt="Bold Poster" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/bold-poster">Bold Poster</a></b>
+      <a href="https://hyperframes.studio/design/blockframe"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/blockframe.png" alt="BlockFrame" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/blockframe">BlockFrame</a></b>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/broadside"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/broadside.png" alt="Broadside" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/broadside">Broadside</a></b>
+      <a href="https://hyperframes.studio/design/blue-professional"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/blue-professional.png" alt="Blue Professional" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/blue-professional">Blue Professional</a></b>
     </td>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/capsule"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/capsule.png" alt="Capsule" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/capsule">Capsule</a></b>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/cartesian"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/cartesian.png" alt="Cartesian" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/cartesian">Cartesian</a></b>
-    </td>
-    <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/cobalt-grid"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/cobalt-grid.png" alt="Cobalt Grid" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/cobalt-grid">Cobalt Grid</a></b>
+      <a href="https://hyperframes.studio/design/bold-poster"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/bold-poster.png" alt="Bold Poster" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/bold-poster">Bold Poster</a></b>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/coral"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/coral.png" alt="Coral" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/coral">Coral</a></b>
+      <a href="https://hyperframes.studio/design/broadside"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/broadside.png" alt="Broadside" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/broadside">Broadside</a></b>
     </td>
     <td width="50%" align="center">
-      <a href="https://www.hyperframes.dev/design/creative-mode"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/creative-mode.png" alt="Creative Mode" width="100%"></a>
-      <br><b><a href="https://www.hyperframes.dev/design/creative-mode">Creative Mode</a></b>
+      <a href="https://hyperframes.studio/design/capsule"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/capsule.png" alt="Capsule" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/capsule">Capsule</a></b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="https://hyperframes.studio/design/cartesian"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/cartesian.png" alt="Cartesian" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/cartesian">Cartesian</a></b>
+    </td>
+    <td width="50%" align="center">
+      <a href="https://hyperframes.studio/design/cobalt-grid"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/cobalt-grid.png" alt="Cobalt Grid" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/cobalt-grid">Cobalt Grid</a></b>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="https://hyperframes.studio/design/coral"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/coral.png" alt="Coral" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/coral">Coral</a></b>
+    </td>
+    <td width="50%" align="center">
+      <a href="https://hyperframes.studio/design/creative-mode"><img src="https://static.heygen.ai/hyperframes-oss/docs/images/design-templates/creative-mode.png" alt="Creative Mode" width="100%"></a>
+      <br><b><a href="https://hyperframes.studio/design/creative-mode">Creative Mode</a></b>
     </td>
   </tr>
 </table>
 
-在 [hyperframes.dev/design](https://www.hyperframes.dev/design) 浏览并混编全部模板。
+在 [hyperframes.studio/design](https://hyperframes.studio/design) 浏览并混编全部模板。
 
 ## 工作原理
 
@@ -243,8 +255,8 @@ HyperFrames 是开源渲染引擎，加上围绕 HTML 原生视频创作不断�
 | 智能体 skills                                    | 已可用              | 把通用 Web 文档所缺失的视频生产模式教给编程智能体                                                  |
 | Studio                                           | 已可用，持续演进    | 用于预览与编辑合成的浏览器界面                                                                      |
 | AWS Lambda 渲染                                  | 已可用              | 部署分布式渲染栈，并从你的笔记本或 CI 驱动渲染                                                      |
-| [hyperframes.dev](https://www.hyperframes.dev/) | 已可用              | 用于预览、迭代、分享与渲染 HTML 原生视频项目的社区演练场                                            |
-| [frame.md](https://www.hyperframes.dev/design)  | 已可用              | 为镜头反转你的设计系统 —— 一份智能体可据此编排视频的 DESIGN.md 超集                                 |
+| [hyperframes.studio](https://hyperframes.studio/) | 已可用              | 用于预览、迭代、分享与渲染 HTML 原生视频项目的社区演练场                                            |
+| [frame.md](https://hyperframes.studio/design)  | 已可用              | 为镜头反转你的设计系统 —— 一份智能体可据此编排视频的 DESIGN.md 超集                                 |
 
 ## 组件库
 
@@ -287,7 +299,7 @@ HyperFrames 的灵感来自 [Remotion](https://www.remotion.dev)。两者都用�
 完整文档：[hyperframes.heygen.com/introduction](https://hyperframes.heygen.com/introduction)
 
 - [快速开始](https://hyperframes.heygen.com/quickstart)
-- [作品展示](https://hyperframes.heygen.com/showcase)
+- [作品展示](https://hyperframes.heygen.com/examples)
 - [指南](https://hyperframes.heygen.com/guides/gsap-animation)
 - [API 参考](https://hyperframes.heygen.com/packages/core)
 - [组件库](https://hyperframes.heygen.com/catalog/blocks/data-chart)
@@ -311,7 +323,7 @@ HyperFrames 的灵感来自 [Remotion](https://www.remotion.dev)。两者都用�
 
 HyperFrames 已在 [HeyGen](https://www.heygen.com) 投入生产使用，并有来自 [tldraw](https://tldraw.com)、[TanStack](https://tanstack.com) 等团队的社区示例，详见 [ADOPTERS.md](https://github.com/heygen-com/hyperframes/blob/main/ADOPTERS.md)。如果你的团队正在使用 HyperFrames，欢迎提交 PR。
 
-- 问题与想法：[Discord](https://discord.gg/EbK98HBPdk)
+- 问题与想法：[Discord](https://discord.gg/fzbdWyjphr)
 - 缺陷与功能请求：[GitHub Issues](https://github.com/heygen-com/hyperframes/issues)
 - 用户调研：[与 HyperFrames 团队预约一次轻松的 30 分钟交流](https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2cSpKoDgmcmRrgekrnrgqmvPT8W6F2Zg6e7MY7IJqaZKwpn_I0NdTHkN390iguMepE_NVg8ezb?gv=true) —— 无需准备，也无销售推销
 - 安全报告：[SECURITY.md](https://github.com/heygen-com/hyperframes/blob/main/SECURITY.md)
@@ -344,3 +356,7 @@ GIT_LFS_SKIP_SMUDGE=1 git clone https://github.com/heygen-com/hyperframes.git
 ## 许可证
 
 [Apache 2.0](https://github.com/heygen-com/hyperframes/blob/main/LICENSE)
+
+### 分享视频以供评审
+
+用 `npx hyperframes auth login` 登录，然后运行 `npx hyperframes share` 选择谁可以打开渲染好的评审页。当改动应成为新版本时使用 `share --update`，网页端设置使用 `share --manage`。CLI 与 Desktop 共用同一套分享系统，每个工作区提供五个免费项目。既有的旧版发布链接仍然可访问。

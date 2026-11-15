@@ -111,7 +111,7 @@ window.__timelines.launch = tl;`,
 
   <div class="author-tag" data-start="1.5" data-duration="4.5" data-track-index="3">
     <span class="tag-avatar">AI</span>
-    <span>Merged by AI Agent via /pr-to-video</span>
+    <span>Merged by AI Agent via /hyperframes</span>
   </div>
 </div>`,
     gsapCode: `const tl = gsap.timeline({ paused: true });

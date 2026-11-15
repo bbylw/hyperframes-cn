@@ -88,7 +88,7 @@ function Nav() {
           <a
             className="nav-btn-primary"
             data-magnet
-            href="https://discord.gg/EbK98HBPdk"
+            href="https://discord.gg/fzbdWyjphr"
             target="_blank"
             rel="noreferrer"
           >
@@ -155,7 +155,7 @@ function Hero() {
             <a
               className="btn btn-ghost"
               data-magnet
-              href="https://www.hyperframes.dev/"
+              href="https://hyperframes.studio/"
               target="_blank"
               rel="noreferrer"
             >
@@ -237,7 +237,7 @@ function BuildList() {
           lede={
             <>
               从产品发布到文档转视频，任何「该被拍下来」的东西。需要灵感？浏览{" "}
-              <a href="https://hyperframes.heygen.com/showcase" target="_blank" rel="noreferrer">
+              <a href="https://hyperframes.heygen.com/examples" target="_blank" rel="noreferrer">
                 作品展示
               </a>
               ，观看、阅读、运行并混编其中已完成的视频。
@@ -538,7 +538,7 @@ function Community() {
             <h3>问题与想法</h3>
             <p>
               到{" "}
-              <a href="https://discord.gg/EbK98HBPdk" target="_blank" rel="noreferrer">
+              <a href="https://discord.gg/fzbdWyjphr" target="_blank" rel="noreferrer">
                 Discord
               </a>{" "}
               与团队和社区实时交流。
@@ -598,17 +598,17 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://hyperframes.heygen.com/showcase" target="_blank" rel="noreferrer">
+                <a href="https://hyperframes.heygen.com/examples" target="_blank" rel="noreferrer">
                   作品展示
                 </a>
               </li>
               <li>
-                <a href="https://www.hyperframes.dev/" target="_blank" rel="noreferrer">
+                <a href="https://hyperframes.studio/" target="_blank" rel="noreferrer">
                   在线演练场
                 </a>
               </li>
               <li>
-                <a href="https://www.hyperframes.dev/design" target="_blank" rel="noreferrer">
+                <a href="https://hyperframes.studio/design" target="_blank" rel="noreferrer">
                   frame.md 模板
                 </a>
               </li>
@@ -636,7 +636,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://discord.gg/EbK98HBPdk" target="_blank" rel="noreferrer">
+                <a href="https://discord.gg/fzbdWyjphr" target="_blank" rel="noreferrer">
                   Discord 社区
                 </a>
               </li>

@@ -18,40 +18,33 @@ export default function PromptWizard({ onShowToast }: PromptWizardProps) {
 
   const urlInputId = useId();
 
-  // 根据选定参数生成智能体提示词
-  const getSkillName = () => {
-    switch (videoType) {
-      case "product-launch":
-        return "/product-launch-video";
-      case "pr-walkthrough":
-        return "/pr-to-video";
-      case "data-viz":
-        return "/motion-graphics";
-      case "captions":
-        return "/embedded-captions";
-      case "explainer":
-        return "/faceless-explainer";
-      default:
-        return "/hyperframes";
-    }
+  // 所有创作请求都先经过 /hyperframes 路由器
+  const videoTypeLabels: Record<string, string> = {
+    "product-launch": "产品发布短片",
+    "pr-walkthrough": "GitHub PR 讲解",
+    "data-viz": "数据图表与动态图形",
+    captions: "电影感逐字字幕",
+    explainer: "概念与文档科普",
   };
+
+  const getSkillName = () => "/hyperframes";
 
   const generateAgentPrompt = () => {
     const skill = getSkillName();
     let prompt = `使用 ${skill} 技能，为我制作一支 ${duration} 的确定性视频。\n`;
+    prompt += `• 视频场景: ${videoTypeLabels[videoType] ?? "自由创作"}\n`;
     prompt += `• 输入源: ${targetUrlOrTopic}\n`;
     prompt += `• 画幅比例: ${aspectRatio}（目标分辨率: ${aspectRatio === "16:9" ? "1920x1080" : aspectRatio === "9:16" ? "1080x1920" : "1080x1080"}）\n`;
     prompt += `• 动画引擎: ${engine}（严格使用 paused: true 可安全定位时间线）\n`;
-    if (audioBed) prompt += `• 音频要求: 接入符合节奏的背景音乐（通过 /media-use 解析并使用 /hyperframes-audio 进行旁白雕刻）\n`;
+    if (audioBed) prompt += `• 音频要求: 接入符合节奏的背景音乐（通过 /media-use 获取素材并完成混音）\n`;
     if (captions) prompt += `• 字幕要求: 包含动态逐字高潮字幕，重点文字发光或高亮\n`;
     prompt += `• 输出标准: 产出符合 HyperFrames 合成契约的 index.html，并执行 npx hyperframes render 导出 MP4。`;
     return prompt;
   };
 
   const generateCliCommand = () => {
-    const skill = getSkillName().replace("/", "");
-    return `# 1. 确保已安装并同步对应技能
-npx hyperframes skills update ${skill}
+    return `# 1. 确保已安装并同步核心 Skills 集合
+npx hyperframes skills update
 
 # 2. 初始化项目工程并进入
 npx hyperframes init my-${videoType}-video --ratio=${aspectRatio}
