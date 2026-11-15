@@ -657,7 +657,41 @@ function Community() {
   );
 }
 
+const HYPERFRAMES_NPM_URL = "https://www.npmjs.com/package/hyperframes";
+const HYPERFRAMES_REGISTRY_URL = "https://registry.npmjs.org/hyperframes/latest";
+const FALLBACK_HYPERFRAMES_VERSION = "0.9.52";
+
+/** 获取 npm 上最新的 hyperframes 版本号，失败时回退到内置版本。 */
+function useHyperframesVersion() {
+  const [version, setVersion] = useState(FALLBACK_HYPERFRAMES_VERSION);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(HYPERFRAMES_REGISTRY_URL, { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: unknown) => {
+        if (
+          data &&
+          typeof data === "object" &&
+          "version" in data &&
+          typeof data.version === "string" &&
+          /^\d+\.\d+\.\d+/.test(data.version)
+        ) {
+          setVersion(data.version);
+        }
+      })
+      .catch(() => {
+        // 网络不可达或组件卸载中止时保留回退版本号
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  return version;
+}
+
 function Footer() {
+  const version = useHyperframesVersion();
   return (
     <footer className="footer">
       <div className="container">
@@ -734,8 +768,8 @@ function Footer() {
           HYPERFRAMES
         </div>
         <div className="footer-bottom">
-          <a href="https://www.npmjs.com/package/hyperframes" target="_blank" rel="noreferrer">
-            npm
+          <a href={HYPERFRAMES_NPM_URL} target="_blank" rel="noreferrer">
+            hyperframes v{version}
           </a>
           <Timecode interactive />
           <span>APACHE-2.0 LICENSE</span>
