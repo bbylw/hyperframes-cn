@@ -1,16 +1,16 @@
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
 const ROOT = path.resolve(process.cwd());
-const TMP = path.join(ROOT, 'tmp-full');
+const TMP = path.join(ROOT, "tmp-full");
 fs.mkdirSync(TMP, { recursive: true });
 
 // Build URL -> slug map from existing data files
 function collectMap(file) {
-  const s = fs.readFileSync(file, 'utf8');
+  const s = fs.readFileSync(file, "utf8");
   const m = [];
   let x;
-  if (file.endsWith('docs-dev.ts')) {
+  if (file.endsWith("docs-dev.ts")) {
     const re = /item\("([^"]+)"[\s\S]*?(https:\/\/[^\"]+\.md)/g;
     while ((x = re.exec(s))) m.push([x[2], x[1]]);
   } else {
@@ -20,14 +20,14 @@ function collectMap(file) {
   return m;
 }
 let map = [];
-for (const f of ['src/data/docs.ts', 'src/data/docs-dev.ts']) {
+for (const f of ["src/data/docs.ts", "src/data/docs-dev.ts"]) {
   map.push(...collectMap(path.join(ROOT, f)));
 }
 // docs-extra has slugs as keys but URLs in docs.ts already; just use above
-console.log('mapped', map.length);
-const EXCLUDE = new Set(['help-changelog', 'help-weekly']);
+console.log("mapped", map.length);
+const EXCLUDE = new Set(["help-changelog", "help-weekly"]);
 const todo = map.filter(([, slug]) => !EXCLUDE.has(slug));
-console.log('todo (excl changelog/weekly)', todo.length);
+console.log("todo (excl changelog/weekly)", todo.length);
 
 function protect(line) {
   const urls = [];
@@ -61,23 +61,25 @@ function restore(s, urls, codes, tags) {
 }
 
 async function gtx(text) {
-  const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text);
-  const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-  if (!r.ok) throw new Error('gtx ' + r.status);
+  const url =
+    "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=" +
+    encodeURIComponent(text);
+  const r = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
+  if (!r.ok) throw new Error("gtx " + r.status);
   const j = await r.json();
   // j[0] is array of segments
-  return j[0].map((s) => s[0]).join('');
+  return j[0].map((s) => s[0]).join("");
 }
 
 async function translateText(text) {
   // chunk by ~900 chars on sentence boundaries
   const chunks = [];
-  let cur = '';
+  let cur = "";
   for (const sent of text.split(/(?<=[.!?。；;])\s+/)) {
-    if ((cur + ' ' + sent).length > 1400) {
+    if ((cur + " " + sent).length > 1400) {
       if (cur) chunks.push(cur);
       cur = sent;
-    } else cur = (cur + ' ' + sent).trim();
+    } else cur = (cur + " " + sent).trim();
   }
   if (cur) chunks.push(cur);
   const outs = [];
@@ -88,27 +90,30 @@ async function translateText(text) {
         outs.push(await gtx(c));
         ok = true;
       } catch (e) {
-        console.log('  retry', e.message, 'sleep');
+        console.log("  retry", e.message, "sleep");
         await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
       }
     }
     if (!ok) outs.push(c);
     await new Promise((r) => setTimeout(r, 450));
   }
-  return outs.join(' ');
+  return outs.join(" ");
 }
 
 async function translateMarkdown(md) {
-  const lines = md.split('\n');
+  const lines = md.split("\n");
   const out = [];
   let inCode = false;
-  let buf = '';
+  let buf = "";
   const flush = async () => {
-    if (!buf.trim()) { buf = ''; return; }
+    if (!buf.trim()) {
+      buf = "";
+      return;
+    }
     const { s, urls, codes, tags } = protect(buf);
     const zh = await translateText(s);
     out.push(restore(zh, urls, codes, tags));
-    buf = '';
+    buf = "";
   };
   for (const line of lines) {
     if (/^\s*```/.test(line)) {
@@ -117,9 +122,18 @@ async function translateMarkdown(md) {
       out.push(line);
       continue;
     }
-    if (inCode) { out.push(line); continue; }
+    if (inCode) {
+      out.push(line);
+      continue;
+    }
     // preserve blank, tables separators, horizontal rules, image lines, pure HTML
-    if (/^\s*$/.test(line) || /^\s*\|[\s:|-]+\|\s*$/.test(line) || /^\s*!\[.*\]\(/.test(line) || /^\s*</.test(line) || /^\s*\[\w+\]\s*$/.test(line)) {
+    if (
+      /^\s*$/.test(line) ||
+      /^\s*\|[\s:|-]+\|\s*$/.test(line) ||
+      /^\s*!\[.*\]\(/.test(line) ||
+      /^\s*</.test(line) ||
+      /^\s*\[\w+\]\s*$/.test(line)
+    ) {
       await flush();
       out.push(line);
       continue;
@@ -129,7 +143,10 @@ async function translateMarkdown(md) {
     if (m) {
       await flush();
       const body = m[2];
-      if (!body.trim()) { out.push(line); continue; }
+      if (!body.trim()) {
+        out.push(line);
+        continue;
+      }
       const { s, urls, codes, tags } = protect(body);
       const zh = await translateText(s);
       out.push(m[1] + restore(zh, urls, codes, tags));
@@ -144,43 +161,64 @@ async function translateMarkdown(md) {
       out.push(restore(zh, urls, codes, tags));
       continue;
     }
-    buf = buf ? buf + ' ' + line.trim() : line.trim();
+    buf = buf ? buf + " " + line.trim() : line.trim();
   }
   await flush();
-  return out.join('\n');
+  return out.join("\n");
 }
 
-
-let doneCount=0, failCount=0, skipCount=0;
+let doneCount = 0,
+  failCount = 0,
+  skipCount = 0;
 async function workOne([url, slug]) {
-  const enPath = path.join(TMP, slug + '.en.md');
-  const zhPath = path.join(TMP, slug + '.zh.md');
-  if (fs.existsSync(zhPath)) { skipCount++; return; }
+  const enPath = path.join(TMP, slug + ".en.md");
+  const zhPath = path.join(TMP, slug + ".zh.md");
+  if (fs.existsSync(zhPath)) {
+    skipCount++;
+    return;
+  }
   try {
     let en;
-    if (fs.existsSync(enPath)) en = fs.readFileSync(enPath, 'utf8');
+    if (fs.existsSync(enPath)) en = fs.readFileSync(enPath, "utf8");
     else {
       const r = await fetch(url);
-      if (!r.ok) throw new Error('fetch ' + r.status);
+      if (!r.ok) throw new Error("fetch " + r.status);
       en = await r.text();
       fs.writeFileSync(enPath, en);
     }
-    const idx2 = en.indexOf(String.fromCharCode(10) + '# ');
+    const idx2 = en.indexOf(String.fromCharCode(10) + "# ");
     const body = idx2 >= 0 ? en.slice(idx2 + 1) : en;
     const zh = await translateMarkdown(body);
     fs.writeFileSync(zhPath, zh);
     doneCount++;
-    console.log('[' + (doneCount+skipCount+failCount) + '/' + todo.length + '] ' + slug + ' en=' + en.length + ' zh=' + zh.length);
+    console.log(
+      "[" +
+        (doneCount + skipCount + failCount) +
+        "/" +
+        todo.length +
+        "] " +
+        slug +
+        " en=" +
+        en.length +
+        " zh=" +
+        zh.length,
+    );
   } catch (e) {
     failCount++;
-    console.log('FAIL ' + slug + ' ' + e.message);
+    console.log("FAIL " + slug + " " + e.message);
     await new Promise((r) => setTimeout(r, 2000));
   }
 }
-(async()=>{
-  const W=3;
-  let i=0;
-  async function worker(){ while(true){ const j=i++; if(j>=todo.length) return; await workOne(todo[j]); } }
-  await Promise.all(Array.from({length:W},()=>worker()));
-  console.log('finished done='+doneCount+' skip='+skipCount+' fail='+failCount);
+(async () => {
+  const W = 3;
+  let i = 0;
+  async function worker() {
+    while (true) {
+      const j = i++;
+      if (j >= todo.length) return;
+      await workOne(todo[j]);
+    }
+  }
+  await Promise.all(Array.from({ length: W }, () => worker()));
+  console.log("finished done=" + doneCount + " skip=" + skipCount + " fail=" + failCount);
 })();

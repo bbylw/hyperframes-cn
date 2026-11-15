@@ -13,7 +13,12 @@ function Inline({ text }: { text: string }) {
     if (m[1]) parts.push(<b key={k++}>{m[1].slice(2, -2)}</b>);
     else if (m[2]) {
       const mm = m[2].match(/^\[(.*)\]\((.*)\)$/);
-      if (mm) parts.push(<a key={k++} href={mm[2]} target="_blank" rel="noreferrer">{mm[1]}</a>);
+      if (mm)
+        parts.push(
+          <a key={k++} href={mm[2]} target="_blank" rel="noreferrer">
+            {mm[1]}
+          </a>,
+        );
       else parts.push(m[2]);
     } else if (m[3]) parts.push(<code key={k++}>{m[3].slice(1, -1)}</code>);
     last = m.index + m[0].length;
@@ -194,71 +199,77 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                         <span className="scene-rule" />
                       </div>
                       <h2 className="docs-h2">{sec.h}</h2>
-                      {sec.paras && sec.paras.length > 0
-                        ? sec.paras.map((para, pi) => {
-                            const img = para.match(/^!\[(.*?)\]\((.*?)\)$/);
-                            if (img) {
+                      {sec.paras && sec.paras.length > 0 ? (
+                        sec.paras.map((para, pi) => {
+                          const img = para.match(/^!\[(.*?)\]\((.*?)\)$/);
+                          if (img) {
+                            return (
+                              <figure key={pi} className="docs-video">
+                                <img src={img[2]} alt={img[1]} loading="lazy" />
+                              </figure>
+                            );
+                          }
+                          if (/^<video\b/i.test(para)) {
+                            const src = para.match(/src="([^"]+)"/)?.[1];
+                            const poster = para.match(/poster="([^"]+)"/)?.[1];
+                            if (src) {
                               return (
                                 <figure key={pi} className="docs-video">
-                                  <img src={img[2]} alt={img[1]} loading="lazy" />
+                                  <video
+                                    src={src}
+                                    poster={poster}
+                                    muted
+                                    loop
+                                    playsInline
+                                    preload="metadata"
+                                    controls
+                                  />
                                 </figure>
                               );
                             }
-                            if (/^<video\b/i.test(para)) {
-                              const src = para.match(/src="([^"]+)"/)?.[1];
-                              const poster = para.match(/poster="([^"]+)"/)?.[1];
-                              if (src) {
-                                return (
-                                  <figure key={pi} className="docs-video">
-                                    <video
-                                      src={src}
-                                      poster={poster}
-                                      muted
-                                      loop
-                                      playsInline
-                                      preload="metadata"
-                                      controls
-                                    />
-                                  </figure>
-                                );
-                              }
+                          }
+                          if (para.trim().startsWith("|")) {
+                            const rows = para
+                              .split("\n")
+                              .map((r) =>
+                                r
+                                  .trim()
+                                  .replace(/^\||\|$/g, "")
+                                  .split("|")
+                                  .map((c) => c.trim()),
+                              )
+                              .filter((cells) => cells.length && !/^[-: ]+$/.test(cells.join("")));
+                            if (rows.length) {
+                              return (
+                                <div key={pi} style={{ overflowX: "auto" }}>
+                                  <table className="docs-table">
+                                    <tbody>
+                                      {rows.map((cells, ri) => (
+                                        <tr key={ri}>
+                                          {cells.map((c, ci) => (
+                                            <td key={ci}>
+                                              <Inline text={c} />
+                                            </td>
+                                          ))}
+                                        </tr>
+                                      ))}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              );
                             }
-                            if (para.trim().startsWith("|")) {
-                              const rows = para
-                                .split("\n")
-                                .map((r) => r.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()))
-                                .filter((cells) => cells.length && !/^[-: ]+$/.test(cells.join("")));
-                              if (rows.length) {
-                                return (
-                                  <div key={pi} style={{ overflowX: "auto" }}>
-                                    <table className="docs-table">
-                                      <tbody>
-                                        {rows.map((cells, ri) => (
-                                          <tr key={ri}>
-                                            {cells.map((c, ci) => (
-                                              <td key={ci}>
-                                                <Inline text={c} />
-                                              </td>
-                                            ))}
-                                          </tr>
-                                        ))}
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                );
-                              }
-                            }
-                            return (
-                              <p key={pi} className="docs-p">
-                                <Inline text={para} />
-                              </p>
-                            );
-                          })
-                        : (
-                          <p className="docs-p">
-                            <Inline text={sec.p} />
-                          </p>
-                        )}
+                          }
+                          return (
+                            <p key={pi} className="docs-p">
+                              <Inline text={para} />
+                            </p>
+                          );
+                        })
+                      ) : (
+                        <p className="docs-p">
+                          <Inline text={sec.p} />
+                        </p>
+                      )}
                       {sec.bullets && sec.bullets.length > 0 && (
                         <ul className="docs-bullets">
                           {sec.bullets.map((b) => (
@@ -270,11 +281,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                       )}
                       {sec.codeBlocks && sec.codeBlocks.length > 0
                         ? sec.codeBlocks.map((cb, ci) => (
-                            <CodeBlock
-                              key={ci}
-                              code={cb.code}
-                              filename={cb.file ?? "EXAMPLE"}
-                            />
+                            <CodeBlock key={ci} code={cb.code} filename={cb.file ?? "EXAMPLE"} />
                           ))
                         : sec.code && (
                             <CodeBlock

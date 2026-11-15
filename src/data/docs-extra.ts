@@ -2,18 +2,45 @@ export const DOCS_EXTRA = {
   "vs-remotion": {
     lede: "同一条发布片用 Remotion 与 HyperFrames 各做一遍并排看：标题卡代码对照，客观讲清谁适合什么项目。",
     sections: [
-      { h: "同要求、两智能体", p: "15 秒 1080p 发布片：虚构笔记应用 Inkwell，Logo 亮相 + 三条功能行 + 标语结尾，无配音，渲染到 out.mp4，智能体不得追问、自己作主。两边都在真实环境里跑通。", code: "Make a 15-second 1920x1080 launch video for a fictional note-taking app called Inkwell (tagline: \"Write it down. Find it later.\")\nLogo reveal, three short feature lines, then an end card with the tagline. No voice.\nRender the final MP4 to out.mp4 in this folder.", codeFile: "PROMPT" },
-      { h: "同一标题卡，两种写法", p: "同张卡在 Remotion 是 React 组件、在 HyperFrames 是带 data 属性的 HTML + 暂停的 GSAP 时间线。创作模型差异是根因。" },
-      { h: "真正不同处与各长", p: "Remotion 长在 React 生态与复杂组件树；HyperFrames 长在纯 HTML 易交付与适配器动效。没有统一优劣，按项目选：要 React 体系选 Remotion，要智能体直写选 HyperFrames。", bullets: ["Remotion：React 组件、打包器、生态成熟", "HyperFrames：纯 HTML、零构建、智能体友好"] },
-      { h: "迁项目", p: "Remotion 项目迁移看同组下一页的迁移指南：说什么、会遇到什么拒绝、怎么验收。" },
+      {
+        h: "同要求、两智能体",
+        p: "15 秒 1080p 发布片：虚构笔记应用 Inkwell，Logo 亮相 + 三条功能行 + 标语结尾，无配音，渲染到 out.mp4，智能体不得追问、自己作主。两边都在真实环境里跑通。",
+        code: 'Make a 15-second 1920x1080 launch video for a fictional note-taking app called Inkwell (tagline: "Write it down. Find it later.")\nLogo reveal, three short feature lines, then an end card with the tagline. No voice.\nRender the final MP4 to out.mp4 in this folder.',
+        codeFile: "PROMPT",
+      },
+      {
+        h: "同一标题卡，两种写法",
+        p: "同张卡在 Remotion 是 React 组件、在 HyperFrames 是带 data 属性的 HTML + 暂停的 GSAP 时间线。创作模型差异是根因。",
+      },
+      {
+        h: "真正不同处与各长",
+        p: "Remotion 长在 React 生态与复杂组件树；HyperFrames 长在纯 HTML 易交付与适配器动效。没有统一优劣，按项目选：要 React 体系选 Remotion，要智能体直写选 HyperFrames。",
+        bullets: [
+          "Remotion：React 组件、打包器、生态成熟",
+          "HyperFrames：纯 HTML、零构建、智能体友好",
+        ],
+      },
+      {
+        h: "迁项目",
+        p: "Remotion 项目迁移看同组下一页的迁移指南：说什么、会遇到什么拒绝、怎么验收。",
+      },
     ],
   },
   "remotion-migration": {
     lede: "把已有 Remotion（React）合成源码迁成 HyperFrames HTML 该怎么说、会遇到什么拒绝。",
     sections: [
-      { h: "迁出来是什么", p: "保留画面与节奏，放弃 React 组件树，产物是可定位 HTML + 适配器时间线。" },
-      { h: "基础提示", p: "作者给一段迁移用的 base prompt：先定 data-start/duration、时间线挂载，再搬视觉。" },
-      { h: "翻不过去的，为何正确", p: "墙钟动画、须渲染时才算的逻辑、非确定性随机本就没有等价物——拒绝是对的，渲染靠逐帧定位。" },
+      {
+        h: "迁出来是什么",
+        p: "保留画面与节奏，放弃 React 组件树，产物是可定位 HTML + 适配器时间线。",
+      },
+      {
+        h: "基础提示",
+        p: "作者给一段迁移用的 base prompt：先定 data-start/duration、时间线挂载，再搬视觉。",
+      },
+      {
+        h: "翻不过去的，为何正确",
+        p: "墙钟动画、须渲染时才算的逻辑、非确定性随机本就没有等价物——拒绝是对的，渲染靠逐帧定位。",
+      },
       { h: "验收不可省", p: "逐帧比对、时长与音频轨对齐、镜头不掉帧，留一遍真渲染验收。" },
     ],
   },
@@ -21,22 +48,41 @@ export const DOCS_EXTRA = {
     lede: "怎么向智能体要一支 HyperFrames 视频：一句够了、强提示的要素、说细的度与迭代法。",
     sections: [
       { h: "一次性准备", p: "装好 skills/插件，开新会话再要片。" },
-      { h: "描述或交付素材", p: "一句自然语言即可；或直接给 URL、CSV、截图。例：10 秒产品片 + 暗背景 + 轻音乐；CSV 变成动画柱竞速。", code: "Create a 10-second product intro with a title over a dark background and quiet music.\nTurn this CSV into an animated bar chart race.", codeFile: "PROMPT" },
-      { h: "强提示的形态", p: "定长宽时长、逐拍时间、内容顺序、品牌色来源、声音与度量（音乐低于 −18dB 垫底）。强提示像分镜脚注：" },
+      {
+        h: "描述或交付素材",
+        p: "一句自然语言即可；或直接给 URL、CSV、截图。例：10 秒产品片 + 暗背景 + 轻音乐；CSV 变成动画柱竞速。",
+        code: "Create a 10-second product intro with a title over a dark background and quiet music.\nTurn this CSV into an animated bar chart race.",
+        codeFile: "PROMPT",
+      },
+      {
+        h: "强提示的形态",
+        p: "定长宽时长、逐拍时间、内容顺序、品牌色来源、声音与度量（音乐低于 −18dB 垫底）。强提示像分镜脚注：",
+      },
     ],
   },
   "tips-motion": {
     lede: "改动效的话术：修不喜欢的动效、要镜头/重叠/深度/节奏、选场景转场。",
     sections: [
-      { h: "修不喜欢的动效", p: "给当前现象 + 想要的现象，分开说起止与时长，例如确认单升 470px/1.2 秒、只淡入，不动旋转缩放模糊。" },
-      { h: "值得主动要的", p: "面板在 1.9s 落定；之后只有 feed 变化才动；五段流水线拉宽逐段点亮；地区按距离每 0.09s 点火；视差、地平线、模糊-column 各速。" },
+      {
+        h: "修不喜欢的动效",
+        p: "给当前现象 + 想要的现象，分开说起止与时长，例如确认单升 470px/1.2 秒、只淡入，不动旋转缩放模糊。",
+      },
+      {
+        h: "值得主动要的",
+        p: "面板在 1.9s 落定；之后只有 feed 变化才动；五段流水线拉宽逐段点亮；地区按距离每 0.09s 点火；视差、地平线、模糊-column 各速。",
+      },
       { h: "手工但仍确定", p: "逐帧定位的 GSAP/CSS/Three 都可手调，值全是数字，换渲染结果不变。" },
     ],
   },
   "tips-media": {
     lede: "用媒体流水线听得懂的话，要配音、音乐、音效、字幕与抠像。",
     sections: [
-      { h: "配音 TTS", p: "说清声线、语速、引擎与同步，例如女声 1.1 倍、Gemini TTS、转录同步字幕与画面亮相。", code: "Generate narration for this script with a professional female voice.\nAdd TTS voiceover, British male voice, at 1.1x speed.", codeFile: "PROMPT" },
+      {
+        h: "配音 TTS",
+        p: "说清声线、语速、引擎与同步，例如女声 1.1 倍、Gemini TTS、转录同步字幕与画面亮相。",
+        code: "Generate narration for this script with a professional female voice.\nAdd TTS voiceover, British male voice, at 1.1x speed.",
+        codeFile: "PROMPT",
+      },
       { h: "背景音乐", p: "写响度目标：电子底低于 −18dB、垫底 ducking，差别就是托住还是淹死。" },
       { h: "音效字幕抠像", p: "转场音效集合、逐词字幕同步、主体抠像与背景处理，同属媒体流水线。" },
     ],
@@ -44,7 +90,10 @@ export const DOCS_EXTRA = {
   "tips-captions": {
     lede: "把字幕语气映射为具名组件，给合成视频做逐词强调。真人 MP4 外挂字幕走另一路径。",
     sections: [
-      { h: "风格与触发", p: "每种字幕组件对应一种语气与场景，按组件名触发，不要自由发挥字色描边。" },
+      {
+        h: "风格与触发",
+        p: "每种字幕组件对应一种语气与场景，按组件名触发，不要自由发挥字色描边。",
+      },
       { h: "语气→组件", p: "亲和、严肃、财经、社媒各有匹配组件；偏离就报组件名与参数。" },
       { h: "文字与代码上屏", p: "强调按钮、旋钮、失败模式与叠层下三分之一，都有对应提法。" },
     ],
@@ -54,29 +103,50 @@ export const DOCS_EXTRA = {
     sections: [
       { h: "源必须有东西可丢", p: "素得发灰的片调不出高级感；先看源头色与动态范围，再后期。" },
       { h: "顺序固定", p: "先色调、再色键、后印相与模拟处理；按值调不按位置。" },
-      { h: "抠主体与刻意毁画", p: "人像留肤、背景半调；抖动、过曝、Kuwahara 绘画都要写清 ramp 曲线。" },
+      {
+        h: "抠主体与刻意毁画",
+        p: "人像留肤、背景半调；抖动、过曝、Kuwahara 绘画都要写清 ramp 曲线。",
+      },
     ],
   },
   "tips-design": {
     lede: "指给智能体品牌真相源——设计规范、网站或 Figma，别只说 on-brand，让它自行构图。",
     sections: [
       { h: "指规范不描述氛围", p: "有 frame.md 就让它用其 palette 与字型：" },
-      { h: "品牌锁颜色字型，版式给视频", p: "色值与字体配对锁死，布局间距动效由智能体为镜头编排。" },
-      { h: "Figma/多片一致", p: "带品牌令牌、帧作开场、片尾 Logo；多片共用 frame.md，只换标题数字。" },
+      {
+        h: "品牌锁颜色字型，版式给视频",
+        p: "色值与字体配对锁死，布局间距动效由智能体为镜头编排。",
+      },
+      {
+        h: "Figma/多片一致",
+        p: "带品牌令牌、帧作开场、片尾 Logo；多片共用 frame.md，只换标题数字。",
+      },
     ],
   },
   "tips-examples": {
     lede: "本页视频背后的提示词（原样），外加每条共享的动效前缀。",
     sections: [
-      { h: "共享前缀", p: "每段前先贴动效规则（密度一焦、次要分段入场、连续不落定镜头、transform 过冲、环境 idle），单段只写 espectacle beat 那一下高光。" },
-      { h: "数字滚动示例", p: "ARR 大数滚动 +312% 落定，纸币爆发为 spectacle；用 apple-money-count 块。" },
-      { h: "社媒与地图示例", p: "推文卡点赞心弹与粒子、旧金山到东京弧线落点三重冲击波；竖图另说尺寸。" },
+      {
+        h: "共享前缀",
+        p: "每段前先贴动效规则（密度一焦、次要分段入场、连续不落定镜头、transform 过冲、环境 idle），单段只写 espectacle beat 那一下高光。",
+      },
+      {
+        h: "数字滚动示例",
+        p: "ARR 大数滚动 +312% 落定，纸币爆发为 spectacle；用 apple-money-count 块。",
+      },
+      {
+        h: "社媒与地图示例",
+        p: "推文卡点赞心弹与粒子、旧金山到东京弧线落点三重冲击波；竖图另说尺寸。",
+      },
     ],
   },
   "tips-editing": {
     lede: "像剪辑师指挥智能体：剪、移、重计时、替换、重风格，动词到提示一一映射。",
     sections: [
-      { h: "动词映射", p: "move 改起点、右裁改终点、媒体片可前裁进 GSAP div 不能半路起动；整段变长还要顶根 data-duration。" },
+      {
+        h: "动词映射",
+        p: "move 改起点、右裁改终点、媒体片可前裁进 GSAP div 不能半路起动；整段变长还要顶根 data-duration。",
+      },
       { h: "剪移重排", p: "裁至 0:03、移字幕至 0:06、字幕被压到镜后移轨顶层。" },
       { h: "拆分与重计时", p: "场景 2 在 0:04 切两半加转场；场景改 2.5 为 4 秒保动作放宽。" },
     ],

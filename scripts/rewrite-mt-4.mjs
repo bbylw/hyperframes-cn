@@ -1,357 +1,804 @@
-import fs from 'node:fs';
+import fs from "node:fs";
 
-let s = fs.readFileSync('src/data/docs-full.ts', 'utf8');
-s = s.replace(/^import.*\n/, '').replace('export const DOCS_FULL: Record<string, DocContent> = ', '').replace(/;\s*$/, '').trim().replace(/;$/, '');
+let s = fs.readFileSync("src/data/docs-full.ts", "utf8");
+s = s
+  .replace(/^import.*\n/, "")
+  .replace("export const DOCS_FULL: Record<string, DocContent> = ", "")
+  .replace(/;\s*$/, "")
+  .trim()
+  .replace(/;$/, "");
 const j = JSON.parse(s);
 
 const PAIRS = [
   // faceless variant (restored MT) polish
-  ['faceless-explainer', '[accordion] 30秒风景主题讲解 (16:9) > 为非技术受众制作一个约 30 秒的 1920x1080 解释，说明 HTTPS 如何保持请求的私密性 — 要点：你的数据在离开浏览器之前已被密封。概念角度：每个场景一个想法，大几何类型，一个简单的锁和钥匙图作为核心（将隐喻与主题交换）。灰白色近乎黑色墨水，带有深蓝色调。女声TTS，温暖而清晰。嵌入标题，关键术语以强调色突出显示。',
-   '[accordion] 30 秒横屏讲解（16:9）> 为非技术受众做约 30 秒 1920x1080 讲解：HTTPS 如何让请求私密——要点：数据离浏览器前已被密封。角度概念：一意一幕，大几何字，锁与钥图作核心（隐喻与题随之替换）。近黑墨白，藏青缀。女声 TTS，暖晰。嵌入标题，关键词品牌色亮。'],
-  ['faceless-explainer', '更短的运行时间、YouTube 或嵌入的景观。更少的场景意味着 主题必须压缩。为外卖命名告诉代理要保留什么。',
-   '更短横屏，宜 YouTube 或嵌入。幕少则题须压缩。点外卖名让智能体知留什么。'],
-  ['faceless-explainer', '列表角度为每个项目提供了自己的场景。每个场景都重复使用相同的内容 数字和标签形状。结果读起来是倒计时，而不是一堵墙 点。',
-   '列表角每项一幕，复用同数字与标签形。读感是倒计时，不是一堵字墙。'],
-  ['faceless-explainer', '为开发人员制作一个时长 60 秒的 1920x1080 如何设置 CI 管道。如何角度：每个场景一个步骤，每个步骤都围绕一个简单的节点和箭头图构建，该图按照旁白的解释进行绘制。带有青色色调的木炭色。平静的男性 TTS 声音。嵌入标题，突出显示步骤名称。',
-   '为开发做 60 秒 1920x1080 如何搭 CI 管道。方法角：一幕一步，幕幕围绕节点箭头图，图跟旁白画。炭色缀青。TTS 男声，沉稳。嵌入标题，步骤名亮。'],
-  ['faceless-explainer', '操作方法依靠图表作为承载视觉。描述一下图表 每一步的*形状* — “节点和箭头”，或“向左填充的管道” 对”。让智能体发明细节。',
-   '方法角以图表为视觉主。描述每步的*形*——“节点箭头”或“自左填管”。细节交智能体。'],
+  [
+    "faceless-explainer",
+    "[accordion] 30秒风景主题讲解 (16:9) > 为非技术受众制作一个约 30 秒的 1920x1080 解释，说明 HTTPS 如何保持请求的私密性 — 要点：你的数据在离开浏览器之前已被密封。概念角度：每个场景一个想法，大几何类型，一个简单的锁和钥匙图作为核心（将隐喻与主题交换）。灰白色近乎黑色墨水，带有深蓝色调。女声TTS，温暖而清晰。嵌入标题，关键术语以强调色突出显示。",
+    "[accordion] 30 秒横屏讲解（16:9）> 为非技术受众做约 30 秒 1920x1080 讲解：HTTPS 如何让请求私密——要点：数据离浏览器前已被密封。角度概念：一意一幕，大几何字，锁与钥图作核心（隐喻与题随之替换）。近黑墨白，藏青缀。女声 TTS，暖晰。嵌入标题，关键词品牌色亮。",
+  ],
+  [
+    "faceless-explainer",
+    "更短的运行时间、YouTube 或嵌入的景观。更少的场景意味着 主题必须压缩。为外卖命名告诉代理要保留什么。",
+    "更短横屏，宜 YouTube 或嵌入。幕少则题须压缩。点外卖名让智能体知留什么。",
+  ],
+  [
+    "faceless-explainer",
+    "列表角度为每个项目提供了自己的场景。每个场景都重复使用相同的内容 数字和标签形状。结果读起来是倒计时，而不是一堵墙 点。",
+    "列表角每项一幕，复用同数字与标签形。读感是倒计时，不是一堵字墙。",
+  ],
+  [
+    "faceless-explainer",
+    "为开发人员制作一个时长 60 秒的 1920x1080 如何设置 CI 管道。如何角度：每个场景一个步骤，每个步骤都围绕一个简单的节点和箭头图构建，该图按照旁白的解释进行绘制。带有青色色调的木炭色。平静的男性 TTS 声音。嵌入标题，突出显示步骤名称。",
+    "为开发做 60 秒 1920x1080 如何搭 CI 管道。方法角：一幕一步，幕幕围绕节点箭头图，图跟旁白画。炭色缀青。TTS 男声，沉稳。嵌入标题，步骤名亮。",
+  ],
+  [
+    "faceless-explainer",
+    "操作方法依靠图表作为承载视觉。描述一下图表 每一步的*形状* — “节点和箭头”，或“向左填充的管道” 对”。让智能体发明细节。",
+    "方法角以图表为视觉主。描述每步的*形*——“节点箭头”或“自左填管”。细节交智能体。",
+  ],
 
   // design-tools
-  ['design-tools', '当这件作品刚刚放在那里并且看起来正确时，保留导出：',
-   '作品成品且貌美，导出保留：'],
-  ['design-tools', '当视频播放时内部发生变化时重建它： 运动，不要在完成的帧之间进行剪切。',
-   '播放中内容会变，HTML 重建：动效在帧间续，不剪。'],
-  ['design-tools', '品牌颜色和字体：导入一次，随处使用。',
-   '品牌色字：导入一次，到处复用。'],
-  ['design-tools', '不要仅仅因为设计工具制作了一堆完成的屏幕截图而对其进行动画处理。截图为证。 HTML 是变化的部分。',
-   '别只因设计工具给一堆完截图就动画截图。截图是证。变化在 HTML。'],
-  ['design-tools', '向代理提供链接和结果： `/figma` 技能导入艺术品、读取品牌价值、将组件重建为可编辑的 HTML，并尽可能地转换动作。一切都落在项目中，因此渲染永远不依赖 Figma。令牌、命令和错误：[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。',
-   '甩给智能体链接与所要结果：`/figma` 技能引美术、读品牌值、组件重建成可编 HTML，动作尽量转。全落工程，渲染不赖 Figma。令牌与命令出错见[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。'],
-  ['design-tools', '这些首先确定布局、调色板、类型和场景方向。',
-   '它们先定布局、板色、字与幕向。'],
-  ['design-tools', '一个好的项目有明确的方向、真实的资产或诚实标记的占位符、可能发生变化的可编辑源、本地媒体和字体以及可打开的项目。自己检查一下： 然后观看它在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)中移动——剧照无法显示时间。',
-   '好工程须方向明，资产真或诚实标占位，可变处在可编源，媒字在本地，能开。验：跑一遍 check，后在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)看它动——剧照不显时。'],
+  [
+    "design-tools",
+    "当这件作品刚刚放在那里并且看起来正确时，保留导出：",
+    "作品成品且貌美，导出保留：",
+  ],
+  [
+    "design-tools",
+    "当视频播放时内部发生变化时重建它： 运动，不要在完成的帧之间进行剪切。",
+    "播放中内容会变，HTML 重建：动效在帧间续，不剪。",
+  ],
+  ["design-tools", "品牌颜色和字体：导入一次，随处使用。", "品牌色字：导入一次，到处复用。"],
+  [
+    "design-tools",
+    "不要仅仅因为设计工具制作了一堆完成的屏幕截图而对其进行动画处理。截图为证。 HTML 是变化的部分。",
+    "别只因设计工具给一堆完截图就动画截图。截图是证。变化在 HTML。",
+  ],
+  [
+    "design-tools",
+    "向代理提供链接和结果： `/figma` 技能导入艺术品、读取品牌价值、将组件重建为可编辑的 HTML，并尽可能地转换动作。一切都落在项目中，因此渲染永远不依赖 Figma。令牌、命令和错误：[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。",
+    "甩给智能体链接与所要结果：`/figma` 技能引美术、读品牌值、组件重建成可编 HTML，动作尽量转。全落工程，渲染不赖 Figma。令牌与命令出错见[Figma 参考](https://hyperframes.heygen.com/guides/figma.md)。",
+  ],
+  ["design-tools", "这些首先确定布局、调色板、类型和场景方向。", "它们先定布局、板色、字与幕向。"],
+  [
+    "design-tools",
+    "一个好的项目有明确的方向、真实的资产或诚实标记的占位符、可能发生变化的可编辑源、本地媒体和字体以及可打开的项目。自己检查一下： 然后观看它在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)中移动——剧照无法显示时间。",
+    "好工程须方向明，资产真或诚实标占位，可变处在可编源，媒字在本地，能开。验：跑一遍 check，后在[浏览器编辑器](https://hyperframes.heygen.com/studio.md)看它动——剧照不显时。",
+  ],
 
   // examples
-  ['examples', '获得你喜欢的视频的最快方法就是从一个开始。下面的每个视频都是混音：某人的原创视频，在 HyperFrames 中用新词、人物和品牌重建。悬停即可播放。像一个？选择 **Remix in Studio** 并制作你自己的版本；请参阅[参考任何视频](https://hyperframes.heygen.com/studio-app/reference-video.md) 了解其工作原理。',
-   '拿想要的成片最快，是从一支成片起。下每支皆混音：他人原创，以 HyperFrames 以新词、人物、品牌重建。悬播。要哪支？选 **Remix in Studio** 做自版；机理见[参考任意视频](https://hyperframes.heygen.com/studio-app/reference-video.md)。'],
-  ['examples', '产品发布和以类型为主导的动作，根据原作的剪辑、时间和效果进行重建。',
-   '发布片与字主行动，沿原剪、时与效重建。'],
-  ['examples', '流行 Reels、TikTok 和 Shorts 的编辑风格，采用不同的演示者：字幕、剪辑、标注和节奏。',
-   'Reels、TikTok、Shorts 的剪风，换演示者：字、剪、注、拍。'],
-  ['examples', '将 HyperFrames 指向已完成的视频，它会以可编辑的 HTML 格式重建同一部电影——手势、类型、时间等等。下面，每个 **参考**（原始的，在左侧）位于其 **HyperFrames 复制品**（右侧）旁边，逐帧匹配。',
-   'HyperFrames 盯一已成品，以可编 HTML 重建同片——动、字、时皆复。下每对 **参考**（左原片）邻 **HyperFrames 复制**（右），逐帧对。'],
-  ['examples', '这些可立即运行的示例是根据过去 30 天内人工请求的安装来订购的。将任何块添加到项目中，然后就地自定义其内容。',
-   '下皆可跑样，依近 30 天人工安装序。任块加进项目，就地改它。'],
-  ['examples', '|示例|从这里开始 |', '|样例|从这起 |'],
-  ['examples', '|标志结尾 | npx HyperFrames添加徽标结尾 |', '|标志尾 | npx hyperframes add logo-ending |'],
-  ['examples', '|数据图表 | npx HyperFrames添加数据图表 |', '|数据图 | npx hyperframes add data-chart |'],
-  ['examples', '|社论闪光覆盖 | npx HyperFrames添加编辑闪存叠加 |', '|编辑闪盖 | npx hyperframes add editorial-flash-overlay |'],
-  ['examples', '|有机漏光覆盖 | npx HyperFrames添加有机光泄漏覆盖 |', '|有机漏光盖 | npx hyperframes add organic-leak-overlay |'],
-  ['examples', '| mk 规格列表 | npx HyperFrames添加 mk-specs-list |', '|mk 规格表 | npx hyperframes add mk-specs-list |'],
-  ['examples', '|硬件标题 | npx HyperFrames添加硬件标题 |', '|硬件标题 | npx hyperframes add hardware-title |'],
-  ['examples', '|代码输入 | npx HyperFrames添加代码输入 |', '|代码录入 | npx hyperframes add code-typing |'],
-  ['examples', '| lt-暗卡 | npx HyperFrames添加 lt-dark-card |', '|lt 暗卡 | npx hyperframes add lt-dark-card |'],
-  ['examples', '|电影变焦| npx HyperFrames添加电影缩放 |', '|电影变焦 | npx hyperframes add cinematic-zoom |'],
-  ['examples', '|模板|良好的起点 |', '|模板|善始 |'],
-  ['examples', '|暖粒 |品牌、生活方式和编辑工作 |', '|暖粒 |品牌、生活、编辑 |'],
-  ['examples', '|播放模式 |充满活力的社交视频和产品发布|', '|播放模式 |社媒与发布 |'],
-  ['examples', '|瑞士电网|技术、结构和企业故事 |', '|瑞士格 |技术与企业故事 |'],
-  ['examples', '|动力型 |以类型为主导的宣传片、简介和标题卡 |', '|动力型 |字主宣传与标题 |'],
-  ['examples', '|决策树|可解释的图表和教程 |', '|决策树 |可解图与教程 |'],
-  ['examples', '|产品促销|多场景产品展示|', '|产品促销 |多幕产品展 |'],
-  ['examples', '| nyt-图 |编辑图表和数据故事|', '|nyt 图 |编辑图与数据事 |'],
-  ['examples', '|维涅利|大胆的肖像公告|', '|维涅利 |大胆肖像告 |'],
-  ['examples', '|空白|代理生成或完全定制的工作 | [！提示] 使用 npx hyperframes init my-video --example \\T0 来获取完整的项目模板，或者 npx hyperframes add \\T1 来从上面的示例之一开始。',
-   '|空白 |智能体自生或全定制 | 提示：整模板用 `npx hyperframes init my-video --example warm-grain`，散块用 `npx hyperframes add <块名>`。'],
+  [
+    "examples",
+    "获得你喜欢的视频的最快方法就是从一个开始。下面的每个视频都是混音：某人的原创视频，在 HyperFrames 中用新词、人物和品牌重建。悬停即可播放。像一个？选择 **Remix in Studio** 并制作你自己的版本；请参阅[参考任何视频](https://hyperframes.heygen.com/studio-app/reference-video.md) 了解其工作原理。",
+    "拿想要的成片最快，是从一支成片起。下每支皆混音：他人原创，以 HyperFrames 以新词、人物、品牌重建。悬播。要哪支？选 **Remix in Studio** 做自版；机理见[参考任意视频](https://hyperframes.heygen.com/studio-app/reference-video.md)。",
+  ],
+  [
+    "examples",
+    "产品发布和以类型为主导的动作，根据原作的剪辑、时间和效果进行重建。",
+    "发布片与字主行动，沿原剪、时与效重建。",
+  ],
+  [
+    "examples",
+    "流行 Reels、TikTok 和 Shorts 的编辑风格，采用不同的演示者：字幕、剪辑、标注和节奏。",
+    "Reels、TikTok、Shorts 的剪风，换演示者：字、剪、注、拍。",
+  ],
+  [
+    "examples",
+    "将 HyperFrames 指向已完成的视频，它会以可编辑的 HTML 格式重建同一部电影——手势、类型、时间等等。下面，每个 **参考**（原始的，在左侧）位于其 **HyperFrames 复制品**（右侧）旁边，逐帧匹配。",
+    "HyperFrames 盯一已成品，以可编 HTML 重建同片——动、字、时皆复。下每对 **参考**（左原片）邻 **HyperFrames 复制**（右），逐帧对。",
+  ],
+  [
+    "examples",
+    "这些可立即运行的示例是根据过去 30 天内人工请求的安装来订购的。将任何块添加到项目中，然后就地自定义其内容。",
+    "下皆可跑样，依近 30 天人工安装序。任块加进项目，就地改它。",
+  ],
+  ["examples", "|示例|从这里开始 |", "|样例|从这起 |"],
+  [
+    "examples",
+    "|标志结尾 | npx HyperFrames添加徽标结尾 |",
+    "|标志尾 | npx hyperframes add logo-ending |",
+  ],
+  [
+    "examples",
+    "|数据图表 | npx HyperFrames添加数据图表 |",
+    "|数据图 | npx hyperframes add data-chart |",
+  ],
+  [
+    "examples",
+    "|社论闪光覆盖 | npx HyperFrames添加编辑闪存叠加 |",
+    "|编辑闪盖 | npx hyperframes add editorial-flash-overlay |",
+  ],
+  [
+    "examples",
+    "|有机漏光覆盖 | npx HyperFrames添加有机光泄漏覆盖 |",
+    "|有机漏光盖 | npx hyperframes add organic-leak-overlay |",
+  ],
+  [
+    "examples",
+    "| mk 规格列表 | npx HyperFrames添加 mk-specs-list |",
+    "|mk 规格表 | npx hyperframes add mk-specs-list |",
+  ],
+  [
+    "examples",
+    "|硬件标题 | npx HyperFrames添加硬件标题 |",
+    "|硬件标题 | npx hyperframes add hardware-title |",
+  ],
+  [
+    "examples",
+    "|代码输入 | npx HyperFrames添加代码输入 |",
+    "|代码录入 | npx hyperframes add code-typing |",
+  ],
+  [
+    "examples",
+    "| lt-暗卡 | npx HyperFrames添加 lt-dark-card |",
+    "|lt 暗卡 | npx hyperframes add lt-dark-card |",
+  ],
+  [
+    "examples",
+    "|电影变焦| npx HyperFrames添加电影缩放 |",
+    "|电影变焦 | npx hyperframes add cinematic-zoom |",
+  ],
+  ["examples", "|模板|良好的起点 |", "|模板|善始 |"],
+  ["examples", "|暖粒 |品牌、生活方式和编辑工作 |", "|暖粒 |品牌、生活、编辑 |"],
+  ["examples", "|播放模式 |充满活力的社交视频和产品发布|", "|播放模式 |社媒与发布 |"],
+  ["examples", "|瑞士电网|技术、结构和企业故事 |", "|瑞士格 |技术与企业故事 |"],
+  ["examples", "|动力型 |以类型为主导的宣传片、简介和标题卡 |", "|动力型 |字主宣传与标题 |"],
+  ["examples", "|决策树|可解释的图表和教程 |", "|决策树 |可解图与教程 |"],
+  ["examples", "|产品促销|多场景产品展示|", "|产品促销 |多幕产品展 |"],
+  ["examples", "| nyt-图 |编辑图表和数据故事|", "|nyt 图 |编辑图与数据事 |"],
+  ["examples", "|维涅利|大胆的肖像公告|", "|维涅利 |大胆肖像告 |"],
+  [
+    "examples",
+    "|空白|代理生成或完全定制的工作 | [！提示] 使用 npx hyperframes init my-video --example \\T0 来获取完整的项目模板，或者 npx hyperframes add \\T1 来从上面的示例之一开始。",
+    "|空白 |智能体自生或全定制 | 提示：整模板用 `npx hyperframes init my-video --example warm-grain`，散块用 `npx hyperframes add <块名>`。",
+  ],
 
   // mcp
-  ['mcp', '当你需要时，请使用托管连接器： 当你需要时，请使用[本地快速入门](https://hyperframes.heygen.com/quickstart.md)：',
-   '要托管就用托管连；要本地用[快速入门](https://hyperframes.heygen.com/quickstart.md)：'],
-  ['mcp', '生产MCP地址为： 你需要一个 HeyGen 帐户并有权访问 HyperFrames 连接器。',
-   '生产 MCP 地址见上。你须 HeyGen 账号且有 HyperFrames 连权限。'],
-  ['mcp', '[标签] Claude HeyGen 的 HyperFrames 列在 Claude 的 [连接器目录](https://claude.com/connectors/hyperframes-heygen) 中。',
-   '[tab] Claude：HeyGen 的 HyperFrames 列在 Claude [连接器目录](https://claude.com/connectors/hyperframes-heygen)。'],
-  ['mcp', '[选项卡] 聊天GPT 自定义 MCP 服务器可在 ChatGPT Web 上的 ChatGPT Business、Enterprise 和 Edu 上运行。在 Business 中，只有工作区管理员和所有者才能添加。',
-   '[tab] ChatGPT：自定义 MCP 仅 ChatGPT Web Business、Enterprise、Edu。Business 仅管理员与业主可加。'],
-  ['mcp', '像向编辑器一样描述视频，并将其命名为 HyperFrames，以便聊天应用程序使用连接器而不是编写自己的视频代码： 连接器通过该聊天中公开的工具提出并构建组合。遵循返回的工具结果，而不是期望特定的预览小部件：主机以不同的方式呈现 MCP 输出。',
-   '像话编辑描述片，并点名 HyperFrames，聊窗才用连而非手码视频：连经窗明示工具提议与建合成。依工具回，别指望特定预览件：各主呈 MCP 输出异。'],
-  ['mcp', '继续同一个对话： 列出明显的问题和期望的结果。避免每次修订都重新启动完整的概要。',
-   '续同对话：遍举毛病与所欲，勿每回重起全纲。'],
-  ['mcp', '每次运行完成后都会单独渲染 MP4，因此没有单独的导出步骤。求下载链接： 托管连接器以其默认设置呈现 MP4。要选择帧速率、4K、WebM 或 MOV 文件（用于透明叠加或其他编辑器），请使用[本地技能](https://hyperframes.heygen.com/quickstart.md) 制作视频并将其渲染在你的计算机上。',
-   '每跑单渲 MP4，无另导出步。要下载链即索之：连以默认呈 MP4。定帧、4K、WebM/MOV（透明叠或他编）用[本地技能](https://hyperframes.heygen.com/quickstart.md) 本机渲。'],
-  ['mcp', '连接器在托管基础设施上呈现。保留该工具返回的任何合成或渲染标识符，以便你可以在后续中参考相同的工作。',
-   '连在托管基建渲。留工具回之合成/渲 ID，后续引以续工。'],
-  ['mcp', 'OAuth 将服务器连接到你当前的 HeyGen 帐户。计划、限制和计费可以独立于 HyperFrame 进行更改，因此在开始重复或长时间渲染之前，请在帐户中确认它们。',
-   'OAuth 连你当 HeyGen 账号。套餐、限额、计费独立于 HyperFrames 自变，重复或长渲前先于账号核。'],
-  ['mcp', '如果授权循环： 如果创建或渲染操作停止： 当故障属于 HyperFrames 时，请使用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)。当连接器根本无法安装或调用时，请使用主机产品的支持。',
-   '授权循环？建/渲停？HyperFrames 责用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)；连装不起、唤不动问主产品。'],
-  ['mcp', '[！警告] 仅连接此页面上显示的生产 HyperFrames 服务器。与任何外部连接器一样， 检查权限，不要发送目的地不应发送的秘密或私人材料 收到。',
-   '提示：仅连此页生产 HyperFrames 服。如外连，核权限，秘私非此去勿发。'],
+  [
+    "mcp",
+    "当你需要时，请使用托管连接器： 当你需要时，请使用[本地快速入门](https://hyperframes.heygen.com/quickstart.md)：",
+    "要托管就用托管连；要本地用[快速入门](https://hyperframes.heygen.com/quickstart.md)：",
+  ],
+  [
+    "mcp",
+    "生产MCP地址为： 你需要一个 HeyGen 帐户并有权访问 HyperFrames 连接器。",
+    "生产 MCP 地址见上。你须 HeyGen 账号且有 HyperFrames 连权限。",
+  ],
+  [
+    "mcp",
+    "[标签] Claude HeyGen 的 HyperFrames 列在 Claude 的 [连接器目录](https://claude.com/connectors/hyperframes-heygen) 中。",
+    "[tab] Claude：HeyGen 的 HyperFrames 列在 Claude [连接器目录](https://claude.com/connectors/hyperframes-heygen)。",
+  ],
+  [
+    "mcp",
+    "[选项卡] 聊天GPT 自定义 MCP 服务器可在 ChatGPT Web 上的 ChatGPT Business、Enterprise 和 Edu 上运行。在 Business 中，只有工作区管理员和所有者才能添加。",
+    "[tab] ChatGPT：自定义 MCP 仅 ChatGPT Web Business、Enterprise、Edu。Business 仅管理员与业主可加。",
+  ],
+  [
+    "mcp",
+    "像向编辑器一样描述视频，并将其命名为 HyperFrames，以便聊天应用程序使用连接器而不是编写自己的视频代码： 连接器通过该聊天中公开的工具提出并构建组合。遵循返回的工具结果，而不是期望特定的预览小部件：主机以不同的方式呈现 MCP 输出。",
+    "像话编辑描述片，并点名 HyperFrames，聊窗才用连而非手码视频：连经窗明示工具提议与建合成。依工具回，别指望特定预览件：各主呈 MCP 输出异。",
+  ],
+  [
+    "mcp",
+    "继续同一个对话： 列出明显的问题和期望的结果。避免每次修订都重新启动完整的概要。",
+    "续同对话：遍举毛病与所欲，勿每回重起全纲。",
+  ],
+  [
+    "mcp",
+    "每次运行完成后都会单独渲染 MP4，因此没有单独的导出步骤。求下载链接： 托管连接器以其默认设置呈现 MP4。要选择帧速率、4K、WebM 或 MOV 文件（用于透明叠加或其他编辑器），请使用[本地技能](https://hyperframes.heygen.com/quickstart.md) 制作视频并将其渲染在你的计算机上。",
+    "每跑单渲 MP4，无另导出步。要下载链即索之：连以默认呈 MP4。定帧、4K、WebM/MOV（透明叠或他编）用[本地技能](https://hyperframes.heygen.com/quickstart.md) 本机渲。",
+  ],
+  [
+    "mcp",
+    "连接器在托管基础设施上呈现。保留该工具返回的任何合成或渲染标识符，以便你可以在后续中参考相同的工作。",
+    "连在托管基建渲。留工具回之合成/渲 ID，后续引以续工。",
+  ],
+  [
+    "mcp",
+    "OAuth 将服务器连接到你当前的 HeyGen 帐户。计划、限制和计费可以独立于 HyperFrame 进行更改，因此在开始重复或长时间渲染之前，请在帐户中确认它们。",
+    "OAuth 连你当 HeyGen 账号。套餐、限额、计费独立于 HyperFrames 自变，重复或长渲前先于账号核。",
+  ],
+  [
+    "mcp",
+    "如果授权循环： 如果创建或渲染操作停止： 当故障属于 HyperFrames 时，请使用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)。当连接器根本无法安装或调用时，请使用主机产品的支持。",
+    "授权循环？建/渲停？HyperFrames 责用[分享反馈](https://hyperframes.heygen.com/help.md#share-feedback)；连装不起、唤不动问主产品。",
+  ],
+  [
+    "mcp",
+    "[！警告] 仅连接此页面上显示的生产 HyperFrames 服务器。与任何外部连接器一样， 检查权限，不要发送目的地不应发送的秘密或私人材料 收到。",
+    "提示：仅连此页生产 HyperFrames 服。如外连，核权限，秘私非此去勿发。",
+  ],
 
   // plugins
-  ['plugins', '在你的终端中运行： 清单应包括`hyperframes`、`hyperframes-cli`和`media-use`。开始一个新会话或运行`/reload-plugins`，然后尝试： **在 Claude Code 的终端 UI 中启用自动更新：** 在项目中打开终端并运行 `claude`。在该会话中，运行 `/plugin`，打开 **Marketplaces**，选择 **hyperframes**，然后选择 **启用自动更新**。如果你通过 Claude Code 的 IDE 扩展或桌面应用程序安装，请在同一台计算机上使用此终端路由。第三方市场默认不启用此功能。有关详细信息，请参阅 ',
-   '终端跑上指令，清单应含 `hyperframes`、`hyperframes-cli`、`media-use`。新起会话或跑 `/reload-plugins` 试：**Claude Code 终端 UI 自更**：盘开终端跑 `claude`，会话内跑 `/plugin`，开 **Marketplaces**，选 **hyperframes**，选**启用自动更新**。若经 IDE 拓展或桌面装，词计算机走此终端径。外市默认不自更。详见 '],
-  ['plugins', '打开扩展视图并搜索`/skills list`。使用插件市场命令将 C1 添加为市场，然后安装 **hyperframes** 并在代理自定义中验证其技能。必须在 VS Code 设置中启用代理插件。',
-   '开扩展视野搜 `/skills list`。以外市命令加市场，装 **hyperframes**，于代理定制验技能。VS Code 须开代理插件。'],
-  ['plugins', '启用 C0 后，VS Code 每 24 小时检查一次更新。使用 **扩展：检查扩展更新** 进行手动检查。从扩展视图禁用或卸载插件。有关当前 UI 和工作区的建议，请参阅 [VS Code 的插件指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。',
-   '起 `hyperframes` 后 VS Code 每 24h 自查更。手查走**扩展：查更新**。废装自扩展视野。UI 与工作区新注见 [VS Code 指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。'],
-  ['plugins', '对于团队市场，在 **仪表板 → 插件和 MCP** 中导入 `@agentPlugins` 并添加 HyperFrames 插件。队友从 **自定义** 安装它。 GitHub 市场自动刷新需要 Cursor GitHub 应用程序和市场的 **启用自动刷新** 设置。',
-   '团队市：**Dashboard → 插件与 MCP** 引 `@agentPlugins` 加 HyperFrames。队友自**定制**装。GitHub 市自更须 Cursor GitHub app 与市内**启用自更**开。'],
-  ['plugins', '对于本地安装，将提取的 HyperFrames 插件文件夹复制到 `heygen-com/hyperframes`，然后重新加载 Cursor 并选中 **自定义**。该文件夹必须包含`extensions.autoUpdate` 和`heygen-com/hyperframes`。本地副本需要手动替换才能更新；他们不订阅 GitHub 的更改。企业策略可能会禁用本地插件导入。删除本地文件夹以卸载该副本。',
-   '本地装：解 HyperFrames 壤拷至 `heygen-com/hyperframes`，重载 Cursor 选**定制**。壤须含 `extensions.autoUpdate` 与 `heygen-com/hyperframes`。本地副本随 GitHub 更而手替，不订之。企策或禁地引。删壤即卸。'],
-  ['plugins', '重新启动 Gemini CLI 并要求其对标题卡使用 HyperFrames 技能。要显式管理扩展： 要保留特定版本，请使用 `~/.cursor/plugins/local/hyperframes` 而不是`plugin.json` 安装。选择包含`skills/`的版本。请参阅[Gemini 的扩展指南](https://geminicli.com/docs/extensions/reference/)。',
-   '重启 Gemini CLI 唤其用 HyperFrames 技能做标题卡。显管拓：钉版用 `gemini extensions install <url> --pin`。版必含 `skills/`。见 [Gemini 指南](https://geminicli.com/docs/extensions/reference/)。'],
-  ['plugins', '该插件将来自一个源快照的工作流程捆绑在一起，并运行其清单中记录的 CLI 版本。你的代理应该使用其捆绑的插件启动器；它不应该在插件工作流程期间运行`--ref <release-tag>`。现有的项目依赖项、下载的媒体和外部服务都有自己的版本，并且不会被插件冻结。',
-   '插件束一源快照工序，跑清单录 CLI 版。代理走其束启，不在工序中跑 `--ref <tag>`。工程依、已下媒、外服各有版，不为插件冻。'],
-  ['plugins', '将较新版本的技能放入插件文件夹中。',
-   '把新版技能置入插件壤。'],
+  [
+    "plugins",
+    "在你的终端中运行： 清单应包括`hyperframes`、`hyperframes-cli`和`media-use`。开始一个新会话或运行`/reload-plugins`，然后尝试： **在 Claude Code 的终端 UI 中启用自动更新：** 在项目中打开终端并运行 `claude`。在该会话中，运行 `/plugin`，打开 **Marketplaces**，选择 **hyperframes**，然后选择 **启用自动更新**。如果你通过 Claude Code 的 IDE 扩展或桌面应用程序安装，请在同一台计算机上使用此终端路由。第三方市场默认不启用此功能。有关详细信息，请参阅 ",
+    "终端跑上指令，清单应含 `hyperframes`、`hyperframes-cli`、`media-use`。新起会话或跑 `/reload-plugins` 试：**Claude Code 终端 UI 自更**：盘开终端跑 `claude`，会话内跑 `/plugin`，开 **Marketplaces**，选 **hyperframes**，选**启用自动更新**。若经 IDE 拓展或桌面装，词计算机走此终端径。外市默认不自更。详见 ",
+  ],
+  [
+    "plugins",
+    "打开扩展视图并搜索`/skills list`。使用插件市场命令将 C1 添加为市场，然后安装 **hyperframes** 并在代理自定义中验证其技能。必须在 VS Code 设置中启用代理插件。",
+    "开扩展视野搜 `/skills list`。以外市命令加市场，装 **hyperframes**，于代理定制验技能。VS Code 须开代理插件。",
+  ],
+  [
+    "plugins",
+    "启用 C0 后，VS Code 每 24 小时检查一次更新。使用 **扩展：检查扩展更新** 进行手动检查。从扩展视图禁用或卸载插件。有关当前 UI 和工作区的建议，请参阅 [VS Code 的插件指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。",
+    "起 `hyperframes` 后 VS Code 每 24h 自查更。手查走**扩展：查更新**。废装自扩展视野。UI 与工作区新注见 [VS Code 指南](https://code.visualstudio.com/docs/agent-customization/agent-plugins)。",
+  ],
+  [
+    "plugins",
+    "对于团队市场，在 **仪表板 → 插件和 MCP** 中导入 `@agentPlugins` 并添加 HyperFrames 插件。队友从 **自定义** 安装它。 GitHub 市场自动刷新需要 Cursor GitHub 应用程序和市场的 **启用自动刷新** 设置。",
+    "团队市：**Dashboard → 插件与 MCP** 引 `@agentPlugins` 加 HyperFrames。队友自**定制**装。GitHub 市自更须 Cursor GitHub app 与市内**启用自更**开。",
+  ],
+  [
+    "plugins",
+    "对于本地安装，将提取的 HyperFrames 插件文件夹复制到 `heygen-com/hyperframes`，然后重新加载 Cursor 并选中 **自定义**。该文件夹必须包含`extensions.autoUpdate` 和`heygen-com/hyperframes`。本地副本需要手动替换才能更新；他们不订阅 GitHub 的更改。企业策略可能会禁用本地插件导入。删除本地文件夹以卸载该副本。",
+    "本地装：解 HyperFrames 壤拷至 `heygen-com/hyperframes`，重载 Cursor 选**定制**。壤须含 `extensions.autoUpdate` 与 `heygen-com/hyperframes`。本地副本随 GitHub 更而手替，不订之。企策或禁地引。删壤即卸。",
+  ],
+  [
+    "plugins",
+    "重新启动 Gemini CLI 并要求其对标题卡使用 HyperFrames 技能。要显式管理扩展： 要保留特定版本，请使用 `~/.cursor/plugins/local/hyperframes` 而不是`plugin.json` 安装。选择包含`skills/`的版本。请参阅[Gemini 的扩展指南](https://geminicli.com/docs/extensions/reference/)。",
+    "重启 Gemini CLI 唤其用 HyperFrames 技能做标题卡。显管拓：钉版用 `gemini extensions install <url> --pin`。版必含 `skills/`。见 [Gemini 指南](https://geminicli.com/docs/extensions/reference/)。",
+  ],
+  [
+    "plugins",
+    "该插件将来自一个源快照的工作流程捆绑在一起，并运行其清单中记录的 CLI 版本。你的代理应该使用其捆绑的插件启动器；它不应该在插件工作流程期间运行`--ref <release-tag>`。现有的项目依赖项、下载的媒体和外部服务都有自己的版本，并且不会被插件冻结。",
+    "插件束一源快照工序，跑清单录 CLI 版。代理走其束启，不在工序中跑 `--ref <tag>`。工程依、已下媒、外服各有版，不为插件冻。",
+  ],
+  ["plugins", "将较新版本的技能放入插件文件夹中。", "把新版技能置入插件壤。"],
 
   // pr-to-video
-  ['pr-to-video', '说明它是变更日志、功能展示、修复还是重构，并提及任何重大变更。视频解释了这一变化；它不会大声朗读描述。',
-   '言明属变更日志、功能演、修复还是重构，并点要害。片阐新，不朗读述。'],
-  ['pr-to-video', '| **有多少帅哥** | “仅一个`code-diff`节拍”/“最多两个帅哥”| Code Beats 共有 2-4 个真正的大块头，每个都是一个清晰的小片段 - 整个文件在视频规模下是无法读取的 |',
-   '| **帅哥数** | “仅一 `code-diff` 拍” / “至多二” | 2-4 真大拍，每皆清小片——全档在片尺不可读 |'],
-  ['pr-to-video', '| **哪个代码块** | C0 表示增量 · C1 表示重构 · C2 表示新代码 |该块与故事相匹配：差异显示添加/删除的线条，变形显示一种形状变成另一种形状 |',
-   '| **用哪块码** | `code-diff` 增 · `code-morph` 改形 · `code-typing` 新 | 块配故事：diff 示增删，morph 示形变 |'],
-  ['pr-to-video', '[手风琴] 变更日志综述 >', '[accordion] 变更日志一览 >'],
-  ['pr-to-video', '[手风琴] 修复解释器 >', '[accordion] 修复讲解 >'],
-  ['pr-to-video', '[手风琴] 重构演练 >', '[accordion] 重构漫 >'],
-  ['pr-to-video', '修复解读为症状→原因→修复。引导用户看到的中断，而不是堆栈跟踪 - 差异是回报，而不是开头。',
-   '修复即症状→因→治。引观者睹断，而非堆栈。diff 是 payoff 非开。'],
-  ['pr-to-video', '重构改变了形状而不改变行为，所以故事是“为什么”新结构更好。 `code-diff` 将一种形式转变为另一种形式的动画 - 当该点是过渡时的右侧块，而不是逐行增量。',
-   '重构变形不变行，故事在“新形何优”。形变动画用 `code-morph`，转场即正义，diff 逐行非此。'],
-  ['pr-to-video', '**询问整个差异。** 公关视频解释了这一变化；它不会背诵每个文件。完整的差异在视频尺度下是无法读取的。',
-   '**全 diff 齐问。** 片阐新，不背档。全 diff 片尺不可读。'],
-  ['pr-to-video', '询问智能体何时必须更改解释或证据；在编辑器中手动修复时间、代码裁剪或标题。',
-   '问智能体何时须改阐释或证。在编辑器手修时、码剪、题。'],
-  ['pr-to-video', '拉取请求和目标分支是正确的。',
-   'PR 与目标支正确。'],
-  ['pr-to-video', '提议、合并、发布并不混淆。',
-   '提议、合并、发布不混。'],
+  [
+    "pr-to-video",
+    "说明它是变更日志、功能展示、修复还是重构，并提及任何重大变更。视频解释了这一变化；它不会大声朗读描述。",
+    "言明属变更日志、功能演、修复还是重构，并点要害。片阐新，不朗读述。",
+  ],
+  [
+    "pr-to-video",
+    "| **有多少帅哥** | “仅一个`code-diff`节拍”/“最多两个帅哥”| Code Beats 共有 2-4 个真正的大块头，每个都是一个清晰的小片段 - 整个文件在视频规模下是无法读取的 |",
+    "| **帅哥数** | “仅一 `code-diff` 拍” / “至多二” | 2-4 真大拍，每皆清小片——全档在片尺不可读 |",
+  ],
+  [
+    "pr-to-video",
+    "| **哪个代码块** | C0 表示增量 · C1 表示重构 · C2 表示新代码 |该块与故事相匹配：差异显示添加/删除的线条，变形显示一种形状变成另一种形状 |",
+    "| **用哪块码** | `code-diff` 增 · `code-morph` 改形 · `code-typing` 新 | 块配故事：diff 示增删，morph 示形变 |",
+  ],
+  ["pr-to-video", "[手风琴] 变更日志综述 >", "[accordion] 变更日志一览 >"],
+  ["pr-to-video", "[手风琴] 修复解释器 >", "[accordion] 修复讲解 >"],
+  ["pr-to-video", "[手风琴] 重构演练 >", "[accordion] 重构漫 >"],
+  [
+    "pr-to-video",
+    "修复解读为症状→原因→修复。引导用户看到的中断，而不是堆栈跟踪 - 差异是回报，而不是开头。",
+    "修复即症状→因→治。引观者睹断，而非堆栈。diff 是 payoff 非开。",
+  ],
+  [
+    "pr-to-video",
+    "重构改变了形状而不改变行为，所以故事是“为什么”新结构更好。 `code-diff` 将一种形式转变为另一种形式的动画 - 当该点是过渡时的右侧块，而不是逐行增量。",
+    "重构变形不变行，故事在“新形何优”。形变动画用 `code-morph`，转场即正义，diff 逐行非此。",
+  ],
+  [
+    "pr-to-video",
+    "**询问整个差异。** 公关视频解释了这一变化；它不会背诵每个文件。完整的差异在视频尺度下是无法读取的。",
+    "**全 diff 齐问。** 片阐新，不背档。全 diff 片尺不可读。",
+  ],
+  [
+    "pr-to-video",
+    "询问智能体何时必须更改解释或证据；在编辑器中手动修复时间、代码裁剪或标题。",
+    "问智能体何时须改阐释或证。在编辑器手修时、码剪、题。",
+  ],
+  ["pr-to-video", "拉取请求和目标分支是正确的。", "PR 与目标支正确。"],
+  ["pr-to-video", "提议、合并、发布并不混淆。", "提议、合并、发布不混。"],
 
   // product-launch
-  ['product-launch', '**在 Studio 应用程序**中，将 URL 粘贴到 **Make Something**（用一行关于视频的内容），然后选择 **Let\'s go**。打开**从故事板开始**，在任何内容移动之前将镜头批准为静止图像。',
-   '**Studio 应用**里，URL 贴 **Make something**(述一语片事) 选 **Let\'s go**。开**自故事板**，动前以静帧批镜。'],
-  ['product-launch', '当你想自己设置结构、声音和音乐时： 为 [https://linear.app](https://linear.app) 制作 45 秒 1920x1080 启动视频。充满活力但又简约，使用网站自己的调色板和屏幕截图。结构：说明问题的钩子、带有 UI 捕获和一行标题的 3 个功能节拍、带有徽标的结束卡 +“免费试用”。女声TTS语音，自信的语气，-18dB以下微妙的电子BGM。',
-   '自定构、声、乐时：为 [https://linear.app](https://linear.app) 做 45 秒 1920x1080 发布片。利落简，具站自板色与图。构：诘题钩、三功能拍各 UI 捕一题行、尾卡标“免费试用”。女 TTS，自信，-18dB 下微电 BGM。'],
-  ['product-launch', '| **捕获与不捕获** |给出一个URL来捕获真实站点；当没有要捕获的站点时提供脚本或简介 | Capture借用了真实的调色板和屏幕截图；没有它，视觉效果就会被发明，所以为你的品牌颜色命名|',
-   '| **捕与否** | 给 URL 捕真站；无站给稿或述 | 捕借真板墨图；无则视自创，牌色须名 |'],
-  ['product-launch', '| **声音和语气** | “女声TTS，自信”/“冷静男声”|语音性别、语气均为提示词；提供者本身是代理的决定 - 有关提供者机制，请参阅[媒体和音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |',
-   '| **声与调** | “女声 TTS，自信” / “沉稳男声” | 性别调皆提示词；供应方归智能体定——机理见[媒体音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |'],
-  ['product-launch', '| **背景音乐级别** | “-18dB以下的微妙电子背景音乐”（或“无背景音乐”）|规定的上限使音乐低于声音；完全把它留作预告片|',
-   '| **BGM 幅** | “-18dB 下微电子”（或“无 BGM”） | 定顶一乐降于声；不，留作预告片 |'],
-  ['product-launch', '| **长度和目的地** | “\\~45 秒”、“TikTok 9:16” |最佳点是 30-90 秒；目的地设置方面（16:9 嵌入 · 1:1 feed · 9:16 Shorts） | [！提示] 持续时间和目的地是两个最便宜、影响力最大的事情。如果你保持安静，代理会选择好的其他一切 - 请参阅[规范拨号](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)了解委托的数量。',
-   '| **长与宿** | “~45 秒”、“TikTok 9:16” | 甜点 30-90 秒；宿定画幅（16:9 嵌 · 1:1 流 · 9:16 短） | 提示：时长与宿最廉最效。余交之，见[规格拨盘](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)。'],
-  ['product-launch', '完整的界面显示任务发生的位置。特写镜头可以让重要的动作变得清晰易读。当孤立的特写镜头失去了完整产品的意义时，要求两者都提供： 例如，监控影片可以建立仪表板、绘制信号、显示诊断结果并将结果返回到报告视图。产品的实际屏幕或提供的源必须支持该流程。周围的界面提供了上下文；特写镜头带有观众需要阅读的标签和数字。',
-   '全界示事在。特写明要害。孤特易失全义，两者俱索：如监控片建盘、绘信、示诊、返报。流须真屏或供源撑。周界为境，写留签数供读。'],
-  ['product-launch', '[手风琴] 20 秒垂直预告片 (9:16) >', '[accordion] 20 秒竖预告（9:16）>'],
-  ['product-launch', '[手风琴] 粘贴脚本，没有捕获 >', '[accordion] 粘稿不捕 >'],
-  ['product-launch', '[手风琴] 现场游览（相同的 URL，游览简介） >', '[accordion] 现场游（同 URL 同述）>'],
-  ['product-launch', '特写镜头连接到整个产品，并且在两个视图之间移动时组件保持清晰。',
-   '特写连全品，双视流转件廓然。'],
-  ['product-launch', '每项产品声明都是最新的。',
-   '每品宣皆新。'],
+  [
+    "product-launch",
+    "**在 Studio 应用程序**中，将 URL 粘贴到 **Make Something**（用一行关于视频的内容），然后选择 **Let's go**。打开**从故事板开始**，在任何内容移动之前将镜头批准为静止图像。",
+    "**Studio 应用**里，URL 贴 **Make something**(述一语片事) 选 **Let's go**。开**自故事板**，动前以静帧批镜。",
+  ],
+  [
+    "product-launch",
+    "当你想自己设置结构、声音和音乐时： 为 [https://linear.app](https://linear.app) 制作 45 秒 1920x1080 启动视频。充满活力但又简约，使用网站自己的调色板和屏幕截图。结构：说明问题的钩子、带有 UI 捕获和一行标题的 3 个功能节拍、带有徽标的结束卡 +“免费试用”。女声TTS语音，自信的语气，-18dB以下微妙的电子BGM。",
+    "自定构、声、乐时：为 [https://linear.app](https://linear.app) 做 45 秒 1920x1080 发布片。利落简，具站自板色与图。构：诘题钩、三功能拍各 UI 捕一题行、尾卡标“免费试用”。女 TTS，自信，-18dB 下微电 BGM。",
+  ],
+  [
+    "product-launch",
+    "| **捕获与不捕获** |给出一个URL来捕获真实站点；当没有要捕获的站点时提供脚本或简介 | Capture借用了真实的调色板和屏幕截图；没有它，视觉效果就会被发明，所以为你的品牌颜色命名|",
+    "| **捕与否** | 给 URL 捕真站；无站给稿或述 | 捕借真板墨图；无则视自创，牌色须名 |",
+  ],
+  [
+    "product-launch",
+    "| **声音和语气** | “女声TTS，自信”/“冷静男声”|语音性别、语气均为提示词；提供者本身是代理的决定 - 有关提供者机制，请参阅[媒体和音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |",
+    "| **声与调** | “女声 TTS，自信” / “沉稳男声” | 性别调皆提示词；供应方归智能体定——机理见[媒体音频](https://hyperframes.heygen.com/prompting/media-and-audio.md) |",
+  ],
+  [
+    "product-launch",
+    "| **背景音乐级别** | “-18dB以下的微妙电子背景音乐”（或“无背景音乐”）|规定的上限使音乐低于声音；完全把它留作预告片|",
+    "| **BGM 幅** | “-18dB 下微电子”（或“无 BGM”） | 定顶一乐降于声；不，留作预告片 |",
+  ],
+  [
+    "product-launch",
+    "| **长度和目的地** | “\\~45 秒”、“TikTok 9:16” |最佳点是 30-90 秒；目的地设置方面（16:9 嵌入 · 1:1 feed · 9:16 Shorts） | [！提示] 持续时间和目的地是两个最便宜、影响力最大的事情。如果你保持安静，代理会选择好的其他一切 - 请参阅[规范拨号](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)了解委托的数量。",
+    "| **长与宿** | “~45 秒”、“TikTok 9:16” | 甜点 30-90 秒；宿定画幅（16:9 嵌 · 1:1 流 · 9:16 短） | 提示：时长与宿最廉最效。余交之，见[规格拨盘](https://hyperframes.heygen.com/prompting/overview.md#how-much-to-specify)。",
+  ],
+  [
+    "product-launch",
+    "完整的界面显示任务发生的位置。特写镜头可以让重要的动作变得清晰易读。当孤立的特写镜头失去了完整产品的意义时，要求两者都提供： 例如，监控影片可以建立仪表板、绘制信号、显示诊断结果并将结果返回到报告视图。产品的实际屏幕或提供的源必须支持该流程。周围的界面提供了上下文；特写镜头带有观众需要阅读的标签和数字。",
+    "全界示事在。特写明要害。孤特易失全义，两者俱索：如监控片建盘、绘信、示诊、返报。流须真屏或供源撑。周界为境，写留签数供读。",
+  ],
+  ["product-launch", "[手风琴] 20 秒垂直预告片 (9:16) >", "[accordion] 20 秒竖预告（9:16）>"],
+  ["product-launch", "[手风琴] 粘贴脚本，没有捕获 >", "[accordion] 粘稿不捕 >"],
+  [
+    "product-launch",
+    "[手风琴] 现场游览（相同的 URL，游览简介） >",
+    "[accordion] 现场游（同 URL 同述）>",
+  ],
+  [
+    "product-launch",
+    "特写镜头连接到整个产品，并且在两个视图之间移动时组件保持清晰。",
+    "特写连全品，双视流转件廓然。",
+  ],
+  ["product-launch", "每项产品声明都是最新的。", "每品宣皆新。"],
 
   // remotion-migration
-  ['remotion-migration', '不是新视频——**翻译**。 [C0](https://hyperframes.heygen.com/prompting/overview) 技能读取现有 Remotion (React) 组合的源代码并将其重写为 HyperFrames HTML：相同的帧、相同的时序、相同的视觉输出，在 GSAP 上运行，而不是 React 的帧回调模型。',
-   '非自创新片——**翻译**。[Remotion→HyperFrames](https://hyperframes.heygen.com/prompting/overview) 技能读现有 Remotion (React) 源，改写为 HyperFrames HTML：同帧、同序、同视，GSAP 驱，不为 React 帧回。'],
-  ['remotion-migration', '/remotion-to hyperframes 将`/remotion-to-hyperframes`（Remotion 项目根：`/hyperframes`）处的合成移植到 HyperFrames。保持相同的持续时间、fps 和尺寸。对于任何翻译不清晰的地方写下`src/HeroReveal.tsx`。',
-   '`/remotion-to-hyperframes` 把 Remotion 根（`src/HeroReveal.tsx`）合成移来。时长、帧、尺寸同。不清处落字 `TRANSLATION_NOTES.md`。'],
-  ['remotion-migration', '一旦一个项目注册了多个 C0 ，那么命名确切的文件（不仅仅是“我的 Remotion 项目”）就很重要了——说出是哪一个。',
-   '一项目多合成，必点确档（非“我的 Remotion”）——言何者。'],
-  ['remotion-migration', '该技能在翻译任何内容之前都会对源代码进行检查，并且在遇到 HyperFrames 的搜索驱动模型无法确定性表示的模式时**拒绝**而不是近似： 如果你的源遇到阻碍，期望代理停止并解释互操作建议，而不是推动 - 这是正确的行为，而不是失败。不要要求它“只是近似”地越过障碍物；这项技能的重点是经过验证、测量的翻译，而不是尽力猜测。',
-   '技能先侦源，碰 HyperFrames 搜索驱模型不可定表之式即**拒**不近似：源触碍，望智能体止而释互操，不硬推——正为，不败。勿令“近似”越碍；所重验量准译，非尽猜。'],
-  ['remotion-migration', '**状态驱动动画** — 具有真实依赖性的`.`C1或`TRANSLATION_NOTES.md`C3。 HyperFrames 寻找任意帧并每次都期望相同的像素；对自己的历史做出反应的状态机不能保证这一点。该技能建议使用运行时互操作模式，而不是默默地生成“看起来正确”但不准确的翻译。',
-   '**状态驱画** —— `useState`/`useEffect`/`useReducer` 真依。HyperFrames 逐帧Seek，须同像素；忆史机不保。此技能建议运行时互操，非“看似对”错译。'],
-  ['remotion-migration', '每个翻译都会根据渲染帧上的 SSIM（结构相似性）对 Remotion 原始内容进行评分，而不是通过肉眼观察。如果你要移植一些重要的内容，请明确要求进行检查： 翻译后，渲染 Remotion 原始版本和 HyperFrames 版本并报告 SSIM 差异。',
-   '每译皆以渲帧 SSIM 较 Remotion 原，非目验。重移须明要验：渲双版报 SSIM 差。'],
-  ['remotion-migration', '在预览中“看起来正确”的翻译仍然可以在经过验证的基线以下进行有意义的测量 - 这就是该技能旨在捕捉的差异。',
-   '预览“对”的译或量远低验基——此技能正为揪此差。'],
-  ['remotion-migration', '| **精确的源文件** | “在`<Composition>`下的组成” |一个 Remotion 项目可以注册多个 `useState` 说出你想要的那个 |',
-   '| **确源档** | “`<Composition>` 下合成” | 一项目多 `Composition`，言要者 |'],
-  ['remotion-migration', '| **差距文档** | “对于任何翻译不清晰的地方，请写下`useReducer`”|近似的字体、降低的音量渐变和替换的演示文稿都会被记录下来，而不是默默地被吸收|',
-   '| **缺口文档** | “不清译处落 `TRANSLATION_NOTES.md`” | 近字、淡音替、代演示皆录，不默吸 |'],
-  ['remotion-migration', '**要求以 Remotion 作为灵感的全新构建。** 如果你没有实际的 Remotion 源代码可供翻译，那么这不是技能 - 这是正常的构建。',
-   '**要 Remotion 灵感之自创新建。** 无真 Remotion 源即非技能——常建。'],
-  ['remotion-migration', '**要求它通过 lint 拦截器。** `useEffect` 驱动的合成不是“无论如何翻译，尽力而为”的情况 - 这是一个不同的问题（运行时互操作），强制翻译会产生一些看起来合理但不准确的帧。',
-   '**令其越 lint 墙。** `useEffect` 驱非“尽译”之例——异问（运行时互操），硬译生似帧错。'],
-  ['remotion-migration', '**跳过重要端口上的验证。** 仅视觉检查会错过仅在逐帧 SSIM 差异中显示的计时/缓动漂移。',
-   '**重口跳验。** 唯目验，漏仅 SSIM 显之时缓漂。'],
-  ['remotion-migration', '**相反：** 让代理推荐互操作模式，然后决定是否适合你的情况',
-   '**相反：** 令智能体荐互操式，再定合否'],
-  ['remotion-migration', '**相反：** `src/HeroReveal.tsx`',
-   '**相反：** `report SSIM against the original`'],
+  [
+    "remotion-migration",
+    "不是新视频——**翻译**。 [C0](https://hyperframes.heygen.com/prompting/overview) 技能读取现有 Remotion (React) 组合的源代码并将其重写为 HyperFrames HTML：相同的帧、相同的时序、相同的视觉输出，在 GSAP 上运行，而不是 React 的帧回调模型。",
+    "非自创新片——**翻译**。[Remotion→HyperFrames](https://hyperframes.heygen.com/prompting/overview) 技能读现有 Remotion (React) 源，改写为 HyperFrames HTML：同帧、同序、同视，GSAP 驱，不为 React 帧回。",
+  ],
+  [
+    "remotion-migration",
+    "/remotion-to hyperframes 将`/remotion-to-hyperframes`（Remotion 项目根：`/hyperframes`）处的合成移植到 HyperFrames。保持相同的持续时间、fps 和尺寸。对于任何翻译不清晰的地方写下`src/HeroReveal.tsx`。",
+    "`/remotion-to-hyperframes` 把 Remotion 根（`src/HeroReveal.tsx`）合成移来。时长、帧、尺寸同。不清处落字 `TRANSLATION_NOTES.md`。",
+  ],
+  [
+    "remotion-migration",
+    "一旦一个项目注册了多个 C0 ，那么命名确切的文件（不仅仅是“我的 Remotion 项目”）就很重要了——说出是哪一个。",
+    "一项目多合成，必点确档（非“我的 Remotion”）——言何者。",
+  ],
+  [
+    "remotion-migration",
+    "该技能在翻译任何内容之前都会对源代码进行检查，并且在遇到 HyperFrames 的搜索驱动模型无法确定性表示的模式时**拒绝**而不是近似： 如果你的源遇到阻碍，期望代理停止并解释互操作建议，而不是推动 - 这是正确的行为，而不是失败。不要要求它“只是近似”地越过障碍物；这项技能的重点是经过验证、测量的翻译，而不是尽力猜测。",
+    "技能先侦源，碰 HyperFrames 搜索驱模型不可定表之式即**拒**不近似：源触碍，望智能体止而释互操，不硬推——正为，不败。勿令“近似”越碍；所重验量准译，非尽猜。",
+  ],
+  [
+    "remotion-migration",
+    "**状态驱动动画** — 具有真实依赖性的`.`C1或`TRANSLATION_NOTES.md`C3。 HyperFrames 寻找任意帧并每次都期望相同的像素；对自己的历史做出反应的状态机不能保证这一点。该技能建议使用运行时互操作模式，而不是默默地生成“看起来正确”但不准确的翻译。",
+    "**状态驱画** —— `useState`/`useEffect`/`useReducer` 真依。HyperFrames 逐帧Seek，须同像素；忆史机不保。此技能建议运行时互操，非“看似对”错译。",
+  ],
+  [
+    "remotion-migration",
+    "每个翻译都会根据渲染帧上的 SSIM（结构相似性）对 Remotion 原始内容进行评分，而不是通过肉眼观察。如果你要移植一些重要的内容，请明确要求进行检查： 翻译后，渲染 Remotion 原始版本和 HyperFrames 版本并报告 SSIM 差异。",
+    "每译皆以渲帧 SSIM 较 Remotion 原，非目验。重移须明要验：渲双版报 SSIM 差。",
+  ],
+  [
+    "remotion-migration",
+    "在预览中“看起来正确”的翻译仍然可以在经过验证的基线以下进行有意义的测量 - 这就是该技能旨在捕捉的差异。",
+    "预览“对”的译或量远低验基——此技能正为揪此差。",
+  ],
+  [
+    "remotion-migration",
+    "| **精确的源文件** | “在`<Composition>`下的组成” |一个 Remotion 项目可以注册多个 `useState` 说出你想要的那个 |",
+    "| **确源档** | “`<Composition>` 下合成” | 一项目多 `Composition`，言要者 |",
+  ],
+  [
+    "remotion-migration",
+    "| **差距文档** | “对于任何翻译不清晰的地方，请写下`useReducer`”|近似的字体、降低的音量渐变和替换的演示文稿都会被记录下来，而不是默默地被吸收|",
+    "| **缺口文档** | “不清译处落 `TRANSLATION_NOTES.md`” | 近字、淡音替、代演示皆录，不默吸 |",
+  ],
+  [
+    "remotion-migration",
+    "**要求以 Remotion 作为灵感的全新构建。** 如果你没有实际的 Remotion 源代码可供翻译，那么这不是技能 - 这是正常的构建。",
+    "**要 Remotion 灵感之自创新建。** 无真 Remotion 源即非技能——常建。",
+  ],
+  [
+    "remotion-migration",
+    "**要求它通过 lint 拦截器。** `useEffect` 驱动的合成不是“无论如何翻译，尽力而为”的情况 - 这是一个不同的问题（运行时互操作），强制翻译会产生一些看起来合理但不准确的帧。",
+    "**令其越 lint 墙。** `useEffect` 驱非“尽译”之例——异问（运行时互操），硬译生似帧错。",
+  ],
+  [
+    "remotion-migration",
+    "**跳过重要端口上的验证。** 仅视觉检查会错过仅在逐帧 SSIM 差异中显示的计时/缓动漂移。",
+    "**重口跳验。** 唯目验，漏仅 SSIM 显之时缓漂。",
+  ],
+  [
+    "remotion-migration",
+    "**相反：** 让代理推荐互操作模式，然后决定是否适合你的情况",
+    "**相反：** 令智能体荐互操式，再定合否",
+  ],
+  [
+    "remotion-migration",
+    "**相反：** `src/HeroReveal.tsx`",
+    "**相反：** `report SSIM against the original`",
+  ],
 
   // skills
-  ['skills', '运行交互式安装程序： 从视频项目的目录运行此命令。如果你克隆了 HyperFrames 来贡献，请使用 `/hyperframes` 从该结帐中进行全局安装，或在单独的视频项目中运行项目安装程序。项目本地安装程序目标可以与签出的跟踪 `npx hyperframes skills update` 源重叠并覆盖未提交的编辑。',
-   '交互装：盘自视频录跑。贡献克隆走 `/hyperframes` 全局装，自盘单录跑项目装。项地装或叠签源，未提编可覆。'],
-  ['skills', '选择**核心技能**。这涵盖了所有类型的视频；其他技能会在请求需要时安装，因此你不需要预先提供完整的目录。',
-   '选**核心技能**，裹众片物。余技需时自装，不必先齐全录。'],
-  ['skills', '安装后启动新的代理聊天，然后要求其使用`skills/`。',
-   '装后新聊，令其用 `skills/`。'],
-  ['skills', '对于非交互式代理或 CI 环境，请使用： 这将安装或刷新全局安装中已存在的核心集和任何 HyperFrames 技能，然后将这些捆绑包链接到兼容的已安装代理中。它不会添加所有可选技能。',
-   '非交互或 CI 用：装或翻全集与 HyperFrames 技，链相合已装代理。不增选技。'],
-  ['skills', '更新会检查安装程序写入的 Claude 全局存储（`/hyperframes` 或`~/.claude/skills` 下的`skills/` 文件夹）。仅在另一个代理的目录中找到的技能不会将缺少的核心技能计为安装在该目录中，并且该其他目录中的可选技能不会自动添加到托管存储中。明确命名可选技能以添加它。即使在托管商店存在之前，安装记录的发布者属性也会受到尊重。对另一个发布者拥有的技能的显式更新请求会失败，而不会覆盖它，包括当新鲜度检查离线时不可用时。',
-   '翻查装入之 Claude 全储（`/hyperframes` 或 `~/.claude/skills` 下 `skills/`）。他代目录缺核心不算其装，他之选技不自入储。选技明名即增。装录发者性即在储前仍尊。他家技明更不覆，离线鲜不达亦然。'],
-  ['skills', '检查新鲜度而不改变任何东西： 显式安装或刷新一项技能：',
-   '只验鲜不改：显装或翻一技：'],
-  ['skills', '运行`CLAUDE_CONFIG_DIR`，打开项目，然后启动 Copilot： 如果 Copilot 已在运行，请使用 `npx hyperframes skills update`。使用`/skills reload`或`/skills list`确认发现。 GitHub 的[当前技能指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列出了其项目和个人技能位置。',
-   '跑 `copilot`，开盘启 Copilot；既跑用 `/skills reload`。探得否由 `/skills list`。GitHub [现指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列项与个位。'],
-  ['skills', '两个代理可以使用相同的第一个请求： 继续同一对话进行修改。对于托管创建而不是本地项目，请使用 [HyperFrames MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。',
-   '双代可共首求：续同话改之。托管非本地用 [MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。'],
-  ['skills', '从你在 Antigravity 中打开的项目的根目录安装技能： 选择**核心技能**和**反重力**。这使用了反重力支持的项目位置`/skills info hyperframes`，并保留项目中的技能。安装后开始新的反重力对话。',
-   '盘自 Antigravity 开盘根装之：选**核心**与**Antigravity**。用 Antigravity 所撑项位 `.agents/skills`，技留项内。装后新聊。'],
-  ['skills', '运行`~/.gemini/config/skills`，然后在项目文件夹中打开或重新启动 Bob Shell，以便它发现`npx hyperframes skills update`下链接的技能： 要求 Bob 在第一个请求中使用 `~/.bob/skills`。再次运行更新会刷新相同的全局技能包，而无需更改项目格式。',
-   '跑 `bob`，盘开或重启 Bob Shell，探 `~/.bob/skills` 已链之。首求令 Bob 用之。再跑翻全包，不改项形。'],
-  ['skills', '通过要求制作任何视频； `/hyperframes`技能包含合同和参考资料（各种电影、故事、动作、外观、声音、评论、字幕、叠加）。',
-   '直索制片；`/hyperframes` 携约参（片、事、动、观、声、评、字、叠）。'],
-  ['skills', '特意安装完整的发布集： `/remotion-to-hyperframes` 还安装完整的已发布集。默认情况下排除回购内部技能。',
-   '明装全集：`/hyperframes` 另装全发集。默除补购内技。'],
-  ['skills', '或者安装一项指定技能： 将全套用于必须跨多个 HyperFrames 任务运行而无需稍后获取的环境。对于正常的项目，核心集更小并且更容易保持最新。',
-   '或单装一技：跨多工无下取境用全。寻常项核心小而易新。'],
-  ['skills', '个人技能定义仍然是代理的真实来源，可在 [HyperFrames 存储库](https://github.com/heygen-com/hyperframes/tree/main/skills) 中找到。',
-   '个技定为代之真源，居 [HyperFrames 库](https://github.com/heygen-com/hyperframes/tree/main/skills)。'],
-  ['skills', '对于`npx hyperframes skills update`C1将`skills@1.7.x`视为已安装的技能名称。即使安装了 HyperFrames 技能，它也会报告 `npx skills update heygen-com/hyperframes`。使用 HyperFrames 更新程序刷新已全局安装的核心集和 HyperFrames 技能： 独立的`heygen-com/hyperframes`命令接受技能名称，例如`No installed skills found matching`以仅更新全局`skills update`技能。存储库名称属于`npx skills upda',
-   '翻时 `skills@1.7.x` 视装名。纵 HyperFrames 已装，仍报 `No installed skills found matching`。以 HyperFrames 新器翻全集与技：独 `skills update` 接技名，仅翻全技。库名属 `npx skills add heygen-com/hyperframes`。'],
-  ['skills', '`/hyperframes` 警告指出无法读取的已安装文件。在编辑该文件之前备份该文件，尤其是当它包含自定义指令时。多行描述需要缩进连续行；例如： 保留文件已有的描述文字和技能体；该示例仅显示 YAML 格式。随后运行 C0 来验证全局发现，或者运行 C1 来进行项目安装。',
-   '`/hyperframes` 警告点不可读装档。改前先备，尤自订。述多行续行须缩：续存档述体，此仅示 YAML 式。后跑 `npx hyperframes skills check` 验全，项装跑 `skills add`。'],
-  ['skills', '回购内部技能，例如 `skills add` 被排除在已发布的集合之外。刷新核心技能并不能修复旧的、单独安装的内部技能副本。 YAML 警告和名称匹配错误可能会在同一运行中发生，并且需要这些单独的修复。',
-   '补购内技如 `hyperframes-catalog`、`hyperframes-cloud` 出发集外。翻核心不修旧单装内技。YAML 警与名误可同跑，须各修。'],
+  [
+    "skills",
+    "运行交互式安装程序： 从视频项目的目录运行此命令。如果你克隆了 HyperFrames 来贡献，请使用 `/hyperframes` 从该结帐中进行全局安装，或在单独的视频项目中运行项目安装程序。项目本地安装程序目标可以与签出的跟踪 `npx hyperframes skills update` 源重叠并覆盖未提交的编辑。",
+    "交互装：盘自视频录跑。贡献克隆走 `/hyperframes` 全局装，自盘单录跑项目装。项地装或叠签源，未提编可覆。",
+  ],
+  [
+    "skills",
+    "选择**核心技能**。这涵盖了所有类型的视频；其他技能会在请求需要时安装，因此你不需要预先提供完整的目录。",
+    "选**核心技能**，裹众片物。余技需时自装，不必先齐全录。",
+  ],
+  ["skills", "安装后启动新的代理聊天，然后要求其使用`skills/`。", "装后新聊，令其用 `skills/`。"],
+  [
+    "skills",
+    "对于非交互式代理或 CI 环境，请使用： 这将安装或刷新全局安装中已存在的核心集和任何 HyperFrames 技能，然后将这些捆绑包链接到兼容的已安装代理中。它不会添加所有可选技能。",
+    "非交互或 CI 用：装或翻全集与 HyperFrames 技，链相合已装代理。不增选技。",
+  ],
+  [
+    "skills",
+    "更新会检查安装程序写入的 Claude 全局存储（`/hyperframes` 或`~/.claude/skills` 下的`skills/` 文件夹）。仅在另一个代理的目录中找到的技能不会将缺少的核心技能计为安装在该目录中，并且该其他目录中的可选技能不会自动添加到托管存储中。明确命名可选技能以添加它。即使在托管商店存在之前，安装记录的发布者属性也会受到尊重。对另一个发布者拥有的技能的显式更新请求会失败，而不会覆盖它，包括当新鲜度检查离线时不可用时。",
+    "翻查装入之 Claude 全储（`/hyperframes` 或 `~/.claude/skills` 下 `skills/`）。他代目录缺核心不算其装，他之选技不自入储。选技明名即增。装录发者性即在储前仍尊。他家技明更不覆，离线鲜不达亦然。",
+  ],
+  ["skills", "检查新鲜度而不改变任何东西： 显式安装或刷新一项技能：", "只验鲜不改：显装或翻一技："],
+  [
+    "skills",
+    "运行`CLAUDE_CONFIG_DIR`，打开项目，然后启动 Copilot： 如果 Copilot 已在运行，请使用 `npx hyperframes skills update`。使用`/skills reload`或`/skills list`确认发现。 GitHub 的[当前技能指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列出了其项目和个人技能位置。",
+    "跑 `copilot`，开盘启 Copilot；既跑用 `/skills reload`。探得否由 `/skills list`。GitHub [现指南](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills) 列项与个位。",
+  ],
+  [
+    "skills",
+    "两个代理可以使用相同的第一个请求： 继续同一对话进行修改。对于托管创建而不是本地项目，请使用 [HyperFrames MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。",
+    "双代可共首求：续同话改之。托管非本地用 [MCP 指南](https://hyperframes.heygen.com/guides/mcp.md)。",
+  ],
+  [
+    "skills",
+    "从你在 Antigravity 中打开的项目的根目录安装技能： 选择**核心技能**和**反重力**。这使用了反重力支持的项目位置`/skills info hyperframes`，并保留项目中的技能。安装后开始新的反重力对话。",
+    "盘自 Antigravity 开盘根装之：选**核心**与**Antigravity**。用 Antigravity 所撑项位 `.agents/skills`，技留项内。装后新聊。",
+  ],
+  [
+    "skills",
+    "运行`~/.gemini/config/skills`，然后在项目文件夹中打开或重新启动 Bob Shell，以便它发现`npx hyperframes skills update`下链接的技能： 要求 Bob 在第一个请求中使用 `~/.bob/skills`。再次运行更新会刷新相同的全局技能包，而无需更改项目格式。",
+    "跑 `bob`，盘开或重启 Bob Shell，探 `~/.bob/skills` 已链之。首求令 Bob 用之。再跑翻全包，不改项形。",
+  ],
+  [
+    "skills",
+    "通过要求制作任何视频； `/hyperframes`技能包含合同和参考资料（各种电影、故事、动作、外观、声音、评论、字幕、叠加）。",
+    "直索制片；`/hyperframes` 携约参（片、事、动、观、声、评、字、叠）。",
+  ],
+  [
+    "skills",
+    "特意安装完整的发布集： `/remotion-to-hyperframes` 还安装完整的已发布集。默认情况下排除回购内部技能。",
+    "明装全集：`/hyperframes` 另装全发集。默除补购内技。",
+  ],
+  [
+    "skills",
+    "或者安装一项指定技能： 将全套用于必须跨多个 HyperFrames 任务运行而无需稍后获取的环境。对于正常的项目，核心集更小并且更容易保持最新。",
+    "或单装一技：跨多工无下取境用全。寻常项核心小而易新。",
+  ],
+  [
+    "skills",
+    "个人技能定义仍然是代理的真实来源，可在 [HyperFrames 存储库](https://github.com/heygen-com/hyperframes/tree/main/skills) 中找到。",
+    "个技定为代之真源，居 [HyperFrames 库](https://github.com/heygen-com/hyperframes/tree/main/skills)。",
+  ],
+  [
+    "skills",
+    "对于`npx hyperframes skills update`C1将`skills@1.7.x`视为已安装的技能名称。即使安装了 HyperFrames 技能，它也会报告 `npx skills update heygen-com/hyperframes`。使用 HyperFrames 更新程序刷新已全局安装的核心集和 HyperFrames 技能： 独立的`heygen-com/hyperframes`命令接受技能名称，例如`No installed skills found matching`以仅更新全局`skills update`技能。存储库名称属于`npx skills upda",
+    "翻时 `skills@1.7.x` 视装名。纵 HyperFrames 已装，仍报 `No installed skills found matching`。以 HyperFrames 新器翻全集与技：独 `skills update` 接技名，仅翻全技。库名属 `npx skills add heygen-com/hyperframes`。",
+  ],
+  [
+    "skills",
+    "`/hyperframes` 警告指出无法读取的已安装文件。在编辑该文件之前备份该文件，尤其是当它包含自定义指令时。多行描述需要缩进连续行；例如： 保留文件已有的描述文字和技能体；该示例仅显示 YAML 格式。随后运行 C0 来验证全局发现，或者运行 C1 来进行项目安装。",
+    "`/hyperframes` 警告点不可读装档。改前先备，尤自订。述多行续行须缩：续存档述体，此仅示 YAML 式。后跑 `npx hyperframes skills check` 验全，项装跑 `skills add`。",
+  ],
+  [
+    "skills",
+    "回购内部技能，例如 `skills add` 被排除在已发布的集合之外。刷新核心技能并不能修复旧的、单独安装的内部技能副本。 YAML 警告和名称匹配错误可能会在同一运行中发生，并且需要这些单独的修复。",
+    "补购内技如 `hyperframes-catalog`、`hyperframes-cloud` 出发集外。翻核心不修旧单装内技。YAML 警与名误可同跑，须各修。",
+  ],
 
   // vs-remotion
-  ['vs-remotion', '我们向 Claude Code (Opus 5.5) 两次提出了相同的单段落请求：一次只安装了 Remotion 的官方代理技能，一次只安装了 HyperFrames。每次运行一次，无需重试，之后也不进行任何编辑。',
-   '同段求问 Claude Code (Opus 5.5) 两度：一供 Remotion 官技，一供 HyperFrames。各跑一回，不重，不改。'],
-  ['vs-remotion', '为名为 Inkwell 的虚构笔记应用程序制作 15 秒 1920x1080 启动视频（口号：“写下来。查找” 稍后再说。”）。标志显示，三个简短的特征线，然后是带有标语的结束卡。没有声音。渲染最终的 MP4 到此文件夹中的 out.mp4。不要问我问题；自己做出选择。',
-   '为虚构笔记 Inkwell 做 15 秒 1920x1080 发布片（签：“写下来。查找”稍后说”。标显、三短征行、签尾卡。无声。MP4 渲至此夹 `out.mp4`。勿问，自择。'],
-  ['vs-remotion', '|写了什么| 10 个 TypeScript 文件，1,037 行 | 4 个 HTML 文件，822 行 |',
-   '|写了何 | 10 TS 档，1,037 行 | 4 HTML 档，822 行 |'],
-  ['vs-remotion', '|安装到项目中 |约 950 MB `node_modules` |什么都没有|',
-   '|带进项 |约 950 MB `node_modules` | 无 |'],
-  ['vs-remotion', '|声音|无 |它选择了一张音乐床和五种音效| 两个都是不错的视频；单次运行并不能决定质量。持续的区别在于你剩下的东西：一个用于继续在代码中构建的 React 项目，或者你可以在浏览器中打开、使用代理进行编辑或在 [Studio 应用程序](https://hyperframes.heygen.com/studio-app/index.md) 中不断更改的 HTML 文件。',
-   '|声|无 |自选乐床与五音效 | 双片皆可，一跑不定性。恒差在所留：一 React 续码工，或 HTML 开浏、代改、[Studio 应用](https://hyperframes.heygen.com/studio-app/index.md) 常更。'],
-  ['vs-remotion', '**远程。** 该分量是当前帧编号的函数。你自己以帧为单位进行计时数学计算。',
-   '**Remotion。** 件为今帧之函。时数算术，自具帧之。'],
-  ['vs-remotion', '另一个文件中的 C0 条目将其注册为 30fps、1280×720 的 90 帧。',
-   '他档 `Composition` 注册 30fps、1280×720、90 帧。'],
-  ['vs-remotion', '**HyperFrames。** 标记声明事物何时出现在屏幕上。 GSAP 时间表声明了它们的移动方式。两者都存在于一个文件中。',
-   '**HyperFrames。** 标宣何时入屏。GSAP 轴宣何动。同档兼之。'],
-  ['vs-remotion', '这是除 `<Composition>` 样板文件之外的整个文件。三个规则使其渲染：每个可见槽都带有 C1 和 C2 、C3 、C4 和 C5 ；时间线已创建**暂停**；并且它以与根元素相同的 id 注册在`<head>`上。错过最后一个，你就会得到一个没有运动的静止帧。 [HTML schema](https://hyperframes.heygen.com/reference/html-schema.md) 列出了每个属性。',
-   '此为除 `<Composition>` 样外全档。三规动其渲：可见槽俱带 `data-hf-id` 与 `data-start`/`data-duration`；轴建**暂**；且以根同 id 注册 `<head>`。缺末得静帧。[HTML 式](https://hyperframes.heygen.com/reference/html-schema.md) 列诸属。'],
-  ['vs-remotion', '这两个文件显然都不是更好。 Remotion 是一种可以在头脑中进行推理的纯函数。 HyperFrames 是一个可以在浏览器中打开并使用开发工具检查的页面。',
-   '双档明无孰优。Remotion 为可脑推纯函。HyperFrames 为开浏可具检页。'],
-  ['vs-remotion', '|运动如何计时？渲染器会暂停你的动画并“寻找”它 - 将其跳转到精确的时刻 - 在捕获每一帧之前 |你的代码读取帧编号并返回该帧的值 |',
-   '|动何计时 |渲暂停你动并“Seek”——跳确刻——后捕帧 | 你码读帧号回帧值 |'],
-  ['vs-remotion', '寻找模型是一个有趣的模型。由于 HyperFrames 驱动动画而不是观看时钟，因此 GSAP、Web 动画、Lottie 和其他浏览器运行时会确定性地渲染 — 每次都会显示相同的帧。请参阅[帧适配器](https://hyperframes.heygen.com/concepts/frame-adapters.md)和[确定性渲染](https://hyperframes.heygen.com/concepts/determinism.md)。',
-   'Seek 模有意。HyperFrames 驱画非视钟，故 GSAP、Web 动、Lottie 诸浏运定渲——每回同帧。见[帧配](https://hyperframes.heygen.com/concepts/frame-adapters.md) 与[定渲](https://hyperframes.heygen.com/concepts/determinism.md)。'],
-  ['vs-remotion', '坦白地说，因为今天的选择很重要。',
-   '直言，今日选要。'],
-  ['vs-remotion', '远程控制更古老，也更成熟。它有更多的模板、更多的教程、更多已解答的问题以及更多的生产历史。 Remotion Lambda 尤其是一个成熟的、有大量文档记录的渲染系统；我们的比较新。',
-   'Remotion 更老更熟。模板、教程、已解问与产史皆多。Remotion Lambda 尤成文繁；我方新。'],
-  ['vs-remotion', '如果你的团队已经编写了 React，Remotion 会免费为你提供组件、设计系统、图表库以及类型化、经过验证的组合输入。没什么可翻译的。',
-   '队已有 React，Remotion 馈件、设系、图库、型验组输。无译之需。'],
-  ['vs-remotion', '而且它的模型确实更容易记住。一个纯粹的帧数函数，没有时间线来注册，没有合同会出现微妙的错误。 HyperFrames 要求你遵守规则——暂停的时间线、没有挂钟、没有未种子的随机性——如果你不这样做，就会悄悄地中断。',
-   '且其模更易记。纯帧函，无轴注，无约微错。HyperFrames 须守规——轴暂、无挂钟、无种未随——违则悄断。'],
-  ['vs-remotion', '你不需要 React、构建步骤或组件重写。网站、HTML 原型、导出的设计或现有的浏览器动画已经接近合成。',
-   'React、构建步、件重写皆免。站、HTML 型、导出设、现浏动近合。'],
-  ['vs-remotion', '它是为智能体进行创作而构建的。 [代理技能](https://hyperframes.heygen.com/guides/skills.md) 对框架的规则进行编码，因此代理可以编写有效的组合而不是猜测，然后人类可以在浏览器编辑器中编辑相同的文件。',
-   '此为代创而造。[技](https://hyperframes.heygen.com/guides/skills.md) 码框规，代作有合非猜，人浏编同档。'],
-  ['vs-remotion', '安装技能： 然后要求你的代理移植该组合物。它将 C0 和 C1 映射到时间线补间，将 C2 映射到剪辑，并将帧转换为秒。',
-   '装技：令代移合。它把 `data-start`/`data-duration` 映射轴缓，把 `data-track-index` 映剪，帧入秒。'],
-  ['vs-remotion', '越难的情况才是技能的重点。它拒绝翻译不适合的内容：基于 C0 或 C1 构建的 React 状态机、异步元数据、第三方 React UI 库。这些内容会被标记，而不是默默地误译。它还对自己的输出进行评分——它渲染两个版本并逐帧比较它们，并记下它丢弃的任何内容。',
-   '难例正技之的。其拒不合者：`useState`/`useEffect` 机、异步元、他家件 UI 皆标，不默错译。自亦评己——渲双版逐帧较，弃者皆录。'],
+  [
+    "vs-remotion",
+    "我们向 Claude Code (Opus 5.5) 两次提出了相同的单段落请求：一次只安装了 Remotion 的官方代理技能，一次只安装了 HyperFrames。每次运行一次，无需重试，之后也不进行任何编辑。",
+    "同段求问 Claude Code (Opus 5.5) 两度：一供 Remotion 官技，一供 HyperFrames。各跑一回，不重，不改。",
+  ],
+  [
+    "vs-remotion",
+    "为名为 Inkwell 的虚构笔记应用程序制作 15 秒 1920x1080 启动视频（口号：“写下来。查找” 稍后再说。”）。标志显示，三个简短的特征线，然后是带有标语的结束卡。没有声音。渲染最终的 MP4 到此文件夹中的 out.mp4。不要问我问题；自己做出选择。",
+    "为虚构笔记 Inkwell 做 15 秒 1920x1080 发布片（签：“写下来。查找”稍后说”。标显、三短征行、签尾卡。无声。MP4 渲至此夹 `out.mp4`。勿问，自择。",
+  ],
+  [
+    "vs-remotion",
+    "|写了什么| 10 个 TypeScript 文件，1,037 行 | 4 个 HTML 文件，822 行 |",
+    "|写了何 | 10 TS 档，1,037 行 | 4 HTML 档，822 行 |",
+  ],
+  [
+    "vs-remotion",
+    "|安装到项目中 |约 950 MB `node_modules` |什么都没有|",
+    "|带进项 |约 950 MB `node_modules` | 无 |",
+  ],
+  [
+    "vs-remotion",
+    "|声音|无 |它选择了一张音乐床和五种音效| 两个都是不错的视频；单次运行并不能决定质量。持续的区别在于你剩下的东西：一个用于继续在代码中构建的 React 项目，或者你可以在浏览器中打开、使用代理进行编辑或在 [Studio 应用程序](https://hyperframes.heygen.com/studio-app/index.md) 中不断更改的 HTML 文件。",
+    "|声|无 |自选乐床与五音效 | 双片皆可，一跑不定性。恒差在所留：一 React 续码工，或 HTML 开浏、代改、[Studio 应用](https://hyperframes.heygen.com/studio-app/index.md) 常更。",
+  ],
+  [
+    "vs-remotion",
+    "**远程。** 该分量是当前帧编号的函数。你自己以帧为单位进行计时数学计算。",
+    "**Remotion。** 件为今帧之函。时数算术，自具帧之。",
+  ],
+  [
+    "vs-remotion",
+    "另一个文件中的 C0 条目将其注册为 30fps、1280×720 的 90 帧。",
+    "他档 `Composition` 注册 30fps、1280×720、90 帧。",
+  ],
+  [
+    "vs-remotion",
+    "**HyperFrames。** 标记声明事物何时出现在屏幕上。 GSAP 时间表声明了它们的移动方式。两者都存在于一个文件中。",
+    "**HyperFrames。** 标宣何时入屏。GSAP 轴宣何动。同档兼之。",
+  ],
+  [
+    "vs-remotion",
+    "这是除 `<Composition>` 样板文件之外的整个文件。三个规则使其渲染：每个可见槽都带有 C1 和 C2 、C3 、C4 和 C5 ；时间线已创建**暂停**；并且它以与根元素相同的 id 注册在`<head>`上。错过最后一个，你就会得到一个没有运动的静止帧。 [HTML schema](https://hyperframes.heygen.com/reference/html-schema.md) 列出了每个属性。",
+    "此为除 `<Composition>` 样外全档。三规动其渲：可见槽俱带 `data-hf-id` 与 `data-start`/`data-duration`；轴建**暂**；且以根同 id 注册 `<head>`。缺末得静帧。[HTML 式](https://hyperframes.heygen.com/reference/html-schema.md) 列诸属。",
+  ],
+  [
+    "vs-remotion",
+    "这两个文件显然都不是更好。 Remotion 是一种可以在头脑中进行推理的纯函数。 HyperFrames 是一个可以在浏览器中打开并使用开发工具检查的页面。",
+    "双档明无孰优。Remotion 为可脑推纯函。HyperFrames 为开浏可具检页。",
+  ],
+  [
+    "vs-remotion",
+    "|运动如何计时？渲染器会暂停你的动画并“寻找”它 - 将其跳转到精确的时刻 - 在捕获每一帧之前 |你的代码读取帧编号并返回该帧的值 |",
+    "|动何计时 |渲暂停你动并“Seek”——跳确刻——后捕帧 | 你码读帧号回帧值 |",
+  ],
+  [
+    "vs-remotion",
+    "寻找模型是一个有趣的模型。由于 HyperFrames 驱动动画而不是观看时钟，因此 GSAP、Web 动画、Lottie 和其他浏览器运行时会确定性地渲染 — 每次都会显示相同的帧。请参阅[帧适配器](https://hyperframes.heygen.com/concepts/frame-adapters.md)和[确定性渲染](https://hyperframes.heygen.com/concepts/determinism.md)。",
+    "Seek 模有意。HyperFrames 驱画非视钟，故 GSAP、Web 动、Lottie 诸浏运定渲——每回同帧。见[帧配](https://hyperframes.heygen.com/concepts/frame-adapters.md) 与[定渲](https://hyperframes.heygen.com/concepts/determinism.md)。",
+  ],
+  ["vs-remotion", "坦白地说，因为今天的选择很重要。", "直言，今日选要。"],
+  [
+    "vs-remotion",
+    "远程控制更古老，也更成熟。它有更多的模板、更多的教程、更多已解答的问题以及更多的生产历史。 Remotion Lambda 尤其是一个成熟的、有大量文档记录的渲染系统；我们的比较新。",
+    "Remotion 更老更熟。模板、教程、已解问与产史皆多。Remotion Lambda 尤成文繁；我方新。",
+  ],
+  [
+    "vs-remotion",
+    "如果你的团队已经编写了 React，Remotion 会免费为你提供组件、设计系统、图表库以及类型化、经过验证的组合输入。没什么可翻译的。",
+    "队已有 React，Remotion 馈件、设系、图库、型验组输。无译之需。",
+  ],
+  [
+    "vs-remotion",
+    "而且它的模型确实更容易记住。一个纯粹的帧数函数，没有时间线来注册，没有合同会出现微妙的错误。 HyperFrames 要求你遵守规则——暂停的时间线、没有挂钟、没有未种子的随机性——如果你不这样做，就会悄悄地中断。",
+    "且其模更易记。纯帧函，无轴注，无约微错。HyperFrames 须守规——轴暂、无挂钟、无种未随——违则悄断。",
+  ],
+  [
+    "vs-remotion",
+    "你不需要 React、构建步骤或组件重写。网站、HTML 原型、导出的设计或现有的浏览器动画已经接近合成。",
+    "React、构建步、件重写皆免。站、HTML 型、导出设、现浏动近合。",
+  ],
+  [
+    "vs-remotion",
+    "它是为智能体进行创作而构建的。 [代理技能](https://hyperframes.heygen.com/guides/skills.md) 对框架的规则进行编码，因此代理可以编写有效的组合而不是猜测，然后人类可以在浏览器编辑器中编辑相同的文件。",
+    "此为代创而造。[技](https://hyperframes.heygen.com/guides/skills.md) 码框规，代作有合非猜，人浏编同档。",
+  ],
+  [
+    "vs-remotion",
+    "安装技能： 然后要求你的代理移植该组合物。它将 C0 和 C1 映射到时间线补间，将 C2 映射到剪辑，并将帧转换为秒。",
+    "装技：令代移合。它把 `data-start`/`data-duration` 映射轴缓，把 `data-track-index` 映剪，帧入秒。",
+  ],
+  [
+    "vs-remotion",
+    "越难的情况才是技能的重点。它拒绝翻译不适合的内容：基于 C0 或 C1 构建的 React 状态机、异步元数据、第三方 React UI 库。这些内容会被标记，而不是默默地误译。它还对自己的输出进行评分——它渲染两个版本并逐帧比较它们，并记下它丢弃的任何内容。",
+    "难例正技之的。其拒不合者：`useState`/`useEffect` 机、异步元、他家件 UI 皆标，不默错译。自亦评己——渲双版逐帧较，弃者皆录。",
+  ],
 
   // with-claude-code
-  ['with-claude-code', '或 Anthropic 控制台帐户。它的使用费用记入该帐户。',
-   '或 Anthropic 控制台账号，用量记其账。'],
-  ['with-claude-code', '[选项卡] 插件（推荐） 在终端中运行上面的两个命令。然后开始新的Claude代码 会话，或在当前会话中运行 `/reload-plugins`。',
-   '[tab] 插件（荐）终端跑上二命。新起 Claude Code 话，或今话跑 `/reload-plugins`。'],
-  ['with-claude-code', '要自行获取更新，请运行`/plugin`，打开**市场**，选择 **HyperFrames**，然后选择**启用自动更新**。看 [安装 HyperFrames 插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code) 进行手动更新和移动。',
-   '自更：跑 `/plugin`，开**市场**，选 **HyperFrames**，选**启用自更**。手更与程见 [装插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code)。'],
-  ['with-claude-code', '[tab] 单机技能 在你的项目文件夹中运行它并选择 **核心技能**： ```bash 主题={null} npx 技能添加 heygen-com/hyperframes ```` 或者为你的用户安装核心集，不带选择器： ```bash 主题={null}',
-   '[tab] 单技 盘内跑之选**核心**：'],
-  ['with-claude-code', '启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。',
-   '启或讲片，盘内造工。长事片先呈三线任选。'],
-  ['with-claude-code', '在同一对话中观看第一个版本并说出要更改的内容。',
-   '同话观首版，言改处。'],
-  ['with-claude-code', 'Claude Code 阅读适合你的视频类型（例如产品）的 HyperFrames 指南',
-   'Claude Code 读尔类 HyperFrames 指南'],
-  ['with-claude-code', '要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你也可以要求 Claude Code 渲染它。',
-   '后重开览，盘内跑：浏编开览，可手改片。自渲 MP4：亦可令 Claude Code 渲之。'],
-  ['with-claude-code', '适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Claude Code 作为其代理。它会为你安装 Claude Code，并在一个窗口中为你提供聊天、预览和编辑器。要在 Claude 聊天应用程序内创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。',
-   'Mac/Win/Linux [Studio 应用](https://hyperframes.heygen.com/studio-app.md) 可径用 Claude Code 为代。为尔装 Code，一窗聊、览、编。聊内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。'],
-  ['with-claude-code', '**Claude Code 没有看到该技能。** 开始新会话或运行',
-   '**Code 未见技。** 新起或跑'],
-  ['with-claude-code', '**渲染失败。**运行` instead of',
-   '**渲败。**跑'],
-  ['with-claude-code', '并修复它报告的内容。',
-   '修其报者。'],
-  ['with-claude-code', '**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。',
-   '**余问。** 见[疑难](https://hyperframes.heygen.com/help.md)。'],
+  [
+    "with-claude-code",
+    "或 Anthropic 控制台帐户。它的使用费用记入该帐户。",
+    "或 Anthropic 控制台账号，用量记其账。",
+  ],
+  [
+    "with-claude-code",
+    "[选项卡] 插件（推荐） 在终端中运行上面的两个命令。然后开始新的Claude代码 会话，或在当前会话中运行 `/reload-plugins`。",
+    "[tab] 插件（荐）终端跑上二命。新起 Claude Code 话，或今话跑 `/reload-plugins`。",
+  ],
+  [
+    "with-claude-code",
+    "要自行获取更新，请运行`/plugin`，打开**市场**，选择 **HyperFrames**，然后选择**启用自动更新**。看 [安装 HyperFrames 插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code) 进行手动更新和移动。",
+    "自更：跑 `/plugin`，开**市场**，选 **HyperFrames**，选**启用自更**。手更与程见 [装插件](https://hyperframes.heygen.com/guides/plugins.md#claude-code)。",
+  ],
+  [
+    "with-claude-code",
+    "[tab] 单机技能 在你的项目文件夹中运行它并选择 **核心技能**： ```bash 主题={null} npx 技能添加 heygen-com/hyperframes ```` 或者为你的用户安装核心集，不带选择器： ```bash 主题={null}",
+    "[tab] 单技 盘内跑之选**核心**：",
+  ],
+  [
+    "with-claude-code",
+    "启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。",
+    "启或讲片，盘内造工。长事片先呈三线任选。",
+  ],
+  ["with-claude-code", "在同一对话中观看第一个版本并说出要更改的内容。", "同话观首版，言改处。"],
+  [
+    "with-claude-code",
+    "Claude Code 阅读适合你的视频类型（例如产品）的 HyperFrames 指南",
+    "Claude Code 读尔类 HyperFrames 指南",
+  ],
+  [
+    "with-claude-code",
+    "要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你也可以要求 Claude Code 渲染它。",
+    "后重开览，盘内跑：浏编开览，可手改片。自渲 MP4：亦可令 Claude Code 渲之。",
+  ],
+  [
+    "with-claude-code",
+    "适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Claude Code 作为其代理。它会为你安装 Claude Code，并在一个窗口中为你提供聊天、预览和编辑器。要在 Claude 聊天应用程序内创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。",
+    "Mac/Win/Linux [Studio 应用](https://hyperframes.heygen.com/studio-app.md) 可径用 Claude Code 为代。为尔装 Code，一窗聊、览、编。聊内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。",
+  ],
+  [
+    "with-claude-code",
+    "**Claude Code 没有看到该技能。** 开始新会话或运行",
+    "**Code 未见技。** 新起或跑",
+  ],
+  ["with-claude-code", "**渲染失败。**运行` instead of", "**渲败。**跑"],
+  ["with-claude-code", "并修复它报告的内容。", "修其报者。"],
+  [
+    "with-claude-code",
+    "**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。",
+    "**余问。** 见[疑难](https://hyperframes.heygen.com/help.md)。",
+  ],
 
   // with-codex
-  ['with-codex', '帐户或 OpenAI API 密钥。它的使用费用记入该帐户。',
-   '账或 OpenAI 钥，用量记其账。'],
-  ['with-codex', '运行上面的命令一次。稍后再次运行以更新技能。',
-   '上命跑一回。后复跑翻技。'],
-  ['with-codex', '要将技能保留在一个项目中，请在项目文件夹中运行此命令，然后在选择器中选择 **Core Skills** 和 **Codex**： 安装后启动新的 Codex 会话。请参阅【安装和更新代理技能】(https://hyperframes.heygen.com/guides/skills.md)进行检查和更新。',
-   '技留项：盘内跑此，选器取 **核心** 与 **Codex**。装后新起 Codex 话。验更见 [装更技](https://hyperframes.heygen.com/guides/skills.md)。'],
-  ['with-codex', '在空文件夹中打开 Codex 并粘贴： `npx hyperframes doctor` 将 HyperFrames 技能命名为“HyperFrames”技能。将 URL 替换为你希望视频显示的页面。',
-   '空盘开 Codex 粘：名技 hyperframes。将 URL 替尔欲片示页。'],
-  ['with-codex', '启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。',
-   '启或讲片，盘内造工。长事先三线任选。'],
-  ['with-codex', 'Codex 可能会在运行命令或使用网络之前询问。技能安装包、启动预览服务器并运行渲染器，因此请批准此文件夹的这些步骤。在同一对话中观看第一个版本并说出要更改的内容。',
-   'Codex 行命或网前或询。技囊、启览服、驱渲，此夹批之。同话观首版，言改处。'],
-  ['with-codex', 'Codex 会读取适合你的视频类型（例如产品）的 HyperFrames 指南',
-   'Codex 读尔类指南'],
-  ['with-codex', '要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你还可以要求 Codex 渲染它。',
-   '后重开览，盘内跑：浏编开览，手改片。自渲 MP4：可令 Codex 渲。'],
-  ['with-codex', '适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Codex 作为其代理。请参阅[连接你的代理](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。要在 ChatGPT 内部创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。',
-   'Mac/Win/Linux [Studio](https://hyperframes.heygen.com/studio-app.md) 可径用 Codex 为代。见[连代](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。ChatGPT 内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。'],
-  ['with-codex', '**Codex 没有看到该技能。** 启动一个新会话，然后运行',
-   '**Codex 未见技。** 新起跑'],
-  ['with-codex', '**渲染失败。**运行`npx hyperframes skills check`并修复它报告的内容。',
-   '**渲败。**跑 `npx hyperframes skills check` 修报者。'],
-  ['with-codex', '**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。',
-   '**余问。** 见[疑难](https://hyperframes.heygen.com/help.md)。'],
+  [
+    "with-codex",
+    "帐户或 OpenAI API 密钥。它的使用费用记入该帐户。",
+    "账或 OpenAI 钥，用量记其账。",
+  ],
+  ["with-codex", "运行上面的命令一次。稍后再次运行以更新技能。", "上命跑一回。后复跑翻技。"],
+  [
+    "with-codex",
+    "要将技能保留在一个项目中，请在项目文件夹中运行此命令，然后在选择器中选择 **Core Skills** 和 **Codex**： 安装后启动新的 Codex 会话。请参阅【安装和更新代理技能】(https://hyperframes.heygen.com/guides/skills.md)进行检查和更新。",
+    "技留项：盘内跑此，选器取 **核心** 与 **Codex**。装后新起 Codex 话。验更见 [装更技](https://hyperframes.heygen.com/guides/skills.md)。",
+  ],
+  [
+    "with-codex",
+    "在空文件夹中打开 Codex 并粘贴： `npx hyperframes doctor` 将 HyperFrames 技能命名为“HyperFrames”技能。将 URL 替换为你希望视频显示的页面。",
+    "空盘开 Codex 粘：名技 hyperframes。将 URL 替尔欲片示页。",
+  ],
+  [
+    "with-codex",
+    "启动或解释器，并在你的文件夹中构建项目。对于讲述故事的较长电影，它首先提供三个故事情节可供选择。",
+    "启或讲片，盘内造工。长事先三线任选。",
+  ],
+  [
+    "with-codex",
+    "Codex 可能会在运行命令或使用网络之前询问。技能安装包、启动预览服务器并运行渲染器，因此请批准此文件夹的这些步骤。在同一对话中观看第一个版本并说出要更改的内容。",
+    "Codex 行命或网前或询。技囊、启览服、驱渲，此夹批之。同话观首版，言改处。",
+  ],
+  ["with-codex", "Codex 会读取适合你的视频类型（例如产品）的 HyperFrames 指南", "Codex 读尔类指南"],
+  [
+    "with-codex",
+    "要稍后重新打开预览，请在项目文件夹中运行以下命令： 预览在浏览器编辑器中打开，你还可以在其中手动编辑视频。自己制作 MP4： 你还可以要求 Codex 渲染它。",
+    "后重开览，盘内跑：浏编开览，手改片。自渲 MP4：可令 Codex 渲。",
+  ],
+  [
+    "with-codex",
+    "适用于 Mac、Windows 和 Linux 的 [HyperFrames Studio 应用程序](https://hyperframes.heygen.com/studio-app.md) 可以使用 Codex 作为其代理。请参阅[连接你的代理](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。要在 ChatGPT 内部创建而不安装任何内容，请使用[托管连接器](https://hyperframes.heygen.com/guides/mcp.md)。",
+    "Mac/Win/Linux [Studio](https://hyperframes.heygen.com/studio-app.md) 可径用 Codex 为代。见[连代](https://hyperframes.heygen.com/studio-app/connect-your-agent.md)。ChatGPT 内不装而创用[连](https://hyperframes.heygen.com/guides/mcp.md)。",
+  ],
+  [
+    "with-codex",
+    "**Codex 没有看到该技能。** 启动一个新会话，然后运行",
+    "**Codex 未见技。** 新起跑",
+  ],
+  [
+    "with-codex",
+    "**渲染失败。**运行`npx hyperframes skills check`并修复它报告的内容。",
+    "**渲败。**跑 `npx hyperframes skills check` 修报者。",
+  ],
+  [
+    "with-codex",
+    "**还有其他问题。** 请参阅[疑难解答](https://hyperframes.heygen.com/help.md)。",
+    "**余问。** 见[疑难](https://hyperframes.heygen.com/help.md)。",
+  ],
 ];
 
-let done = 0, missed = 0;
+let done = 0,
+  missed = 0;
 for (const [slug, oldText, newText] of PAIRS) {
   const v = j[slug];
-  if (!v) { missed++; console.log('missing slug', slug); continue; }
+  if (!v) {
+    missed++;
+    console.log("missing slug", slug);
+    continue;
+  }
   let hit = false;
   for (const sec of v.sections) {
     if (sec.paras) {
       for (let i = 0; i < sec.paras.length; i++) {
-        if (sec.paras[i] === oldText) { sec.paras[i] = newText; hit = true; done++; }
+        if (sec.paras[i] === oldText) {
+          sec.paras[i] = newText;
+          hit = true;
+          done++;
+        }
       }
     }
     if (sec.bullets) {
       for (let i = 0; i < sec.bullets.length; i++) {
-        if (sec.bullets[i] === oldText) { sec.bullets[i] = newText; hit = true; done++; }
+        if (sec.bullets[i] === oldText) {
+          sec.bullets[i] = newText;
+          hit = true;
+          done++;
+        }
       }
     }
-    if (sec.p === oldText) { sec.p = newText; hit = true; done++; }
+    if (sec.p === oldText) {
+      sec.p = newText;
+      hit = true;
+      done++;
+    }
   }
-  if (v.lede === oldText) { v.lede = newText; hit = true; done++; }
-  if (!hit) { missed++; console.log('MISS', slug, oldText.slice(0, 60).replace(/\n/g, ' ')); }
+  if (v.lede === oldText) {
+    v.lede = newText;
+    hit = true;
+    done++;
+  }
+  if (!hit) {
+    missed++;
+    console.log("MISS", slug, oldText.slice(0, 60).replace(/\n/g, " "));
+  }
 }
 console.log(`patched ${done}, missed ${missed} / pairs ${PAIRS.length}`);
 
 // global leftovers across all MT pages
-for (const slug of ['avatar','captions','data-maps','design-tools','examples','faceless-explainer','faq','free-agents','general-video','introduction','mcp','motion-graphics','music','plugins','pr-to-video','product-launch','quickstart','remotion-migration','skills','slideshow','vs-remotion','with-claude-code','with-codex','with-cursor']) {
+for (const slug of [
+  "avatar",
+  "captions",
+  "data-maps",
+  "design-tools",
+  "examples",
+  "faceless-explainer",
+  "faq",
+  "free-agents",
+  "general-video",
+  "introduction",
+  "mcp",
+  "motion-graphics",
+  "music",
+  "plugins",
+  "pr-to-video",
+  "product-launch",
+  "quickstart",
+  "remotion-migration",
+  "skills",
+  "slideshow",
+  "vs-remotion",
+  "with-claude-code",
+  "with-codex",
+  "with-cursor",
+]) {
   const v = j[slug];
   if (!v) continue;
-  const fix = (t) => t.split('[手风琴]').join('[accordion]').split('[卡]').join('[card]').split('[！提示]').join('提示：').split('[！笔记]').join('提示：').split('C0 表示').join('`code-diff` 表增').split('C1 表示').join('`code-morph` 改形');
-  if (typeof v.lede === 'string') v.lede = fix(v.lede);
+  const fix = (t) =>
+    t
+      .split("[手风琴]")
+      .join("[accordion]")
+      .split("[卡]")
+      .join("[card]")
+      .split("[！提示]")
+      .join("提示：")
+      .split("[！笔记]")
+      .join("提示：")
+      .split("C0 表示")
+      .join("`code-diff` 表增")
+      .split("C1 表示")
+      .join("`code-morph` 改形");
+  if (typeof v.lede === "string") v.lede = fix(v.lede);
   for (const sec of v.sections) {
     if (sec.paras) sec.paras = sec.paras.map(fix);
     if (sec.bullets) sec.bullets = sec.bullets.map(fix);
   }
 }
 
-const ts = 'import type { DocContent } from "./docs";\n\nexport const DOCS_FULL: Record<string, DocContent> = ' + JSON.stringify(j, null, 1) + ';\n';
-fs.writeFileSync('src/data/docs-full.ts', ts, 'utf8');
-console.log('wrote', ts.length);
+const ts =
+  'import type { DocContent } from "./docs";\n\nexport const DOCS_FULL: Record<string, DocContent> = ' +
+  JSON.stringify(j, null, 1) +
+  ";\n";
+fs.writeFileSync("src/data/docs-full.ts", ts, "utf8");
+console.log("wrote", ts.length);
