@@ -49,6 +49,7 @@ export interface NavLinkItem {
 }
 
 export const desktopNavLinks: NavLinkItem[] = [
+  { href: "#docs/introduction", label: "文档", badge: "DOCS" },
   { href: "#quickstart", label: "快速开始" },
   { href: "#playground", label: "实时工坊", badge: "LIVE" },
   { href: "#wizard", label: "Prompt 发生器" },
@@ -58,6 +59,7 @@ export const desktopNavLinks: NavLinkItem[] = [
 ];
 
 export const mobileNavLinks: NavLinkItem[] = [
+  { href: "#docs/introduction", label: "中文文档", badge: "DOCS" },
   { href: "#quickstart", label: "快速开始" },
   { href: "#playground", label: "实时工坊", badge: "LIVE" },
   { href: "#wizard", label: "Prompt 发生器" },

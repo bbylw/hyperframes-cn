@@ -10,6 +10,7 @@ import FrameGallery from "./components/FrameGallery";
 import MobileNav from "./components/MobileNav";
 import CinemaHUD from "./components/CinemaHUD";
 import Toast from "./components/Toast";
+import DocsPage from "./components/DocsPage";
 import BrandLogo from "./components/BrandLogo";
 import { SemanticIcon, ZapBoltIcon, BotAgentIcon } from "./components/Icons";
 import {
@@ -221,6 +222,15 @@ function QuickStart() {
             <CodeBlock code={cliSample} filename="TERMINAL" />
             <p className="req mono">ENV：NODE.JS ≥ 22 · FFMPEG</p>
           </div>
+        </div>
+        <div style={{ marginTop: "28px" }}>
+          <a className="btn btn-ghost" href="#docs/quickstart">
+            <span>查看完整中文文档页 · Quickstart</span>
+            <span className="arrow">→</span>
+          </a>
+          <p className="figure-cap mono">
+            <b>▸</b> 中文版 · 对应官网 hyperframes.heygen.com/quickstart（三条路径）
+          </p>
         </div>
       </div>
     </section>
@@ -490,6 +500,9 @@ function DocsAndPackages() {
           }
         />
         <div className="docs-grid" data-reveal>
+          <a className="doc-chip mono" href="#docs/quickstart" style={{ borderColor: "var(--accent)", color: "var(--accent)" }}>
+            中文文档 · 快速开始 →
+          </a>
           {docsLinks.map((d) => (
             <a
               key={d.label}
@@ -672,10 +685,47 @@ export default function App() {
   useCinemaFX();
   const [toastMsg, setToastMsg] = useState<string>("");
   const [toastVisible, setToastVisible] = useState<boolean>(false);
+  const [docSlug, setDocSlug] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    const h = window.location.hash;
+    if (h.startsWith("#docs/")) return h.slice(6) || "introduction";
+    if (h === "#docs") return "introduction";
+    return null;
+  });
 
   const showToast = (msg: string) => {
     setToastMsg(msg);
     setToastVisible(true);
+  };
+
+  useEffect(() => {
+    const onHashChange = () => {
+      const h = window.location.hash;
+      if (h.startsWith("#docs/")) {
+        setDocSlug(h.slice(6) || "introduction");
+      } else if (h === "#docs") {
+        setDocSlug("introduction");
+      } else {
+        setDocSlug((s) => (s !== null ? null : s));
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  useEffect(() => {
+    document.title =
+      docSlug !== null
+        ? "中文文档 · HyperFrames"
+        : "HyperFrames · 用 HTML 写视频，由 AI 智能体驱动";
+  }, [docSlug]);
+
+  const goHome = () => {
+    if (window.location.hash.startsWith("#docs")) {
+      window.location.hash = "#top";
+    } else {
+      setDocSlug(null);
+    }
   };
 
   useEffect(() => {
@@ -726,6 +776,10 @@ export default function App() {
       />
       <Nav />
       <main id="main">
+        {docSlug !== null ? (
+          <DocsPage slug={docSlug} onBack={goHome} />
+        ) : (
+          <>
         <Hero />
         <div aria-hidden="true">
           <Ticker items={tickerItems} />
@@ -745,6 +799,8 @@ export default function App() {
         <WhyAndCompare />
         <DocsAndPackages />
         <Community />
+          </>
+        )}
       </main>
       <Footer />
     </>
