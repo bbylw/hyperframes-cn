@@ -528,6 +528,9 @@ export const DOCS_GROUPS: DocGroup[] = [
   },
 ];
 
+import { DOCS_DEV_GROUPS } from "./docs-dev";
+DOCS_GROUPS.push(...DOCS_DEV_GROUPS);
+
 export const DOCS_FLAT: DocItem[] = DOCS_GROUPS.flatMap((g) => g.items);
 
 export function findDoc(slug: string): DocItem | undefined {

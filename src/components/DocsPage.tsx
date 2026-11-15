@@ -10,6 +10,7 @@ import {
   groupOf,
 } from "../data/docs";
 import { DOCS_EXTRA } from "../data/docs-extra";
+import { DOCS_DEV_CONTENT } from "../data/docs-dev";
 import type { DocContent } from "../data/docs";
 
 interface DocsPageProps {
@@ -29,7 +30,11 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
   const next = idx < DOCS_FLAT.length - 1 ? DOCS_FLAT[idx + 1] : undefined;
 
   const isQuickstart = item.slug === "quickstart";
-  const content = DOCS_CONTENT[item.slug] ?? (DOCS_EXTRA as Record<string, DocContent>)[item.slug] ?? genericContent(item);
+  const content =
+    DOCS_CONTENT[item.slug] ??
+    (DOCS_EXTRA as Record<string, DocContent>)[item.slug] ??
+    (DOCS_DEV_CONTENT as Record<string, DocContent>)[item.slug] ??
+    genericContent(item);
   const official = officialUrl(item.url);
 
   useEffect(() => {
