@@ -598,6 +598,22 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
   );
   const hashAnchor = extractDocAnchor(locationHash);
   const prevScrolledSlugRef = useRef<string | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  useEffect(() => {
+    const nav = navRef.current;
+    if (!nav || nav.clientHeight <= 0 || nav.scrollHeight <= nav.clientHeight) return;
+    const active = nav.querySelector<HTMLElement>(".docs-nav-item.is-active");
+    if (!active) return;
+    const navRect = nav.getBoundingClientRect();
+    const activeRect = active.getBoundingClientRect();
+    const relTop = activeRect.top - navRect.top + nav.scrollTop;
+    const relBottom = relTop + activeRect.height;
+    if (relTop < nav.scrollTop + 48 || relBottom > nav.scrollTop + nav.clientHeight - 48) {
+      nav.scrollTop = Math.max(0, relTop - nav.clientHeight * 0.35);
+    }
+  }, [item.slug, mobileNavOpen]);
 
   const official = officialUrl(item.url);
 
@@ -675,6 +691,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
   }, [content]);
 
   function go(s: string) {
+    setMobileNavOpen(false);
     window.location.hash = `#docs/${s}`;
   }
 
@@ -706,14 +723,27 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
         </div>
 
         <div className="docs-shell">
-          <aside className="docs-nav" aria-label="文档侧边导航">
+          <button
+            type="button"
+            className="docs-nav-mobile-toggle mono"
+            aria-expanded={mobileNavOpen}
+            aria-controls="docs-sidebar-nav"
+            onClick={() => setMobileNavOpen((v) => !v)}
+          >
+            <span>文档目录 · {item.zh}</span>
+            <span className="docs-nav-toggle-state">{mobileNavOpen ? "收起 −" : "展开 +"}</span>
+          </button>
+          <aside
+            id="docs-sidebar-nav"
+            ref={navRef}
+            className={mobileNavOpen ? "docs-nav is-open" : "docs-nav"}
+            aria-label="文档侧边导航"
+          >
             <p className="docs-toc-title mono">文档目录 · {DOCS_FLAT.length} 页</p>
             <nav className="docs-nav-groups">
               {DOCS_GROUPS.map((g) => (
                 <div key={g.id} className="docs-nav-group">
-                  <p className="docs-nav-group-title mono">
-                    {g.title} <span>{g.en}</span>
-                  </p>
+                  <p className="docs-nav-group-title mono">{g.title}</p>
                   <ul className="docs-nav-list">
                     {g.items.map((it) => (
                       <li key={it.slug}>
@@ -760,7 +790,9 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                     {group?.en.toUpperCase()} · {item.en.toUpperCase()}
                   </p>
                   <h1 className="docs-title">{item.zh}</h1>
-                  <p className="docs-lede">{content?.lede ?? item.descZh}</p>
+                  <p className="docs-lede">
+                    <Inline text={content?.lede ?? item.descZh} currentSlug={item.slug} />
+                  </p>
                   <ul className="docs-meta mono">
                     <li>来源 · hyperframes.heygen.com</li>
                     <li>语言 · 中文版</li>
@@ -837,7 +869,9 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                             <span className="scene-no mono">{String(i + 1).padStart(2, "0")}</span>
                             <span className="scene-rule" />
                           </div>
-                          <h2 className="docs-h2">{sec.h}</h2>
+                          <h2 className="docs-h2">
+                            <Inline text={sec.h} currentSlug={item.slug} allowLinks={false} />
+                          </h2>
                           {sec.paras && sec.paras.length > 0 ? (
                             sec.paras.map((para, pi) =>
                               renderPara(para, pi, sec, item.slug, item.zh),

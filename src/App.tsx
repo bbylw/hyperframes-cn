@@ -56,7 +56,7 @@ function SceneHead({ no, title, lede }: { no: string; title: string; lede?: Reac
   );
 }
 
-function Nav() {
+function Nav({ inDocs }: { inDocs?: boolean }) {
   return (
     <header className="nav">
       <div className="container nav-inner">
@@ -74,14 +74,21 @@ function Nav() {
 
         <nav className="nav-menu" aria-label="主导航">
           <ul className="nav-links">
-            {desktopNavLinks.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="nav-item">
-                  <span>{l.label}</span>
-                  {l.badge && <span className="nav-pill-badge mono">{l.badge}</span>}
-                </a>
-              </li>
-            ))}
+            {desktopNavLinks.map((l) => {
+              const isActive = Boolean(inDocs && l.href.startsWith("#docs"));
+              return (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className={isActive ? "nav-item is-active" : "nav-item"}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    <span>{l.label}</span>
+                    {l.badge && <span className="nav-pill-badge mono">{l.badge}</span>}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -876,7 +883,7 @@ export default function App() {
       <ProjectorBeam />
       <CinemaHUD onShowToast={showToast} docSlug={docSlug} />
       <Toast message={toastMsg} visible={toastVisible} onClose={() => setToastVisible(false)} />
-      <Nav />
+      <Nav inDocs={Boolean(docSlug)} />
       <main id="main">
         {docSlug !== null ? (
           <Suspense fallback={<DocsLoadingFallback />}>

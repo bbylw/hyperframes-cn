@@ -40,7 +40,7 @@ body {
   font-size-adjust: from-font;
   line-height: 1.85;
   letter-spacing: 0.01em;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -121,8 +121,16 @@ button {
 .scene-title,
 .hero-l,
 .mani-claim,
-.comm-card h3 {
+.comm-card h3,
+.docs-h2 {
   text-wrap: balance;
+}
+
+.hero-sub,
+.scene-lede,
+.docs-lede,
+.docs-p {
+  text-wrap: pretty;
 }
 
 .container {
@@ -354,6 +362,16 @@ button {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.07);
   transform: translateY(-1px);
+}
+
+.nav-item:active {
+  transform: translateY(0);
+}
+
+.nav-item.is-active {
+  color: var(--accent);
+  background: rgba(226, 166, 61, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(226, 166, 61, 0.35);
 }
 
 .nav-pill-badge {
@@ -849,18 +867,19 @@ button {
 
 .qs-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 26px;
 }
 
 @media (min-width: 980px) {
   .qs-grid {
-    grid-template-columns: 7fr 5fr;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: 34px;
   }
 }
 
 .chan {
+  min-width: 0;
   position: relative;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -1938,6 +1957,15 @@ td.dim {
   background: var(--surface-2);
 }
 
+.pg-preset-btn:active {
+  transform: scale(0.98);
+}
+
+.pg-preset-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 .pg-preset-btn[aria-selected="true"],
 .pg-preset-btn.is-selected {
   background: var(--surface-2);
@@ -1993,7 +2021,7 @@ td.dim {
 
 .pg-workbench {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 24px;
   background: var(--bg-deep);
   border: 1px solid var(--line-strong);
@@ -2003,6 +2031,7 @@ td.dim {
 }
 
 .pg-viewport-panel {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -2637,6 +2666,7 @@ td.dim {
 
 /* Code panel */
 .pg-code-panel {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   background: var(--surface);
@@ -2669,6 +2699,15 @@ td.dim {
   color: var(--ink);
 }
 
+.pg-tab:active {
+  opacity: 0.8;
+}
+
+.pg-tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
 .pg-tab.is-active {
   color: var(--accent);
   border-bottom-color: var(--accent);
@@ -2693,11 +2732,16 @@ td.dim {
   color: #110e0c;
 }
 
+.pg-copy-btn:active {
+  transform: scale(0.96);
+}
+
 .pg-code-body {
   flex: 1;
   padding: 16px;
   overflow-y: auto;
   max-height: 380px;
+  scrollbar-width: thin;
   background: #0a0908;
   font-size: 0.7812rem;
   line-height: 1.65;
@@ -2727,11 +2771,12 @@ td.dim {
 
 .wizard-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
   gap: 24px;
 }
 
 .wizard-form-card {
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
@@ -2840,6 +2885,7 @@ td.dim {
 }
 
 .wizard-output-card {
+  min-width: 0;
   display: flex;
   flex-direction: column;
 }
@@ -2992,11 +3038,12 @@ td.dim {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
 .skill-card {
+  min-width: 0;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -3014,6 +3061,7 @@ td.dim {
 }
 
 .skill-card-head {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -3072,6 +3120,7 @@ td.dim {
 }
 
 .skill-cli-row {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -3083,6 +3132,7 @@ td.dim {
 }
 
 .skill-cli-code {
+  min-width: 0;
   font-size: 0.6875rem;
   color: #cfc5b4;
   overflow: hidden;
@@ -3153,16 +3203,18 @@ td.dim {
 
 .frame-workspace {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 24px;
 }
 
 .frame-cards-grid {
+  min-width: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   max-height: 540px;
   overflow-y: auto;
+  scrollbar-width: thin;
   padding-right: 8px;
 }
 
@@ -3185,7 +3237,7 @@ td.dim {
 
 .frame-card:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 .frame-card:hover {
@@ -3264,6 +3316,7 @@ td.dim {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  min-width: 0;
 }
 
 .frame-spec-hero {
@@ -3399,11 +3452,33 @@ td.dim {
 }
 
 .drawer-close {
-  background: none;
-  border: none;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   color: var(--muted);
   font-size: 1rem;
+  line-height: 1;
   cursor: pointer;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.drawer-close:hover {
+  color: var(--ink);
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.drawer-close:active {
+  transform: scale(0.95);
 }
 
 .drawer-nav {
@@ -3591,20 +3666,20 @@ td.dim {
   .pg-workbench,
   .wizard-grid,
   .frame-workspace {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .use-cases-grid,
   .how-workflow-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .frame-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     max-height: 380px;
   }
 }
@@ -3612,7 +3687,7 @@ td.dim {
 @media (max-width: 768px) {
   .use-cases-grid,
   .how-workflow-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .wz-row-group {
@@ -3620,12 +3695,13 @@ td.dim {
   }
 
   .frame-cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .cinema-hud {
     bottom: 12px;
     width: calc(100% - 24px);
+    max-width: calc(100% - 24px);
     border-radius: 12px;
   }
 
@@ -3695,6 +3771,15 @@ td.dim {
 
   .pg-select {
     width: 100%;
+  }
+
+  .hud-content {
+    gap: 8px;
+    padding: 7px 10px;
+  }
+
+  .hud-scene-name {
+    max-width: 104px;
   }
 }
 
@@ -3885,7 +3970,7 @@ dialog.mobile-drawer[open]::backdrop {
 /* ---------- docs: quickstart page (中文文档页) ---------- */
 
 .docs-page {
-  padding: clamp(24px, 4vw, 48px) 0 clamp(60px, 8vw, 100px);
+  padding: clamp(24px, 4vw, 48px) 0 clamp(88px, 11vw, 136px);
   background:
     radial-gradient(900px 420px at 10% 0%, rgba(226, 166, 61, 0.09), transparent 62%), var(--bg);
 }
@@ -3919,6 +4004,10 @@ dialog.mobile-drawer[open]::backdrop {
 .docs-back:hover {
   background: rgba(226, 166, 61, 0.2);
   transform: translateY(-1px);
+}
+
+.docs-back:active {
+  transform: translateY(0);
 }
 
 .docs-crumb-sep {
@@ -3980,6 +4069,16 @@ dialog.mobile-drawer[open]::backdrop {
 .docs-lede strong {
   color: var(--ink);
   font-weight: 600;
+}
+
+.docs-lede a {
+  color: var(--accent);
+  border-bottom: 1px solid rgba(226, 166, 61, 0.35);
+  overflow-wrap: anywhere;
+}
+
+.docs-lede a:hover {
+  border-color: var(--accent);
 }
 
 .docs-meta {
@@ -4094,6 +4193,18 @@ dialog.mobile-drawer[open]::backdrop {
   margin: 18px 0 14px;
 }
 
+.docs-h2 code,
+.docs-lede code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent);
+  background: rgba(226, 166, 61, 0.1);
+  border: 1px solid rgba(226, 166, 61, 0.22);
+  padding: 1px 6px;
+  border-radius: 3px;
+  overflow-wrap: anywhere;
+}
+
 .docs-h3 {
   font-size: 1.2rem;
   font-weight: 700;
@@ -4112,6 +4223,7 @@ dialog.mobile-drawer[open]::backdrop {
 .docs-p a {
   color: var(--accent);
   border-bottom: 1px solid rgba(226, 166, 61, 0.35);
+  overflow-wrap: anywhere;
 }
 
 .docs-p a:hover {
@@ -4126,7 +4238,7 @@ dialog.mobile-drawer[open]::backdrop {
   background: rgba(226, 166, 61, 0.1);
   padding: 1px 6px;
   border-radius: 3px;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .docs-steps {
@@ -4139,12 +4251,16 @@ dialog.mobile-drawer[open]::backdrop {
 
 .docs-step {
   display: grid;
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 56px minmax(0, 1fr);
   gap: 18px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 22px;
+}
+
+.docs-step > div {
+  min-width: 0;
 }
 
 .docs-step-num {
@@ -4174,6 +4290,7 @@ dialog.mobile-drawer[open]::backdrop {
 
 .docs-step a {
   color: var(--accent);
+  overflow-wrap: anywhere;
 }
 
 .docs-step a:hover {
@@ -4276,7 +4393,7 @@ dialog.mobile-drawer[open]::backdrop {
 
 @media (max-width: 940px) {
   .docs-related-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -4291,7 +4408,7 @@ dialog.mobile-drawer[open]::backdrop {
   }
 
   .docs-step {
-    grid-template-columns: 44px 1fr;
+    grid-template-columns: 44px minmax(0, 1fr);
     padding: 18px;
   }
 }
@@ -4304,6 +4421,46 @@ dialog.mobile-drawer[open]::backdrop {
   gap: clamp(24px, 3vw, 44px);
   padding-top: clamp(20px, 3vw, 32px);
   align-items: start;
+}
+
+.docs-nav-mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.docs-nav-mobile-toggle:hover {
+  border-color: rgba(226, 166, 61, 0.45);
+  background: var(--surface-2);
+}
+
+.docs-nav-mobile-toggle:active {
+  transform: scale(0.99);
+}
+
+.docs-nav-mobile-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.docs-nav-toggle-state {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 
 .docs-nav {
@@ -4331,14 +4488,6 @@ dialog.mobile-drawer[open]::backdrop {
   color: var(--ink);
   margin-bottom: 8px;
   line-height: 1.5;
-}
-
-.docs-nav-group-title span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  margin-top: 2px;
 }
 
 .docs-nav-list {
@@ -4372,6 +4521,15 @@ dialog.mobile-drawer[open]::backdrop {
 .docs-nav-item:hover {
   background: rgba(226, 166, 61, 0.06);
   color: var(--accent);
+}
+
+.docs-nav-item:active {
+  background: rgba(226, 166, 61, 0.14);
+}
+
+.docs-nav-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .docs-nav-item.is-active {
@@ -4455,6 +4613,10 @@ dialog.mobile-drawer[open]::backdrop {
   transform: translateY(-2px);
 }
 
+.docs-pn:active {
+  transform: translateY(0);
+}
+
 .docs-pn--next,
 .docs-pn-right .docs-pn {
   align-items: flex-end;
@@ -4493,16 +4655,24 @@ dialog.mobile-drawer[open]::backdrop {
 
 @media (max-width: 860px) {
   .docs-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .docs-nav-mobile-toggle {
+    display: flex;
   }
 
   .docs-nav {
     position: static;
-    max-height: 420px;
+    max-height: 360px;
+  }
+
+  .docs-nav:not(.is-open) {
+    display: none;
   }
 
   .docs-prevnext {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .docs-pn--next,
@@ -4519,6 +4689,12 @@ dialog.mobile-drawer[open]::backdrop {
   border-radius: var(--radius);
   background: var(--surface);
   scrollbar-width: thin;
+}
+
+.table-wrapper:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-color: var(--accent);
 }
 
 .docs-table {
@@ -4578,25 +4754,25 @@ dialog.mobile-drawer[open]::backdrop {
   background: rgba(226, 166, 61, 0.1);
   padding: 1px 6px;
   border-radius: 3px;
-}
-
-.docs-table code {
   overflow-wrap: anywhere;
 }
 
 .docs-bullets a,
 .docs-table a,
 .docs-callout a,
+.docs-link-card a,
 .docs-quote a,
 .docs-accordion a,
 .docs-tab-tag a {
   color: var(--accent);
   border-bottom: 1px solid rgba(226, 166, 61, 0.35);
+  overflow-wrap: anywhere;
 }
 
 .docs-bullets a:hover,
 .docs-table a:hover,
 .docs-callout a:hover,
+.docs-link-card a:hover,
 .docs-quote a:hover,
 .docs-accordion a:hover,
 .docs-tab-tag a:hover {
@@ -4680,6 +4856,10 @@ dialog.mobile-drawer[open]::backdrop {
   border-color: rgba(226, 166, 61, 0.45);
 }
 
+.docs-link-card:active {
+  border-color: rgba(226, 166, 61, 0.65);
+}
+
 .docs-link-card-title {
   font-size: 1rem;
   font-weight: 700;
@@ -4739,6 +4919,18 @@ dialog.mobile-drawer[open]::backdrop {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.docs-accordion-sum:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.docs-accordion-sum:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 .docs-accordion-sum::-webkit-details-marker {
