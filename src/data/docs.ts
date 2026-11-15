@@ -548,6 +548,8 @@ export interface DocSection {
   code?: string;
   codeFile?: string;
   codeComment?: string;
+  paras?: string[];
+  codeBlocks?: { code: string; file?: string }[];
 }
 
 export interface DocContent {

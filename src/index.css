@@ -4511,3 +4511,16 @@ dialog.mobile-drawer[open]::backdrop {
     text-align: left;
   }
 }
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.docs-table td {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 6px 10px;
+  vertical-align: top;
+  text-align: left;
+}

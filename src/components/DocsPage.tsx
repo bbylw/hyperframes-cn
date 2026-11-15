@@ -1,5 +1,26 @@
 import { useEffect } from "react";
 import CodeBlock from "./CodeBlock";
+
+function Inline({ text }: { text: string }) {
+  // Render **bold** and [label](url) minimally; everything else as text.
+  const parts: React.ReactNode[] = [];
+  const re = /(\*\*[^*]+\*\*)|(\[[^\]]+\]\([^)]+\))|(`[^`]+`)/g;
+  let last = 0;
+  let m: RegExpExecArray | null;
+  let k = 0;
+  while ((m = re.exec(text))) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    if (m[1]) parts.push(<b key={k++}>{m[1].slice(2, -2)}</b>);
+    else if (m[2]) {
+      const mm = m[2].match(/^\[(.*)\]\((.*)\)$/);
+      if (mm) parts.push(<a key={k++} href={mm[2]} target="_blank" rel="noreferrer">{mm[1]}</a>);
+      else parts.push(m[2]);
+    } else if (m[3]) parts.push(<code key={k++}>{m[3].slice(1, -1)}</code>);
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return <>{parts}</>;
+}
 import QuickstartArticle from "./QuickstartArticle";
 import {
   DOCS_CONTENT,
@@ -11,6 +32,7 @@ import {
 } from "../data/docs";
 import { DOCS_EXTRA } from "../data/docs-extra";
 import { DOCS_DEV_CONTENT } from "../data/docs-dev";
+import { DOCS_FULL } from "../data/docs-full";
 import type { DocContent } from "../data/docs";
 
 interface DocsPageProps {
@@ -31,6 +53,7 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
 
   const isQuickstart = item.slug === "quickstart";
   const content =
+    (DOCS_FULL as Record<string, DocContent>)[item.slug] ??
     DOCS_CONTENT[item.slug] ??
     (DOCS_EXTRA as Record<string, DocContent>)[item.slug] ??
     (DOCS_DEV_CONTENT as Record<string, DocContent>)[item.slug] ??
@@ -171,21 +194,95 @@ export default function DocsPage({ slug, onBack }: DocsPageProps) {
                         <span className="scene-rule" />
                       </div>
                       <h2 className="docs-h2">{sec.h}</h2>
-                      <p className="docs-p">{sec.p}</p>
+                      {sec.paras && sec.paras.length > 0
+                        ? sec.paras.map((para, pi) => {
+                            const img = para.match(/^!\[(.*?)\]\((.*?)\)$/);
+                            if (img) {
+                              return (
+                                <figure key={pi} className="docs-video">
+                                  <img src={img[2]} alt={img[1]} loading="lazy" />
+                                </figure>
+                              );
+                            }
+                            if (/^<video\b/i.test(para)) {
+                              const src = para.match(/src="([^"]+)"/)?.[1];
+                              const poster = para.match(/poster="([^"]+)"/)?.[1];
+                              if (src) {
+                                return (
+                                  <figure key={pi} className="docs-video">
+                                    <video
+                                      src={src}
+                                      poster={poster}
+                                      muted
+                                      loop
+                                      playsInline
+                                      preload="metadata"
+                                      controls
+                                    />
+                                  </figure>
+                                );
+                              }
+                            }
+                            if (para.trim().startsWith("|")) {
+                              const rows = para
+                                .split("\n")
+                                .map((r) => r.trim().replace(/^\||\|$/g, "").split("|").map((c) => c.trim()))
+                                .filter((cells) => cells.length && !/^[-: ]+$/.test(cells.join("")));
+                              if (rows.length) {
+                                return (
+                                  <div key={pi} style={{ overflowX: "auto" }}>
+                                    <table className="docs-table">
+                                      <tbody>
+                                        {rows.map((cells, ri) => (
+                                          <tr key={ri}>
+                                            {cells.map((c, ci) => (
+                                              <td key={ci}>
+                                                <Inline text={c} />
+                                              </td>
+                                            ))}
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                );
+                              }
+                            }
+                            return (
+                              <p key={pi} className="docs-p">
+                                <Inline text={para} />
+                              </p>
+                            );
+                          })
+                        : (
+                          <p className="docs-p">
+                            <Inline text={sec.p} />
+                          </p>
+                        )}
                       {sec.bullets && sec.bullets.length > 0 && (
                         <ul className="docs-bullets">
                           {sec.bullets.map((b) => (
-                            <li key={b}>{b}</li>
+                            <li key={b}>
+                              <Inline text={b} />
+                            </li>
                           ))}
                         </ul>
                       )}
-                      {sec.code && (
-                        <CodeBlock
-                          code={sec.code}
-                          filename={sec.codeFile ?? "EXAMPLE"}
-                          comment={sec.codeComment}
-                        />
-                      )}
+                      {sec.codeBlocks && sec.codeBlocks.length > 0
+                        ? sec.codeBlocks.map((cb, ci) => (
+                            <CodeBlock
+                              key={ci}
+                              code={cb.code}
+                              filename={cb.file ?? "EXAMPLE"}
+                            />
+                          ))
+                        : sec.code && (
+                            <CodeBlock
+                              code={sec.code}
+                              filename={sec.codeFile ?? "EXAMPLE"}
+                              comment={sec.codeComment}
+                            />
+                          )}
                     </section>
                   ))}
 
